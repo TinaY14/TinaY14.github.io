@@ -1,4 +1,13 @@
-// Execute this script immediately to prevent flash
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <!-- Add the darkmode.js script before the CSS -->
+    <script src="darkmode.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+    
+    // Execute this script immediately to prevent flash
 (function() {
     // Check for saved theme preference or use device preference
     const savedTheme = localStorage.getItem('dark-mode');
