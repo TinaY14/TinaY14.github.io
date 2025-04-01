@@ -6,3 +6,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add a simple welcome message in the console
     console.log('Welcome to my website!');
 });
+
