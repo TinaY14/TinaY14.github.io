@@ -110,3 +110,88 @@ footer {
 :root.dark-mode .moon-icon {
     display: none;
 }
+
+:root {
+    /* Light mode variables */
+    --bg-color: #f5f5f5;
+    --card-bg: white;
+    --text-color: #333;
+    --header-bg: #3498db;
+    --header-text: white;
+    --footer-text: #777;
+    --link-color: #3498db;
+    --shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+:root.dark-mode {
+    /* Dark mode variables */
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #e0e0e0;
+    --header-bg: #2980b9;
+    --header-text: #f5f5f5;
+    --footer-text: #aaaaaa;
+    --link-color: #5dade2;
+    --shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    border-radius: 5px;
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: var(--card-bg);
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.sun-icon {
+    display: none;
+}
+
+.moon-icon {
+    display: inline;
+}
+
+:root.dark-mode .sun-icon {
+    display: inline;
+}
+
+:root.dark-mode .moon-icon {
+    display: none;
+}
