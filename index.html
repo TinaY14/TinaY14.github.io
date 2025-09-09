@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Personal Website</title>
-    <script src="darkmode.js"></script>
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('dark-mode');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'true' || (savedTheme === null && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-        <span class="sun-icon">☀️</span>
-        <span class="moon-icon">🌙</span>
-    </button>
+    <div class="top-right-container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="nutrition.html">营养学科普</a></li>
+                <li><a href="aboutme.html">关于我</a></li>
+            </ul>
+        </nav>
+        <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+        </button>
+    </div>
     
     <header>
         <h1>Your Name</h1>
@@ -42,5 +59,7 @@
     <footer>
         <p></p>
     </footer>
+
+    <script src="darkmode.js"></script>
 </body>
 </html>
