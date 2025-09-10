@@ -3,63 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Website</title>
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('dark-mode');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'true' || (savedTheme === null && prefersDark)) {
-                document.documentElement.classList.add('dark-mode');
-            }
-        })();
-    </script>
+    <title>Your Name - Personal Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="top-right-container">
-        <nav class="navbar">
+
+    <header class="main-header">
+        <div class="header-left">
+            <a href="#" class="logo">H Hugo Profile</a>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Ctrl + k to Search...</span>
+            </div>
+        </div>
+        <nav class="main-nav">
             <ul>
-                <li><a href="index.html">首页</a></li>
-                <li><a href="nutrition.html">营养学科普</a></li>
-                <li><a href="aboutme.html">关于我</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Blog</a></li>
             </ul>
         </nav>
-        <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-            <span class="sun-icon">☀️</span>
-            <span class="moon-icon">🌙</span>
-        </button>
-    </div>
-    
-    <header>
-        <h1>Your Name</h1>
-        <p>Web Developer | Designer | Your Title</p>
+        <div class="header-right">
+            <a href="#">Gallery</a>
+            <button id="dark-mode-toggle" class="theme-toggle">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
     </header>
-    
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hello! I'm Tina and welcome to my website! This is my personal site where I put nutrition ___.</p>
-        </section>
-        
-        <section id="projects">
-            <h2>My Projects</h2>
-            <div class="project">
-                <h3>Project 1</h3>
-                <p>Description of your first project goes here.</p>
+
+    <main class="hero">
+        <div class="hero-content">
+            <p class="intro-text">Hi, my name is</p>
+            <h1 class="name">Isabella.</h1>
+            <h2 class="subtitle">I build things for the web</h2>
+            <p class="description">
+                A passionate web app developer. I tend to make use of modern web technologies to build websites that look great, feel fantastic, and function correctly.
+            </p>
+            <div class="actions">
+                <a href="#" class="btn-resume">Resume</a>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://x.com/yourusername" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
             </div>
-        </section>
-        
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Email: tinayu191409@gmail.com</p>
-            <p>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></p>
-        </section>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/300" alt="Your Avatar">
+        </div>
     </main>
     
-    <footer>
-        <p></p>
-    </footer>
-
     <script src="darkmode.js"></script>
 </body>
 </html>
