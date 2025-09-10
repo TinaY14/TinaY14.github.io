@@ -260,3 +260,49 @@ body {
     margin-right: 10px;
     color: var(--primary-blue);
 }
+
+/* --- NEW STYLES for Two-Column Inner Pages --- */
+
+/* This is the container for the right-side content */
+.page-content {
+    max-width: 600px;
+    width: 100%;
+}
+
+/* This styles the big blue title on the right side (e.g., "About Me.") */
+.page-title {
+    font-size: 6em;
+    font-weight: 700;
+    color: var(--primary-blue);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+/* This adds some spacing and styling to the content lists */
+.page-content .content-entry {
+    margin-bottom: 30px;
+}
+
+.page-content h3 {
+    color: var(--heading-color);
+    margin-bottom: 5px;
+}
+
+.page-content p {
+    line-height: 1.7;
+}
+
+.page-content .date, .page-content .tech-stack {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.page-content ul {
+    list-style-position: outside;
+    padding-left: 20px;
+}
+
+.page-content li {
+    margin-bottom: 8px;
+}
