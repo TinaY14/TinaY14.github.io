@@ -20,7 +20,7 @@
             <a href="index.html">Home</a>
             <a href="about.html">About Me</a>
             <a href="night_stall_food.html">Night Stall Food</a>
-            <a href="education.html">Education</a>
+            <a href="food_gallery.html">Food Gallery</a>
             <a href="projects.html">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
@@ -47,17 +47,23 @@
 
         <div class="page-content">
             <h2 class="page-title">Contact.</h2>
-            
             <p>
-                I'm always open to new opportunities, collaborations, and discussions about nutrition, research, or community initiatives. Feel free to reach out to me via email.
+                I'm always open to new opportunities, collaborations, and discussions about nutrition, research, or community initiatives. Feel free to reach out to me via email or use the message box below.
             </p>
             <div class="content-entry">
-                <p><strong>Email:</strong> <a href="mailto:18175109yyt@gmail.com">18175109yyt@gmail.com</a></p>
-                <p><strong>Skills:</strong> Python, C, Canvas, Autodesk Sketchbook, WeVideo, Scratch, Google Suite</p>
-                <p><strong>Languages:</strong> Chinese (Native), French (Elementary), Spanish (Elementary)</p>
-                <p><strong>Certifications:</strong> CPR/AED First Aid Certification</p>
+                <form action="mailto:18175109yyt@gmail.com" method="POST" enctype="text/plain">
+                    <label for="purpose"><strong>Message Purpose:</strong></label><br>
+                    <select id="purpose" name="Purpose" required>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Collaboration">Collaboration</option>
+                        <option value="Nutrition Question">Nutrition Question</option>
+                        <option value="Other">Other</option>
+                    </select><br><br>
+                    <label for="message"><strong>Your Message:</strong></label><br>
+                    <textarea id="message" name="Message" rows="5" cols="40" required></textarea><br><br>
+                    <button type="submit" class="resume-btn">Send Message</button>
+                </form>
             </div>
-            
         </div>
 
     </main>
