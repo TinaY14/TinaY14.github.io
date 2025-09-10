@@ -183,3 +183,80 @@ body {
     object-fit: cover;
     border-radius: 15px;
 }
+
+/* --- New Styles for Single Column Pages (like About Me) --- */
+.hero-single-column {
+    flex-direction: column; /* Stacks content vertically */
+    align-items: flex-start; /* Aligns content to the left */
+    gap: 20px; /* Space between elements */
+}
+
+.hero-single-column .hero-content {
+    max-width: 800px; /* Allow content to use more width */
+    width: 100%;
+    margin-top: 50px; /* Add some space from the header */
+}
+
+/* Hide the image container on single-column pages */
+.hero-single-column .hero-image {
+    display: none;
+}
+
+/* Styling for generic section titles on these new pages */
+.section-title {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 20px 0 30px 0;
+    line-height: 1.1;
+}
+
+/* Basic styling for content within Experience, Education, Projects, Contact */
+.job-entry, .education-entry, .project-entry, .contact-info {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.job-entry h3, .education-entry h3, .project-entry h3 {
+    color: var(--heading-color);
+    margin-bottom: 5px;
+}
+
+.job-date, .university {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.details, .project-description, .project-tech {
+    margin-bottom: 10px;
+}
+
+.job-entry ul {
+    margin-left: 20px;
+    list-style: disc;
+    padding-top: 10px;
+    color: var(--text-color);
+}
+
+.job-entry li {
+    margin-bottom: 5px;
+}
+
+.project-links a {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--primary-blue);
+}
