@@ -3,180 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isabella - Web Developer</title>
+    <title>About Me - Isabella</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <style>
-        /* --- Basic Setup & Colors --- */
-        :root {
-            --bg-color: #f0f4f8;
-            --text-color: #566a7e;
-            --heading-color: #3e4b5b;
-            --primary-blue: #0d6efd;
-            --white: #ffffff;
-            --avatar-bg: #86c5da;
-            --avatar-border: #ffffff;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0 5%;
-        }
-
-        /* --- Header & Navigation --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            width: 100%;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2em;
-            color: var(--heading-color);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            margin: 0 15px;
-            font-size: 0.9em;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--primary-blue);
-        }
-
-        /* --- Main Hero Section --- */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 80vh;
-            gap: 40px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero-image {
-            max-width: 400px;
-        }
-
-        /* --- Text Content Styling --- */
-        .intro-text {
-            font-size: 1.1em;
-            margin: 0;
-        }
-
-        h1.name {
-            font-size: 6em;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin: -10px 0 0 0;
-            line-height: 1;
-        }
-
-        h2.tagline {
-            font-size: 3.5em;
-            font-weight: 700;
-            color: var(--heading-color);
-            margin: 10px 0;
-            line-height: 1.1;
-        }
-
-        .description {
-            font-size: 1em;
-            line-height: 1.6;
-            max-width: 500px;
-            margin-bottom: 30px;
-        }
-
-        /* --- Buttons and Links --- */
-        .actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .resume-btn {
-            background-color: var(--white);
-            color: var(--primary-blue);
-            border: 1px solid #dcdcdc;
-            padding: 10px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .resume-btn:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            border-color: var(--primary-blue);
-        }
-
-        .social-links a {
-            color: var(--text-color);
-            font-size: 1.5em;
-            margin: 0 8px;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        /* --- Avatar Image Styling --- */
-        .avatar-container {
-            background-color: var(--avatar-bg);
-            padding: 20px;
-            border-radius: 30px;
-            border: 10px solid var(--avatar-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .avatar-container img {
-            display: block;
-            max-width: 100%;
-            border-radius: 20px;
-        }
-
-        /* --- Responsive Design for smaller screens --- */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column-reverse;
-                text-align: center;
-                margin-top: 40px;
-            }
-
-            .hero-content {
-                max-width: 100%;
-            }
-
-            h1.name { font-size: 4em; }
-            h2.tagline { font-size: 2.5em; }
-            .description { margin: 20px auto; }
-            .actions { justify-content: center; }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -191,17 +23,23 @@
         </nav>
     </header>
 
-    <main class="hero">
-        
+    <main class="hero hero-single-column">
         <div class="hero-content">
-            <p class="intro-text">Hi, my name is</p>
-            <h1 class="name">Isabella.</h1>
-            <h2 class="tagline">I build things for the web</h2>
+            <h1 class="name">About Me.</h1>
             <p class="description">
-                A passionate web app developer. I tend to make use of modern web technologies to build websites that look great, feel fantastic, and function correctly.
+                Hello! I'm Isabella, a passionate web developer with a keen eye for design and user experience. My journey into web development began with a curiosity for how websites are built, which quickly blossomed into a love for creating intuitive and beautiful digital experiences.
+            </p>
+            <p class="description">
+                I specialize in front-end development, using technologies like HTML, CSS, JavaScript, and modern frameworks to bring ideas to life. I enjoy solving complex problems and continuously learning new skills to stay at the forefront of technology.
+            </p>
+            <p class="description">
+                Beyond coding, I love exploring new design trends, contributing to open-source projects, and collaborating with fellow developers. When I'm not at my computer, you might find me hiking, reading sci-fi novels, or experimenting with new recipes in the kitchen.
+            </p>
+            <p class="description">
+                I'm always looking for exciting opportunities to build impactful web applications and collaborate on innovative projects. Feel free to reach out if you'd like to connect!
             </p>
             <div class="actions">
-                <a href="#your-resume-link" class="resume-btn">Resume</a>
+                <a href="#your-resume-link" class="resume-btn">View My Resume</a>
                 <div class="social-links">
                     <a href="#your-github-link" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="#your-twitter-link" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -209,14 +47,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="hero-image">
-            <div class="avatar-container">
-                <img src="https://i.imgur.com/SpVHxQy.png" alt="Avatar of Isabella">
-            </div>
-        </div>
-
-</main>
+    </main>
 
 </body>
 </html>
