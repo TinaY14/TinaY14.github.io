@@ -1,148 +1,267 @@
-/* --- Basic Setup & Colors --- */
+/* --- Basic Setup & Variables --- */
 :root {
-    --bg-color: #f0f4f8;
-    --text-color: #566a7e;
-    --heading-color: #3e4b5b;
-    --primary-blue: #0d6efd;
-    --white: #ffffff;
-    --avatar-bg: #86c5da;
-    --avatar-border: #ffffff;
+    --bg-color: #f8f9fa;
+    --text-color: #495057;
+    --heading-color: #212529;
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Add dark mode variables later if needed */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--bg-color);
     color: var(--text-color);
-    margin: 0;
-    padding: 0 5%;
+    line-height: 1.6;
 }
 
 /* --- Header & Navigation --- */
-header {
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
-    width: 100%;
+    padding: 15px 5%;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .logo {
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: var(--heading-color);
+    text-decoration: none;
 }
 
-nav a {
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 15px;
+    color: var(--secondary-color);
+    width: 250px;
+}
+
+.main-nav ul, .header-right {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 25px;
+}
+
+.main-nav a, .header-right a {
     text-decoration: none;
     color: var(--text-color);
-    margin: 0 15px;
-    font-size: 0.9em;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
-nav a:hover {
-    color: var(--primary-blue);
+.main-nav a:hover, .header-right a:hover {
+    color: var(--primary-color);
 }
 
-/* --- Main Hero Section (for all pages) --- */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+.theme-toggle .fa-sun { display: none; } /* Hide sun icon by default */
+/* Add styles for dark mode later */
+
+
+/* --- Hero Section --- */
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 80vh;
+    padding: 80px 10%;
     gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Left side content */
 .hero-content {
     max-width: 600px;
 }
 
-/* Right side image (homepage only) */
-.hero-image {
-    max-width: 400px;
+.intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
 }
 
-/* --- Text Content Styling --- */
-.intro-text {
-    font-size: 1.1em;
+.name {
+    font-size: 5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    line-height: 1.1;
     margin: 0;
 }
 
-h1.name {
-    font-size: 6em;
+.subtitle {
+    font-size: 3rem;
+    color: var(--secondary-color);
     font-weight: 700;
-    color: var(--primary-blue);
-    margin: -10px 0 0 0;
-    line-height: 1;
-}
-
-h2.tagline {
-    font-size: 3.5em;
-    font-weight: 700;
-    color: var(--heading-color);
-    margin: 10px 0;
-    line-height: 1.1;
+    line-height: 1.2;
+    margin: 10px 0 20px;
 }
 
 .description {
-    font-size: 1em;
-    line-height: 1.6;
+    font-size: 1.1rem;
     max-width: 500px;
     margin-bottom: 30px;
 }
 
-/* --- Buttons and Links --- */
 .actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
-.resume-btn {
-    background-color: var(--white);
-    color: var(--primary-blue);
-    border: 1px solid #dcdcdc;
-    padding: 10px 25px;
+.btn-resume {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--heading-color);
+    padding: 12px 25px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     transition: all 0.3s ease;
 }
 
-.resume-btn:hover {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    border-color: var(--primary-blue);
+.btn-resume:hover {
+    background-color: var(--heading-color);
+    color: var(--card-bg);
+    border-color: var(--heading-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
 }
 
 .social-links a {
     color: var(--text-color);
-    font-size: 1.5em;
-    margin: 0 8px;
+    font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
 .social-links a:hover {
+    color: var(--primary-color);
+}
+
+.hero-image {
+    background-color: #cce5ff; /* A light blue background */
+    border-radius: 20px;
+    padding: 20px;
+    width: 340px;
+    height: 340px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* --- New Styles for Single Column Pages (like About Me) --- */
+.hero-single-column {
+    flex-direction: column; /* Stacks content vertically */
+    align-items: flex-start; /* Aligns content to the left */
+    gap: 20px; /* Space between elements */
+}
+
+.hero-single-column .hero-content {
+    max-width: 800px; /* Allow content to use more width */
+    width: 100%;
+    margin-top: 50px; /* Add some space from the header */
+}
+
+/* Hide the image container on single-column pages */
+.hero-single-column .hero-image {
+    display: none;
+}
+
+/* Styling for generic section titles on these new pages */
+.section-title {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 20px 0 30px 0;
+    line-height: 1.1;
+}
+
+/* Basic styling for content within Experience, Education, Projects, Contact */
+.job-entry, .education-entry, .project-entry, .contact-info {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.job-entry h3, .education-entry h3, .project-entry h3 {
+    color: var(--heading-color);
+    margin-bottom: 5px;
+}
+
+.job-date, .university {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.details, .project-description, .project-tech {
+    margin-bottom: 10px;
+}
+
+.job-entry ul {
+    margin-left: 20px;
+    list-style: disc;
+    padding-top: 10px;
+    color: var(--text-color);
+}
+
+.job-entry li {
+    margin-bottom: 5px;
+}
+
+.project-links a {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info i {
+    margin-right: 10px;
     color: var(--primary-blue);
 }
 
-/* --- Avatar Image Styling (homepage only) --- */
-.avatar-container {
-    background-color: var(--avatar-bg);
-    padding: 20px;
-    border-radius: 30px;
-    border: 10px solid var(--avatar-border);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.avatar-container img {
-    display: block;
-    max-width: 100%;
-    border-radius: 20px;
-}
-
-/* --- Styles for Two-Column Inner Pages --- */
+/* --- NEW STYLES for Two-Column Inner Pages --- */
 
 /* This is the container for the right-side content */
 .page-content {
@@ -173,7 +292,7 @@ h2.tagline {
     line-height: 1.7;
 }
 
-.page-content .date {
+.page-content .date, .page-content .tech-stack {
     font-size: 0.9em;
     color: var(--text-color);
     margin-bottom: 10px;
@@ -188,29 +307,52 @@ h2.tagline {
     margin-bottom: 8px;
 }
 
+/* --- NEW STYLES for Inner Page Layout (Experience, etc.) --- */
 
-/* --- Responsive Design for smaller screens --- */
-@media (max-width: 992px) {
-    .hero {
-        flex-direction: column; /* Stacks columns on small screens */
-        text-align: center;
-        margin-top: 40px;
-    }
-
-    .hero-content, .page-content {
-        max-width: 100%;
-        text-align: left; /* Keep text aligned left even when centered */
-    }
-
-    h1.name, .page-title { font-size: 4em; }
-    h2.tagline { font-size: 2.5em; }
-    .description { margin: 20px auto; }
-    .actions { justify-content: center; }
+/* This is the main container for the inner page content */
+.page-container {
+    padding-top: 40px; /* Adds space below the header */
+    max-width: 900px;
+    margin: 0 auto; /* Centers the content */
 }
 
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
+/* Styles the big title (e.g., "Experience.") */
+.page-header {
+    font-size: 5em;
+    font-weight: 700;
+    color: #3e4b5b; /* A dark, neutral color */
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+/* Styles each white card holding a job or project */
+.content-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    margin-bottom: 30px;
+}
+
+.content-card h3 {
+    color: var(--heading-color);
+    margin-bottom: 5px;
+    font-size: 1.4em;
+}
+
+.content-card .date {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.content-card ul {
+    list-style-position: outside;
+    padding-left: 20px;
+}
+
+.content-card li {
+    margin-bottom: 10px;
+    line-height: 1.6;
 }
