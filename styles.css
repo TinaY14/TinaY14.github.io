@@ -1,20 +1,66 @@
 /* --- Basic Setup & Colors --- */
 :root {
     --bg-color: #f0f4f8;
-    --text-color: #566a7e;
-    --heading-color: #3e4b5b;
-    --primary-blue: #0d6efd;
+    --text-color: #ffffff;
+    --heading-color: #ffffff;
+    --primary-blue: #4fc3f7;
     --white: #ffffff;
     --avatar-bg: #86c5da;
     --avatar-border: #ffffff;
+    --content-bg: #ffffff;
+    --content-text: #333333;
+}
+
+/* Dark mode variables */
+:root.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --heading-color: #ffffff;
+    --primary-blue: #4fc3f7;
+    --white: #ffffff;
+    --avatar-bg: #86c5da;
+    --avatar-border: #ffffff;
+    --content-bg: #2d2d2d;
+    --content-text: #ffffff;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--text-color);
     margin: 0;
     padding: 0 5%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Override background for non-homepage in dark mode */
+body.non-homepage {
+    background-image: none;
+    background-color: var(--bg-color);
+}
+
+body.non-homepage.dark-mode {
+    background-color: var(--content-bg);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+body.non-homepage::before {
+    display: none;
 }
 
 /* --- Header & Navigation (Used on ALL pages) --- */
@@ -31,19 +77,62 @@ header {
 .logo {
     font-weight: 700;
     font-size: 1.2em;
-    color: var(--heading-color);
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.non-homepage .logo {
+    color: var(--content-text);
+    text-shadow: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--white);
     margin: 0 15px;
     font-size: 0.9em;
     transition: color 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.non-homepage nav a {
+    color: var(--content-text);
+    text-shadow: none;
 }
 
 nav a:hover {
     color: var(--primary-blue);
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    padding: 8px 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    margin-left: 20px;
+    backdrop-filter: blur(10px);
+}
+
+body.non-homepage #dark-mode-toggle {
+    background: var(--content-bg);
+    border: 2px solid var(--content-text);
+    color: var(--content-text);
+}
+
+#dark-mode-toggle:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--primary-blue);
 }
 
 /* --- HOMEPAGE SPECIFIC STYLES --- */
@@ -71,7 +160,8 @@ nav a:hover {
 .hero-content { max-width: 600px; }
 .intro-text { 
     font-size: 1.1em; 
-    margin: 0 0 20px 0; 
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 h1.name {
     font-size: 3.5em;
@@ -79,19 +169,22 @@ h1.name {
     color: var(--primary-blue);
     margin: 0 0 25px 0;
     line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 h2.tagline {
     font-size: 2.5em;
     font-weight: 700;
-    color: var(--heading-color);
+    color: var(--white);
     margin: 0 0 30px 0;
     line-height: 1.1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 .description {
     font-size: 1em;
     line-height: 1.6;
     max-width: 500px;
     margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 .actions { display: flex; align-items: center; gap: 15px; }
 .resume-btn {
@@ -120,28 +213,31 @@ h2.tagline {
 /* --- INNER PAGE SPECIFIC STYLES --- */
 .page-container {
     max-width: 800px;
-    margin: 40px auto; /* Center the content and add space from the header */
+    margin: 40px auto;
 }
 
 .page-title {
     font-size: 4em;
     font-weight: 700;
-    color: var(--heading-color);
+    color: var(--content-text);
     margin-bottom: 30px;
     border-bottom: 2px solid var(--primary-blue);
     padding-bottom: 15px;
+    text-shadow: none;
 }
 
 .content-entry {
-    background-color: var(--white);
+    background-color: var(--content-bg);
+    color: var(--content-text);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    transition: all 0.3s ease;
 }
 
 .content-entry h3 {
-    color: var(--heading-color);
+    color: var(--content-text);
     font-weight: 600;
     margin: 0 0 10px 0;
     font-size: 1.3em;
@@ -155,6 +251,7 @@ h2.tagline {
 }
 
 .content-entry p {
+    color: var(--content-text);
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -165,6 +262,7 @@ h2.tagline {
 }
 
 .content-entry li {
+    color: var(--content-text);
     margin-bottom: 8px;
     line-height: 1.5;
 }
@@ -173,6 +271,28 @@ h2.tagline {
     max-width: 800px;
     margin: 40px auto;
     padding: 0 20px;
+}
+
+.page-content p {
+    color: var(--content-text);
+    text-shadow: none;
+}
+
+/* Form styles for contact page */
+form label {
+    color: var(--content-text);
+}
+
+form select, form textarea {
+    background-color: var(--content-bg);
+    color: var(--content-text);
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.dark-mode form select, .dark-mode form textarea {
+    border-color: #555;
 }
 
 /* --- Responsive Design --- */
