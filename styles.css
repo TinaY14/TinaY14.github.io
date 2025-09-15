@@ -235,9 +235,23 @@ body.inner-page .page-title {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-:root.dark-mode .content-entry {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+/* Light mode - white blocks on light background */
+body.inner-page .content-entry {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode - dark blocks on darker background */
+:root.dark-mode body.inner-page .content-entry {
+    background-color: #2a2a2a;
+    border: 1px solid #404040;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode background for inner pages */
+:root.dark-mode body.inner-page {
+    background-color: #1a1a1a;
 }
 
 .content-entry h3 {
