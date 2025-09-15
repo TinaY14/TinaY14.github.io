@@ -7,21 +7,18 @@
     --white: #ffffff;
     --avatar-bg: #86c5da;
     --avatar-border: #ffffff;
-    --content-bg: #ffffff;
-    --content-text: #333333;
+    --inner-bg: #ffffff;
+    --inner-text: #333333;
+    --inner-heading: #333333;
 }
 
 /* Dark mode variables */
 :root.dark-mode {
-    --bg-color: #1a1a1a;
+    --inner-bg: #1a1a1a;
+    --inner-text: #ffffff;
+    --inner-heading: #ffffff;
     --text-color: #ffffff;
     --heading-color: #ffffff;
-    --primary-blue: #4fc3f7;
-    --white: #ffffff;
-    --avatar-bg: #86c5da;
-    --avatar-border: #ffffff;
-    --content-bg: #2d2d2d;
-    --content-text: #ffffff;
 }
 
 body {
@@ -35,19 +32,9 @@ body {
     margin: 0;
     padding: 0 5%;
     position: relative;
-    transition: all 0.3s ease;
 }
 
-/* Override background for non-homepage in dark mode */
-body.non-homepage {
-    background-image: none;
-    background-color: var(--bg-color);
-}
-
-body.non-homepage.dark-mode {
-    background-color: var(--content-bg);
-}
-
+/* Homepage background overlay */
 body::before {
     content: '';
     position: fixed;
@@ -59,7 +46,14 @@ body::before {
     z-index: -1;
 }
 
-body.non-homepage::before {
+/* Inner pages styling */
+body.inner-page {
+    background-image: none;
+    background-color: var(--inner-bg);
+    color: var(--inner-text);
+}
+
+body.inner-page::before {
     display: none;
 }
 
@@ -81,8 +75,9 @@ header {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-body.non-homepage .logo {
-    color: var(--content-text);
+/* Inner page logo styling */
+body.inner-page .logo {
+    color: var(--inner-heading);
     text-shadow: none;
 }
 
@@ -100,8 +95,9 @@ nav a {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-body.non-homepage nav a {
-    color: var(--content-text);
+/* Inner page nav styling */
+body.inner-page nav a {
+    color: var(--inner-text);
     text-shadow: none;
 }
 
@@ -111,28 +107,26 @@ nav a:hover {
 
 /* Dark mode toggle button */
 #dark-mode-toggle {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: none;
+    border: 2px solid var(--white);
     color: var(--white);
+    font-size: 1.2em;
     padding: 8px 12px;
-    border-radius: 25px;
+    border-radius: 50px;
     cursor: pointer;
-    font-size: 1em;
     transition: all 0.3s ease;
     margin-left: 20px;
-    backdrop-filter: blur(10px);
 }
 
-body.non-homepage #dark-mode-toggle {
-    background: var(--content-bg);
-    border: 2px solid var(--content-text);
-    color: var(--content-text);
+body.inner-page #dark-mode-toggle {
+    border-color: var(--inner-text);
+    color: var(--inner-text);
 }
 
 #dark-mode-toggle:hover {
-    background: var(--primary-blue);
-    color: var(--white);
+    background-color: var(--primary-blue);
     border-color: var(--primary-blue);
+    color: white;
 }
 
 /* --- HOMEPAGE SPECIFIC STYLES --- */
@@ -219,28 +213,47 @@ h2.tagline {
 .page-title {
     font-size: 4em;
     font-weight: 700;
-    color: var(--content-text);
+    color: var(--inner-heading);
     margin-bottom: 30px;
     border-bottom: 2px solid var(--primary-blue);
     padding-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Homepage page-title keeps shadow, inner pages don't */
+body.inner-page .page-title {
     text-shadow: none;
 }
 
 .content-entry {
-    background-color: var(--content-bg);
-    color: var(--content-text);
+    background-color: var(--inner-bg);
+    color: var(--inner-text);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+:root.dark-mode .content-entry {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .content-entry h3 {
-    color: var(--content-text);
+    color: var(--inner-heading);
     font-weight: 600;
     margin: 0 0 10px 0;
     font-size: 1.3em;
+}
+
+.content-entry h3 a {
+    color: var(--inner-heading);
+    text-decoration: none;
+}
+
+.content-entry h3 a:hover {
+    color: var(--primary-blue);
 }
 
 .content-entry .date {
@@ -251,7 +264,7 @@ h2.tagline {
 }
 
 .content-entry p {
-    color: var(--content-text);
+    color: var(--inner-text);
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -262,9 +275,9 @@ h2.tagline {
 }
 
 .content-entry li {
-    color: var(--content-text);
     margin-bottom: 8px;
     line-height: 1.5;
+    color: var(--inner-text);
 }
 
 .page-content {
@@ -274,25 +287,30 @@ h2.tagline {
 }
 
 .page-content p {
-    color: var(--content-text);
-    text-shadow: none;
+    color: var(--inner-text);
 }
 
-/* Form styles for contact page */
+/* Form styling for contact page */
+form {
+    color: var(--inner-text);
+}
+
 form label {
-    color: var(--content-text);
+    color: var(--inner-heading);
 }
 
 form select, form textarea {
-    background-color: var(--content-bg);
-    color: var(--content-text);
-    border: 1px solid #ccc;
+    background-color: var(--inner-bg);
+    color: var(--inner-text);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 8px;
     border-radius: 4px;
+    font-family: inherit;
 }
 
-.dark-mode form select, .dark-mode form textarea {
-    border-color: #555;
+:root.dark-mode form select, 
+:root.dark-mode form textarea {
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* --- Responsive Design --- */

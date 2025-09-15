@@ -1,99 +1,75 @@
 // Execute this script immediately to prevent flash
 (function() {
-    // Function to determine if it should be dark mode based on time
-    function shouldBeDarkMode() {
-        const hour = new Date().getHours();
-        // Dark mode from 6 PM (18) to 6 AM (6)
-        return hour >= 18 || hour < 6;
+    // Function to determine if it's night time (6 PM to 6 AM)
+    function isNightTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        return hours >= 18 || hours < 6;
     }
-
-    // Check for manual override or use time-based determination
-    const manualOverride = localStorage.getItem('dark-mode-override');
-    let isDarkMode;
     
-    if (manualOverride !== null) {
-        isDarkMode = manualOverride === 'true';
-    } else {
-        isDarkMode = shouldBeDarkMode();
-    }
+    // Check for saved theme preference or use time-based preference
+    const savedTheme = localStorage.getItem('dark-mode-override');
+    const shouldBeDark = savedTheme !== null ? savedTheme === 'true' : isNightTime();
     
     // Apply the correct theme immediately
-    if (isDarkMode) {
+    if (shouldBeDark) {
         document.documentElement.classList.add('dark-mode');
     }
-
-    // Add non-homepage class to body if not on index page
-    if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
-        document.body.classList.add('non-homepage');
+    
+    // Add inner-page class to body if not on homepage
+    const isHomepage = window.location.pathname.endsWith('index.html') || 
+                      window.location.pathname === '/' || 
+                      window.location.pathname.endsWith('/');
+    
+    if (!isHomepage) {
+        document.body.classList.add('inner-page');
     }
 })();
 
 // Setup event handlers after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the current year for the footer copyright
-    const year = new Date().getFullYear();
-    document.querySelector('footer p').innerHTML = `&copy; ${year} Your Name. All rights reserved.`;
-    
-    // Add a simple welcome message in the console
-    console.log('Welcome to my website!');
-    
     // Dark mode toggle functionality
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     
-    if (!darkModeToggle) return; // Exit if toggle button doesn't exist
+    if (!darkModeToggle) return; // Exit if toggle button not found
     
     // Function to update toggle button icon
     function updateToggleIcon() {
-        const isDark = document.documentElement.classList.contains('dark-mode');
-        darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+        const isDarkMode = document.documentElement.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDarkMode ? '🌙' : '☀️';
     }
     
-    // Function to determine if it should be dark mode based on time
-    function shouldBeDarkMode() {
-        const hour = new Date().getHours();
-        return hour >= 18 || hour < 6;
+    // Function to determine if it's night time
+    function isNightTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        return hours >= 18 || hours < 6;
     }
+    
+    // Initialize the toggle icon
+    updateToggleIcon();
     
     // Toggle dark mode function
     function toggleDarkMode() {
         const isDarkMode = document.documentElement.classList.toggle('dark-mode');
-        localStorage.setItem('dark-mode-override', isDarkMode);
+        localStorage.setItem('dark-mode-override', isDarkMode.toString());
         updateToggleIcon();
     }
-    
-    // Auto update based on time (check every minute)
-    function autoUpdateDarkMode() {
-        const manualOverride = localStorage.getItem('dark-mode-override');
-        if (manualOverride === null) { // Only auto-update if no manual override
-            const shouldBeDark = shouldBeDarkMode();
-            const isDark = document.documentElement.classList.contains('dark-mode');
-            
-            if (shouldBeDark !== isDark) {
-                document.documentElement.classList.toggle('dark-mode', shouldBeDark);
-                updateToggleIcon();
-            }
-        }
-    }
-    
-    // Initial icon update
-    updateToggleIcon();
     
     // Toggle when button is clicked
     darkModeToggle.addEventListener('click', toggleDarkMode);
     
-    // Check time every minute for automatic switching
-    setInterval(autoUpdateDarkMode, 60000);
-    
-    // Reset manual override at midnight to allow natural cycling
-    const now = new Date();
-    const msUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
-    setTimeout(() => {
-        localStorage.removeItem('dark-mode-override');
-        autoUpdateDarkMode();
-        // Set daily reset
-        setInterval(() => {
-            localStorage.removeItem('dark-mode-override');
-            autoUpdateDarkMode();
-        }, 24 * 60 * 60 * 1000);
-    }, msUntilMidnight);
+    // Auto-switch every hour if no manual override
+    setInterval(() => {
+        const hasOverride = localStorage.getItem('dark-mode-override') !== null;
+        if (!hasOverride) {
+            const shouldBeDark = isNightTime();
+            const isDarkMode = document.documentElement.classList.contains('dark-mode');
+            
+            if (shouldBeDark !== isDarkMode) {
+                document.documentElement.classList.toggle('dark-mode', shouldBeDark);
+                updateToggleIcon();
+            }
+        }
+    }, 3600000); // Check every hour
 });
