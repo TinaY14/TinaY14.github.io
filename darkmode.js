@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to update toggle button icon
     function updateToggleIcon() {
         const isDarkMode = document.documentElement.classList.contains('dark-mode');
-        darkModeToggle.textContent = isDarkMode ? '🌙' : '☀️';
+        // Show sun when in dark mode (click to go to light), moon when in light mode (click to go to dark)
+        darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        darkModeToggle.setAttribute('title', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
     }
     
     // Function to determine if it's night time
@@ -54,10 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const isDarkMode = document.documentElement.classList.toggle('dark-mode');
         localStorage.setItem('dark-mode-override', isDarkMode.toString());
         updateToggleIcon();
+        console.log('Dark mode toggled:', isDarkMode ? 'ON' : 'OFF'); // Debug log
     }
     
     // Toggle when button is clicked
-    darkModeToggle.addEventListener('click', toggleDarkMode);
+    darkModeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleDarkMode();
+    });
     
     // Auto-switch every hour if no manual override
     setInterval(() => {

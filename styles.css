@@ -14,16 +14,19 @@
 
 /* Dark mode variables */
 :root.dark-mode {
-    --inner-bg: #000000;
+    --bg-color: #1a1a1a;
+    --inner-bg: #1a1a1a;
     --inner-text: #ffffff;
     --inner-heading: #ffffff;
     --text-color: #ffffff;
     --heading-color: #ffffff;
+    --primary-blue: #64b5f6;
+    --white: #ffffff;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url('background.jpg');
+    background-image: url('pictures/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -252,6 +255,21 @@ body.inner-page .content-entry {
 /* Dark mode background for inner pages */
 :root.dark-mode body.inner-page {
     background-color: #000000;
+}
+
+/* Dark mode for homepage */
+:root.dark-mode body:not(.inner-page) {
+    background-color: #000000;
+    color: var(--text-color);
+}
+
+/* Dark mode for main elements */
+:root.dark-mode .hero {
+    background-color: transparent;
+}
+
+:root.dark-mode header {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .content-entry h3 {
