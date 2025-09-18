@@ -1,81 +1,73 @@
-// Execute this script immediately to prevent flash
+// Dark Mode Toggle Script
 (function() {
-    // Function to determine if it's night time (6 PM to 6 AM)
-    function isNightTime() {
-        const now = new Date();
-        const hours = now.getHours();
-        return hours >= 18 || hours < 6;
-    }
+    'use strict';
     
-    // Check for saved theme preference or use time-based preference
-    const savedTheme = localStorage.getItem('dark-mode-override');
-    const shouldBeDark = savedTheme !== null ? savedTheme === 'true' : isNightTime();
-    
-    // Apply the correct theme immediately
-    if (shouldBeDark) {
-        document.documentElement.classList.add('dark-mode');
-    }
-    
-    // Add inner-page class to body if not on homepage
-    const isHomepage = window.location.pathname.endsWith('index.html') || 
-                      window.location.pathname === '/' || 
-                      window.location.pathname.endsWith('/');
-    
-    if (!isHomepage) {
-        document.body.classList.add('inner-page');
-    }
-})();
-
-// Setup event handlers after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Dark mode toggle functionality
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    
-    if (!darkModeToggle) return; // Exit if toggle button not found
-    
-    // Function to update toggle button icon
-    function updateToggleIcon() {
-        const isDarkMode = document.documentElement.classList.contains('dark-mode');
-        // Show sun when in dark mode (click to go to light), moon when in light mode (click to go to dark)
-        darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
-        darkModeToggle.setAttribute('title', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
-    }
-    
-    // Function to determine if it's night time
-    function isNightTime() {
-        const now = new Date();
-        const hours = now.getHours();
-        return hours >= 18 || hours < 6;
-    }
-    
-    // Initialize the toggle icon
-    updateToggleIcon();
-    
-    // Toggle dark mode function
-    function toggleDarkMode() {
-        const isDarkMode = document.documentElement.classList.toggle('dark-mode');
-        localStorage.setItem('dark-mode-override', isDarkMode.toString());
-        updateToggleIcon();
-        console.log('Dark mode toggled:', isDarkMode ? 'ON' : 'OFF'); // Debug log
-    }
-    
-    // Toggle when button is clicked
-    darkModeToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggleDarkMode();
-    });
-    
-    // Auto-switch every hour if no manual override
-    setInterval(() => {
-        const hasOverride = localStorage.getItem('dark-mode-override') !== null;
-        if (!hasOverride) {
-            const shouldBeDark = isNightTime();
-            const isDarkMode = document.documentElement.classList.contains('dark-mode');
-            
-            if (shouldBeDark !== isDarkMode) {
-                document.documentElement.classList.toggle('dark-mode', shouldBeDark);
-                updateToggleIcon();
-            }
+    // Initialize dark mode on page load
+    function initDarkMode() {
+        // Check if user has a saved preference
+        const savedMode = localStorage.getItem('darkMode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Determine if we should start in dark mode
+        const shouldBeDark = savedMode ? savedMode === 'true' : prefersDark;
+        
+        // Apply dark mode class
+        if (shouldBeDark) {
+            document.documentElement.classList.add('dark-mode');
         }
-    }, 3600000); // Check every hour
-});
+        
+        // Add inner-page class for non-homepage
+        const isHomepage = window.location.pathname === '/' || 
+                          window.location.pathname.endsWith('/index.html') ||
+                          window.location.pathname.endsWith('/');
+        if (!isHomepage) {
+            document.body.classList.add('inner-page');
+        }
+    }
+    
+    // Update button icon based on current mode
+    function updateIcon(button) {
+        const isDark = document.documentElement.classList.contains('dark-mode');
+        button.textContent = isDark ? '☀️' : '🌙';
+        button.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+    
+    // Toggle dark mode
+    function toggleDarkMode() {
+        const html = document.documentElement;
+        const isDarkNow = html.classList.toggle('dark-mode');
+        
+        // Save user preference
+        localStorage.setItem('darkMode', isDarkNow.toString());
+        
+        // Update all toggle buttons on the page
+        const buttons = document.querySelectorAll('#dark-mode-toggle');
+        buttons.forEach(updateIcon);
+        
+        console.log('Dark mode toggled:', isDarkNow ? 'ON' : 'OFF');
+    }
+    
+    // Initialize immediately
+    initDarkMode();
+    
+    // Setup when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        
+        if (toggleButton) {
+            // Set initial icon
+            updateIcon(toggleButton);
+            
+            // Add click event
+            toggleButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleDarkMode();
+            });
+            
+            console.log('Dark mode toggle initialized');
+        } else {
+            console.warn('Dark mode toggle button not found');
+        }
+    });
+})();

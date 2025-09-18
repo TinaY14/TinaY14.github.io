@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Test</title>
+    <style>
+        /* Basic test styles */
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #333;
+        }
+        
+        :root.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        #dark-mode-toggle {
+            background: none;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            font-size: 1.2em;
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dark Mode Test</h1>
+    <p>This is a test page to check dark mode functionality.</p>
+    <button id="dark-mode-toggle">🌙</button>
+    
+    <script>
+        // Simplified dark mode script for testing
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('dark-mode-toggle');
+            
+            function updateIcon() {
+                const isDark = document.documentElement.classList.contains('dark-mode');
+                button.textContent = isDark ? '☀️' : '🌙';
+                console.log('Current mode:', isDark ? 'DARK' : 'LIGHT');
+            }
+            
+            function toggleDarkMode() {
+                document.documentElement.classList.toggle('dark-mode');
+                updateIcon();
+                console.log('Toggle clicked!');
+            }
+            
+            button.addEventListener('click', toggleDarkMode);
+            updateIcon();
+            
+            console.log('Test script loaded successfully');
+        });
+    </script>
+</body>
+</html>

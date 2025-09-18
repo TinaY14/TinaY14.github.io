@@ -119,6 +119,9 @@ nav a:hover {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-left: 20px;
+    outline: none;
+    position: relative;
+    z-index: 1000;
 }
 
 body.inner-page #dark-mode-toggle {
@@ -130,6 +133,14 @@ body.inner-page #dark-mode-toggle {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
     color: white;
+}
+
+#dark-mode-toggle:active {
+    transform: scale(0.95);
+}
+
+#dark-mode-toggle:focus {
+    box-shadow: 0 0 0 2px var(--primary-blue);
 }
 
 /* --- HOMEPAGE SPECIFIC STYLES --- */
