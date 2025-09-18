@@ -53,8 +53,8 @@ body::before {
 /* Inner pages styling - THESE PAGES FOLLOW DARK/LIGHT MODE */
 /* Pages: about.html, projects.html, contact.html, food_gallery/, night_stall_food/ */
 body.inner-page {
-    background-image: none; /* Remove background.jpg */
-    background-color: var(--inner-bg); /* White in light mode, black in dark mode */
+    background-image: none !important; /* Force remove background.jpg */
+    background: var(--inner-bg) !important; /* Force solid color background */
     color: var(--inner-text);
 }
 
@@ -268,7 +268,8 @@ body.inner-page .content-entry {
 /* Dark mode background for inner pages - FULL MODE SWITCHING */
 /* These pages get solid black background in dark mode */
 :root.dark-mode body.inner-page {
-    background-color: #000000; /* Solid black background */
+    background: #000000 !important; /* Force solid black background, no image */
+    background-image: none !important; /* Ensure no background image shows */
 }
 
 /* Dark mode for homepage ONLY - keep background image but allow header/text changes */
