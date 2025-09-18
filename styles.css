@@ -50,15 +50,16 @@ body::before {
     z-index: -1;
 }
 
-/* Inner pages styling */
+/* Inner pages styling - THESE PAGES FOLLOW DARK/LIGHT MODE */
+/* Pages: about.html, projects.html, contact.html, food_gallery/, night_stall_food/ */
 body.inner-page {
-    background-image: none;
-    background-color: var(--inner-bg);
+    background-image: none; /* Remove background.jpg */
+    background-color: var(--inner-bg); /* White in light mode, black in dark mode */
     color: var(--inner-text);
 }
 
 body.inner-page::before {
-    display: none;
+    display: none; /* No overlay needed */
 }
 
 /* --- Header & Navigation (Used on ALL pages) --- */
@@ -264,12 +265,14 @@ body.inner-page .content-entry {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Dark mode background for inner pages */
+/* Dark mode background for inner pages - FULL MODE SWITCHING */
+/* These pages get solid black background in dark mode */
 :root.dark-mode body.inner-page {
-    background-color: #000000;
+    background-color: #000000; /* Solid black background */
 }
 
-/* Dark mode for homepage - keep background image but allow header/text changes */
+/* Dark mode for homepage ONLY - keep background image but allow header/text changes */
+/* Homepage (index.html) NEVER changes background - always shows background.jpg */
 :root.dark-mode body:not(.inner-page) {
     /* Don't override background - keep the background.jpg image */
     color: var(--text-color);
