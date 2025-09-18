@@ -8,13 +8,13 @@
     --avatar-bg: #86c5da;
     --avatar-border: #ffffff;
     --inner-bg: #ffffff;
-    --inner-text: #333333;
-    --inner-heading: #333333;
+    --inner-text: #000000;
+    --inner-heading: #000000;
 }
 
 /* Dark mode variables */
 :root.dark-mode {
-    --inner-bg: #1a1a1a;
+    --inner-bg: #000000;
     --inner-text: #ffffff;
     --inner-heading: #ffffff;
     --text-color: #ffffff;
@@ -235,23 +235,23 @@ body.inner-page .page-title {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Light mode - white blocks on light background */
+/* Light mode - white blocks on white background */
 body.inner-page .content-entry {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Dark mode - dark blocks on darker background */
+/* Dark mode - dark blocks on black background */
 :root.dark-mode body.inner-page .content-entry {
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Dark mode background for inner pages */
 :root.dark-mode body.inner-page {
-    background-color: #1a1a1a;
+    background-color: #000000;
 }
 
 .content-entry h3 {
@@ -313,18 +313,32 @@ form label {
     color: var(--inner-heading);
 }
 
-form select, form textarea {
+form input[type="email"], 
+form select, 
+form textarea {
     background-color: var(--inner-bg);
     color: var(--inner-text);
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 8px;
     border-radius: 4px;
     font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+:root.dark-mode form input[type="email"],
 :root.dark-mode form select, 
 :root.dark-mode form textarea {
     border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: var(--inner-bg);
+}
+
+form input[type="email"]:focus,
+form select:focus, 
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2);
 }
 
 /* --- Responsive Design --- */
