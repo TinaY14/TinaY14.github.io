@@ -26,6 +26,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    /* Homepage background - should ALWAYS show regardless of dark/light mode */
     background-image: url('pictures/background.jpg');
     background-size: cover;
     background-position: center;
@@ -268,9 +269,9 @@ body.inner-page .content-entry {
     background-color: #000000;
 }
 
-/* Dark mode for homepage */
+/* Dark mode for homepage - keep background image but allow header/text changes */
 :root.dark-mode body:not(.inner-page) {
-    background-color: #000000;
+    /* Don't override background - keep the background.jpg image */
     color: var(--text-color);
 }
 
@@ -279,8 +280,9 @@ body.inner-page .content-entry {
     background-color: transparent;
 }
 
+/* Dark mode header styling - darker overlay for better readability */
 :root.dark-mode header {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .content-entry h3 {
