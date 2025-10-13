@@ -29,86 +29,27 @@
     </header>
 
     <main class="hero inner-page">
-        
         <div class="page-content">
-            <h2 class="page-title">Contact</h2>
-            <p>
-                I'm always open to new opportunities, collaborations, and discussions about nutrition, research, or community initiatives. Feel free to reach out to me via email or connect with me on social media.
-            </p>
+            <h2 class="page-title">Contact Me</h2>
+            <p>Feel free to reach out to me for collaborations, questions, or just to connect!</p>
             
-            <!-- Direct contact information -->
             <div class="content-entry">
-                <h3>Get In Touch</h3>
-                <p><strong>Email:</strong> <a href="mailto:18175109yyt@gmail.com">18175109yyt@gmail.com</a></p>
-                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-profile" target="_blank">Connect with me</a></p>
-                <p>Feel free to reach out directly via email for any inquiries, collaborations, or questions!</p>
+                <h3>📧 Get in Touch</h3>
+                <p><strong>Email:</strong> <a href="mailto:tinayu191409@gmail.com">tinayu191409@gmail.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-profile" target="_blank">Connect with me on LinkedIn</a></p>
+                <p><strong>Location:</strong> New York, NY</p>
             </div>
-
-            <!-- Working contact form using Formspree -->
+            
             <div class="content-entry">
-                <h3>Send me a message</h3>
-                <form action="https://formspree.io/f/your-form-id" method="POST" id="contact-form">
-                    <label for="email"><strong>Your Email:</strong></label><br>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px;"><br>
-                    
-                    <label for="purpose"><strong>Message Purpose:</strong></label><br>
-                    <select id="purpose" name="purpose" required style="width: 100%; padding: 8px; margin: 8px 0;">
-                        <option value="General Inquiry">General Inquiry</option>
-                        <option value="Collaboration">Collaboration</option>
-                        <option value="Nutrition Question">Nutrition Question</option>
-                        <option value="Other">Other</option>
-                    </select><br>
-                    
-                    <label for="message"><strong>Your Message:</strong></label><br>
-                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 8px; margin: 8px 0; resize: vertical;"></textarea><br>
-                    
-                    <button type="submit" class="resume-btn" style="margin-top: 10px;">Send Message</button>
-                    <div id="form-status" style="margin-top: 10px; display: none;"></div>
-                </form>
-            </div>
-
-            <!-- Simple JavaScript fallback -->
-            <script>
-                document.getElementById('contact-form').addEventListener('submit', function(e) {
-                    // Since we don't have a working Formspree endpoint, let's provide a fallback
-                    e.preventDefault();
-                    
-                    const email = document.getElementById('email').value;
-                    const purpose = document.getElementById('purpose').value;
-                    const message = document.getElementById('message').value;
-                    
-                    // Create mailto link with pre-filled content
-                    const subject = encodeURIComponent(`Contact Form: ${purpose}`);
-                    const body = encodeURIComponent(`From: ${email}\n\nMessage:\n${message}`);
-                    const mailtoLink = `mailto:18175109yyt@gmail.com?subject=${subject}&body=${body}`;
-                    
-                    // Open email client
-                    window.location.href = mailtoLink;
-                    
-                    // Show success message
-                    const status = document.getElementById('form-status');
-                    status.style.display = 'block';
-                    status.style.color = 'var(--primary-blue)';
-                    status.innerHTML = '✓ Opening your email client... If it doesn\'t open automatically, please email me directly at 18175109yyt@gmail.com';
-                });
-            </script>
-        </div>
-
-    </main>
-
-</body>
-</html>
-                        <option value="Collaboration">Collaboration</option>
-                        <option value="Nutrition Question">Nutrition Question</option>
-                        <option value="Other">Other</option>
-                    </select><br><br>
-                    <label for="message"><strong>Your Message:</strong></label><br>
-                    <textarea id="message" name="Message" rows="5" cols="40" required></textarea><br><br>
-                    <button type="submit" class="resume-btn">Send Message</button>
-                </form>
+                <h3>💼 Professional Interests</h3>
+                <ul>
+                    <li>Chemical Engineering opportunities</li>
+                    <li>Nutrition research collaborations</li>
+                    <li>Food science projects</li>
+                    <li>Academic partnerships</li>
+                </ul>
             </div>
         </div>
-
     </main>
 
 </body>
