@@ -14,19 +14,16 @@
 
 /* Dark mode variables */
 :root.dark-mode {
-    --bg-color: #1a1a1a;
     --inner-bg: #1a1a1a;
     --inner-text: #ffffff;
     --inner-heading: #ffffff;
     --text-color: #ffffff;
     --heading-color: #ffffff;
     --primary-blue: #64b5f6;
-    --white: #ffffff;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* Homepage background - should ALWAYS show regardless of dark/light mode */
     background-image: url('pictures/background.jpg');
     background-size: cover;
     background-position: center;
@@ -36,6 +33,7 @@ body {
     margin: 0;
     padding: 0 5%;
     position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Homepage background overlay */
@@ -50,19 +48,23 @@ body::before {
     z-index: -1;
 }
 
-/* Inner pages styling - THESE PAGES FOLLOW DARK/LIGHT MODE */
-/* Pages: about.html, projects.html, contact.html, food_gallery/, night_stall_food/ */
+/* Inner pages styling */
 body.inner-page {
-    background-image: none !important; /* Force remove background.jpg */
-    background: var(--inner-bg) !important; /* Force solid color background */
+    background-image: none !important;
+    background: var(--inner-bg) !important;
     color: var(--inner-text);
 }
 
 body.inner-page::before {
-    display: none; /* No overlay needed */
+    display: none;
 }
 
-/* --- Header & Navigation (Used on ALL pages) --- */
+/* Dark mode for inner pages */
+:root.dark-mode body.inner-page {
+    background: #000000 !important;
+}
+
+/* --- Header & Navigation --- */
 header {
     display: flex;
     justify-content: space-between;
@@ -80,7 +82,6 @@ header {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Inner page logo styling */
 body.inner-page .logo {
     color: var(--inner-heading);
     text-shadow: none;
@@ -100,7 +101,6 @@ nav a {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Inner page nav styling */
 body.inner-page nav a {
     color: var(--inner-text);
     text-shadow: none;
@@ -110,7 +110,7 @@ nav a:hover {
     color: var(--primary-blue);
 }
 
-/* Dark mode toggle button */
+/* Dark mode toggle button - SIMPLIFIED */
 #dark-mode-toggle {
     background: none;
     border: 2px solid var(--white);
@@ -122,8 +122,6 @@ nav a:hover {
     transition: all 0.3s ease;
     margin-left: 20px;
     outline: none;
-    position: relative;
-    z-index: 1000;
     min-width: 45px;
     min-height: 45px;
     display: inline-flex;
@@ -131,13 +129,11 @@ nav a:hover {
     justify-content: center;
 }
 
-/* Inner page toggle button styling */
 body.inner-page #dark-mode-toggle {
     border-color: var(--inner-text);
     color: var(--inner-text);
 }
 
-/* Dark mode toggle button hover states */
 #dark-mode-toggle:hover {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
@@ -147,17 +143,6 @@ body.inner-page #dark-mode-toggle {
 
 #dark-mode-toggle:active {
     transform: scale(0.95);
-}
-
-#dark-mode-toggle:focus {
-    box-shadow: 0 0 0 2px var(--primary-blue);
-}
-
-/* Ensure button is visible in all scenarios */
-body.inner-page #dark-mode-toggle:hover {
-    background-color: var(--primary-blue);
-    border-color: var(--primary-blue);
-    color: white;
 }
 
 /* --- HOMEPAGE SPECIFIC STYLES --- */
@@ -171,15 +156,10 @@ body.inner-page #dark-mode-toggle:hover {
     margin: 0 auto;
 }
 
-/* --- INNER PAGES LAYOUT --- */
 .hero.inner-page {
     align-items: flex-start;
     min-height: auto;
     padding-top: 20px;
-}
-
-.hero.inner-page .hero-content {
-    margin-top: 80px;
 }
 
 .hero-content { max-width: 600px; }
@@ -248,10 +228,8 @@ h2.tagline {
     margin-bottom: 30px;
     border-bottom: 2px solid var(--primary-blue);
     padding-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Homepage page-title keeps shadow, inner pages don't */
 body.inner-page .page-title {
     text-shadow: none;
 }
@@ -264,44 +242,14 @@ body.inner-page .page-title {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Light mode - white blocks on white background */
-body.inner-page .content-entry {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-/* Dark mode - dark blocks on black background */
+/* Dark mode content entries */
 :root.dark-mode body.inner-page .content-entry {
     background-color: #1a1a1a;
     border: 1px solid #333333;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Dark mode background for inner pages - FULL MODE SWITCHING */
-/* These pages get solid black background in dark mode */
-:root.dark-mode body.inner-page {
-    background: #000000 !important; /* Force solid black background, no image */
-    background-image: none !important; /* Ensure no background image shows */
-}
-
-/* Dark mode for homepage ONLY - keep background image but allow header/text changes */
-/* Homepage (index.html) NEVER changes background - always shows background.jpg */
-:root.dark-mode body:not(.inner-page) {
-    /* Don't override background - keep the background.jpg image */
-    color: var(--text-color);
-}
-
-/* Dark mode for main elements */
-:root.dark-mode .hero {
-    background-color: transparent;
-}
-
-/* Dark mode header styling - darker overlay for better readability */
-:root.dark-mode header {
-    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .content-entry h3 {
@@ -318,13 +266,6 @@ body.inner-page .content-entry {
 
 .content-entry h3 a:hover {
     color: var(--primary-blue);
-}
-
-.content-entry .date {
-    color: var(--primary-blue);
-    font-weight: 600;
-    margin-bottom: 15px;
-    font-size: 0.9em;
 }
 
 .content-entry p {
@@ -354,41 +295,70 @@ body.inner-page .content-entry {
     color: var(--inner-text);
 }
 
-/* Form styling for contact page */
+/* Form styling for contact page - ENHANCED */
 form {
     color: var(--inner-text);
 }
 
 form label {
     color: var(--inner-heading);
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
 }
 
+form input[type="text"],
 form input[type="email"], 
 form select, 
 form textarea {
     background-color: var(--inner-bg);
     color: var(--inner-text);
     border: 1px solid rgba(0, 0, 0, 0.3);
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
     font-family: inherit;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+:root.dark-mode form input[type="text"],
 :root.dark-mode form input[type="email"],
 :root.dark-mode form select, 
 :root.dark-mode form textarea {
     border: 1px solid rgba(255, 255, 255, 0.3);
-    background-color: var(--inner-bg);
+    background-color: #2a2a2a;
+    color: var(--inner-text);
 }
 
+form input[type="text"]:focus,
 form input[type="email"]:focus,
 form select:focus, 
 form textarea:focus {
     outline: none;
     border-color: var(--primary-blue);
     box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2);
+}
+
+form button[type="submit"] {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #3a9dd6;
+    transform: translateY(-1px);
+}
+
+form button[type="submit"]:active {
+    transform: translateY(0);
 }
 
 /* --- Responsive Design --- */

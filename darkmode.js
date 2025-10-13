@@ -1,4 +1,4 @@
-// Dark Mode Toggle Script - Enhanced for all pages
+// Dark Mode Toggle Script - Simplified and Fixed
 (function() {
     'use strict';
     
@@ -65,78 +65,56 @@
         // Save preference
         localStorage.setItem('darkMode', isDarkNow.toString());
         
-        // Update all buttons on page
-        const buttons = document.querySelectorAll('#dark-mode-toggle');
-        console.log('Found', buttons.length, 'toggle buttons');
-        buttons.forEach(updateButton);
+        // Update button
+        const button = document.getElementById('dark-mode-toggle');
+        updateButton(button);
         
         console.log('Dark mode toggled to:', isDarkNow ? 'ON' : 'OFF');
-        
-        // Force a small delay to ensure CSS updates
-        setTimeout(() => {
-            console.log('Dark mode state after toggle:', document.documentElement.classList.contains('dark-mode'));
-        }, 100);
     }
     
-    // Setup the toggle button
+    // Setup the toggle button - SIMPLIFIED
     function setupToggleButton() {
         console.log('Setting up toggle button...');
         
-        // Wait a bit more for button to be available
-        setTimeout(() => {
-            const button = document.getElementById('dark-mode-toggle');
+        const button = document.getElementById('dark-mode-toggle');
+        
+        if (button) {
+            console.log('Dark mode button found:', button);
             
-            if (button) {
-                console.log('Dark mode button found:', button);
-                
-                // Remove existing listeners to prevent duplicates
-                const newButton = button.cloneNode(true);
-                button.parentNode.replaceChild(newButton, button);
-                
-                // Add click listener to the new button
-                newButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Button clicked!');
-                    toggleDarkMode();
-                });
-                
-                // Update initial appearance
-                updateButton(newButton);
-                
-                console.log('Dark mode toggle setup completed');
-            } else {
-                console.error('Dark mode toggle button (#dark-mode-toggle) not found!');
-                console.log('Available elements with IDs:', 
-                    Array.from(document.querySelectorAll('[id]')).map(el => el.id));
-            }
-        }, 500);
+            // Clear any existing listeners
+            button.onclick = null;
+            
+            // Add simple click listener
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked!');
+                toggleDarkMode();
+            });
+            
+            // Update initial appearance
+            updateButton(button);
+            
+            console.log('Dark mode toggle setup completed');
+        } else {
+            console.error('Dark mode toggle button (#dark-mode-toggle) not found!');
+        }
     }
     
     // Initialize everything
     function initialize() {
         console.log('Initializing dark mode system...');
         initDarkMode();
-        setupToggleButton();
+        
+        // Setup button after a short delay to ensure DOM is ready
+        setTimeout(setupToggleButton, 100);
     }
     
-    // Multiple initialization strategies to ensure it works
+    // Run when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initialize);
     } else {
         initialize();
     }
-    
-    // Also try after window load as backup
-    window.addEventListener('load', function() {
-        console.log('Window loaded, checking dark mode setup...');
-        const button = document.getElementById('dark-mode-toggle');
-        if (button && !button.onclick && !button.hasAttribute('data-setup')) {
-            console.log('Button found but not set up, initializing...');
-            button.setAttribute('data-setup', 'true');
-            setupToggleButton();
-        }
-    });
     
     console.log('Dark mode script loaded');
 })();
