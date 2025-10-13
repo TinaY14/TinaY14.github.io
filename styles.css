@@ -124,17 +124,25 @@ nav a:hover {
     outline: none;
     position: relative;
     z-index: 1000;
+    min-width: 45px;
+    min-height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Inner page toggle button styling */
 body.inner-page #dark-mode-toggle {
     border-color: var(--inner-text);
     color: var(--inner-text);
 }
 
+/* Dark mode toggle button hover states */
 #dark-mode-toggle:hover {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
     color: white;
+    transform: scale(1.05);
 }
 
 #dark-mode-toggle:active {
@@ -143,6 +151,13 @@ body.inner-page #dark-mode-toggle {
 
 #dark-mode-toggle:focus {
     box-shadow: 0 0 0 2px var(--primary-blue);
+}
+
+/* Ensure button is visible in all scenarios */
+body.inner-page #dark-mode-toggle:hover {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: white;
 }
 
 /* --- HOMEPAGE SPECIFIC STYLES --- */

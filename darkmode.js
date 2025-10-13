@@ -9,8 +9,24 @@
         return hours >= 18 || hours < 6;
     }
     
+    // Check if current page is inner page (not homepage)
+    function isInnerPage() {
+        const path = window.location.pathname;
+        const isHomepage = path === '/' || 
+                          path.endsWith('/index.html') ||
+                          path === '/index.html' ||
+                          (path.endsWith('/') && !path.includes('food_gallery') && !path.includes('night_stall_food'));
+        return !isHomepage;
+    }
+    
     // Initialize dark mode on page load
     function initDarkMode() {
+        // Add inner-page class if needed
+        if (isInnerPage()) {
+            document.body.classList.add('inner-page');
+            console.log('Inner page detected, added inner-page class');
+        }
+        
         // Check if user has manually overridden (clicked button before)
         const manualOverride = localStorage.getItem('darkModeManualOverride');
         const savedMode = localStorage.getItem('darkMode');
@@ -33,18 +49,12 @@
         if (shouldBeDark) {
             document.documentElement.classList.add('dark-mode');
         }
-        
-        // Add inner-page class for non-homepage
-        const isHomepage = window.location.pathname === '/' || 
-                          window.location.pathname.endsWith('/index.html') ||
-                          window.location.pathname.endsWith('/');
-        if (!isHomepage) {
-            document.body.classList.add('inner-page');
-        }
     }
     
     // Update button icon based on current mode
     function updateIcon(button) {
+        if (!button) return;
+        
         const isDark = document.documentElement.classList.contains('dark-mode');
         button.textContent = isDark ? '☀️' : '🌙';
         button.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
@@ -91,16 +101,20 @@
         }
     }
     
-    // Initialize immediately
+    // Initialize immediately (before DOM loads)
     initDarkMode();
     
     // Setup when DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
+    function setupDarkModeToggle() {
         const toggleButton = document.getElementById('dark-mode-toggle');
         
         if (toggleButton) {
             // Set initial icon
             updateIcon(toggleButton);
+            
+            // Remove any existing event listeners to prevent duplicates
+            toggleButton.removeEventListener('click', toggleDarkMode);
+            toggleButton.removeEventListener('dblclick', resetToAutoMode);
             
             // Add click event for manual toggle
             toggleButton.addEventListener('click', function(e) {
@@ -112,27 +126,41 @@
             // Double-click to reset to automatic mode
             toggleButton.addEventListener('dblclick', function(e) {
                 e.preventDefault();
-                localStorage.removeItem('darkModeManualOverride');
-                localStorage.removeItem('darkMode');
-                console.log('Reset to automatic mode - page will refresh');
-                location.reload();
+                resetToAutoMode();
             });
             
-            console.log('Dark mode toggle initialized');
+            console.log('Dark mode toggle initialized for button:', toggleButton);
             console.log('💡 Tip: Double-click the button to reset to automatic time-based switching');
         } else {
-            console.warn('Dark mode toggle button not found');
+            console.warn('Dark mode toggle button (#dark-mode-toggle) not found on this page');
         }
-        
-        // Start auto-switching check (every 30 minutes)
-        setInterval(checkAutoSwitch, 1800000); // 30 minutes = 1800000ms
-        
-        // Also check on the hour (more precise timing)
-        const now = new Date();
-        const msUntilNextHour = (60 - now.getMinutes()) * 60000 - (now.getSeconds() * 1000);
-        setTimeout(() => {
-            checkAutoSwitch();
-            setInterval(checkAutoSwitch, 3600000); // Then every hour
-        }, msUntilNextHour);
-    });
+    }
+    
+    function resetToAutoMode() {
+        localStorage.removeItem('darkModeManualOverride');
+        localStorage.removeItem('darkMode');
+        console.log('Reset to automatic mode - page will refresh');
+        location.reload();
+    }
+    
+    // Run setup when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupDarkModeToggle);
+    } else {
+        // DOM is already ready
+        setupDarkModeToggle();
+    }
+    
+    // Start auto-switching check (every 30 minutes)
+    setInterval(checkAutoSwitch, 1800000); // 30 minutes = 1800000ms
+    
+    // Also check on the hour (more precise timing)
+    const now = new Date();
+    const msUntilNextHour = (60 - now.getMinutes()) * 60000 - (now.getSeconds() * 1000);
+    setTimeout(() => {
+        checkAutoSwitch();
+        setInterval(checkAutoSwitch, 3600000); // Then every hour
+    }, msUntilNextHour);
+    
+    console.log('Dark mode script loaded successfully');
 })();
