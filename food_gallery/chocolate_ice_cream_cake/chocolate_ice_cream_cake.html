@@ -41,7 +41,7 @@
                 <h3>📸 Photo Gallery</h3>
                 <p><strong>The finished three-layer masterpiece:</strong></p>
                 <div style="text-align: center; margin-top: 20px;">
-                    <img src="chocolate_ice_cream.jpg" alt="Three-Layer Chocolate Ice Cream Cake" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <img src="chocolate_ice_cream_cake.jpg" alt="Three-Layer Chocolate Ice Cream Cake" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                     <p style="margin-top: 10px; font-style: italic; color: var(--inner-text);">Homemade three-layer chocolate ice cream cake with rich, creamy texture</p>
                 </div>
             </div>
@@ -114,5 +114,53 @@
             </div>
         </div>
     </main>
+
+    <!-- image-fix: try alternate extensions / lowercase / space-replacements when an <img> fails -->
+	<script>
+		(function(){
+			function buildCandidates(origSrc) {
+				try {
+					const url = new URL(origSrc, location.href);
+					const dir = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
+					const filename = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
+					const base = filename.replace(/\.[^.]*$/, '');
+					const saneBase = base.toLowerCase().replace(/\s+/g, '_');
+					const exts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+					const candidates = [];
+					exts.forEach(ext => candidates.push(dir + saneBase + ext));
+					exts.forEach(ext => candidates.push(dir + base + ext));
+					candidates.push(dir + encodeURIComponent(filename));
+					return [...new Set(candidates)];
+				} catch (e) {
+					return [];
+				}
+			}
+
+			function tryReplace(img) {
+				if (img.dataset._fixing) return;
+				img.dataset._fixing = '1';
+				const orig = img.dataset.origSrc || img.src;
+				img.dataset.origSrc = orig;
+				const candidates = buildCandidates(orig);
+				let idx = 0;
+				function next() {
+					if (idx >= candidates.length) return;
+					img.onerror = function() { idx++; next(); };
+					img.src = candidates[idx];
+				}
+				next();
+			}
+
+			document.querySelectorAll('img').forEach(img => {
+				img.addEventListener('error', function onErr() {
+					img.removeEventListener('error', onErr);
+					tryReplace(img);
+				});
+				if (img.complete && img.naturalWidth === 0) {
+					tryReplace(img);
+				}
+			});
+		})();
+	</script>
 </body>
 </html>
