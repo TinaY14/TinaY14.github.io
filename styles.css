@@ -166,8 +166,15 @@ body.inner-page #dark-mode-toggle {
 .intro-text { 
     font-size: 1.1em; 
     margin: 0 0 20px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+
+/* Special styling for about.html page only */
+body.inner-page .intro-text {
+    text-shadow: none;
+    color: var(--inner-text);
+}
+
 h1.name {
     font-size: 3.5em;
     font-weight: 700;
@@ -176,21 +183,30 @@ h1.name {
     line-height: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
+
 h2.tagline {
     font-size: 2.5em;
     font-weight: 700;
-    color: var(--white);
+    color: #000000;
     margin: 0 0 30px 0;
     line-height: 1.1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-shadow: none;
 }
+
 .description {
     font-size: 1em;
     line-height: 1.6;
     max-width: 500px;
     margin-bottom: 40px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+
+/* Remove text shadows for about.html page */
+body.inner-page .description {
+    text-shadow: none;
+    color: var(--inner-text);
+}
+
 .actions { display: flex; align-items: center; gap: 15px; }
 .resume-btn {
     background-color: var(--white);
@@ -361,7 +377,50 @@ form button[type="submit"]:active {
     transform: translateY(0);
 }
 
-/* --- Responsive Design --- */
+/* --- Scroll to Top Button --- */
+#scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scroll-to-top:hover {
+    background-color: #3a9dd6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+#scroll-to-top:active {
+    transform: translateY(-1px);
+}
+
+/* Dark mode styling for scroll button */
+:root.dark-mode #scroll-to-top {
+    background-color: var(--primary-blue);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     body {
         padding: 0 3%;
@@ -411,5 +470,13 @@ form button[type="submit"]:active {
     
     .page-content {
         padding: 0 15px;
+    }
+    
+    #scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3em;
     }
 }

@@ -100,6 +100,50 @@
         }
     }
     
+    // Scroll to Top Button Functionality
+    function setupScrollToTop() {
+        console.log('Setting up scroll to top button...');
+        
+        // Create the button if it doesn't exist
+        let scrollBtn = document.getElementById('scroll-to-top');
+        if (!scrollBtn) {
+            scrollBtn = document.createElement('button');
+            scrollBtn.id = 'scroll-to-top';
+            scrollBtn.innerHTML = '↑';
+            scrollBtn.setAttribute('aria-label', 'Scroll to top');
+            scrollBtn.title = 'Back to top';
+            document.body.appendChild(scrollBtn);
+            console.log('Scroll to top button created');
+        }
+        
+        // Show/hide button based on scroll position
+        function toggleScrollButton() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPosition > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        }
+        
+        // Smooth scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Event listeners
+        window.addEventListener('scroll', toggleScrollButton);
+        scrollBtn.addEventListener('click', scrollToTop);
+        
+        // Initial check
+        toggleScrollButton();
+        
+        console.log('Scroll to top button setup completed');
+    }
+    
     // Initialize everything
     function initialize() {
         console.log('Initializing dark mode system...');
@@ -107,6 +151,7 @@
         
         // Setup button after a short delay to ensure DOM is ready
         setTimeout(setupToggleButton, 100);
+        setTimeout(setupScrollToTop, 100);
     }
     
     // Run when DOM is ready
