@@ -10,6 +10,7 @@
     --inner-bg: #ffffff;
     --inner-text: #000000;
     --inner-heading: #000000;
+    --home-text-color: #ffffff;
 }
 
 /* Dark mode variables */
@@ -20,6 +21,7 @@
     --text-color: #ffffff;
     --heading-color: #ffffff;
     --primary-blue: #64b5f6;
+    --home-text-color: #cccccc;
 }
 
 body {
@@ -163,9 +165,10 @@ body.inner-page #dark-mode-toggle {
 }
 
 .hero-content { max-width: 600px; }
-.intro-text { 
-    font-size: 1.1em; 
+.intro-text {
+    font-size: 1.1em;
     margin: 0 0 20px 0;
+    color: var(--home-text-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -198,6 +201,7 @@ h2.tagline {
     line-height: 1.6;
     max-width: 500px;
     margin-bottom: 40px;
+    color: var(--home-text-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -219,7 +223,7 @@ body.inner-page .description {
     transition: all 0.3s ease;
 }
 .resume-btn:hover { background-color: var(--primary-blue); color: var(--white); border-color: var(--primary-blue); }
-.social-links a { color: var(--text-color); font-size: 1.5em; margin: 0 8px; transition: color 0.3s ease; }
+.social-links a { color: var(--home-text-color); font-size: 1.5em; margin: 0 8px; transition: color 0.3s ease; }
 .social-links a:hover { color: var(--primary-blue); }
 .hero-image { max-width: 400px; }
 .avatar-container {

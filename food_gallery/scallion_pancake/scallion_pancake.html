@@ -12,6 +12,16 @@
     
     <link rel="stylesheet" href="../../styles.css">
     <script src="../../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
 </head>
 <body class="inner-page">
     <header>
@@ -23,7 +33,18 @@
             <a href="../food_gallery.html">Food Gallery</a>
             <a href="../../projects.html">Projects</a>
             <a href="../../contact.html">Contact</a>
-            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
         </nav>
     </header>
     
