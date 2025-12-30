@@ -1,0 +1,44 @@
+name: Build HTML from Markdown
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'content/**'
+      - 'templates/**'
+      - 'build.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build HTML files
+      run: npm run build
+
+    - name: Check for changes
+      id: verify_diff
+      run: |
+        git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+
+    - name: Commit generated HTML
+      if: steps.verify_diff.outputs.changed == 'true'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add food_gallery/*.html night_stall_food/*.html projects/*.html
+        git commit -m "🤖 Auto-build: Generate HTML from markdown"
+        git push

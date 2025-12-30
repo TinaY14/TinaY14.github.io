@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+.env
+
+# Optional: Uncomment these to ignore generated HTML files
+# GitHub Actions will build them automatically
+# food_gallery/*.html
+# night_stall_food/*.html
+# projects/*.html

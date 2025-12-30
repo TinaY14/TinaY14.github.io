@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Ice Cream Cake - Tina's Food Gallery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <script src="../../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <div class="logo">Tina's Little World</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About Me</a>
+            <a href="../../night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery.html">Food Gallery</a>
+            <a href="../../projects.html">Projects</a>
+            <a href="../../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">🍰 Chocolate Ice Cream Cake</h2>
+            <p><em>Decadent Frozen Dessert</em></p>
+
+            <div class="content-entry"><h3>🍰 About This Dessert</h3>
+<p>This chocolate ice cream cake is the ultimate frozen treat - layers of rich chocolate cake, creamy ice cream, and chocolate ganache. Perfect for birthdays, celebrations, or when you want to impress with a show-stopping dessert.</p>
+</div><div class="content-entry"><h3>🍫 Ingredients</h3>
+<p><strong>For the Chocolate Cake:</strong></p>
+<ul>
+<li>All-purpose flour - 1½ cups</li>
+<li>Sugar - 1 cup</li>
+<li>Cocoa powder - ¾ cup</li>
+<li>Baking soda - 1½ teaspoons</li>
+<li>Salt - ½ teaspoon</li>
+<li>Eggs - 2 large</li>
+<li>Buttermilk - 1 cup</li>
+<li>Vegetable oil - ½ cup</li>
+<li>Vanilla extract - 2 teaspoons</li>
+<li>Hot water - 1 cup</li>
+</ul>
+<p><strong>For the Ice Cream Layer:</strong></p>
+<ul>
+<li>Vanilla ice cream - 2 quarts, softened</li>
+<li>Chocolate chips - 1 cup (optional)</li>
+</ul>
+<p><strong>For the Ganache:</strong></p>
+<ul>
+<li>Heavy cream - 1 cup</li>
+<li>Dark chocolate chips - 2 cups</li>
+<li>Butter - 2 tablespoons</li>
+</ul>
+</div><div class="content-entry"><h3>👩‍🍳 Instructions</h3>
+<p><strong>Step 1: Bake the Cake</strong></p>
+<ol>
+<li>Preheat oven to 350°F (175°C)</li>
+<li>Mix all dry ingredients in a large bowl</li>
+<li>Add eggs, buttermilk, oil, and vanilla</li>
+<li>Stir in hot water (batter will be thin)</li>
+<li>Bake in two 9-inch pans for 30-35 minutes</li>
+<li>Cool completely</li>
+</ol>
+<p><strong>Step 2: Assemble the Layers</strong></p>
+<ol>
+<li>Place one cake layer in a springform pan</li>
+<li>Spread softened ice cream evenly on top</li>
+<li>Fold in chocolate chips if using</li>
+<li>Top with second cake layer</li>
+<li>Freeze for 4 hours minimum</li>
+</ol>
+<p><strong>Step 3: Make the Ganache</strong></p>
+<ol>
+<li>Heat cream until just boiling</li>
+<li>Pour over chocolate chips</li>
+<li>Let sit 2 minutes, then stir until smooth</li>
+<li>Add butter and stir until glossy</li>
+<li>Let cool slightly</li>
+</ol>
+<p><strong>Step 4: Final Assembly</strong></p>
+<ol>
+<li>Remove cake from springform pan</li>
+<li>Pour ganache over top</li>
+<li>Let it drip down the sides</li>
+<li>Freeze for 1 more hour</li>
+<li>Let sit at room temperature 10 minutes before slicing</li>
+</ol>
+</div><div class="content-entry"><h3>💡 Tips &amp; Tricks</h3>
+<ul>
+<li><strong>Make Ahead:</strong> Can be made up to 1 week in advance</li>
+<li><strong>Flavor Variations:</strong> Try different ice cream flavors</li>
+<li><strong>Easy Slicing:</strong> Dip knife in hot water between cuts</li>
+<li><strong>Storage:</strong> Keep frozen, wrapped tightly in plastic wrap</li>
+<li><strong>Serving:</strong> Let soften slightly for easier cutting</li>
+</ul>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- image-fix: try alternate extensions / lowercase / space-replacements when an <img> fails -->
+    <script>
+        (function(){
+            function buildCandidates(origSrc) {
+                try {
+                    const url = new URL(origSrc, location.href);
+                    const dir = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
+                    const filename = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
+                    const base = filename.replace(/\.[^.]*$/, '');
+                    const saneBase = base.toLowerCase().replace(/\s+/g, '_');
+                    const exts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+                    const candidates = [];
+                    exts.forEach(ext => candidates.push(dir + saneBase + ext));
+                    exts.forEach(ext => candidates.push(dir + base + ext));
+                    candidates.push(dir + encodeURIComponent(filename));
+                    return [...new Set(candidates)];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            function tryReplace(img) {
+                if (img.dataset._fixing) return;
+                img.dataset._fixing = '1';
+                const orig = img.dataset.origSrc || img.src;
+                img.dataset.origSrc = orig;
+                const candidates = buildCandidates(orig);
+                let idx = 0;
+                function next() {
+                    if (idx >= candidates.length) return;
+                    img.onerror = function() { idx++; next(); };
+                    img.src = candidates[idx];
+                }
+                next();
+            }
+
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function onErr() {
+                    img.removeEventListener('error', onErr);
+                    tryReplace(img);
+                });
+                if (img.complete && img.naturalWidth === 0) {
+                    tryReplace(img);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

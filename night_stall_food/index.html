@@ -53,36 +53,95 @@
         <div class="page-content">
             <h2 class="page-title">Night Stall Food</h2>
             <p>Exploring the vibrant world of street food and night market culture.</p>
-            
-            <div class="content-entry">
-                <h3>🍽️ Browse All Food</h3>
-                <p><strong>Popular Night Market Treats:</strong></p>
-                <ul>
-                    <li><strong>Grilled Skewers</strong> - Various meats and vegetables charred to perfection</li>
-                    <li><strong>Stinky Tofu</strong> - Fermented tofu with unique flavor and crispy exterior</li>
-                    <li><strong>Bubble Tea</strong> - Sweet tea drinks with chewy tapioca pearls</li>
-                    <li><strong>Taiwanese Popcorn Chicken</strong> - Bite-sized fried chicken with five-spice</li>
-                    <li><strong>Scallion Pancakes</strong> - Flaky, crispy pancakes with fresh scallions</li>
-                </ul>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="food-search" placeholder="Search for food..." aria-label="Search for food">
+                <i class="fas fa-search search-icon"></i>
             </div>
-            
-            <div class="content-entry">
-                <h3>🌃 Night Market Adventures</h3>
-                <p>Night markets are a cornerstone of Asian street food culture, offering an incredible variety of flavors, aromas, and experiences that come alive after dark.</p>
+
+            <!-- Food Grid (Alphabetically Ordered) -->
+            <div class="food-grid" id="food-grid">
+                <a href="chuanr.html" class="food-card" data-name="chuanr chinese bbq skewers">
+                    <div class="food-emoji">🍢</div>
+                    <h3>Chuanr</h3>
+                    <p>Chinese BBQ Skewers</p>
+                </a>
+
+                <a href="douhua.html" class="food-card" data-name="douhua tofu pudding">
+                    <div class="food-emoji">🥛</div>
+                    <h3>Douhua</h3>
+                    <p>Tofu Pudding</p>
+                </a>
+
+                <a href="egg-waffles.html" class="food-card" data-name="egg waffles hong kong bubble waffle">
+                    <div class="food-emoji">🧇</div>
+                    <h3>Egg Waffles</h3>
+                    <p>Hong Kong Bubble Waffle</p>
+                </a>
+
+                <a href="jianbing.html" class="food-card" data-name="jianbing chinese crepe">
+                    <div class="food-emoji">🥞</div>
+                    <h3>Jianbing</h3>
+                    <p>Chinese Crepe</p>
+                </a>
+
+                <a href="roujiamo.html" class="food-card" data-name="roujiamo chinese hamburger">
+                    <div class="food-emoji">🍔</div>
+                    <h3>Roujiamo</h3>
+                    <p>Chinese Hamburger</p>
+                </a>
+
+                <a href="shengjianbao.html" class="food-card" data-name="shengjianbao pan-fried buns">
+                    <div class="food-emoji">🥟</div>
+                    <h3>Shengjianbao</h3>
+                    <p>Pan-Fried Buns</p>
+                </a>
+
+                <a href="stinky-tofu.html" class="food-card" data-name="stinky tofu chou doufu">
+                    <div class="food-emoji">🧈</div>
+                    <h3>Stinky Tofu</h3>
+                    <p>Chou Doufu</p>
+                </a>
+
+                <a href="takoyaki.html" class="food-card" data-name="takoyaki octopus balls japanese">
+                    <div class="food-emoji">🐙</div>
+                    <h3>Takoyaki</h3>
+                    <p>Octopus Balls</p>
+                </a>
             </div>
-            
-            <div class="content-entry">
-                <h3>🍢 Popular Night Stall Foods</h3>
-                <ul>
-                    <li><strong>Grilled Skewers:</strong> Various meats and vegetables charred to perfection</li>
-                    <li><strong>Stinky Tofu:</strong> Fermented tofu with unique flavor and crispy exterior</li>
-                    <li><strong>Bubble Tea:</strong> Sweet tea drinks with chewy tapioca pearls</li>
-                    <li><strong>Taiwanese Popcorn Chicken:</strong> Bite-sized fried chicken with five-spice</li>
-                    <li><strong>Scallion Pancakes:</strong> Flaky, crispy pancakes with fresh scallions</li>
-                </ul>
-            </div>
+
+            <p id="no-results" class="no-results" style="display: none;">No food items found matching your search.</p>
         </div>
     </main>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('food-search');
+        const foodGrid = document.getElementById('food-grid');
+        const foodCards = document.querySelectorAll('.food-card');
+        const noResults = document.getElementById('no-results');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            foodCards.forEach(card => {
+                const foodName = card.getAttribute('data-name').toLowerCase();
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+
+                if (foodName.includes(searchTerm) || title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+    </script>
 
 </body>
 </html>
