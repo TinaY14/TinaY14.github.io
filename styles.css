@@ -274,8 +274,8 @@ body.inner-page .page-title {
 
 /* Small intro thumbnail for content entries */
 .intro-thumb {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 8px;
     float: left;
@@ -321,6 +321,10 @@ body.inner-page .page-title {
     max-width: 800px;
     margin: 40px auto;
     padding: 0 20px;
+}
+
+.page-content.wide {
+    max-width: 1400px;
 }
 
 .page-content p {
@@ -488,8 +492,8 @@ form button[type="submit"]:active {
 /* --- Food Grid Styles --- */
 .food-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
     margin-bottom: 30px;
 }
 
@@ -497,7 +501,7 @@ form button[type="submit"]:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px 15px;
+    padding: 30px 20px;
     background-color: var(--inner-bg);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -513,20 +517,20 @@ form button[type="submit"]:active {
 }
 
 .food-emoji {
-    font-size: 3em;
-    margin-bottom: 10px;
+    font-size: 3.5em;
+    margin-bottom: 12px;
 }
 
 .food-card h3 {
     color: var(--inner-heading);
-    font-size: 1.1em;
-    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    margin: 0 0 8px 0;
     text-align: center;
 }
 
 .food-card p {
     color: #666;
-    font-size: 0.85em;
+    font-size: 0.9em;
     margin: 0;
     text-align: center;
 }
@@ -554,6 +558,152 @@ form button[type="submit"]:active {
 
 :root.dark-mode .no-results {
     color: #aaa;
+}
+
+/* --- Floating Vegetables Styles --- */
+#veggie-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.veggie {
+    position: absolute;
+    font-size: 2.5em;
+    cursor: grab;
+    pointer-events: auto;
+    user-select: none;
+    transition: transform 0.1s ease-out;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    z-index: 11;
+}
+
+.veggie:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(3px 6px 10px rgba(0, 0, 0, 0.4));
+}
+
+.veggie.dragging {
+    cursor: grabbing;
+    transform: scale(1.3);
+    z-index: 100;
+    transition: none;
+}
+
+.veggie.picked {
+    animation: pickVeggie 0.5s ease-out forwards;
+}
+
+@keyframes pickVeggie {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(15deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Veggie Basket */
+#veggie-basket {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#veggie-basket:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+.basket-icon {
+    font-size: 2em;
+}
+
+.basket-count {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #2e7d32;
+    min-width: 30px;
+    text-align: center;
+}
+
+#veggie-basket.bounce {
+    animation: basketBounce 0.4s ease;
+}
+
+@keyframes basketBounce {
+    0%, 100% { transform: scale(1.05); }
+    50% { transform: scale(1.15); }
+}
+
+:root.dark-mode #veggie-basket {
+    background: rgba(30, 30, 30, 0.95);
+}
+
+:root.dark-mode .basket-count {
+    color: #81c784;
+}
+
+/* Floating animation for idle vegetables */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(-3deg);
+    }
+    75% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+}
+
+.veggie.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Tooltip hint */
+.veggie-hint {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9em;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.veggie-hint.show {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -620,15 +770,34 @@ form button[type="submit"]:active {
     }
 
     .food-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 15px;
     }
 
     .food-card {
-        padding: 20px 10px;
+        padding: 20px 15px;
     }
 
     .food-emoji {
-        font-size: 2.5em;
+        font-size: 2.8em;
+    }
+
+    /* Vegetables responsive */
+    .veggie {
+        font-size: 2em;
+    }
+
+    #veggie-basket {
+        bottom: 20px;
+        left: 20px;
+        padding: 10px 15px;
+    }
+
+    .basket-icon {
+        font-size: 1.6em;
+    }
+
+    .basket-count {
+        font-size: 1.2em;
     }
 }
