@@ -1,0 +1,26 @@
+{
+  "name": "tinay14.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "darkmode.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TinaY14/TinaY14.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TinaY14/TinaY14.github.io/issues"
+  },
+  "homepage": "https://github.com/TinaY14/TinaY14.github.io#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.1"
+  }
+}
