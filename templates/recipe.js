@@ -18,8 +18,8 @@ module.exports = function(data, content) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="../../styles.css">
-    <script src="../../darkmode.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
 
     <!-- Prevent dark mode icon flash -->
     <script>
@@ -35,11 +35,10 @@ module.exports = function(data, content) {
     <header>
         <div class="logo">Tina's Little World</div>
         <nav>
-            <a href="../../index.html">Home</a>
-            <a href="../../night_stall_food.html">Night Stall Food</a>
-            <a href="../food_gallery.html">Food Gallery</a>
-            <a href="../../projects.html">Projects</a>
-            <a href="../../contact.html">Contact</a>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash

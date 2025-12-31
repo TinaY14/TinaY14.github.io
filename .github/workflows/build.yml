@@ -1,25 +1,33 @@
-name: Build HTML from Markdown
+name: Build and Deploy
 
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'content/**'
-      - 'templates/**'
-      - 'build.js'
+
+# Sets permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one deployment at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
 
@@ -29,16 +37,14 @@ jobs:
     - name: Build HTML files
       run: npm run build
 
-    - name: Check for changes
-      id: verify_diff
-      run: |
-        git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
 
-    - name: Commit generated HTML
-      if: steps.verify_diff.outputs.changed == 'true'
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git add food_gallery/*.html night_stall_food/*.html projects/*.html
-        git commit -m "🤖 Auto-build: Generate HTML from markdown"
-        git push
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

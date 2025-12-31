@@ -3,8 +3,11 @@ node_modules/
 *.log
 .env
 
-# Optional: Uncomment these to ignore generated HTML files
-# GitHub Actions will build them automatically
-# food_gallery/*.html
-# night_stall_food/*.html
-# projects/*.html
+# Generated HTML files (built by GitHub Actions)
+food_gallery/*.html
+!food_gallery/food_gallery.html
+food_gallery/data.json
+night_stall_food/*.html
+!night_stall_food/night_stall_food.html
+night_stall_food/data.json
+projects/*.html
