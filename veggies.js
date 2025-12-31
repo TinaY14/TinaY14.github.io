@@ -98,8 +98,8 @@
         food.style.top = y + 'px';
 
         // Physics properties
-        food.vx = (Math.random() - 0.5) * 2;
-        food.vy = (Math.random() - 0.5) * 2;
+        food.vx = (Math.random() - 0.5) * 4;
+        food.vy = (Math.random() - 0.5) * 4;
 
         foodContainer.appendChild(food);
         foodElements.push(food);
@@ -268,8 +268,8 @@
                 food.classList.remove('returning');
                 food.style.transition = '';
                 food.classList.add('floating');
-                food.vx = (Math.random() - 0.5) * 2;
-                food.vy = (Math.random() - 0.5) * 2;
+                food.vx = (Math.random() - 0.5) * 4;
+                food.vy = (Math.random() - 0.5) * 4;
             }, 500);
         }
     }
@@ -370,9 +370,9 @@
 
             // Maintain minimum speed
             const speed = Math.sqrt(food.vx * food.vx + food.vy * food.vy);
-            if (speed < 0.4) {
-                food.vx += (Math.random() - 0.5) * 0.6;
-                food.vy += (Math.random() - 0.5) * 0.6;
+            if (speed < 0.8) {
+                food.vx += (Math.random() - 0.5) * 1.2;
+                food.vy += (Math.random() - 0.5) * 1.2;
             }
 
             food.style.left = x + 'px';
