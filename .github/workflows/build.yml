@@ -35,11 +35,9 @@ jobs:
       - name: Prepare site for deployment
         run: |
           mkdir _site
-          # Copy all site files (exclude dev files)
-          cp -r index.html styles.css darkmode.js _site/
-          cp -r food_gallery night_stall_food projects _site/
-          [ -d images ] && cp -r images _site/ || true
-          [ -d fonts ] && cp -r fonts _site/ || true
+          # Copy site files
+          cp *.html *.css *.js _site/ 2>/dev/null || true
+          cp -r food_gallery night_stall_food projects pictures _site/ 2>/dev/null || true
           touch _site/.nojekyll
 
       - name: Setup Pages
