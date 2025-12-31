@@ -37,13 +37,22 @@ jobs:
     - name: Build HTML files
       run: npm run build
 
+    - name: Create .nojekyll
+      run: touch .nojekyll
+
+    - name: Prepare deployment folder
+      run: |
+        mkdir -p _site
+        cp -r *.html *.css *.js images/ food_gallery/ night_stall_food/ projects/ fonts/ _site/ 2>/dev/null || true
+        cp .nojekyll _site/
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: '.'
+        path: '_site'
 
     - name: Deploy to GitHub Pages
       id: deployment
