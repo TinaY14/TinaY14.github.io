@@ -1,0 +1,58 @@
+[
+  {
+    "href": "chuanr.html",
+    "title": "Chuanr",
+    "emoji": "🍢",
+    "description": "Grilled skewers with cumin spice",
+    "searchTerms": "chuanr bbq skewers grilled meat lamb beef"
+  },
+  {
+    "href": "douhua.html",
+    "title": "Douhua",
+    "emoji": "🍮",
+    "description": "Silky tofu pudding dessert",
+    "searchTerms": "douhua tofu pudding sweet dessert soy"
+  },
+  {
+    "href": "egg-waffles.html",
+    "title": "Egg Waffles",
+    "emoji": "🧇",
+    "description": "Crispy Hong Kong bubble waffles",
+    "searchTerms": "egg waffles hong kong bubble crispy snack"
+  },
+  {
+    "href": "jianbing.html",
+    "title": "Jianbing",
+    "emoji": "🫓",
+    "description": "Crispy Chinese breakfast crepe",
+    "searchTerms": "jianbing crepe breakfast egg crispy"
+  },
+  {
+    "href": "roujiamo.html",
+    "title": "Roujiamo",
+    "emoji": "🥙",
+    "description": "Chinese-style meat sandwich",
+    "searchTerms": "roujiamo chinese hamburger meat sandwich flatbread"
+  },
+  {
+    "href": "shengjianbao.html",
+    "title": "Shengjianbao",
+    "emoji": "🥟",
+    "description": "Pan-fried soup dumplings",
+    "searchTerms": "shengjianbao pan fried buns pork shanghai"
+  },
+  {
+    "href": "stinky-tofu.html",
+    "title": "Stinky Tofu",
+    "emoji": "🧈",
+    "description": "Fermented tofu with crispy exterior",
+    "searchTerms": "stinky tofu fermented crispy taiwanese street food"
+  },
+  {
+    "href": "takoyaki.html",
+    "title": "Takoyaki",
+    "emoji": "🐙",
+    "description": "Japanese octopus balls",
+    "searchTerms": "takoyaki octopus balls japanese snack"
+  }
+]

@@ -1,55 +1,36 @@
-name: Build and Deploy
+name: Build HTML from Markdown
 
 on:
   push:
-    branches: ["main"]
-
-permissions:
-  contents: write
+    branches: [ main ]
+    paths:
+      - 'content/**'
+      - 'templates/**'
+      - 'build.js'
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Build HTML files
-        run: npm run build
+    - name: Build HTML files
+      run: npm run build
 
-      - name: Debug - show built files
-        run: |
-          echo "=== Root files ==="
-          ls -la *.html *.css *.js 2>/dev/null || echo "No files"
-          echo "=== food_gallery ==="
-          ls -la food_gallery/ || echo "No folder"
-          echo "=== night_stall_food ==="
-          ls -la night_stall_food/ || echo "No folder"
-          echo "=== projects ==="
-          ls -la projects/ || echo "No folder"
-          echo "=== pictures ==="
-          ls -la pictures/ || echo "No folder"
-
-      - name: Prepare deploy folder
-        run: |
-          mkdir -p deploy/food_gallery deploy/night_stall_food deploy/projects deploy/pictures
-          cp index.html styles.css darkmode.js script.js projects.html deploy/
-          cp -r food_gallery/* deploy/food_gallery/
-          cp -r night_stall_food/* deploy/night_stall_food/
-          cp -r projects/* deploy/projects/ || true
-          cp -r pictures/* deploy/pictures/ || true
-          touch deploy/.nojekyll
-
-      - name: Deploy to gh-pages branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: deploy
-          branch: gh-pages
+    - name: Commit generated HTML
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add -A
+        git diff --staged --quiet || git commit -m "🤖 Auto-build: Generate HTML from markdown"
+        git push
