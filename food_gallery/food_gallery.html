@@ -11,6 +11,90 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
+    <style>
+        /* Game Section Styles */
+        .game-section {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .game-instruction {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color, #ff6b6b);
+        }
+
+        .game-box {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            border: 3px solid #ff6b6b;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        .dark-mode .game-box {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-color: #ff8a8a;
+        }
+
+        .game-score {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff6b6b;
+            z-index: 10;
+        }
+
+        .dark-mode .game-score {
+            color: #ff8a8a;
+        }
+
+        .falling-food {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.1s;
+            z-index: 5;
+        }
+
+        .falling-food:hover {
+            transform: scale(1.2);
+        }
+
+        .falling-food.clicked {
+            animation: pop 0.3s ease-out forwards;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .score-popup {
+            position: absolute;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4CAF50;
+            pointer-events: none;
+            animation: floatUp 0.8s ease-out forwards;
+            z-index: 15;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-30px); }
+        }
+    </style>
+
     <!-- Prevent dark mode icon flash -->
     <script>
         (function() {
@@ -47,6 +131,14 @@
         <div class="page-content wide">
             <h2 class="page-title">Food Gallery</h2>
             <p>Recipes I've made and want to share with you!</p>
+
+            <!-- Falling Food Game Box -->
+            <div class="game-section">
+                <p class="game-instruction">🎮 Click the falling food to score points!</p>
+                <div class="game-box" id="game-box">
+                    <div class="game-score">Score: <span id="game-score">0</span></div>
+                </div>
+            </div>
 
             <!-- Search Bar -->
             <div class="search-container">
@@ -123,6 +215,90 @@
 
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         });
+
+        // Falling Food Game - Contained in game-box only
+        (function() {
+            const gameBox = document.getElementById('game-box');
+            const scoreDisplay = document.getElementById('game-score');
+            const foodEmojis = ['🍌', '🍫', '🍗', '🌶️', '🥟', '🥞', '🍜', '🍕', '🍔', '🍣', '🍰', '🍪'];
+            let score = 0;
+
+            function createFallingFood() {
+                const food = document.createElement('div');
+                food.className = 'falling-food';
+                food.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+
+                // Get game box dimensions
+                const boxWidth = gameBox.clientWidth;
+                const boxHeight = gameBox.clientHeight;
+
+                // Random starting position (within the box)
+                const startX = Math.random() * (boxWidth - 40);
+                food.style.left = startX + 'px';
+                food.style.top = '-40px';
+
+                // Add to game box (not body)
+                gameBox.appendChild(food);
+
+                // Animation variables
+                let posY = -40;
+                const speed = 1 + Math.random() * 2;
+                const wobble = Math.random() * 2 - 1;
+                let posX = startX;
+
+                // Click handler
+                food.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!food.classList.contains('clicked')) {
+                        food.classList.add('clicked');
+                        score += 10;
+                        scoreDisplay.textContent = score;
+
+                        // Show +10 popup
+                        const popup = document.createElement('div');
+                        popup.className = 'score-popup';
+                        popup.textContent = '+10';
+                        popup.style.left = food.style.left;
+                        popup.style.top = food.style.top;
+                        gameBox.appendChild(popup);
+
+                        setTimeout(() => popup.remove(), 800);
+                        setTimeout(() => food.remove(), 300);
+                    }
+                });
+
+                // Animate falling within the box
+                function fall() {
+                    if (food.classList.contains('clicked')) return;
+
+                    posY += speed;
+                    posX += wobble;
+
+                    // Keep within horizontal bounds
+                    if (posX < 0) posX = 0;
+                    if (posX > boxWidth - 40) posX = boxWidth - 40;
+
+                    food.style.top = posY + 'px';
+                    food.style.left = posX + 'px';
+
+                    // Remove when it falls past the box bottom
+                    if (posY > boxHeight) {
+                        food.remove();
+                    } else {
+                        requestAnimationFrame(fall);
+                    }
+                }
+
+                requestAnimationFrame(fall);
+            }
+
+            // Spawn food at intervals
+            setInterval(createFallingFood, 1200);
+
+            // Create a few immediately
+            setTimeout(createFallingFood, 300);
+            setTimeout(createFallingFood, 800);
+        })();
     </script>
 </body>
 </html>
