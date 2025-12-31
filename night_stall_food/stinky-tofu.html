@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stinky Tofu (臭豆腐, Fermented Tofu) - Tina's Night Stall Food</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Tina's Little World</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <a href="../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Stinky Tofu (臭豆腐, Fermented Tofu)</h2>
+
+            <div class="content-entry"><h3>ℹ️ About Stinky Tofu</h3>
+<p>Stinky tofu is a form of fermented tofu that has a strong odor. It&#39;s a beloved street food in China and Taiwan, typically deep-fried and served with pickled vegetables and chili sauce.</p>
+</div><div class="content-entry"><h3>🥄 Preparation Methods</h3>
+<p><strong>Deep-Fried (most common):</strong></p>
+<ul>
+<li>Crispy golden exterior</li>
+<li>Soft creamy interior</li>
+<li>Served with sweet or spicy sauce</li>
+</ul>
+<p><strong>Steamed:</strong></p>
+<ul>
+<li>Softer texture</li>
+<li>More intense flavor</li>
+<li>Often served in soup</li>
+</ul>
+</div><div class="content-entry"><h3>🌶️ Accompaniments</h3>
+<ul>
+<li>Pickled cabbage</li>
+<li>Chili sauce</li>
+<li>Garlic sauce</li>
+<li>Soy sauce</li>
+<li>Cilantro</li>
+</ul>
+</div><div class="content-entry"><h3>📊 Nutritional Information</h3>
+<ul>
+<li>Per serving (4-5 pieces): ~200-250 cal</li>
+<li>High in protein</li>
+<li>Contains probiotics from fermentation</li>
+<li>Rich in B vitamins</li>
+</ul>
+</div><div class="content-entry"><h3>💡 Cultural Notes</h3>
+<p>Don&#39;t let the smell fool you - stinky tofu tastes much better than it smells! The fermentation process gives it a complex, savory umami flavor. It&#39;s considered a delicacy in Chinese cuisine, especially popular in Taiwan and Changsha. First-timers often become converts after trying it!</p>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

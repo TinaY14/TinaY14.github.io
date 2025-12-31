@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Night Stall Food - Tina</title>
-    
+    <title>Takoyaki (章鱼小丸子, Octopus Balls) - Tina's Night Stall Food</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
@@ -23,16 +23,16 @@
         })();
     </script>
 </head>
-<body class="inner-page">
-
+<body>
     <header>
-        <a href="../index.html" class="logo">Tina's Little World</a>
+        <div class="logo">Tina's Little World</div>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="night_stall_food.html">Night Stall Food</a>
+            <a href="../night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
-                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <a href="../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash
                 (function() {
@@ -46,41 +46,45 @@
             </script>
         </nav>
     </header>
-
     <main class="hero inner-page">
-        <div class="page-content wide">
-            <h2 class="page-title">Night Stall Food</h2>
-            <p>Exploring the vibrant world of street food and night market culture.</p>
+        <div class="page-content">
+            <h2 class="page-title">Takoyaki (章鱼小丸子, Octopus Balls)</h2>
 
-            <!-- Food Grid - cards loaded dynamically from data.json -->
-            <div class="food-grid" id="food-grid">
-                <!-- Cards will be loaded dynamically -->
+            <div class="content-entry"><h3>ℹ️ About Takoyaki</h3>
+<p>Takoyaki are spherical Japanese snacks made of wheat flour batter filled with diced octopus, tempura scraps, pickled ginger, and green onion. They&#39;re cooked in a special molded pan until golden and crispy outside, soft inside.</p>
+</div><div class="content-entry"><h3>🥄 Ingredients</h3>
+<p><strong>Batter:</strong></p>
+<ul>
+<li>Wheat flour</li>
+<li>Eggs</li>
+<li>Dashi (fish stock)</li>
+<li>Water</li>
+</ul>
+<p><strong>Fillings:</strong></p>
+<ul>
+<li>Octopus pieces</li>
+<li>Tempura scraps (tenkasu)</li>
+<li>Pickled ginger</li>
+<li>Green onions</li>
+</ul>
+<p><strong>Toppings:</strong></p>
+<ul>
+<li>Takoyaki sauce</li>
+<li>Japanese mayonnaise</li>
+<li>Bonito flakes</li>
+<li>Seaweed powder (aonori)</li>
+</ul>
+</div><div class="content-entry"><h3>📊 Nutritional Information</h3>
+<ul>
+<li>6 pieces: ~300-350 cal</li>
+<li>High in protein from octopus</li>
+<li>Moderate carbohydrates</li>
+</ul>
+</div><div class="content-entry"><h3>💡 Tips</h3>
+<p>While originally Japanese, takoyaki has become extremely popular at Asian night markets. The key is the special pan and quick flipping technique to create the perfect round shape. Best eaten hot - be careful of the steaming filling!</p>
+
             </div>
         </div>
     </main>
-
-    <script>
-        // Load cards dynamically from data.json
-        const foodGrid = document.getElementById('food-grid');
-
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                // Render cards
-                data.forEach(item => {
-                    const card = document.createElement('a');
-                    card.href = item.href;
-                    card.className = 'food-card';
-                    card.setAttribute('data-name', item.searchTerms);
-                    card.innerHTML = `
-                        <div class="food-emoji">${item.emoji}</div>
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                    `;
-                    foodGrid.appendChild(card);
-                });
-            })
-            .catch(err => console.error('Failed to load data:', err));
-    </script>
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jianbing (煎饼, Chinese Crepe) - Tina's Night Stall Food</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Tina's Little World</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <a href="../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Jianbing (煎饼, Chinese Crepe)</h2>
+
+            <div class="content-entry"><h3>📸 Photo Gallery</h3>
+<p><strong>Pictures:</strong></p>
+<ul>
+<li>Pic 1 - Fresh jianbing being made on griddle</li>
+<li>Pic 2 - Folded jianbing ready to serve</li>
+<li>Pic 3 - Jianbing ingredients and fillings</li>
+</ul>
+</div><div class="content-entry"><h3>🥄 Ingredients</h3>
+<ul>
+<li>Wheat flour</li>
+<li>Mung bean flour</li>
+<li>Eggs</li>
+<li>Water</li>
+<li>Scallions (chopped)</li>
+<li>Cilantro</li>
+<li>Crispy wonton crackers (baocui)</li>
+<li>Sweet bean sauce (tianmianjiang)</li>
+<li>Chili sauce (optional)</li>
+<li>Sesame seeds</li>
+</ul>
+</div><div class="content-entry"><h3>📊 Nutritional Information</h3>
+<p><strong>Calories (per serving):</strong></p>
+<ul>
+<li>One jianbing: ~300-400 cal</li>
+<li>Per 100g: ~240 cal</li>
+<li>With extra egg: +70 cal</li>
+</ul>
+<p><strong>Good source of protein and carbohydrates, moderate fat</strong></p>
+</div><div class="content-entry"><h3>ℹ️ About Jianbing</h3>
+<p>Jianbing is a popular breakfast street food, made from a thin crepe filled with egg, scallions, cilantro, crispy wonton, and savory sauces. It is folded and served hot, perfect for eating on the go.</p>
+<p><strong>Tips:</strong> Jianbing originated in Shandong province and has become one of China&#39;s most beloved breakfast foods. The batter is spread thin on a large griddle, an egg is cracked on top, and various fillings are added before folding. The crispy wonton cracker adds a delightful crunch. Each region has its own variation - some add lettuce, some use different sauces. It&#39;s best enjoyed fresh and hot from the street vendor!</p>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Night Stall Food - Tina</title>
-    
+    <title>Chuanr (烤串, Chinese BBQ Skewers) - Tina's Night Stall Food</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
@@ -23,16 +23,16 @@
         })();
     </script>
 </head>
-<body class="inner-page">
-
+<body>
     <header>
-        <a href="../index.html" class="logo">Tina's Little World</a>
+        <div class="logo">Tina's Little World</div>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="night_stall_food.html">Night Stall Food</a>
+            <a href="../night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
-                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <a href="../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash
                 (function() {
@@ -46,41 +46,43 @@
             </script>
         </nav>
     </header>
-
     <main class="hero inner-page">
-        <div class="page-content wide">
-            <h2 class="page-title">Night Stall Food</h2>
-            <p>Exploring the vibrant world of street food and night market culture.</p>
+        <div class="page-content">
+            <h2 class="page-title">Chuanr (烤串, Chinese BBQ Skewers)</h2>
 
-            <!-- Food Grid - cards loaded dynamically from data.json -->
-            <div class="food-grid" id="food-grid">
-                <!-- Cards will be loaded dynamically -->
+            <div class="content-entry"><h3>ℹ️ About Chuanr</h3>
+<p>Chinese BBQ skewers (Chuanr) are a popular street food featuring various meats and vegetables grilled on bamboo skewers. Seasoned with cumin, chili powder, and other spices, these skewers are a staple at night markets across China.</p>
+</div><div class="content-entry"><h3>🥄 Common Varieties</h3>
+<ul>
+<li>Lamb skewers (most popular)</li>
+<li>Chicken wings</li>
+<li>Beef skewers</li>
+<li>Squid</li>
+<li>Mushrooms</li>
+<li>Peppers and onions</li>
+<li>Eggplant</li>
+</ul>
+</div><div class="content-entry"><h3>🌶️ Seasonings</h3>
+<ul>
+<li>Cumin powder</li>
+<li>Chili powder</li>
+<li>Salt</li>
+<li>Sichuan peppercorns</li>
+<li>Sesame seeds</li>
+<li>Five-spice powder</li>
+</ul>
+</div><div class="content-entry"><h3>📊 Nutritional Information</h3>
+<p><strong>Calories vary by type:</strong></p>
+<ul>
+<li>Lamb skewer: ~150-200 cal each</li>
+<li>Chicken wing: ~100-150 cal</li>
+<li>Vegetable skewers: ~50-80 cal</li>
+</ul>
+</div><div class="content-entry"><h3>💡 Tips</h3>
+<p>Chuanr originated in Xinjiang province and spread throughout China. The key to great chuanr is the charcoal grilling method and generous seasoning. Best enjoyed hot off the grill with cold beer at a night market!</p>
+
             </div>
         </div>
     </main>
-
-    <script>
-        // Load cards dynamically from data.json
-        const foodGrid = document.getElementById('food-grid');
-
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                // Render cards
-                data.forEach(item => {
-                    const card = document.createElement('a');
-                    card.href = item.href;
-                    card.className = 'food-card';
-                    card.setAttribute('data-name', item.searchTerms);
-                    card.innerHTML = `
-                        <div class="food-emoji">${item.emoji}</div>
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                    `;
-                    foodGrid.appendChild(card);
-                });
-            })
-            .catch(err => console.error('Failed to load data:', err));
-    </script>
 </body>
 </html>

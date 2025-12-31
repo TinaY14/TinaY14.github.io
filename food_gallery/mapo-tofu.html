@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homemade Mapo Tofu - Tina's Food Gallery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <script src="../../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <div class="logo">Tina's Little World</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery.html">Food Gallery</a>
+            <a href="../../projects.html">Projects</a>
+            <a href="../../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">🌶️ Homemade Mapo Tofu</h2>
+            <p><em>麻婆豆腐 - Spicy Sichuan Classic</em></p>
+
+            <div class="content-entry"><h3>🌶️ About This Dish</h3>
+<p>Mapo Tofu is one of the most famous dishes from Sichuan cuisine, known for its &quot;má là&quot; (numbing and spicy) flavor profile. This homemade version features silky tofu, savory ground pork, and a rich chili bean sauce that creates the perfect balance of heat and umami.</p>
+</div><div class="content-entry"><h3>🥘 Ingredients</h3>
+<p><strong>Main Ingredients:</strong></p>
+<ul>
+<li>Silky tofu (soft or medium-firm) - 1 block (400g)</li>
+<li>Ground pork - 150g</li>
+<li>Green onions - 3-4 stalks, chopped</li>
+</ul>
+<p><strong>Sauce &amp; Seasonings:</strong></p>
+<ul>
+<li>Doubanjiang (chili bean paste) - 2 tablespoons</li>
+<li>Garlic - 4 cloves, minced</li>
+<li>Ginger - 1 inch piece, minced</li>
+<li>Sichuan peppercorns - 1 teaspoon, ground</li>
+<li>Light soy sauce - 2 tablespoons</li>
+<li>Dark soy sauce - 1 teaspoon</li>
+<li>Chicken stock - 1 cup</li>
+<li>Cornstarch - 1 tablespoon mixed with 2 tbsp water</li>
+<li>Cooking oil - 3 tablespoons</li>
+<li>Salt and sugar to taste</li>
+</ul>
+</div><div class="content-entry"><h3>👩‍🍳 Cooking Instructions</h3>
+<p><strong>Step 1: Prepare the Tofu</strong></p>
+<ol>
+<li>Cut tofu into 2cm cubes, being gentle to maintain shape</li>
+<li>Bring water to boil, add 1 tsp salt, and blanch tofu for 2 minutes</li>
+<li>Drain carefully and set aside (this removes excess water and firms up the tofu)</li>
+</ol>
+<p><strong>Step 2: Cook the Pork</strong></p>
+<ol>
+<li>Heat 2 tablespoons oil in wok over medium-high heat</li>
+<li>Add ground pork and cook until browned and crispy, breaking it up as it cooks</li>
+<li>Push pork to one side of the wok</li>
+</ol>
+<p><strong>Step 3: Build the Sauce</strong></p>
+<ol>
+<li>Add remaining oil to the empty side of wok</li>
+<li>Add minced garlic and ginger, stir-fry for 30 seconds until fragrant</li>
+<li>Add doubanjiang (chili bean paste) and cook for 1 minute until oil turns red</li>
+<li>Mix everything together in the wok</li>
+</ol>
+<p><strong>Step 4: Combine and Simmer</strong></p>
+<ol>
+<li>Pour in chicken stock, light soy sauce, and dark soy sauce</li>
+<li>Bring to a gentle boil, then carefully add the blanched tofu</li>
+<li>Simmer for 3-4 minutes, gently stirring occasionally</li>
+<li>Add cornstarch slurry to thicken the sauce</li>
+<li>Sprinkle ground Sichuan peppercorns and adjust seasoning</li>
+</ol>
+<p><strong>Step 5: Final Touches</strong></p>
+<ol>
+<li>Transfer to serving dish</li>
+<li>Garnish generously with chopped green onions</li>
+<li>Serve immediately with steamed rice</li>
+</ol>
+</div><div class="content-entry"><h3>💡 Pro Tips</h3>
+<ul>
+<li><strong>Tofu Choice:</strong> Use silky or soft tofu for authentic texture, but handle gently</li>
+<li><strong>Authentic Heat:</strong> Good doubanjiang is key - look for Pixian brand for best flavor</li>
+<li><strong>Sichuan Peppercorns:</strong> Toast them lightly before grinding for maximum numbing effect</li>
+<li><strong>Extra Garlic:</strong> My version uses extra garlic for deeper flavor</li>
+<li><strong>Serving:</strong> Best enjoyed hot with plenty of steamed white rice</li>
+</ul>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- image-fix: try alternate extensions / lowercase / space-replacements when an <img> fails -->
+    <script>
+        (function(){
+            function buildCandidates(origSrc) {
+                try {
+                    const url = new URL(origSrc, location.href);
+                    const dir = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
+                    const filename = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
+                    const base = filename.replace(/\.[^.]*$/, '');
+                    const saneBase = base.toLowerCase().replace(/\s+/g, '_');
+                    const exts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+                    const candidates = [];
+                    exts.forEach(ext => candidates.push(dir + saneBase + ext));
+                    exts.forEach(ext => candidates.push(dir + base + ext));
+                    candidates.push(dir + encodeURIComponent(filename));
+                    return [...new Set(candidates)];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            function tryReplace(img) {
+                if (img.dataset._fixing) return;
+                img.dataset._fixing = '1';
+                const orig = img.dataset.origSrc || img.src;
+                img.dataset.origSrc = orig;
+                const candidates = buildCandidates(orig);
+                let idx = 0;
+                function next() {
+                    if (idx >= candidates.length) return;
+                    img.onerror = function() { idx++; next(); };
+                    img.src = candidates[idx];
+                }
+                next();
+            }
+
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function onErr() {
+                    img.removeEventListener('error', onErr);
+                    tryReplace(img);
+                });
+                if (img.complete && img.naturalWidth === 0) {
+                    tryReplace(img);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

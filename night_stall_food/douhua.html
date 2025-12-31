@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Douhua (豆花, Tofu Pudding) - Tina's Night Stall Food</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Tina's Little World</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <a href="../contact.html">Contact</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Douhua (豆花, Tofu Pudding)</h2>
+
+            <div class="content-entry"><h3>ℹ️ About Douhua</h3>
+<p>Douhua (also called tofu pudding or soy milk pudding) is a silky-smooth Chinese dessert or breakfast dish made from soft tofu. It can be served sweet or savory depending on the region.</p>
+</div><div class="content-entry"><h3>🍜 Serving Styles</h3>
+<p><strong>Sweet Version (Southern China/Taiwan):</strong></p>
+<ul>
+<li>Brown sugar syrup</li>
+<li>Ginger syrup</li>
+<li>Tapioca pearls</li>
+<li>Peanuts</li>
+<li>Red beans</li>
+</ul>
+<p><strong>Savory Version (Northern China):</strong></p>
+<ul>
+<li>Soy sauce</li>
+<li>Chili oil</li>
+<li>Pickled vegetables</li>
+<li>Dried shrimp</li>
+<li>Green onions</li>
+<li>Sesame oil</li>
+</ul>
+</div><div class="content-entry"><h3>🥄 Main Ingredients</h3>
+<ul>
+<li>Fresh soy milk</li>
+<li>Coagulant (gypsum or nigari)</li>
+<li>Various toppings based on preference</li>
+</ul>
+</div><div class="content-entry"><h3>📊 Nutritional Information</h3>
+<ul>
+<li>Per serving: ~150-200 cal (varies with toppings)</li>
+<li>High in protein</li>
+<li>Low in fat</li>
+<li>Good source of calcium and iron</li>
+</ul>
+</div><div class="content-entry"><h3>💡 Tips</h3>
+<p>Douhua has an incredibly smooth, custard-like texture that melts in your mouth. The key is using fresh, high-quality soy milk and not over-setting the tofu. Best enjoyed warm, especially on cold days. It&#39;s a popular breakfast item and late-night snack!</p>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

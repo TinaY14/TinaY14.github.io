@@ -64,6 +64,23 @@
     let animationId = null;
     let gameRunning = false;
 
+    const cheers = ['GREAT!', 'AWESOME!', 'NICE!', 'AMAZING!', 'PERFECT!', 'WOW!', 'SUPERB!', 'EXCELLENT!'];
+
+    // Show cheer message in center of game
+    function showCheer() {
+        const cheer = document.createElement('div');
+        cheer.className = 'cheer-message';
+        cheer.textContent = cheers[Math.floor(Math.random() * cheers.length)];
+        cheer.style.cssText = `
+            position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 2.5rem; font-weight: bold; color: #ff6b6b; pointer-events: none;
+            z-index: 100; text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: cheerPop 1s ease-out forwards;
+        `;
+        foodContainer.appendChild(cheer);
+        setTimeout(() => cheer.remove(), 1000);
+    }
+
     // Create baskets
     function createBaskets() {
         basketsContainer.innerHTML = '';
@@ -230,6 +247,7 @@
             score++;
             sortedFoods++;
             updateScore();
+            showCheer();
 
             food.classList.add('sorted', 'correct');
             showFeedback('Correct! +1', 'correct', food);
