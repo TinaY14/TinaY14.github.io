@@ -30,7 +30,7 @@
             max-width: 600px;
             height: 300px;
             margin: 0 auto;
-            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            background: linear-gradient(135deg, #fef9f3 0%, #fff4e6 100%);
             border: 3px solid #ff6b6b;
             border-radius: 16px;
             overflow: hidden;
@@ -38,7 +38,7 @@
         }
 
         .dark-mode .game-box {
-            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            background: linear-gradient(135deg, #f5f0eb 0%, #ebe5dc 100%);
             border-color: #ff8a8a;
         }
 
@@ -58,7 +58,7 @@
 
         .falling-food {
             position: absolute;
-            font-size: 2rem;
+            font-size: 5rem;
             cursor: pointer;
             user-select: none;
             transition: transform 0.1s;
@@ -92,6 +92,27 @@
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-30px); }
+        }
+
+        .cheer-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            pointer-events: none;
+            animation: cheerPop 1s ease-out forwards;
+            z-index: 20;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes cheerPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            40% { transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
         }
     </style>
 
@@ -221,7 +242,16 @@
             const gameBox = document.getElementById('game-box');
             const scoreDisplay = document.getElementById('game-score');
             const foodEmojis = ['🍌', '🍫', '🍗', '🌶️', '🥟', '🥞', '🍜', '🍕', '🍔', '🍣', '🍰', '🍪'];
+            const cheers = ['Nice!', 'Yummy!', 'Awesome!', 'Great catch!', 'Delicious!', 'Amazing!', 'Tasty!', 'Nom nom!', 'Perfect!', 'Wow!'];
             let score = 0;
+
+            function showCheer() {
+                const cheer = document.createElement('div');
+                cheer.className = 'cheer-message';
+                cheer.textContent = cheers[Math.floor(Math.random() * cheers.length)];
+                gameBox.appendChild(cheer);
+                setTimeout(() => cheer.remove(), 1000);
+            }
 
             function createFallingFood() {
                 const food = document.createElement('div');
@@ -253,6 +283,7 @@
                         food.classList.add('clicked');
                         score += 10;
                         scoreDisplay.textContent = score;
+                        showCheer();
 
                         // Show +10 popup
                         const popup = document.createElement('div');
