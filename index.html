@@ -31,7 +31,6 @@
             <a href="night_stall_food.html">Night Stall Food</a>
             <a href="food_gallery/food_gallery.html">Food Gallery</a>
             <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash
@@ -50,8 +49,6 @@
     <main class="hero">
         <div class="hero-content">
         </div>
-        <!-- Food Sorting Game -->
-        <div id="veggie-container"></div>
     </main>
 
     <!-- About Me Section -->
@@ -70,17 +67,70 @@
                 <p class="description">
                     Take a look around, and feel free to connect with me—I'd love to hear your thoughts and share ideas with you. Here's to good food, good health, and a happier you! 💚
                 </p>
+                <div class="game-invite">
+                    <p>Want to test your nutrition knowledge? <a href="#game-section">Scroll down to play a fun sorting game!</a></p>
+                </div>
                 <div class="actions">
                     <a href="Xitian(Tina) Yu-Resume-2.pdf" class="resume-btn">Resume</a>
                     <div class="social-links">
-                        <a href="https://github.com/your-username" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://twitter.com/your-username" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://linkedin.com/in/your-username" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/TinaY14" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/TinaY25754" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/xitian-tina-yu-6080a323b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:18175109yyt@gmail.com"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
             <div class="about-image">
                 <img src="pictures/selfie.png" alt="Tina Yu Selfie">
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Sorting Game Section -->
+    <section class="game-section" id="game-section">
+        <div class="game-wrapper">
+            <h2 class="game-title">Food Group Sorting Game</h2>
+            <p class="game-subtitle">Test your nutrition knowledge!</p>
+
+            <div class="game-box" id="game-box">
+                <!-- Start Screen -->
+                <div class="game-start-screen" id="game-start-screen">
+                    <div class="start-content">
+                        <div class="start-icon">🥗</div>
+                        <h3>How to Play</h3>
+                        <p>Drag each floating food item to the correct food group basket at the bottom.</p>
+                        <ul class="game-rules">
+                            <li>🌾 <strong>Grains:</strong> Bread, rice, noodles, etc.</li>
+                            <li>🥩 <strong>Protein:</strong> Meat, fish, eggs, nuts</li>
+                            <li>🥛 <strong>Dairy:</strong> Milk, cheese, butter</li>
+                            <li>🍎 <strong>Fruits:</strong> Apples, bananas, oranges</li>
+                            <li>🥬 <strong>Vegetables:</strong> Carrots, broccoli, lettuce</li>
+                        </ul>
+                        <p class="start-tip">Sort all 15 foods correctly to win!</p>
+                        <button class="start-game-btn" id="start-game-btn">Start Game</button>
+                    </div>
+                </div>
+
+                <!-- Game Area -->
+                <div class="game-area" id="game-area">
+                    <div class="game-score-inline" id="game-score-inline">
+                        <span class="score-text">Score: <span id="score-value-inline">0</span></span>
+                        <span class="progress-text"><span id="sorted-count">0</span> / <span id="total-count">15</span></span>
+                    </div>
+                    <div class="food-container" id="food-container"></div>
+                    <div class="baskets-container" id="baskets-container"></div>
+                </div>
+
+                <!-- Win Screen -->
+                <div class="game-win-screen" id="game-win-screen">
+                    <div class="win-content-box">
+                        <div class="win-icon">🎉</div>
+                        <h3>Great Job!</h3>
+                        <p>You scored <span id="final-score-box">0</span> points!</p>
+                        <p class="win-subtitle">You sorted all the foods correctly!</p>
+                        <button class="play-again-btn" id="play-again-btn">Play Again</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

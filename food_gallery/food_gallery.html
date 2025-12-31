@@ -29,7 +29,6 @@
             <a href="../night_stall_food/">Night Stall Food</a>
             <a href="food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
-            <a href="../contact.html">Contact</a>
                         <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash
@@ -45,53 +44,85 @@
         </nav>
     </header>
     <main class="hero inner-page">
-        <div class="page-content">
+        <div class="page-content wide">
             <h2 class="page-title">Food Gallery</h2>
-            <p class="page-subtitle">I want to introduce you to good food I made!</p>
-            
-            <div class="content-entry">
-                <h3>📋 Browse All Recipes</h3>
-                <p><strong>Organized by category:</strong></p>
-                <ul>
-                    <li><a href="banana_cake/banana_cake.html">Banana Cake</a> - Moist homemade cake</li>
-                    <li><a href="chocolate_ice_cream_cake/chocolate_ice_cream_cake.html">Chocolate Ice Cream Cake</a> - Three-layer frozen dessert</li>
-                    <li><a href="chicken_winter_melon/chicken_winter_melon.html">Chicken & Winter Melon</a> - Colorful stir-fry</li>
-                    <li><a href="mapo_tofu/mapo_tofu.html">Mapo Tofu</a> - Spicy Sichuan classic</li>
-                    <li><a href="xiaolongbao/xiaolongbao.html">Xiaolongbao</a> - Soup dumplings</li>
-                    <li><a href="scallion_pancake/scallion_pancake.html">Scallion Pancake</a> - Crispy street snack</li>
-                </ul>
+            <p>Recipes I've made and want to share with you!</p>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="food-search" placeholder="Search recipes..." aria-label="Search recipes">
+                <i class="fas fa-search search-icon"></i>
             </div>
-            
-            <div class="content-entry">
-                <h3><a href="banana_cake/banana_cake.html">Banana Cake</a></h3>
-                <p>A moist and flavorful homemade banana cake made with ripe bananas. Creating the perfect balance of sweetness and natural banana flavor. Simple ingredients, extraordinary taste.</p>
+
+            <!-- Recipe Grid -->
+            <div class="food-grid" id="food-grid">
+                <a href="banana_cake/banana_cake.html" class="food-card" data-name="banana cake dessert sweet">
+                    <div class="food-emoji">🍌</div>
+                    <h3>Banana Cake</h3>
+                    <p>Moist homemade cake</p>
+                </a>
+
+                <a href="chocolate_ice_cream_cake/chocolate_ice_cream_cake.html" class="food-card" data-name="chocolate ice cream cake dessert frozen">
+                    <div class="food-emoji">🍫</div>
+                    <h3>Chocolate Ice Cream Cake</h3>
+                    <p>Three-layer frozen dessert</p>
+                </a>
+
+                <a href="chicken_winter_melon/chicken_winter_melon.html" class="food-card" data-name="chicken winter melon stir fry peppers">
+                    <div class="food-emoji">🍗</div>
+                    <h3>Chicken & Winter Melon</h3>
+                    <p>Colorful stir-fry</p>
+                </a>
+
+                <a href="mapo_tofu/mapo_tofu.html" class="food-card" data-name="mapo tofu spicy sichuan pork">
+                    <div class="food-emoji">🌶️</div>
+                    <h3>Mapo Tofu</h3>
+                    <p>Spicy Sichuan classic</p>
+                </a>
+
+                <a href="xiaolongbao/xiaolongbao.html" class="food-card" data-name="xiaolongbao soup dumplings pork">
+                    <div class="food-emoji">🥟</div>
+                    <h3>Xiaolongbao</h3>
+                    <p>Soup dumplings</p>
+                </a>
+
+                <a href="scallion_pancake/scallion_pancake.html" class="food-card" data-name="scallion pancake crispy street snack">
+                    <div class="food-emoji">🥞</div>
+                    <h3>Scallion Pancake</h3>
+                    <p>Crispy street snack</p>
+                </a>
             </div>
-            
-            <div class="content-entry">
-                <h3><a href="chocolate_ice_cream_cake/chocolate_ice_cream_cake.html">Chocolate Ice Cream Cake</a></h3>
-                <p>A delicious three-layer homemade ice cream cake featuring rich chocolate and heavy cream. Each layer offers a unique texture and flavor profile.</p>
-            </div>
-            
-            <div class="content-entry">
-                <h3><a href="chicken_winter_melon/chicken_winter_melon.html">Stir-Fried Chicken and Winter Melon with Colorful Peppers</a></h3>
-                <p>三彩鸡肉焗冬瓜 - A colorful and nutritious stir-fry featuring tender winter melon, ground chicken, and vibrant bell peppers in a savory sauce.</p>
-            </div>
-            
-            <div class="content-entry">
-                <h3><a href="mapo_tofu/mapo_tofu.html">Homemade Mapo Tofu</a></h3>
-                <p>A spicy and numbing Sichuan dish made with tofu, ground pork, and a rich chili bean sauce. My version uses extra garlic and a touch of fresh green onions for garnish.</p>
-            </div>
-            
-            <div class="content-entry">
-                <h3><a href="xiaolongbao/xiaolongbao.html">Steamed Xiaolongbao</a></h3>
-                <p>Delicate soup dumplings filled with juicy pork and a flavorful broth, made from scratch and steamed to perfection.</p>
-            </div>
-            
-            <div class="content-entry">
-                <h3><a href="scallion_pancake/scallion_pancake.html">Scallion Pancake</a></h3>
-                <p>Flaky, crispy, and packed with fresh scallions—my favorite street snack to make at home!</p>
-            </div>
+
+            <p id="no-results" class="no-results" style="display: none;">No recipes found matching your search.</p>
         </div>
     </main>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('food-search');
+        const foodGrid = document.getElementById('food-grid');
+        const foodCards = document.querySelectorAll('.food-card');
+        const noResults = document.getElementById('no-results');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            foodCards.forEach(card => {
+                const foodName = card.getAttribute('data-name').toLowerCase();
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+
+                if (foodName.includes(searchTerm) || title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>

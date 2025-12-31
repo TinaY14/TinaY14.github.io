@@ -11,16 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Prevent dark mode icon flash -->
-    <script>
-        (function() {
-            const savedMode = localStorage.getItem('darkMode');
-            if (savedMode === 'true') {
-                document.documentElement.classList.add('dark-mode');
-            }
-        })();
-    </script>
 </head>
 <body class="inner-page">
 
@@ -32,19 +22,7 @@
             <a href="night_stall_food.html">Night Stall Food</a>
             <a href="food_gallery/food_gallery.html">Food Gallery</a>
             <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
-            <script>
-                // Set initial button state immediately to prevent flash
-                (function() {
-                    const btn = document.getElementById('dark-mode-toggle');
-                    const isDark = document.documentElement.classList.contains('dark-mode');
-                    if (btn) {
-                        btn.textContent = isDark ? '☀️' : '🌙';
-                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                    }
-                })();
-            </script>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
         </nav>
     </header>
 
@@ -54,13 +32,10 @@
             <h1 class="name">Xitian (Tina) Yu</h1>
             <h2 class="tagline">Nutrition Enthusiast</h2>
             <p class="description">
-                Hi, I'm Tina—thank you for stopping by! This space is where I share my journey and passion for nutrition and healthy living in everyday life. Whether you're here to learn more about nourishing foods, discover simple wellness tips, or just get inspired, you're in the right place.
+                Welcome! Thank you for stopping by! This space is where I share my passion for nutrition and healthy living in everyday life. Whether you're here to learn more about nourishing foods, discover simple wellness tips, or just get inspired, you're in the right place.
             </p>
             <p class="description">
-                I believe nutrition isn't about restriction—it's about learning how to fuel your body in a way that makes you feel your best. Through my website, I hope to explore a touch of personal experience to make healthy living approachable and enjoyable.
-            </p>
-            <p class="description">
-                Take a look around, and feel free to connect with me—I'd love to hear your thoughts and share ideas with you. Here's to good food, good health, and a happier you! 💚
+                Take a look around, and feel free to connect with me! I'd love to hear your thoughts and share ideas with you. Here's to good food, good health, and a happier you! 💚
             </p>
             <div class="actions">
                 <a href="Xitian(Tina) Yu-Resume-2.pdf" class="resume-btn">Resume</a>

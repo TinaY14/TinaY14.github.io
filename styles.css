@@ -562,305 +562,411 @@ form button[type="submit"]:active {
     color: #aaa;
 }
 
-/* --- Food Sorting Game Styles --- */
-#veggie-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 10;
+/* --- Food Sorting Game Section --- */
+.game-section {
+    background: var(--inner-bg);
+    padding: 60px 5%;
+    min-height: auto;
+}
+
+.game-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.game-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--inner-heading);
+    margin-bottom: 10px;
+}
+
+.game-subtitle {
+    font-size: 1.1em;
+    color: var(--inner-text);
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+.game-box {
+    background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    position: relative;
+    min-height: 500px;
 }
 
-/* Food Items */
-.food-item {
+:root.dark-mode .game-box {
+    background: linear-gradient(145deg, #1b3d1f, #2d4a30);
+}
+
+/* Start Screen */
+.game-start-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 40px;
+}
+
+.start-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.start-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.start-content h3 {
+    font-size: 1.8em;
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+:root.dark-mode .start-content h3 {
+    color: #81c784;
+}
+
+.start-content p {
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+:root.dark-mode .start-content p {
+    color: #ddd;
+}
+
+.game-rules {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.game-rules li {
+    padding: 8px 0;
+    color: #444;
+    font-size: 0.95em;
+}
+
+:root.dark-mode .game-rules li {
+    color: #ccc;
+}
+
+.start-tip {
+    font-weight: 600;
+    color: #1b5e20;
+    margin-top: 20px;
+}
+
+:root.dark-mode .start-tip {
+    color: #a5d6a7;
+}
+
+.start-game-btn {
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.start-game-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+}
+
+/* Game Area */
+.game-area {
+    display: none;
+    flex-direction: column;
+    height: 500px;
+    position: relative;
+}
+
+.game-score-inline {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+:root.dark-mode .game-score-inline {
+    background: rgba(30, 30, 30, 0.9);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.score-text, .progress-text {
+    font-weight: 600;
+    color: #333;
+}
+
+:root.dark-mode .score-text,
+:root.dark-mode .progress-text {
+    color: #ddd;
+}
+
+.score-text span {
+    color: #4caf50;
+    font-size: 1.2em;
+}
+
+/* Food Container */
+.food-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+/* Game Food Items - with selection prevention */
+.game-food {
     position: absolute;
-    font-size: 2.8em;
+    font-size: 2.5em;
     cursor: grab;
-    pointer-events: auto;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
     transition: transform 0.15s ease-out;
-    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3));
-    z-index: 11;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+    z-index: 10;
 }
 
-.food-item:hover {
-    transform: scale(1.15);
-    filter: drop-shadow(3px 6px 12px rgba(0, 0, 0, 0.4));
+.game-food::selection {
+    background: transparent;
 }
 
-.food-item.dragging {
+.game-food::-moz-selection {
+    background: transparent;
+}
+
+.game-food * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.game-food:hover {
+    transform: scale(1.1);
+}
+
+.game-food.dragging {
     cursor: grabbing;
-    transform: scale(1.25);
+    transform: scale(1.2);
     z-index: 100;
     transition: none;
-    filter: drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(4px 8px 12px rgba(0, 0, 0, 0.4));
 }
 
-.food-item.sorted {
+.game-food.sorted {
     pointer-events: none;
 }
 
-.food-item.correct {
-    animation: correctPick 0.4s ease-out forwards;
+.game-food.correct {
+    animation: foodCorrect 0.4s ease-out forwards;
 }
 
-@keyframes correctPick {
+@keyframes foodCorrect {
     0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 0.8; }
     100% { transform: scale(0); opacity: 0; }
 }
 
-.food-item.floating {
-    animation: foodFloat 4s ease-in-out infinite;
+.game-food.floating {
+    animation: foodBob 3s ease-in-out infinite;
 }
 
-@keyframes foodFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-12px) rotate(4deg); }
-    50% { transform: translateY(-4px) rotate(-2deg); }
-    75% { transform: translateY(-16px) rotate(-4deg); }
+@keyframes foodBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
-/* Food Baskets */
-.food-baskets {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Baskets Container */
+.baskets-container {
     display: flex;
-    gap: 15px;
-    z-index: 1000;
-    pointer-events: auto;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.food-basket {
+:root.dark-mode .baskets-container {
+    background: rgba(30, 30, 30, 0.95);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.game-basket {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90px;
-    height: 90px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    height: 75px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    border: 3px solid #ddd;
     transition: all 0.2s ease;
-    border: 3px solid transparent;
+    cursor: default;
 }
 
-.food-basket:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+:root.dark-mode .game-basket {
+    background: #333;
+    border-color: #555;
 }
 
-.food-basket.highlight {
-    transform: translateY(-8px) scale(1.05);
+.game-basket:hover {
+    transform: translateY(-3px);
     border-color: #4fc3f7;
-    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
 }
 
-.food-basket.correct-drop {
-    animation: correctBasket 0.5s ease;
+.game-basket.highlight {
+    transform: translateY(-5px) scale(1.05);
+    border-color: #4fc3f7;
+    background: #e3f2fd;
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.3);
+}
+
+:root.dark-mode .game-basket.highlight {
+    background: #1e3a5f;
+}
+
+.game-basket.correct-drop {
+    animation: basketCorrect 0.5s ease;
     border-color: #4caf50;
+    background: #e8f5e9;
 }
 
-@keyframes correctBasket {
-    0%, 100% { transform: translateY(-5px) scale(1); }
-    50% { transform: translateY(-10px) scale(1.1); background: rgba(76, 175, 80, 0.2); }
+:root.dark-mode .game-basket.correct-drop {
+    background: #1b3d1f;
 }
 
-.food-basket.wrong-drop {
-    animation: wrongBasket 0.5s ease;
+@keyframes basketCorrect {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.game-basket.wrong-drop {
+    animation: basketWrong 0.5s ease;
     border-color: #f44336;
+    background: #ffebee;
 }
 
-@keyframes wrongBasket {
+:root.dark-mode .game-basket.wrong-drop {
+    background: #3d1f1f;
+}
+
+@keyframes basketWrong {
     0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-8px); }
-    40%, 80% { transform: translateX(8px); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
 }
 
-.food-basket .basket-icon {
-    font-size: 2em;
+.game-basket .basket-icon {
+    font-size: 1.8em;
     line-height: 1;
 }
 
-.food-basket .basket-label {
-    font-size: 0.7em;
+.game-basket .basket-label {
+    font-size: 0.65em;
     font-weight: 600;
-    color: #333;
+    color: #555;
     margin-top: 4px;
-    text-align: center;
 }
 
-:root.dark-mode .food-basket {
-    background: rgba(40, 40, 40, 0.95);
+:root.dark-mode .game-basket .basket-label {
+    color: #bbb;
 }
 
-:root.dark-mode .food-basket .basket-label {
-    color: #ddd;
-}
-
-/* Score Display */
-.game-score {
-    position: fixed;
-    top: 100px;
-    right: 30px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-}
-
-.game-score .score-label {
-    font-size: 0.85em;
-    color: #666;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.game-score .score-value {
-    font-size: 2.5em;
+/* Food Feedback */
+.food-feedback {
+    position: absolute;
+    font-size: 0.9em;
     font-weight: 700;
-    color: #4caf50;
-    line-height: 1.1;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: white;
+    pointer-events: none;
+    animation: feedbackPop 1s ease-out forwards;
+    z-index: 200;
 }
 
-.game-score .score-progress {
-    font-size: 0.8em;
-    color: #888;
-    margin-top: 5px;
+.food-feedback.correct {
+    background: #4caf50;
 }
 
-:root.dark-mode .game-score {
-    background: rgba(40, 40, 40, 0.95);
+.food-feedback.wrong {
+    background: #f44336;
 }
 
-:root.dark-mode .game-score .score-label {
-    color: #aaa;
+@keyframes feedbackPop {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-30px) scale(0.8); }
 }
 
-:root.dark-mode .game-score .score-value {
+/* Win Screen in Box */
+.game-win-screen {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.win-content-box {
+    text-align: center;
+    padding: 40px;
+}
+
+.win-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.win-content-box h3 {
+    font-size: 2.5em;
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+:root.dark-mode .win-content-box h3 {
     color: #81c784;
 }
 
-:root.dark-mode .game-score .score-progress {
-    color: #888;
-}
-
-/* Game Hint */
-.game-hint {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 1em;
-    z-index: 1001;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.game-hint.show {
-    opacity: 1;
-}
-
-/* Game Feedback */
-.game-feedback {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 20px 40px;
-    border-radius: 20px;
-    font-size: 1.5em;
-    font-weight: 700;
-    z-index: 1002;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.game-feedback.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.game-feedback.correct {
-    background: rgba(76, 175, 80, 0.95);
-}
-
-.game-feedback.wrong {
-    background: rgba(244, 67, 54, 0.95);
-}
-
-/* Win Screen */
-.win-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-.win-screen.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.win-content {
-    text-align: center;
-    color: white;
-    transform: scale(0.8);
-    transition: transform 0.5s ease;
-}
-
-.win-screen.show .win-content {
-    transform: scale(1);
-}
-
-.win-title {
-    font-size: 3em;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #4caf50;
-}
-
-.win-score {
-    font-size: 1.8em;
+.win-content-box p {
+    font-size: 1.3em;
+    color: #333;
     margin-bottom: 10px;
 }
 
-.win-score span {
-    color: #ffd54f;
-    font-weight: 700;
+:root.dark-mode .win-content-box p {
+    color: #ddd;
 }
 
-.win-message {
-    font-size: 1.2em;
-    color: #aaa;
-    margin-bottom: 30px;
+.win-content-box #final-score-box {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ff9800;
+}
+
+.win-subtitle {
+    font-size: 1em !important;
+    opacity: 0.8;
 }
 
 .play-again-btn {
@@ -868,17 +974,55 @@ form button[type="submit"]:active {
     color: white;
     border: none;
     padding: 15px 40px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 600;
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
 }
 
 .play-again-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
+    box-shadow: 0 8px 25px rgba(79, 195, 247, 0.4);
+}
+
+/* Game invite text */
+.game-invite {
+    margin-top: 25px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 15px;
+    display: inline-block;
+}
+
+:root.dark-mode .game-invite {
+    background: linear-gradient(135deg, #1b3d1f, #2d4a30);
+}
+
+.game-invite p {
+    margin: 0;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+:root.dark-mode .game-invite p {
+    color: #a5d6a7;
+}
+
+.game-invite a {
+    color: #1b5e20;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.game-invite a:hover {
+    text-decoration: underline;
+}
+
+:root.dark-mode .game-invite a {
+    color: #81c784;
 }
 
 /* --- About Section on Homepage --- */
@@ -1019,64 +1163,105 @@ form button[type="submit"]:active {
     }
 
     /* Food Sorting Game responsive */
-    .food-item {
-        font-size: 2em;
+    .game-section {
+        padding: 40px 3%;
     }
 
-    .food-baskets {
-        gap: 8px;
-        bottom: 10px;
-    }
-
-    .food-basket {
-        width: 60px;
-        height: 60px;
-        border-radius: 12px;
-    }
-
-    .food-basket .basket-icon {
-        font-size: 1.5em;
-    }
-
-    .food-basket .basket-label {
-        font-size: 0.55em;
-    }
-
-    .game-score {
-        top: 80px;
-        right: 15px;
-        padding: 10px 15px;
-    }
-
-    .game-score .score-value {
+    .game-title {
         font-size: 1.8em;
     }
 
-    .game-hint {
-        font-size: 0.85em;
-        padding: 10px 20px;
+    .game-subtitle {
+        font-size: 0.95em;
     }
 
-    .game-feedback {
-        font-size: 1.2em;
-        padding: 15px 30px;
+    .game-box {
+        min-height: 450px;
+        border-radius: 16px;
     }
 
-    .win-title {
-        font-size: 2em;
+    .game-start-screen {
+        min-height: 450px;
+        padding: 25px;
     }
 
-    .win-score {
+    .start-icon {
+        font-size: 3em;
+    }
+
+    .start-content h3 {
         font-size: 1.4em;
     }
 
-    .win-message {
+    .start-content p {
+        font-size: 0.9em;
+    }
+
+    .game-rules li {
+        font-size: 0.85em;
+        padding: 6px 0;
+    }
+
+    .start-game-btn {
+        padding: 14px 35px;
         font-size: 1em;
+    }
+
+    .game-area {
+        height: 450px;
+    }
+
+    .food-container {
+        min-height: 280px;
+    }
+
+    .game-food {
+        font-size: 2em;
+    }
+
+    .baskets-container {
+        gap: 8px;
+        padding: 12px 10px;
+    }
+
+    .game-basket {
+        width: 58px;
+        height: 58px;
+        border-radius: 10px;
+    }
+
+    .game-basket .basket-icon {
+        font-size: 1.4em;
+    }
+
+    .game-basket .basket-label {
+        font-size: 0.5em;
+    }
+
+    .game-win-screen {
+        min-height: 450px;
+    }
+
+    .win-content-box h3 {
+        font-size: 1.8em;
+    }
+
+    .win-content-box p {
+        font-size: 1.1em;
     }
 
     .play-again-btn {
         padding: 12px 30px;
         font-size: 1em;
+    }
+
+    .game-invite {
+        padding: 12px 20px;
+        margin-top: 20px;
+    }
+
+    .game-invite p {
+        font-size: 0.9em;
     }
 
     /* About section responsive */

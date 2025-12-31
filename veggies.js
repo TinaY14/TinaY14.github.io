@@ -1,10 +1,18 @@
-// Food Nutrition Sorting Game
+// Food Nutrition Sorting Game - Contained Version
 (function() {
     // Only run on homepage
     if (document.body.classList.contains('inner-page')) return;
 
-    const container = document.getElementById('veggie-container');
-    if (!container) return;
+    const gameBox = document.getElementById('game-box');
+    const gameArea = document.getElementById('game-area');
+    const foodContainer = document.getElementById('food-container');
+    const basketsContainer = document.getElementById('baskets-container');
+    const startScreen = document.getElementById('game-start-screen');
+    const winScreen = document.getElementById('game-win-screen');
+    const startBtn = document.getElementById('start-game-btn');
+    const playAgainBtn = document.getElementById('play-again-btn');
+
+    if (!gameBox || !foodContainer) return;
 
     // Food items with their categories
     const foodItems = [
@@ -53,18 +61,15 @@
     let sortedFoods = 0;
     let foodElements = [];
     let baskets = {};
-    let gameStarted = false;
+    let animationId = null;
+    let gameRunning = false;
 
-    // Create game UI
-    function createGameUI() {
-        // Create baskets container
-        const basketsContainer = document.createElement('div');
-        basketsContainer.className = 'food-baskets';
-        basketsContainer.id = 'food-baskets';
-
+    // Create baskets
+    function createBaskets() {
+        basketsContainer.innerHTML = '';
         categories.forEach(cat => {
             const basket = document.createElement('div');
-            basket.className = 'food-basket';
+            basket.className = 'game-basket';
             basket.dataset.category = cat.id;
             basket.innerHTML = `
                 <div class="basket-icon">${cat.icon}</div>
@@ -73,78 +78,30 @@
             basketsContainer.appendChild(basket);
             baskets[cat.id] = basket;
         });
-
-        document.body.appendChild(basketsContainer);
-
-        // Create score display
-        const scoreDisplay = document.createElement('div');
-        scoreDisplay.className = 'game-score';
-        scoreDisplay.id = 'game-score';
-        scoreDisplay.innerHTML = `
-            <div class="score-label">Score</div>
-            <div class="score-value" id="score-value">0</div>
-            <div class="score-progress" id="score-progress">0 / 0</div>
-        `;
-        document.body.appendChild(scoreDisplay);
-
-        // Create hint
-        const hint = document.createElement('div');
-        hint.className = 'game-hint';
-        hint.id = 'game-hint';
-        hint.textContent = 'Drag food to the correct food group basket!';
-        document.body.appendChild(hint);
-
-        // Show hint briefly
-        setTimeout(() => hint.classList.add('show'), 500);
-        setTimeout(() => hint.classList.remove('show'), 4000);
-
-        // Create feedback display
-        const feedback = document.createElement('div');
-        feedback.className = 'game-feedback';
-        feedback.id = 'game-feedback';
-        document.body.appendChild(feedback);
-
-        // Create win screen
-        const winScreen = document.createElement('div');
-        winScreen.className = 'win-screen';
-        winScreen.id = 'win-screen';
-        winScreen.innerHTML = `
-            <div class="win-content">
-                <div class="win-title">Great Job!</div>
-                <div class="win-score">You scored <span id="final-score">0</span> points!</div>
-                <div class="win-message">You sorted all the foods correctly!</div>
-                <button class="play-again-btn" id="play-again">Play Again</button>
-            </div>
-        `;
-        document.body.appendChild(winScreen);
-
-        document.getElementById('play-again').addEventListener('click', resetGame);
     }
 
     // Create a food item
     function createFood(foodData) {
+        const containerRect = foodContainer.getBoundingClientRect();
         const food = document.createElement('div');
-        food.className = 'food-item floating';
+        food.className = 'game-food floating';
         food.textContent = foodData.emoji;
         food.dataset.category = foodData.category;
         food.dataset.name = foodData.name;
 
-        // Random position in upper area (not overlapping baskets)
-        const maxY = window.innerHeight * 0.55; // Keep above baskets
-        const x = 50 + Math.random() * (window.innerWidth - 100);
-        const y = 50 + Math.random() * (maxY - 100);
+        // Random position within container
+        const maxX = containerRect.width - 50;
+        const maxY = containerRect.height - 50;
+        const x = 20 + Math.random() * (maxX - 40);
+        const y = 20 + Math.random() * (maxY - 40);
         food.style.left = x + 'px';
         food.style.top = y + 'px';
 
-        // Random animation timing
-        food.style.animationDelay = (Math.random() * 3) + 's';
-        food.style.animationDuration = (3 + Math.random() * 2) + 's';
-
         // Physics properties
-        food.vx = (Math.random() - 0.5) * 1.5;
-        food.vy = (Math.random() - 0.5) * 1.5;
+        food.vx = (Math.random() - 0.5) * 2;
+        food.vy = (Math.random() - 0.5) * 2;
 
-        container.appendChild(food);
+        foodContainer.appendChild(food);
         foodElements.push(food);
 
         addFoodInteraction(food);
@@ -154,7 +111,7 @@
     // Add drag interaction to food
     function addFoodInteraction(food) {
         let isDragging = false;
-        let startX, startY, initialX, initialY;
+        let offsetX, offsetY;
 
         food.addEventListener('mousedown', startDrag);
         food.addEventListener('touchstart', startDrag, { passive: false });
@@ -168,11 +125,10 @@
 
             const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            const foodRect = food.getBoundingClientRect();
 
-            startX = clientX;
-            startY = clientY;
-            initialX = food.offsetLeft;
-            initialY = food.offsetTop;
+            offsetX = clientX - foodRect.left;
+            offsetY = clientY - foodRect.top;
 
             document.addEventListener('mousemove', drag);
             document.addEventListener('mouseup', endDrag);
@@ -188,18 +144,19 @@
             const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
 
-            let newX = initialX + (clientX - startX);
-            let newY = initialY + (clientY - startY);
+            const containerRect = foodContainer.getBoundingClientRect();
+            let newX = clientX - containerRect.left - offsetX;
+            let newY = clientY - containerRect.top - offsetY;
 
-            // Keep within bounds
-            newX = Math.max(0, Math.min(window.innerWidth - 50, newX));
-            newY = Math.max(0, Math.min(window.innerHeight - 50, newY));
+            // Allow dragging slightly outside container for basket drop
+            newX = Math.max(-20, Math.min(containerRect.width - 30, newX));
+            newY = Math.max(-20, Math.min(containerRect.height + 80, newY));
 
             food.style.left = newX + 'px';
             food.style.top = newY + 'px';
 
             // Highlight basket on hover
-            highlightBasketUnderFood(newX + 25, newY + 25);
+            highlightBasketUnderFood(clientX, clientY);
 
             if (e.type.includes('touch')) e.preventDefault();
         }
@@ -235,7 +192,14 @@
             if (droppedOnBasket) {
                 checkAnswer(food, droppedOnBasket);
             } else {
-                // Not dropped on basket, resume floating
+                // Return to container bounds and resume floating
+                const containerRect = foodContainer.getBoundingClientRect();
+                let x = parseFloat(food.style.left);
+                let y = parseFloat(food.style.top);
+                x = Math.max(10, Math.min(containerRect.width - 60, x));
+                y = Math.max(10, Math.min(containerRect.height - 60, y));
+                food.style.left = x + 'px';
+                food.style.top = y + 'px';
                 food.classList.add('floating');
             }
         }
@@ -260,7 +224,6 @@
     // Check if answer is correct
     function checkAnswer(food, basketCategory) {
         const correctCategory = food.dataset.category;
-        const feedback = document.getElementById('game-feedback');
 
         if (basketCategory === correctCategory) {
             // Correct!
@@ -269,7 +232,7 @@
             updateScore();
 
             food.classList.add('sorted', 'correct');
-            showFeedback('Correct! +1', 'correct');
+            showFeedback('Correct! +1', 'correct', food);
             baskets[basketCategory].classList.add('correct-drop');
             setTimeout(() => baskets[basketCategory].classList.remove('correct-drop'), 500);
 
@@ -287,16 +250,17 @@
 
         } else {
             // Wrong!
-            showFeedback('Wrong! Try again', 'wrong');
+            showFeedback('Wrong!', 'wrong', food);
             baskets[basketCategory].classList.add('wrong-drop');
             setTimeout(() => baskets[basketCategory].classList.remove('wrong-drop'), 500);
 
             // Food bounces back
             food.classList.add('returning');
-            const returnX = 50 + Math.random() * (window.innerWidth - 100);
-            const returnY = 50 + Math.random() * (window.innerHeight * 0.4);
+            const containerRect = foodContainer.getBoundingClientRect();
+            const returnX = 20 + Math.random() * (containerRect.width - 80);
+            const returnY = 20 + Math.random() * (containerRect.height - 80);
 
-            food.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            food.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
             food.style.left = returnX + 'px';
             food.style.top = returnY + 'px';
 
@@ -304,50 +268,47 @@
                 food.classList.remove('returning');
                 food.style.transition = '';
                 food.classList.add('floating');
-                // Give it new random velocity
-                food.vx = (Math.random() - 0.5) * 1.5;
-                food.vy = (Math.random() - 0.5) * 1.5;
-            }, 600);
+                food.vx = (Math.random() - 0.5) * 2;
+                food.vy = (Math.random() - 0.5) * 2;
+            }, 500);
         }
     }
 
-    // Show feedback message
-    function showFeedback(message, type) {
-        const feedback = document.getElementById('game-feedback');
+    // Show feedback message near food
+    function showFeedback(message, type, food) {
+        const feedback = document.createElement('div');
+        feedback.className = 'food-feedback ' + type;
         feedback.textContent = message;
-        feedback.className = 'game-feedback show ' + type;
-        setTimeout(() => feedback.classList.remove('show'), 1500);
+        feedback.style.left = food.style.left;
+        feedback.style.top = food.style.top;
+        foodContainer.appendChild(feedback);
+
+        setTimeout(() => feedback.remove(), 1000);
     }
 
     // Update score display
     function updateScore() {
-        document.getElementById('score-value').textContent = score;
-        document.getElementById('score-progress').textContent = `${sortedFoods} / ${totalFoods}`;
+        document.getElementById('score-value-inline').textContent = score;
+        document.getElementById('sorted-count').textContent = sortedFoods;
     }
 
     // Show win screen
     function showWinScreen() {
-        document.getElementById('final-score').textContent = score;
-        document.getElementById('win-screen').classList.add('show');
-    }
-
-    // Reset game
-    function resetGame() {
-        // Clear existing foods
-        foodElements.forEach(f => f.remove());
-        foodElements = [];
-        score = 0;
-        sortedFoods = 0;
-
-        document.getElementById('win-screen').classList.remove('show');
-
-        // Create new foods
-        initFoods();
-        updateScore();
+        gameRunning = false;
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        document.getElementById('final-score-box').textContent = score;
+        gameArea.style.display = 'none';
+        winScreen.style.display = 'flex';
     }
 
     // Initialize foods
     function initFoods() {
+        foodContainer.innerHTML = '';
+        foodElements = [];
+
         // Shuffle and pick foods (3 from each category = 15 total)
         const selectedFoods = [];
         categories.forEach(cat => {
@@ -357,10 +318,11 @@
         });
 
         totalFoods = selectedFoods.length;
+        document.getElementById('total-count').textContent = totalFoods;
 
         // Create food elements with staggered timing
         selectedFoods.forEach((foodData, i) => {
-            setTimeout(() => createFood(foodData), i * 80);
+            setTimeout(() => createFood(foodData), i * 100);
         });
 
         updateScore();
@@ -368,7 +330,11 @@
 
     // Animate floating foods
     function animateFoods() {
-        const maxY = window.innerHeight * 0.55;
+        if (!gameRunning) return;
+
+        const containerRect = foodContainer.getBoundingClientRect();
+        const maxX = containerRect.width - 50;
+        const maxY = containerRect.height - 50;
 
         foodElements.forEach(food => {
             if (food.classList.contains('dragging') ||
@@ -383,13 +349,13 @@
             y += food.vy;
 
             // Bounce off edges
-            if (x <= 0 || x >= window.innerWidth - 50) {
+            if (x <= 5 || x >= maxX) {
                 food.vx *= -0.9;
-                x = Math.max(0, Math.min(window.innerWidth - 50, x));
+                x = Math.max(5, Math.min(maxX, x));
             }
-            if (y <= 0 || y >= maxY) {
+            if (y <= 5 || y >= maxY) {
                 food.vy *= -0.9;
-                y = Math.max(0, Math.min(maxY, y));
+                y = Math.max(5, Math.min(maxY, y));
             }
 
             // Slow down gradually
@@ -398,77 +364,51 @@
 
             // Add slight random movement
             if (Math.random() < 0.02) {
-                food.vx += (Math.random() - 0.5) * 0.3;
-                food.vy += (Math.random() - 0.5) * 0.3;
+                food.vx += (Math.random() - 0.5) * 0.4;
+                food.vy += (Math.random() - 0.5) * 0.4;
             }
 
             // Maintain minimum speed
             const speed = Math.sqrt(food.vx * food.vx + food.vy * food.vy);
-            if (speed < 0.3) {
-                food.vx += (Math.random() - 0.5) * 0.5;
-                food.vy += (Math.random() - 0.5) * 0.5;
+            if (speed < 0.4) {
+                food.vx += (Math.random() - 0.5) * 0.6;
+                food.vy += (Math.random() - 0.5) * 0.6;
             }
 
             food.style.left = x + 'px';
             food.style.top = y + 'px';
         });
 
-        requestAnimationFrame(animateFoods);
+        animationId = requestAnimationFrame(animateFoods);
     }
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        const maxY = window.innerHeight * 0.55;
-        foodElements.forEach(food => {
-            let x = parseFloat(food.style.left) || 0;
-            let y = parseFloat(food.style.top) || 0;
-            x = Math.min(x, window.innerWidth - 50);
-            y = Math.min(y, maxY);
-            food.style.left = x + 'px';
-            food.style.top = y + 'px';
-        });
-    });
+    // Start game
+    function startGame() {
+        score = 0;
+        sortedFoods = 0;
+        gameRunning = true;
 
-    // Hide game when scrolling down to content
-    let gameHidden = false;
-    const hideThreshold = window.innerHeight * 0.3;
-    const gameElements = ['veggie-container', 'food-baskets', 'game-score', 'game-hint'];
+        startScreen.style.display = 'none';
+        winScreen.style.display = 'none';
+        gameArea.style.display = 'block';
 
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY || window.pageYOffset;
+        createBaskets();
+        initFoods();
 
-        if (scrollY > hideThreshold && !gameHidden) {
-            gameHidden = true;
-            gameElements.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.style.opacity = '0';
-                    el.style.pointerEvents = 'none';
-                }
-            });
-        } else if (scrollY <= hideThreshold && gameHidden) {
-            gameHidden = false;
-            gameElements.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.style.opacity = '1';
-                    el.style.pointerEvents = 'auto';
-                }
-            });
-        }
-    });
+        // Start animation after foods are created
+        setTimeout(() => {
+            animateFoods();
+        }, 200);
+    }
 
-    // Initialize game
-    createGameUI();
-    initFoods();
-    animateFoods();
+    // Reset game
+    function resetGame() {
+        winScreen.style.display = 'none';
+        startGame();
+    }
 
-    // Add transitions after a brief delay
-    setTimeout(() => {
-        gameElements.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.transition = 'opacity 0.3s ease';
-        });
-    }, 100);
+    // Event listeners
+    startBtn.addEventListener('click', startGame);
+    playAgainBtn.addEventListener('click', resetGame);
 
 })();
