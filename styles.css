@@ -162,6 +162,7 @@ body.inner-page #dark-mode-toggle {
     align-items: flex-start;
     min-height: auto;
     padding-top: 20px;
+    max-width: 100%;
 }
 
 .hero-content { max-width: 600px; }
@@ -324,7 +325,8 @@ body.inner-page .page-title {
 }
 
 .page-content.wide {
-    max-width: 1400px;
+    max-width: none;
+    width: 100%;
 }
 
 .page-content p {
@@ -560,7 +562,7 @@ form button[type="submit"]:active {
     color: #aaa;
 }
 
-/* --- Floating Vegetables Styles --- */
+/* --- Food Sorting Game Styles --- */
 #veggie-container {
     position: fixed;
     top: 0;
@@ -572,138 +574,372 @@ form button[type="submit"]:active {
     overflow: hidden;
 }
 
-.veggie {
+/* Food Items */
+.food-item {
     position: absolute;
-    font-size: 2.5em;
+    font-size: 2.8em;
     cursor: grab;
     pointer-events: auto;
     user-select: none;
-    transition: transform 0.1s ease-out;
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    transition: transform 0.15s ease-out;
+    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3));
     z-index: 11;
 }
 
-.veggie:hover {
-    transform: scale(1.2);
-    filter: drop-shadow(3px 6px 10px rgba(0, 0, 0, 0.4));
+.food-item:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(3px 6px 12px rgba(0, 0, 0, 0.4));
 }
 
-.veggie.dragging {
+.food-item.dragging {
     cursor: grabbing;
-    transform: scale(1.3);
+    transform: scale(1.25);
     z-index: 100;
     transition: none;
+    filter: drop-shadow(4px 8px 16px rgba(0, 0, 0, 0.5));
 }
 
-.veggie.picked {
-    animation: pickVeggie 0.5s ease-out forwards;
+.food-item.sorted {
+    pointer-events: none;
 }
 
-@keyframes pickVeggie {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5) rotate(15deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(0) rotate(360deg);
-        opacity: 0;
-    }
+.food-item.correct {
+    animation: correctPick 0.4s ease-out forwards;
 }
 
-/* Veggie Basket */
-#veggie-basket {
+@keyframes correctPick {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.food-item.floating {
+    animation: foodFloat 4s ease-in-out infinite;
+}
+
+@keyframes foodFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-12px) rotate(4deg); }
+    50% { transform: translateY(-4px) rotate(-2deg); }
+    75% { transform: translateY(-16px) rotate(-4deg); }
+}
+
+/* Food Baskets */
+.food-baskets {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    gap: 15px;
     z-index: 1000;
-    font-family: 'Poppins', sans-serif;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: auto;
 }
 
-#veggie-basket:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+.food-basket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    border: 3px solid transparent;
 }
 
-.basket-icon {
+.food-basket:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.food-basket.highlight {
+    transform: translateY(-8px) scale(1.05);
+    border-color: #4fc3f7;
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
+}
+
+.food-basket.correct-drop {
+    animation: correctBasket 0.5s ease;
+    border-color: #4caf50;
+}
+
+@keyframes correctBasket {
+    0%, 100% { transform: translateY(-5px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); background: rgba(76, 175, 80, 0.2); }
+}
+
+.food-basket.wrong-drop {
+    animation: wrongBasket 0.5s ease;
+    border-color: #f44336;
+}
+
+@keyframes wrongBasket {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.food-basket .basket-icon {
     font-size: 2em;
+    line-height: 1;
 }
 
-.basket-count {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #2e7d32;
-    min-width: 30px;
+.food-basket .basket-label {
+    font-size: 0.7em;
+    font-weight: 600;
+    color: #333;
+    margin-top: 4px;
     text-align: center;
 }
 
-#veggie-basket.bounce {
-    animation: basketBounce 0.4s ease;
+:root.dark-mode .food-basket {
+    background: rgba(40, 40, 40, 0.95);
 }
 
-@keyframes basketBounce {
-    0%, 100% { transform: scale(1.05); }
-    50% { transform: scale(1.15); }
+:root.dark-mode .food-basket .basket-label {
+    color: #ddd;
 }
 
-:root.dark-mode #veggie-basket {
-    background: rgba(30, 30, 30, 0.95);
+/* Score Display */
+.game-score {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
-:root.dark-mode .basket-count {
+.game-score .score-label {
+    font-size: 0.85em;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.game-score .score-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #4caf50;
+    line-height: 1.1;
+}
+
+.game-score .score-progress {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+}
+
+:root.dark-mode .game-score {
+    background: rgba(40, 40, 40, 0.95);
+}
+
+:root.dark-mode .game-score .score-label {
+    color: #aaa;
+}
+
+:root.dark-mode .game-score .score-value {
     color: #81c784;
 }
 
-/* Floating animation for idle vegetables */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-15px) rotate(5deg);
-    }
-    50% {
-        transform: translateY(-5px) rotate(-3deg);
-    }
-    75% {
-        transform: translateY(-20px) rotate(-5deg);
-    }
+:root.dark-mode .game-score .score-progress {
+    color: #888;
 }
 
-.veggie.floating {
-    animation: float 4s ease-in-out infinite;
-}
-
-/* Tooltip hint */
-.veggie-hint {
+/* Game Hint */
+.game-hint {
     position: fixed;
-    top: 100px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 0.9em;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1em;
     z-index: 1001;
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
+    white-space: nowrap;
 }
 
-.veggie-hint.show {
+.game-hint.show {
     opacity: 1;
+}
+
+/* Game Feedback */
+.game-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 1.5em;
+    font-weight: 700;
+    z-index: 1002;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.game-feedback.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.game-feedback.correct {
+    background: rgba(76, 175, 80, 0.95);
+}
+
+.game-feedback.wrong {
+    background: rgba(244, 67, 54, 0.95);
+}
+
+/* Win Screen */
+.win-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.win-screen.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.win-content {
+    text-align: center;
+    color: white;
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+}
+
+.win-screen.show .win-content {
+    transform: scale(1);
+}
+
+.win-title {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #4caf50;
+}
+
+.win-score {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.win-score span {
+    color: #ffd54f;
+    font-weight: 700;
+}
+
+.win-message {
+    font-size: 1.2em;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.play-again-btn {
+    background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.play-again-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
+}
+
+/* --- About Section on Homepage --- */
+.about-section {
+    background-color: var(--inner-bg);
+    padding: 80px 5%;
+    min-height: 100vh;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.about-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.about-image {
+    flex-shrink: 0;
+}
+
+.about-section .intro-text {
+    color: var(--inner-text);
+    text-shadow: none;
+}
+
+.about-section .name {
+    text-shadow: none;
+}
+
+.about-section .tagline {
+    color: var(--inner-heading);
+}
+
+.about-section .description {
+    color: var(--inner-text);
+    text-shadow: none;
+}
+
+.about-section .social-links a {
+    color: var(--inner-text);
+}
+
+.about-image img {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode for about section */
+:root.dark-mode .about-section {
+    background-color: #000000;
 }
 
 @media (max-width: 768px) {
@@ -782,22 +1018,87 @@ form button[type="submit"]:active {
         font-size: 2.8em;
     }
 
-    /* Vegetables responsive */
-    .veggie {
+    /* Food Sorting Game responsive */
+    .food-item {
         font-size: 2em;
     }
 
-    #veggie-basket {
-        bottom: 20px;
-        left: 20px;
+    .food-baskets {
+        gap: 8px;
+        bottom: 10px;
+    }
+
+    .food-basket {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+    }
+
+    .food-basket .basket-icon {
+        font-size: 1.5em;
+    }
+
+    .food-basket .basket-label {
+        font-size: 0.55em;
+    }
+
+    .game-score {
+        top: 80px;
+        right: 15px;
         padding: 10px 15px;
     }
 
-    .basket-icon {
-        font-size: 1.6em;
+    .game-score .score-value {
+        font-size: 1.8em;
     }
 
-    .basket-count {
+    .game-hint {
+        font-size: 0.85em;
+        padding: 10px 20px;
+    }
+
+    .game-feedback {
         font-size: 1.2em;
+        padding: 15px 30px;
+    }
+
+    .win-title {
+        font-size: 2em;
+    }
+
+    .win-score {
+        font-size: 1.4em;
+    }
+
+    .win-message {
+        font-size: 1em;
+    }
+
+    .play-again-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    /* About section responsive */
+    .about-section {
+        padding: 60px 3%;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .about-text {
+        max-width: 100%;
+    }
+
+    .about-image img {
+        max-width: 300px;
+    }
+
+    .about-section .actions {
+        justify-content: center;
     }
 }
