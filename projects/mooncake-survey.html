@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mooncake Survey: Changing Traditions - Tina's Projects</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Tina's Profile</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Mooncake Survey: Changing Traditions</h2>
+
+            <h1 id="🥮-the-story-behind-mooncakes">🥮 The Story Behind Mooncakes</h3>
+<p>Mooncakes are traditional Chinese pastries deeply rooted in the Mid-Autumn Festival celebration. This festival, also known as the Moon Festival, is one of the most important holidays in Chinese culture, symbolizing family reunion and harmony.</p>
+<p><strong>Mid-Autumn Festival Tradition:</strong> Families gather to admire the full moon, share mooncakes, and celebrate togetherness. The round shape of mooncakes represents completeness and unity, making them essential to this cultural celebration.</p>
+<h1 id="🤔-research-motivation">🤔 Research Motivation</h3>
+<p>I noticed a concerning trend: nowadays Chinese people are buying fewer and fewer mooncakes. This decline in a cherished tradition made me wonder - what&#39;s happening to this important cultural practice?</p>
+<p>To understand this phenomenon, I conducted a small survey asking people from different age groups across various places in China about their mooncake consumption habits and preferences.</p>
+<h1 id="📊-survey-methodology">📊 Survey Methodology</h3>
+<p><strong>Research Approach:</strong></p>
+<ul>
+<li>Interviewed people from different age groups</li>
+<li>Included participants from various regions in China</li>
+<li>Asked about purchasing habits and preferences</li>
+<li>Explored reasons behind changing consumption patterns</li>
+</ul>
+<h1 id="📈-key-findings">📈 Key Findings</h3>
+<p><strong>Declining Consumption:</strong></p>
+<ul>
+<li>Younger generations buy fewer mooncakes</li>
+<li>Many receive mooncakes as gifts rather than purchasing</li>
+<li>Price and health concerns influence buying decisions</li>
+</ul>
+<p><strong>Changing Preferences:</strong></p>
+<ul>
+<li>Traditional flavors less popular with youth</li>
+<li>Interest in creative, modern flavors growing</li>
+<li>Concerns about high sugar and oil content</li>
+</ul>
+<p><strong>Cultural Significance:</strong></p>
+<ul>
+<li>Older generations maintain strong emotional connection</li>
+<li>Younger people see it more as obligation than tradition</li>
+<li>Festival still important, but mooncake role changing</li>
+</ul>
+<h1 id="🌏-cultural--personal-insights">🌏 Cultural &amp; Personal Insights</h3>
+<p>The survey revealed that while the Mid-Autumn Festival remains important, the role of mooncakes is evolving. Modern lifestyles, health consciousness, and changing tastes are reshaping this ancient tradition.</p>
+<p><strong>Future Considerations:</strong></p>
+<ul>
+<li>Need for healthier mooncake options</li>
+<li>Innovation in flavors to attract younger consumers</li>
+<li>Balancing tradition with modern preferences</li>
+<li>Importance of cultural education about festival significance</li>
+</ul>
+<p>This research highlights how traditional foods must adapt to remain relevant in modern society while preserving their cultural essence.</p>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Stall Food - Tina</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+
+    <main class="hero inner-page">
+        <div class="page-content wide">
+            <h2 class="page-title">Night Stall Food</h2>
+            <p>Exploring the vibrant world of street food and night market culture.</p>
+
+            <!-- Food Grid - cards loaded dynamically from data.json -->
+            <div class="food-grid" id="food-grid">
+                <!-- Cards will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load cards dynamically from data.json
+        const foodGrid = document.getElementById('food-grid');
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Render cards
+                data.forEach(item => {
+                    const card = document.createElement('a');
+                    card.href = item.href;
+                    card.className = 'food-card';
+                    card.setAttribute('data-name', item.searchTerms);
+                    card.innerHTML = `
+                        <div class="food-emoji">${item.emoji}</div>
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    `;
+                    foodGrid.appendChild(card);
+                });
+            })
+            .catch(err => console.error('Failed to load data:', err));
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xitian (Tina) Yu </title>
+    
+    <!-- Preload background image for faster loading -->
+    <link rel="preload" href="pictures/background.jpg" as="image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+        </div>
+    </main>
+
+    <!-- About Me Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <p class="intro-text">Hi, my name is</p>
+                <h1 class="name">Xitian (Tina) Yu</h1>
+                <h2 class="tagline">Nutrition Enthusiast</h2>
+                <p class="description">
+                    Hi, I'm Tina—thank you for stopping by! This space is where I share my journey and passion for nutrition and healthy living in everyday life. Whether you're here to learn more about nourishing foods, discover simple wellness tips, or just get inspired, you're in the right place.
+                </p>
+                <p class="description">
+                    Take a look around, and feel free to connect with me—I'd love to hear your thoughts and share ideas with you. Here's to good food, good health, and a happier you! 💚
+                </p>
+                <div class="game-invite">
+                    <p>Want to test your nutrition knowledge? <a href="#game-section">Scroll down to play a fun sorting game!</a></p>
+                </div>
+                <div class="actions">
+                    <a href="Xitian(Tina) Yu-Resume-2.pdf" class="resume-btn">Resume</a>
+                    <div class="social-links">
+                        <a href="https://github.com/TinaY14" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/TinaY25754" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/xitian-tina-yu-6080a323b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:18175109yyt@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="pictures/selfie.png" alt="Tina Yu Selfie">
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Sorting Game Section -->
+    <section class="game-section" id="game-section">
+        <div class="game-wrapper">
+            <h2 class="game-title">Food Group Sorting Game</h2>
+            <p class="game-subtitle">Test your nutrition knowledge!</p>
+
+            <div class="game-box" id="game-box">
+                <!-- Start Screen -->
+                <div class="game-start-screen" id="game-start-screen">
+                    <div class="start-content">
+                        <div class="start-icon">🥗</div>
+                        <h3>How to Play</h3>
+                        <p>Drag each floating food item to the correct food group basket at the bottom.</p>
+                        <p class="start-tip">Sort all 15 foods correctly to win!</p>
+                        <button class="start-game-btn" id="start-game-btn">Start Game</button>
+                    </div>
+                </div>
+
+                <!-- Game Area -->
+                <div class="game-area" id="game-area">
+                    <div class="game-score-inline" id="game-score-inline">
+                        <span class="score-text">Score: <span id="score-value-inline">0</span></span>
+                        <span class="progress-text"><span id="sorted-count">0</span> / <span id="total-count">15</span></span>
+                    </div>
+                    <div class="food-container" id="food-container"></div>
+                    <div class="baskets-container" id="baskets-container"></div>
+                </div>
+
+                <!-- Win Screen -->
+                <div class="game-win-screen" id="game-win-screen">
+                    <div class="win-content-box">
+                        <div class="win-icon">🎉</div>
+                        <h3>Great Job!</h3>
+                        <p>You scored <span id="final-score-box">0</span> points!</p>
+                        <p class="win-subtitle">You sorted all the foods correctly!</p>
+                        <button class="play-again-btn" id="play-again-btn">Play Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="darkmode.js"></script>
+    <script src="veggies.js"></script>
+</body>
+</html>
