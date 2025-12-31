@@ -1,21 +1,14 @@
-name: Build and Deploy to Pages
+name: Build and Deploy
 
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,29 +25,15 @@ jobs:
       - name: Build HTML files
         run: npm run build
 
-      - name: Prepare site for deployment
+      - name: Prepare deploy folder
         run: |
-          mkdir _site
-          # Copy site files
-          cp *.html *.css *.js _site/ 2>/dev/null || true
-          cp -r food_gallery night_stall_food projects pictures _site/ 2>/dev/null || true
-          touch _site/.nojekyll
+          mkdir -p deploy
+          cp -r index.html styles.css darkmode.js script.js projects.html deploy/
+          cp -r food_gallery night_stall_food projects pictures deploy/
+          touch deploy/.nojekyll
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: '_site'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: deploy
+          branch: gh-pages
