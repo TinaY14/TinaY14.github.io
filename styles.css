@@ -991,6 +991,7 @@ form button[type="submit"]:active {
 /* Game invite text */
 .game-invite {
     margin-top: 10px;
+    margin-bottom: 20px;
     padding: 15px 25px;
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
     border-radius: 15px;

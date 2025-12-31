@@ -2,6 +2,9 @@
 title: Jianbing
 chineseName: 煎饼
 englishName: Chinese Crepe
+emoji: 🫓
+cardDescription: Crispy Chinese breakfast crepe
+searchTerms: jianbing crepe breakfast egg crispy
 ---
 
 # 📸 Photo Gallery

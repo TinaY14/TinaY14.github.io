@@ -2,6 +2,9 @@
 title: Stinky Tofu
 chineseName: 臭豆腐
 englishName: Fermented Tofu
+emoji: 🧈
+cardDescription: Fermented tofu with crispy exterior
+searchTerms: stinky tofu fermented crispy taiwanese street food
 ---
 
 # ℹ️ About Stinky Tofu

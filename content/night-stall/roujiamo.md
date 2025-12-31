@@ -2,6 +2,9 @@
 title: Roujiamo
 chineseName: 肉夹馍
 englishName: Chinese Hamburger
+emoji: 🥙
+cardDescription: Chinese-style meat sandwich
+searchTerms: roujiamo chinese hamburger meat sandwich flatbread
 ---
 
 # ℹ️ About Roujiamo

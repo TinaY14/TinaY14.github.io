@@ -1,7 +1,9 @@
 ---
 title: Chocolate Ice Cream Cake
 subtitle: Decadent Frozen Dessert
-emoji: 🍰
+emoji: 🍫
+cardDescription: Three-layer frozen dessert
+searchTerms: chocolate ice cream cake dessert frozen
 hasImage: true
 ---
 

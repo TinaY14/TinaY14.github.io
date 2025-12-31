@@ -11,6 +11,35 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
+    <style>
+        .game-section { margin: 2rem 0; text-align: center; }
+        .game-instruction { font-size: 1.1rem; margin-bottom: 1rem; color: #ff6b6b; }
+        .game-box {
+            position: relative; width: 100%; max-width: 600px; height: 300px;
+            margin: 0 auto; background: linear-gradient(135deg, #fef9f3 0%, #fff4e6 100%);
+            border: 3px solid #ff6b6b; border-radius: 16px; overflow: hidden; cursor: crosshair;
+        }
+        .dark-mode .game-box { background: linear-gradient(135deg, #f5f0eb 0%, #ebe5dc 100%); }
+        .game-score { position: absolute; top: 10px; right: 15px; font-size: 1.2rem; font-weight: 600; color: #ff6b6b; z-index: 10; }
+        .falling-food { position: absolute; font-size: 5rem; cursor: pointer; user-select: none; transition: transform 0.1s; z-index: 5; }
+        .falling-food:hover { transform: scale(1.2); }
+        .falling-food.clicked { animation: pop 0.3s ease-out forwards; }
+        @keyframes pop { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(0); opacity: 0; } }
+        .score-popup { position: absolute; font-size: 1rem; font-weight: bold; color: #4CAF50; pointer-events: none; animation: floatUp 0.8s ease-out forwards; z-index: 15; }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-30px); } }
+        .cheer-message {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 2rem; font-weight: bold; color: #ff6b6b; pointer-events: none;
+            animation: cheerPop 1s ease-out forwards; z-index: 20; text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @keyframes cheerPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+            40% { transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+        }
+    </style>
+
     <!-- Prevent dark mode icon flash -->
     <script>
         (function() {
@@ -48,49 +77,23 @@
             <h2 class="page-title">Food Gallery</h2>
             <p>Recipes I've made and want to share with you!</p>
 
+            <!-- Falling Food Game -->
+            <div class="game-section">
+                <p class="game-instruction">Click the falling food to score points!</p>
+                <div class="game-box" id="game-box">
+                    <div class="game-score">Score: <span id="game-score">0</span></div>
+                </div>
+            </div>
+
             <!-- Search Bar -->
             <div class="search-container">
                 <input type="text" id="food-search" placeholder="Search recipes..." aria-label="Search recipes">
                 <i class="fas fa-search search-icon"></i>
             </div>
 
-            <!-- Recipe Grid -->
+            <!-- Recipe Grid - cards generated from content/recipes/*.md -->
             <div class="food-grid" id="food-grid">
-                <a href="banana_cake/banana_cake.html" class="food-card" data-name="banana cake dessert sweet">
-                    <div class="food-emoji">🍌</div>
-                    <h3>Banana Cake</h3>
-                    <p>Moist homemade cake</p>
-                </a>
-
-                <a href="chocolate_ice_cream_cake/chocolate_ice_cream_cake.html" class="food-card" data-name="chocolate ice cream cake dessert frozen">
-                    <div class="food-emoji">🍫</div>
-                    <h3>Chocolate Ice Cream Cake</h3>
-                    <p>Three-layer frozen dessert</p>
-                </a>
-
-                <a href="chicken_winter_melon/chicken_winter_melon.html" class="food-card" data-name="chicken winter melon stir fry peppers">
-                    <div class="food-emoji">🍗</div>
-                    <h3>Chicken & Winter Melon</h3>
-                    <p>Colorful stir-fry</p>
-                </a>
-
-                <a href="mapo_tofu/mapo_tofu.html" class="food-card" data-name="mapo tofu spicy sichuan pork">
-                    <div class="food-emoji">🌶️</div>
-                    <h3>Mapo Tofu</h3>
-                    <p>Spicy Sichuan classic</p>
-                </a>
-
-                <a href="xiaolongbao/xiaolongbao.html" class="food-card" data-name="xiaolongbao soup dumplings pork">
-                    <div class="food-emoji">🥟</div>
-                    <h3>Xiaolongbao</h3>
-                    <p>Soup dumplings</p>
-                </a>
-
-                <a href="scallion_pancake/scallion_pancake.html" class="food-card" data-name="scallion pancake crispy street snack">
-                    <div class="food-emoji">🥞</div>
-                    <h3>Scallion Pancake</h3>
-                    <p>Crispy street snack</p>
-                </a>
+                <!-- TEMPLATE_RECIPES_PLACEHOLDER -->
             </div>
 
             <p id="no-results" class="no-results" style="display: none;">No recipes found matching your search.</p>
@@ -123,6 +126,73 @@
 
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         });
+
+        // Falling Food Game
+        (function() {
+            const gameBox = document.getElementById('game-box');
+            const scoreDisplay = document.getElementById('game-score');
+            const foodEmojis = ['🍌', '🍫', '🍗', '🌶️', '🥟', '🥞', '🍜', '🍕', '🍔', '🍣', '🍰', '🍪'];
+            const cheers = ['GREAT!', 'AWESOME!', 'NICE!', 'YUMMY!', 'AMAZING!', 'PERFECT!', 'DELICIOUS!', 'WOW!'];
+            let score = 0;
+
+            function showCheer() {
+                const cheer = document.createElement('div');
+                cheer.className = 'cheer-message';
+                cheer.textContent = cheers[Math.floor(Math.random() * cheers.length)];
+                gameBox.appendChild(cheer);
+                setTimeout(() => cheer.remove(), 1000);
+            }
+
+            function createFallingFood() {
+                const food = document.createElement('div');
+                food.className = 'falling-food';
+                food.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+                const boxWidth = gameBox.clientWidth;
+                const boxHeight = gameBox.clientHeight;
+                const startX = Math.random() * (boxWidth - 80);
+                food.style.left = startX + 'px';
+                food.style.top = '-80px';
+                gameBox.appendChild(food);
+
+                let posY = -80, posX = startX;
+                const speed = 1 + Math.random() * 2;
+                const wobble = Math.random() * 2 - 1;
+
+                food.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!food.classList.contains('clicked')) {
+                        food.classList.add('clicked');
+                        score += 10;
+                        scoreDisplay.textContent = score;
+                        showCheer();
+                        const popup = document.createElement('div');
+                        popup.className = 'score-popup';
+                        popup.textContent = '+10';
+                        popup.style.left = food.style.left;
+                        popup.style.top = food.style.top;
+                        gameBox.appendChild(popup);
+                        setTimeout(() => popup.remove(), 800);
+                        setTimeout(() => food.remove(), 300);
+                    }
+                });
+
+                function fall() {
+                    if (food.classList.contains('clicked')) return;
+                    posY += speed;
+                    posX += wobble;
+                    if (posX < 0) posX = 0;
+                    if (posX > boxWidth - 80) posX = boxWidth - 80;
+                    food.style.top = posY + 'px';
+                    food.style.left = posX + 'px';
+                    if (posY > boxHeight) { food.remove(); } else { requestAnimationFrame(fall); }
+                }
+                requestAnimationFrame(fall);
+            }
+
+            setInterval(createFallingFood, 1200);
+            setTimeout(createFallingFood, 300);
+            setTimeout(createFallingFood, 800);
+        })();
     </script>
 </body>
 </html>

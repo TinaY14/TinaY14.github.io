@@ -2,6 +2,8 @@
 title: Homemade Mapo Tofu
 subtitle: 麻婆豆腐 - Spicy Sichuan Classic
 emoji: 🌶️
+cardDescription: Spicy Sichuan classic
+searchTerms: mapo tofu spicy sichuan pork
 ---
 
 # 🌶️ About This Dish

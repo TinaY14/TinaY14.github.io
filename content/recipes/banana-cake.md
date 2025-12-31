@@ -2,6 +2,8 @@
 title: Banana Cake
 subtitle: Moist and Flavorful Homemade Delight
 emoji: 🍌
+cardDescription: Moist homemade cake
+searchTerms: banana cake dessert sweet
 hasImage: true
 ---
 

@@ -2,6 +2,9 @@
 title: Chuanr
 chineseName: 烤串
 englishName: Chinese BBQ Skewers
+emoji: 🍢
+cardDescription: Grilled skewers with cumin spice
+searchTerms: chuanr bbq skewers grilled meat lamb beef
 ---
 
 # ℹ️ About Chuanr

@@ -2,6 +2,9 @@
 title: Takoyaki
 chineseName: 章鱼小丸子
 englishName: Octopus Balls
+emoji: 🐙
+cardDescription: Japanese octopus balls
+searchTerms: takoyaki octopus balls japanese snack
 ---
 
 # ℹ️ About Takoyaki
