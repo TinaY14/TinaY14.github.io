@@ -7,9 +7,9 @@ const matter = require('gray-matter');
 const config = {
   food: {
     contentDir: 'content/food',
-    outputDir: 'recipes',
+    outputDir: 'night_stall_food',
     template: null,
-    hubPage: 'recipes/recipes.html',
+    hubPage: 'night_stall_food/night_stall_food.html',
     placeholder: '<!-- TEMPLATE_FOOD_PLACEHOLDER -->',
     cardType: 'food'
   },

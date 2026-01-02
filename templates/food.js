@@ -16,7 +16,7 @@ module.exports = function(data, content) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${titleText} - Tina's Recipes</title>
+    <title>${titleText} - Tina's Night Stall Food</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +41,8 @@ module.exports = function(data, content) {
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="recipes.html">Recipes</a>
+            <a href="night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>

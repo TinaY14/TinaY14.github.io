@@ -27,9 +27,10 @@ jobs:
 
       - name: Prepare deploy folder
         run: |
-          mkdir -p deploy/recipes deploy/projects deploy/images
+          mkdir -p deploy/night_stall_food deploy/food_gallery deploy/projects deploy/images
           cp index.html styles.css darkmode.js script.js veggies.js projects.html "Xitian(Tina) Yu-Resume-2.pdf" deploy/
-          cp -r recipes/* deploy/recipes/
+          cp -r night_stall_food/* deploy/night_stall_food/
+          cp -r food_gallery/* deploy/food_gallery/
           cp -r projects/* deploy/projects/
           cp -r images/* deploy/images/
           touch deploy/.nojekyll

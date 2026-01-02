@@ -3,13 +3,13 @@ const path = require('path');
 
 // Directories containing generated HTML files
 const generatedDirs = [
-    'recipes',
+    'night_stall_food',
     'projects'
 ];
 
 // Index/main pages to keep (these are NOT generated from templates)
 const keepFiles = [
-    'recipes/recipes.html'
+    'night_stall_food/night_stall_food.html'
 ];
 
 let deletedCount = 0;
