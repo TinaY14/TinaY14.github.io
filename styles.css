@@ -290,6 +290,39 @@ body.inner-page .page-title {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+/* Section with image layout for food pages */
+.section-with-image {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.section-with-image .section-text {
+    flex: 1;
+}
+
+.section-with-image .section-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .section-with-image {
+        flex-direction: column;
+    }
+
+    .section-with-image .section-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+}
+
 .content-entry h3 {
     color: var(--inner-heading);
     font-weight: 600;
