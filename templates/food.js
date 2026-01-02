@@ -6,12 +6,17 @@ module.exports = function(data, content) {
     .replace(/<\/h1>/g, '</h3>')
     .replace(/^<\/div>/, ''); // Remove leading closing div from first section
 
+  // Build title with Chinese and English names
+  const titleText = data.chineseName
+    ? `${data.title} (${data.chineseName}, ${data.englishName || ''})`
+    : data.title;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${data.title} - Tina's Projects</title>
+    <title>${titleText} - Tina's Recipes</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +41,7 @@ module.exports = function(data, content) {
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../recipes/recipes.html">Recipes</a>
+            <a href="recipes.html">Recipes</a>
             <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
@@ -54,7 +59,7 @@ module.exports = function(data, content) {
     </header>
     <main class="hero inner-page">
         <div class="page-content">
-            <h2 class="page-title">${data.title}</h2>
+            <h2 class="page-title">${titleText}</h2>
 
             ${processedContent}
             </div>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steamed Xiaolongbao - Tina's Recipes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Steamed Xiaolongbao</h2>
+
+            <h1 id="🥟-about-this-dish">🥟 About This Dish</h3>
+<p>Xiaolongbao are delicate soup dumplings that originated in Shanghai. Each dumpling contains a flavorful pork filling surrounded by rich, savory broth that&#39;s created during the steaming process. Making them from scratch requires patience and technique, but the result is incredibly rewarding.</p>
+<h1 id="🍜-ingredients">🍜 Ingredients</h3>
+<p><strong>For the Dough:</strong></p>
+<ul>
+<li>All-purpose flour - 2 cups</li>
+<li>Warm water - ¾ cup</li>
+<li>Salt - ½ teaspoon</li>
+</ul>
+<p><strong>For the Pork Filling:</strong></p>
+<ul>
+<li>Ground pork (with some fat) - 300g</li>
+<li>Ginger - 2 tablespoons, minced</li>
+<li>Green onions - 3 stalks, finely chopped</li>
+<li>Light soy sauce - 2 tablespoons</li>
+<li>Shaoxing wine - 1 tablespoon</li>
+<li>Sesame oil - 1 teaspoon</li>
+<li>White pepper - ¼ teaspoon</li>
+<li>Salt - ½ teaspoon</li>
+<li>Sugar - 1 teaspoon</li>
+</ul>
+<p><strong>For the Soup (Gelatin Stock):</strong></p>
+<ul>
+<li>Pork bones or chicken bones - 500g</li>
+<li>Water - 4 cups</li>
+<li>Ginger - 2 slices</li>
+<li>Green onion - 1 stalk</li>
+<li>Gelatin powder - 1 packet (if needed)</li>
+</ul>
+<h1 id="👩🍳-preparation-steps">👩‍🍳 Preparation Steps</h3>
+<p><strong>Step 1: Make the Gelatin Stock (Day Before)</strong></p>
+<ol>
+<li>Boil pork bones with ginger and green onion for 3-4 hours</li>
+<li>Strain and refrigerate overnight until it becomes jelly-like</li>
+<li>Cut the jellied stock into small cubes</li>
+</ol>
+<p><strong>Step 2: Prepare the Dough</strong></p>
+<ol>
+<li>Mix flour and salt in a large bowl</li>
+<li>Gradually add warm water while mixing until dough forms</li>
+<li>Knead for 10 minutes until smooth and elastic</li>
+<li>Cover and rest for 30 minutes</li>
+</ol>
+<p><strong>Step 3: Make the Filling</strong></p>
+<ol>
+<li>Mix ground pork with all seasonings</li>
+<li>Stir in one direction for 5 minutes until sticky</li>
+<li>Gently fold in the jellied stock cubes</li>
+<li>Refrigerate filling until ready to use</li>
+</ol>
+<p><strong>Step 4: Assemble the Dumplings</strong></p>
+<ol>
+<li>Roll dough into a long cylinder and cut into small pieces</li>
+<li>Roll each piece into thin circles (thinner edges, thicker center)</li>
+<li>Place 1 tablespoon filling in center</li>
+<li>Pleat the edges (18-20 pleats) and twist to seal at top</li>
+<li>Place on parchment paper squares</li>
+</ol>
+<p><strong>Step 5: Steam to Perfection</strong></p>
+<ol>
+<li>Arrange dumplings in steamer, leaving space between each</li>
+<li>Steam over high heat for 12-15 minutes</li>
+<li>Turn off heat and let sit for 2 minutes before opening</li>
+<li>Serve immediately while hot</li>
+</ol>
+<h1 id="💡-expert-tips">💡 Expert Tips</h3>
+<ul>
+<li><strong>Pleating Technique:</strong> Practice makes perfect - aim for 18-20 pleats for authentic look</li>
+<li><strong>Soup Secret:</strong> The gelatin stock melts during steaming to create the soup inside</li>
+<li><strong>Eating Method:</strong> Bite a small hole first, sip the broth, then eat the dumpling</li>
+<li><strong>Wrapper Thickness:</strong> Keep edges thin but center thick to prevent tearing</li>
+<li><strong>Timing:</strong> Serve immediately - the soup cools quickly and loses its magic</li>
+</ul>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

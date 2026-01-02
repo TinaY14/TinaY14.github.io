@@ -2,7 +2,7 @@
 title: Douhua
 chineseName: 豆花
 englishName: Tofu Pudding
-image: ../images/night-stall/douhua.jpg
+image: ../images/food/douhua.jpg
 cardDescription: Silky tofu pudding dessert
 searchTerms: douhua tofu pudding sweet dessert soy
 ---

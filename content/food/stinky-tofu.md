@@ -2,7 +2,7 @@
 title: Stinky Tofu
 chineseName: 臭豆腐
 englishName: Fermented Tofu
-image: ../images/night-stall/stinky-tofu.jpg
+image: ../images/food/stinky-tofu.jpg
 cardDescription: Fermented tofu with crispy exterior
 searchTerms: stinky tofu fermented crispy taiwanese street food
 ---
