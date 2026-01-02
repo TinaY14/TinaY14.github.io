@@ -529,10 +529,10 @@ form button[type="submit"]:active {
 }
 
 .food-image {
-    width: 126px;
-    height: 126px;
+    width: 50px !important;
+    height: 50px !important;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 6px;
     margin-bottom: 12px;
 }
 
