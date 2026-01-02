@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scallion Pancake - Tina's Food Gallery</title>
+    <title>Scallion Pancake - Tina's Recipes</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,11 +25,10 @@
 </head>
 <body class="inner-page">
     <header>
-        <div class="logo">Tina's Little World</div>
+        <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
-            <a href="food_gallery.html">Food Gallery</a>
+            <a href="recipes.html">Recipes</a>
             <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
@@ -45,11 +44,9 @@
             </script>
         </nav>
     </header>
-
     <main class="hero inner-page">
         <div class="page-content">
-            <h2 class="page-title">🥞 Scallion Pancake</h2>
-            <p><em>葱油饼 - Crispy Chinese Street Food</em></p>
+            <h2 class="page-title">Scallion Pancake</h2>
 
             <h1 id="🥞-about-this-dish">🥞 About This Dish</h3>
 <p>Scallion pancakes are a beloved Chinese street food known for their flaky, crispy exterior and soft, layered interior packed with fresh scallions. This homemade version captures all the authentic flavors and textures that make this dish so irresistible as a snack or side dish.</p>
@@ -130,53 +127,5 @@
             </div>
         </div>
     </main>
-
-    <!-- image-fix: try alternate extensions / lowercase / space-replacements when an <img> fails -->
-    <script>
-        (function(){
-            function buildCandidates(origSrc) {
-                try {
-                    const url = new URL(origSrc, location.href);
-                    const dir = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
-                    const filename = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
-                    const base = filename.replace(/\.[^.]*$/, '');
-                    const saneBase = base.toLowerCase().replace(/\s+/g, '_');
-                    const exts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
-                    const candidates = [];
-                    exts.forEach(ext => candidates.push(dir + saneBase + ext));
-                    exts.forEach(ext => candidates.push(dir + base + ext));
-                    candidates.push(dir + encodeURIComponent(filename));
-                    return [...new Set(candidates)];
-                } catch (e) {
-                    return [];
-                }
-            }
-
-            function tryReplace(img) {
-                if (img.dataset._fixing) return;
-                img.dataset._fixing = '1';
-                const orig = img.dataset.origSrc || img.src;
-                img.dataset.origSrc = orig;
-                const candidates = buildCandidates(orig);
-                let idx = 0;
-                function next() {
-                    if (idx >= candidates.length) return;
-                    img.onerror = function() { idx++; next(); };
-                    img.src = candidates[idx];
-                }
-                next();
-            }
-
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('error', function onErr() {
-                    img.removeEventListener('error', onErr);
-                    tryReplace(img);
-                });
-                if (img.complete && img.naturalWidth === 0) {
-                    tryReplace(img);
-                }
-            });
-        })();
-    </script>
 </body>
 </html>
