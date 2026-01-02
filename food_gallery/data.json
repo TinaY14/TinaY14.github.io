@@ -2,6 +2,7 @@
   {
     "href": "banana-cake.html",
     "title": "Banana Cake",
+    "image": null,
     "emoji": "🍌",
     "description": "Moist homemade cake",
     "searchTerms": "banana cake dessert sweet"
@@ -9,6 +10,7 @@
   {
     "href": "chicken-winter-melon.html",
     "title": "Chicken Winter Melon Soup",
+    "image": null,
     "emoji": "🍗",
     "description": "Colorful stir-fry",
     "searchTerms": "chicken winter melon stir fry peppers"
@@ -16,6 +18,7 @@
   {
     "href": "chocolate-ice-cream-cake.html",
     "title": "Chocolate Ice Cream Cake",
+    "image": null,
     "emoji": "🍫",
     "description": "Three-layer frozen dessert",
     "searchTerms": "chocolate ice cream cake dessert frozen"
@@ -23,6 +26,7 @@
   {
     "href": "mapo-tofu.html",
     "title": "Homemade Mapo Tofu",
+    "image": null,
     "emoji": "🌶️",
     "description": "Spicy Sichuan classic",
     "searchTerms": "mapo tofu spicy sichuan pork"
@@ -30,6 +34,7 @@
   {
     "href": "scallion-pancake.html",
     "title": "Scallion Pancake",
+    "image": null,
     "emoji": "🥞",
     "description": "Crispy street snack",
     "searchTerms": "scallion pancake crispy street snack"
@@ -37,6 +42,7 @@
   {
     "href": "xiaolongbao.html",
     "title": "Steamed Xiaolongbao",
+    "image": null,
     "emoji": "🥟",
     "description": "Soup dumplings",
     "searchTerms": "xiaolongbao soup dumplings pork"

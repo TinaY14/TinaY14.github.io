@@ -72,8 +72,11 @@
                     card.href = item.href;
                     card.className = 'food-card';
                     card.setAttribute('data-name', item.searchTerms);
+                    const visual = item.image
+                        ? `<img class="food-image" src="${item.image}" alt="${item.title}">`
+                        : `<div class="food-emoji">${item.emoji}</div>`;
                     card.innerHTML = `
-                        <div class="food-emoji">${item.emoji}</div>
+                        ${visual}
                         <h3>${item.title}</h3>
                         <p>${item.description}</p>
                     `;

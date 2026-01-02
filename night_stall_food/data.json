@@ -1,57 +1,65 @@
 [
   {
     "href": "chuanr.html",
-    "title": "Chuanr",
-    "emoji": "🍢",
+    "title": "Chuanr 烤串",
+    "image": "images/chuanr.jpg",
+    "emoji": "🍜",
     "description": "Grilled skewers with cumin spice",
     "searchTerms": "chuanr bbq skewers grilled meat lamb beef"
   },
   {
     "href": "douhua.html",
-    "title": "Douhua",
-    "emoji": "🍮",
+    "title": "Douhua 豆花",
+    "image": "images/douhua.jpg",
+    "emoji": "🍜",
     "description": "Silky tofu pudding dessert",
     "searchTerms": "douhua tofu pudding sweet dessert soy"
   },
   {
     "href": "egg-waffles.html",
-    "title": "Egg Waffles",
-    "emoji": "🧇",
+    "title": "Egg Waffles 鸡蛋仔",
+    "image": "images/egg-waffles.png",
+    "emoji": "🍜",
     "description": "Crispy Hong Kong bubble waffles",
     "searchTerms": "egg waffles hong kong bubble crispy snack"
   },
   {
     "href": "jianbing.html",
-    "title": "Jianbing",
-    "emoji": "🫓",
+    "title": "Jianbing 煎饼",
+    "image": "images/jianbing.jpg",
+    "emoji": "🍜",
     "description": "Crispy Chinese breakfast crepe",
     "searchTerms": "jianbing crepe breakfast egg crispy"
   },
   {
     "href": "roujiamo.html",
-    "title": "Roujiamo",
-    "emoji": "🥙",
+    "title": "Roujiamo 肉夹馍",
+    "image": "images/roujiamo.jpg",
+    "emoji": "🍜",
     "description": "Chinese-style meat sandwich",
     "searchTerms": "roujiamo chinese hamburger meat sandwich flatbread"
   },
   {
     "href": "shengjianbao.html",
-    "title": "Shengjianbao",
-    "emoji": "🥟",
+    "title": "Shengjianbao 生煎包",
+    "image": "images/shengjianbao.jpg",
+    "emoji": "🍜",
     "description": "Pan-fried soup dumplings",
     "searchTerms": "shengjianbao pan fried buns pork shanghai"
   },
   {
     "href": "stinky-tofu.html",
-    "title": "Stinky Tofu",
-    "emoji": "🧈",
+    "title": "Stinky Tofu 臭豆腐",
+    "image": "images/stinky-tofu.jpg",
+    "emoji": "🍜",
     "description": "Fermented tofu with crispy exterior",
     "searchTerms": "stinky tofu fermented crispy taiwanese street food"
   },
   {
     "href": "takoyaki.html",
-    "title": "Takoyaki",
-    "emoji": "🐙",
+    "title": "Takoyaki 章鱼小丸子",
+    "image": "images/takoyaki.jpg",
+    "emoji": "🍜",
     "description": "Japanese octopus balls",
     "searchTerms": "takoyaki octopus balls japanese snack"
   }
