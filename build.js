@@ -45,9 +45,15 @@ function generateDataFile(section) {
     const { data } = matter(fileContent);
     const htmlFileName = file.replace('.md', '.html');
 
+    // Format title with Chinese name if available (e.g., "Chuanr 烤串")
+    const displayTitle = data.chineseName
+      ? `${data.title} ${data.chineseName}`
+      : data.title;
+
     return {
       href: htmlFileName,
-      title: data.title,
+      title: displayTitle,
+      image: data.image || null,
       emoji: data.emoji || (cardType === 'recipe' ? '🍽️' : '🍜'),
       description: data.cardDescription || data.subtitle || data.englishName || '',
       searchTerms: data.searchTerms || data.title.toLowerCase()

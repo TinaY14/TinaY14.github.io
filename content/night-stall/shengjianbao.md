@@ -2,7 +2,7 @@
 title: Shengjianbao
 chineseName: 生煎包
 englishName: Pan-Fried Pork Buns
-emoji: 🥟
+image: images/shengjianbao.jpg
 cardDescription: Pan-fried soup dumplings
 searchTerms: shengjianbao pan fried buns pork shanghai
 ---
