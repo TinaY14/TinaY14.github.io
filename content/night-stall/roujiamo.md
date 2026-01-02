@@ -2,7 +2,7 @@
 title: Roujiamo
 chineseName: 肉夹馍
 englishName: Chinese Hamburger
-image: images/roujiamo.jpg
+image: ../pictures/roujiamo.jpg
 cardDescription: Chinese-style meat sandwich
 searchTerms: roujiamo chinese hamburger meat sandwich flatbread
 ---

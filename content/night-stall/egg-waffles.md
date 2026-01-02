@@ -2,7 +2,7 @@
 title: Egg Waffles
 chineseName: 鸡蛋仔
 englishName: Hong Kong Style Bubble Waffles
-image: images/egg-waffles.jpg
+image: ../pictures/egg-waffle(3).jpg
 cardDescription: Crispy Hong Kong bubble waffles
 searchTerms: egg waffles hong kong bubble crispy snack
 ---
