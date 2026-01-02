@@ -529,8 +529,8 @@ form button[type="submit"]:active {
 }
 
 .food-image {
-    width: 126px !important;
-    height: 126px !important;
+    width: 200px !important;
+    height: 200px !important;
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 12px;
