@@ -52,16 +52,26 @@
             <h2 class="page-title">Night Stall Food</h2>
             <p>Exploring the vibrant world of street food and night market culture.</p>
 
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="food-search" placeholder="Search street foods..." aria-label="Search street foods">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
             <!-- Food Grid - cards loaded dynamically from data.json -->
             <div class="food-grid" id="food-grid">
                 <!-- Cards will be loaded dynamically -->
             </div>
+
+            <p id="no-results" class="no-results" style="display: none;">No street foods found matching your search.</p>
         </div>
     </main>
 
     <script>
         // Load cards dynamically from data.json
         const foodGrid = document.getElementById('food-grid');
+        const searchInput = document.getElementById('food-search');
+        const noResults = document.getElementById('no-results');
 
         fetch('data.json')
             .then(response => response.json())
@@ -82,8 +92,35 @@
                     `;
                     foodGrid.appendChild(card);
                 });
+
+                // Setup search after cards are loaded
+                setupSearch();
             })
             .catch(err => console.error('Failed to load data:', err));
+
+        function setupSearch() {
+            const foodCards = document.querySelectorAll('.food-card');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                foodCards.forEach(card => {
+                    const foodName = card.getAttribute('data-name').toLowerCase();
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+
+                    if (foodName.includes(searchTerm) || title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        }
     </script>
 </body>
 </html>
