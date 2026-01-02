@@ -26,8 +26,6 @@ Roujiamo is often called the "Chinese hamburger" - a popular street food from Sh
 - Tender and flavorful
 - Chopped finely
 
-# 🌶️ Seasoning
-
 **Braising Spices:**
 - Star anise
 - Cinnamon

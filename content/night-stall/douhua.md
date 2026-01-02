@@ -11,6 +11,12 @@ searchTerms: douhua tofu pudding sweet dessert soy
 
 Douhua (also called tofu pudding or soy milk pudding) is a silky-smooth Chinese dessert or breakfast dish made from soft tofu. It can be served sweet or savory depending on the region.
 
+# 🥄 Main Ingredients
+
+- Fresh soy milk
+- Coagulant (gypsum or nigari)
+- Various toppings based on preference
+
 # 🍜 Serving Styles
 
 **Sweet Version (Southern China/Taiwan):**
@@ -27,12 +33,6 @@ Douhua (also called tofu pudding or soy milk pudding) is a silky-smooth Chinese 
 - Dried shrimp
 - Green onions
 - Sesame oil
-
-# 🥄 Main Ingredients
-
-- Fresh soy milk
-- Coagulant (gypsum or nigari)
-- Various toppings based on preference
 
 # 📊 Nutritional Information
 

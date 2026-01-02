@@ -7,13 +7,9 @@ cardDescription: Crispy Chinese breakfast crepe
 searchTerms: jianbing crepe breakfast egg crispy
 ---
 
-# 📸 Photo Gallery
+# ℹ️ About Jianbing
 
-**Pictures:**
-
-- Pic 1 - Fresh jianbing being made on griddle
-- Pic 2 - Folded jianbing ready to serve
-- Pic 3 - Jianbing ingredients and fillings
+Jianbing is a popular breakfast street food, made from a thin crepe filled with egg, scallions, cilantro, crispy wonton, and savory sauces. It is folded and served hot, perfect for eating on the go.
 
 # 🥄 Ingredients
 
@@ -38,8 +34,14 @@ searchTerms: jianbing crepe breakfast egg crispy
 
 **Good source of protein and carbohydrates, moderate fat**
 
-# ℹ️ About Jianbing
+# 💡 Tips
 
-Jianbing is a popular breakfast street food, made from a thin crepe filled with egg, scallions, cilantro, crispy wonton, and savory sauces. It is folded and served hot, perfect for eating on the go.
+Jianbing originated in Shandong province and has become one of China's most beloved breakfast foods. The batter is spread thin on a large griddle, an egg is cracked on top, and various fillings are added before folding. The crispy wonton cracker adds a delightful crunch. Each region has its own variation - some add lettuce, some use different sauces. It's best enjoyed fresh and hot from the street vendor!
 
-**Tips:** Jianbing originated in Shandong province and has become one of China's most beloved breakfast foods. The batter is spread thin on a large griddle, an egg is cracked on top, and various fillings are added before folding. The crispy wonton cracker adds a delightful crunch. Each region has its own variation - some add lettuce, some use different sauces. It's best enjoyed fresh and hot from the street vendor!
+# 📸 Photo Gallery
+
+**Pictures:**
+
+- Pic 1 - Fresh jianbing being made on griddle
+- Pic 2 - Folded jianbing ready to serve
+- Pic 3 - Jianbing ingredients and fillings

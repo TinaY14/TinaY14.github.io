@@ -29,13 +29,7 @@ Egg waffles (Gai Daan Jai) are a popular Hong Kong street snack featuring a gold
 - Filled with ice cream
 - Topped with fruits
 
-# 📊 Nutritional Information
-
-- One waffle: ~250-300 cal
-- Moderate protein from eggs
-- Main source: carbohydrates
-
-# 🌟 Serving Suggestions
+# 🍜 Serving Suggestions
 
 **Traditional:**
 - Plain, eaten hot
@@ -46,6 +40,12 @@ Egg waffles (Gai Daan Jai) are a popular Hong Kong street snack featuring a gold
 - Topped with fresh fruits
 - Drizzled with chocolate
 - Filled with cream or custard
+
+# 📊 Nutritional Information
+
+- One waffle: ~250-300 cal
+- Moderate protein from eggs
+- Main source: carbohydrates
 
 # 💡 Cultural Notes
 
