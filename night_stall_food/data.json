@@ -2,7 +2,7 @@
   {
     "href": "chuanr.html",
     "title": "Chuanr 烤串",
-    "image": "../pictures/chuanr.jpg",
+    "image": "../images/night-stall/chuanr.jpg",
     "emoji": "🍜",
     "description": "Grilled skewers with cumin spice",
     "searchTerms": "chuanr bbq skewers grilled meat lamb beef"
@@ -10,7 +10,7 @@
   {
     "href": "douhua.html",
     "title": "Douhua 豆花",
-    "image": "../pictures/douhua.jpg",
+    "image": "../images/night-stall/douhua.jpg",
     "emoji": "🍜",
     "description": "Silky tofu pudding dessert",
     "searchTerms": "douhua tofu pudding sweet dessert soy"
@@ -18,7 +18,7 @@
   {
     "href": "egg-waffles.html",
     "title": "Egg Waffles 鸡蛋仔",
-    "image": "../pictures/egg-waffle(3).jpg",
+    "image": "../images/night-stall/egg-waffle.jpg",
     "emoji": "🍜",
     "description": "Crispy Hong Kong bubble waffles",
     "searchTerms": "egg waffles hong kong bubble crispy snack"
@@ -26,7 +26,7 @@
   {
     "href": "jianbing.html",
     "title": "Jianbing 煎饼",
-    "image": "../pictures/jianbing.jpg",
+    "image": "../images/night-stall/jianbing.jpg",
     "emoji": "🍜",
     "description": "Crispy Chinese breakfast crepe",
     "searchTerms": "jianbing crepe breakfast egg crispy"
@@ -34,7 +34,7 @@
   {
     "href": "roujiamo.html",
     "title": "Roujiamo 肉夹馍",
-    "image": "../pictures/roujiamo.jpg",
+    "image": "../images/night-stall/roujiamo.jpg",
     "emoji": "🍜",
     "description": "Chinese-style meat sandwich",
     "searchTerms": "roujiamo chinese hamburger meat sandwich flatbread"
@@ -42,7 +42,7 @@
   {
     "href": "shengjianbao.html",
     "title": "Shengjianbao 生煎包",
-    "image": "../pictures/xiaolongbao.jpg",
+    "image": "../images/night-stall/xiaolongbao.jpg",
     "emoji": "🍜",
     "description": "Pan-fried soup dumplings",
     "searchTerms": "shengjianbao pan fried buns pork shanghai"
@@ -50,7 +50,7 @@
   {
     "href": "stinky-tofu.html",
     "title": "Stinky Tofu 臭豆腐",
-    "image": "../pictures/stinky tofu.jpg",
+    "image": "../images/night-stall/stinky-tofu.jpg",
     "emoji": "🍜",
     "description": "Fermented tofu with crispy exterior",
     "searchTerms": "stinky tofu fermented crispy taiwanese street food"
@@ -58,7 +58,7 @@
   {
     "href": "takoyaki.html",
     "title": "Takoyaki 章鱼小丸子",
-    "image": "../pictures/takoyaki.jpg",
+    "image": "../images/night-stall/takoyaki.jpg",
     "emoji": "🍜",
     "description": "Japanese octopus balls",
     "searchTerms": "takoyaki octopus balls japanese snack"
