@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Gallery - Tina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../recipes/recipes.html">Recipes</a>
+            <a href="food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content wide">
+            <h2 class="page-title">Food Gallery</h2>
+            <p>A timeline of my culinary adventures</p>
+
+            <!-- Timeline Container -->
+            <div class="timeline" id="timeline">
+                <!-- Timeline entries will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const timeline = document.getElementById('timeline');
+
+        // Format date to readable string
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Sort by date, most recent first
+                data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Render timeline entries
+                data.forEach(entry => {
+                    const timelineEntry = document.createElement('div');
+                    timelineEntry.className = 'timeline-entry';
+
+                    const photosHtml = entry.photos.map(photo => `
+                        <div class="timeline-photo">
+                            <img src="${photo.image}" alt="${photo.caption}" loading="lazy">
+                            <p class="photo-caption">${photo.caption}</p>
+                        </div>
+                    `).join('');
+
+                    timelineEntry.innerHTML = `
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">${formatDate(entry.date)}</div>
+                        <div class="timeline-content">
+                            <div class="timeline-photos">
+                                ${photosHtml}
+                            </div>
+                        </div>
+                    `;
+                    timeline.appendChild(timelineEntry);
+                });
+            })
+            .catch(err => console.error('Failed to load data:', err));
+    </script>
+</body>
+</html>
