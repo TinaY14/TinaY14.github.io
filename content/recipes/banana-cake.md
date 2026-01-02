@@ -16,7 +16,7 @@ This homemade banana cake is incredibly moist and bursting with natural banana f
 **The finished banana cake:**
 
 <div style="text-align: center; margin-top: 20px;">
-    <img src="../../pictures/banana_cake.jpg" alt="Homemade Banana Cake" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <img src="../../images/recipes/banana-cake.jpg" alt="Homemade Banana Cake" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
     <p style="margin-top: 10px; font-style: italic; color: var(--inner-text);">Moist and flavorful homemade banana cake - perfect for any occasion</p>
 </div>
 

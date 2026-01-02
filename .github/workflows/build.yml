@@ -27,12 +27,12 @@ jobs:
 
       - name: Prepare deploy folder
         run: |
-          mkdir -p deploy/food_gallery deploy/night_stall_food deploy/projects deploy/pictures
+          mkdir -p deploy/food_gallery deploy/night_stall_food deploy/projects deploy/images
           cp index.html styles.css darkmode.js script.js projects.html deploy/
           cp -r food_gallery/* deploy/food_gallery/
           cp -r night_stall_food/* deploy/night_stall_food/
           cp -r projects/* deploy/projects/
-          cp -r pictures/* deploy/pictures/
+          cp -r images/* deploy/images/
           touch deploy/.nojekyll
 
       - name: Deploy to gh-pages branch

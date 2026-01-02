@@ -2,7 +2,7 @@
 title: Takoyaki
 chineseName: 章鱼小丸子
 englishName: Octopus Balls
-image: ../pictures/takoyaki.jpg
+image: ../images/night-stall/takoyaki.jpg
 cardDescription: Japanese octopus balls
 searchTerms: takoyaki octopus balls japanese snack
 ---
