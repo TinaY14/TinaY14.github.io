@@ -207,39 +207,79 @@
     <script>
         const timeline = document.getElementById('timeline');
 
-        // Format date to readable string
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
+        // Extract date from filename (MMDDYY format, e.g., "070325.jpg" -> July 3, 2025)
+        function parseDateFromFilename(imagePath) {
+            // Get filename from path (e.g., "image/070325.jpg" -> "070325.jpg")
+            const filename = imagePath.split('/').pop();
+            // Extract the 6-digit date part (handles files like "070325.jpg" or "070325(1).jpg")
+            const match = filename.match(/^(\d{6})/);
+            if (!match) return null;
+
+            const dateStr = match[1]; // e.g., "070325"
+            const month = parseInt(dateStr.substring(0, 2), 10);
+            const day = parseInt(dateStr.substring(2, 4), 10);
+            let year = parseInt(dateStr.substring(4, 6), 10);
+            // Convert 2-digit year to 4-digit (assume 20xx for years 00-99)
+            year = year + 2000;
+
+            return { year, month, day, sortKey: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}` };
+        }
+
+        // Format date object to readable string
+        function formatDate(dateObj) {
+            const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day);
             const options = { year: 'numeric', month: 'short', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
         }
 
+        // Process data: extract dates from filenames and group by date
+        function processData(data) {
+            const photosByDate = new Map();
+
+            // Flatten all photos and extract dates from filenames
+            data.forEach(entry => {
+                entry.photos.forEach(photo => {
+                    const dateObj = parseDateFromFilename(photo.image);
+                    if (dateObj) {
+                        const key = dateObj.sortKey;
+                        if (!photosByDate.has(key)) {
+                            photosByDate.set(key, { dateObj, photos: [] });
+                        }
+                        photosByDate.get(key).photos.push(photo);
+                    }
+                });
+            });
+
+            // Convert to array and sort by date (most recent first)
+            return Array.from(photosByDate.values())
+                .sort((a, b) => b.dateObj.sortKey.localeCompare(a.dateObj.sortKey));
+        }
+
         // Render timeline entries
         function renderTimeline(data) {
-            // Sort by date, most recent first
-            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const processedData = processData(data);
 
-            data.forEach(entry => {
-            const timelineEntry = document.createElement('div');
-            timelineEntry.className = 'timeline-entry';
+            processedData.forEach(entry => {
+                const timelineEntry = document.createElement('div');
+                timelineEntry.className = 'timeline-entry';
 
-            const photosHtml = entry.photos.map(photo => `
-                <div class="timeline-photo">
-                    <img src="${photo.image}" alt="${photo.caption || ''}" loading="lazy">
-                    ${photo.caption ? `<p class="photo-caption">${photo.caption}</p>` : ''}
-                </div>
-            `).join('');
-
-            timelineEntry.innerHTML = `
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">${formatDate(entry.date)}</div>
-                <div class="timeline-content">
-                    <div class="timeline-photos">
-                        ${photosHtml}
+                const photosHtml = entry.photos.map(photo => `
+                    <div class="timeline-photo">
+                        <img src="${photo.image}" alt="${photo.caption || ''}" loading="lazy">
+                        ${photo.caption ? `<p class="photo-caption">${photo.caption}</p>` : ''}
                     </div>
-                </div>
-            `;
-            timeline.appendChild(timelineEntry);
+                `).join('');
+
+                timelineEntry.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">${formatDate(entry.dateObj)}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-photos">
+                            ${photosHtml}
+                        </div>
+                    </div>
+                `;
+                timeline.appendChild(timelineEntry);
             });
 
             // Scroll reveal animation with Intersection Observer

@@ -61,11 +61,10 @@ function generateTimeline() {
     });
   }
 
-  // Convert to array and sort by date (newest first)
+  // Convert to array (no need to include date - HTML extracts it from filename)
   const timeline = Object.keys(photosByDate)
     .sort((a, b) => b.localeCompare(a))
     .map(date => ({
-      date,
       photos: photosByDate[date]
     }));
 
