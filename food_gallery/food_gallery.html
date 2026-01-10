@@ -26,7 +26,7 @@
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../recipes/recipes.html">Recipes</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
             <a href="food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
@@ -55,6 +55,12 @@
         </div>
     </main>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <img class="lightbox-img" src="" alt="">
+    </div>
+
     <script>
         const timeline = document.getElementById('timeline');
 
@@ -78,8 +84,8 @@
 
                     const photosHtml = entry.photos.map(photo => `
                         <div class="timeline-photo">
-                            <img src="${photo.image}" alt="${photo.caption}" loading="lazy">
-                            <p class="photo-caption">${photo.caption}</p>
+                            <img src="${photo.image}" alt="${photo.caption || ''}" loading="lazy">
+                            ${photo.caption ? `<p class="photo-caption">${photo.caption}</p>` : ''}
                         </div>
                     `).join('');
 
@@ -94,25 +100,65 @@
                     `;
                     timeline.appendChild(timelineEntry);
                 });
-            })
-            .catch(err => console.error('Failed to load data:', err))
-            .then(() => {
-                // Scroll reveal animation with Intersection Observer
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                });
 
-                document.querySelectorAll('.timeline-entry').forEach(entry => {
-                    observer.observe(entry);
-                });
+                // Scroll reveal animation with Intersection Observer
+                const timelineEntries = document.querySelectorAll('.timeline-entry');
+
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                    }, {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    });
+
+                    timelineEntries.forEach(entry => {
+                        observer.observe(entry);
+                    });
+                } else {
+                    // Fallback: show all entries if IntersectionObserver not supported
+                    timelineEntries.forEach(entry => {
+                        entry.classList.add('visible');
+                    });
+                }
+            })
+            .catch(err => {
+                console.error('Failed to load data:', err);
+                timeline.innerHTML = '<p style="color: #888; text-align: center;">Unable to load timeline. If testing locally, please use a local server (e.g., npx serve or python -m http.server).</p>';
             });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('.lightbox-img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+        // Open lightbox when clicking on a photo
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.timeline-photo img')) {
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
     </script>
 </body>
 </html>
