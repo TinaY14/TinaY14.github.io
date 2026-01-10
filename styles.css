@@ -36,10 +36,6 @@ body {
     padding: 0 5%;
     position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
-    /* Performance optimization for fixed background */
-    will-change: transform;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
 }
 
 /* Homepage background overlay */
@@ -612,19 +608,19 @@ form button[type="submit"]:active {
 .timeline {
     position: relative;
     margin-top: 40px;
-    padding-left: 100px;
+    padding-left: 210px;
 }
 
 /* The vertical line */
 .timeline::before {
     content: '';
     position: absolute;
-    left: 90px;
+    left: 191px;
     top: 0;
     bottom: 0;
-    width: 2px;
+    width: 10px;
     background: linear-gradient(to bottom, var(--primary-blue), #e0e0e0);
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 :root.dark-mode .timeline::before {
@@ -642,14 +638,14 @@ form button[type="submit"]:active {
 /* The dot on the timeline */
 .timeline-dot {
     position: absolute;
-    left: -14px;
+    left: -26px;
     top: 3px;
-    width: 8px;
-    height: 8px;
+    width: 16px;
+    height: 16px;
     background-color: var(--primary-blue);
-    border: 2px solid var(--inner-bg);
+    border: 3px solid var(--inner-bg);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--primary-blue);
+    box-shadow: 0 0 0 3px var(--primary-blue);
     z-index: 1;
 }
 
@@ -659,14 +655,19 @@ form button[type="submit"]:active {
 
 .timeline-date {
     position: absolute;
-    left: -90px;
+    left: -190px;
     top: 0;
-    width: 80px;
-    font-size: 0.75em;
-    font-weight: 600;
-    color: var(--primary-blue);
+    width: 140px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #333;
     text-align: right;
     line-height: 1.3;
+    white-space: nowrap;
+}
+
+:root.dark-mode .timeline-date {
+    color: #e0e0e0;
 }
 
 .timeline-content {
@@ -675,8 +676,9 @@ form button[type="submit"]:active {
 
 .timeline-photos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 900px;
 }
 
 .timeline-photo {
@@ -739,33 +741,98 @@ form button[type="submit"]:active {
 /* Timeline responsive */
 @media (max-width: 768px) {
     .timeline {
-        padding-left: 70px;
+        padding-left: 145px;
     }
 
     .timeline::before {
-        left: 60px;
+        left: 128px;
+        width: 8px;
     }
 
     .timeline-dot {
-        left: -12px;
-        width: 6px;
-        height: 6px;
+        left: -22px;
+        width: 12px;
+        height: 12px;
     }
 
     .timeline-date {
-        left: -60px;
-        width: 50px;
-        font-size: 0.65em;
+        left: -125px;
+        width: 90px;
+        font-size: 0.8em;
     }
 
     .timeline-photos {
         grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
+        gap: 8px;
     }
 
     .timeline-photo img {
         aspect-ratio: 1 / 1;
     }
+}
+
+/* --- Lightbox Modal --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lightbox.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    font-size: 40px;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    line-height: 1;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
 }
 
 /* --- Food Sorting Game Section --- */
