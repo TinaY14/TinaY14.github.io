@@ -48,35 +48,39 @@
     </header>
 
     <main class="hero inner-page">
-        <div class="page-content">
+        <div class="page-content wide">
             <h2 class="page-title">Projects</h2>
             <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years.</p>
             
-            <div class="content-entry">
-                <img src="images/mooncake.jpg" alt="Mooncake Survey" class="intro-thumb">
-                <h3><a href="mooncake-survey.html">Mooncake Survey: Changing Traditions</a></h3>
-                <p>Research exploring the declining trend of mooncake consumption in China, investigating changing preferences across different age groups and regions.</p>
-            </div>
-            
-            <div class="content-entry">
-                <img src="../images/site/placeholder-chemistry.jpg" alt="Chemistry Lab" class="intro-thumb">
-                <h3><a href="engineering-chemistry.html">Engineering Chemistry Laboratory Work</a></h3>
-                <p>Hands-on experience with analytical chemistry techniques and process engineering principles at Stony Brook University.</p>
-            </div>
-            
-            <div class="content-entry">
-                <img src="../images/site/placeholder-outreach.jpg" alt="Community Outreach" class="intro-thumb">
-                <h3><a href="community-outreach.html">Community Outreach Program</a></h3>
-                <p>Developed and led nutrition education workshops for local community groups, focusing on accessible healthy eating strategies.</p>
-            </div>
-
-            <div class="content-entry">
-                <img src="images/rice-wine.jpg" alt="Homemade Rice Wine" class="intro-thumb">
-                <h3><a href="rice-wine.html">Homemade Rice Wine Project</a></h3>
-                <p>Traditional Chinese fermentation project exploring the biochemical processes behind rice wine making, combining culinary chemistry with cultural heritage.</p>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Cards will be loaded dynamically -->
             </div>
         </div>
     </main>
 
+    <script>
+        // Load cards dynamically from data.json
+        const projectsGrid = document.getElementById('projects-grid');
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const card = document.createElement('a');
+                    card.href = item.href;
+                    card.className = 'content-entry';
+                    const visual = item.image
+                        ? `<img class="intro-thumb" src="${item.image}" alt="${item.title}">`
+                        : `<div class="placeholder-image"></div>`;
+                    card.innerHTML = `
+                        ${visual}
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    `;
+                    projectsGrid.appendChild(card);
+                });
+            })
+            .catch(err => console.error('Failed to load data:', err));
+    </script>
 </body>
 </html>
