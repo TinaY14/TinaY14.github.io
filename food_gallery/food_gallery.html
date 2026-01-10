@@ -214,26 +214,12 @@
             return date.toLocaleDateString('en-US', options);
         }
 
-        // Timeline data (embedded directly)
-        const data = [
-            { date: "2025-11-27", photos: [{ image: "image/112725.jpg", caption: "" }, { image: "image/112725(1).jpg", caption: "" }] },
-            { date: "2025-07-24", photos: [{ image: "image/072425.jpg", caption: "" }, { image: "image/072425(1).jpg", caption: "" }, { image: "image/072425(2).jpg", caption: "" }] },
-            { date: "2025-01-03", photos: [{ image: "image/010325.jpg", caption: "" }] },
-            { date: "2024-10-05", photos: [{ image: "image/100524.jpg", caption: "" }] },
-            { date: "2024-09-03", photos: [{ image: "image/090324.jpg", caption: "" }] },
-            { date: "2024-06-30", photos: [{ image: "image/063024.jpg", caption: "" }] },
-            { date: "2024-02-09", photos: [{ image: "image/020924.jpg", caption: "" }] },
-            { date: "2023-11-18", photos: [{ image: "image/111823.jpg", caption: "" }] },
-            { date: "2023-10-28", photos: [{ image: "image/102823.jpg", caption: "" }] },
-            { date: "2023-09-23", photos: [{ image: "image/092323.jpg", caption: "" }] },
-            { date: "2023-06-25", photos: [{ image: "image/062523.jpg", caption: "" }, { image: "image/062523(1).jpg", caption: "" }] }
-        ];
-
-        // Sort by date, most recent first
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
         // Render timeline entries
-        data.forEach(entry => {
+        function renderTimeline(data) {
+            // Sort by date, most recent first
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            data.forEach(entry => {
             const timelineEntry = document.createElement('div');
             timelineEntry.className = 'timeline-entry';
 
@@ -254,32 +240,39 @@
                 </div>
             `;
             timeline.appendChild(timelineEntry);
-        });
+            });
 
-        // Scroll reveal animation with Intersection Observer
-        const timelineEntries = document.querySelectorAll('.timeline-entry');
+            // Scroll reveal animation with Intersection Observer
+            const timelineEntries = document.querySelectorAll('.timeline-entry');
 
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
 
-            timelineEntries.forEach(entry => {
-                observer.observe(entry);
-            });
-        } else {
-            // Fallback: show all entries if IntersectionObserver not supported
-            timelineEntries.forEach(entry => {
-                entry.classList.add('visible');
-            });
+                timelineEntries.forEach(entry => {
+                    observer.observe(entry);
+                });
+            } else {
+                // Fallback: show all entries if IntersectionObserver not supported
+                timelineEntries.forEach(entry => {
+                    entry.classList.add('visible');
+                });
+            }
         }
+
+        // Load timeline data from JSON file
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => renderTimeline(data))
+            .catch(error => console.error('Error loading timeline data:', error));
 
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
