@@ -28,7 +28,7 @@ jobs:
       - name: Prepare deploy folder
         run: |
           mkdir -p deploy/night_stall_food deploy/food_gallery deploy/projects deploy/images
-          cp index.html styles.css darkmode.js script.js veggies.js projects.html Xitian_Tina__Yu-2.pdf deploy/
+          cp index.html styles.css darkmode.js script.js veggies.js Xitian_Tina__Yu-2.pdf deploy/
           cp -r night_stall_food/* deploy/night_stall_food/
           cp -r food_gallery/* deploy/food_gallery/
           cp -r projects/* deploy/projects/
