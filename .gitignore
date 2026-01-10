@@ -7,7 +7,6 @@ deploy/
 # Generated files (built by GitHub Actions)
 food_gallery/*.html
 !food_gallery/food_gallery.html
-food_gallery/data.json
 night_stall_food/*.html
 !night_stall_food/night_stall_food.html
 night_stall_food/data.json
