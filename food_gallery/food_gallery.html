@@ -61,7 +61,7 @@
         // Format date to readable string
         function formatDate(dateStr) {
             const date = new Date(dateStr);
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
         }
 
@@ -95,7 +95,24 @@
                     timeline.appendChild(timelineEntry);
                 });
             })
-            .catch(err => console.error('Failed to load data:', err));
+            .catch(err => console.error('Failed to load data:', err))
+            .then(() => {
+                // Scroll reveal animation with Intersection Observer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                document.querySelectorAll('.timeline-entry').forEach(entry => {
+                    observer.observe(entry);
+                });
+            });
     </script>
 </body>
 </html>
