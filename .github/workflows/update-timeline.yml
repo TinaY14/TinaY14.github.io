@@ -1,0 +1,38 @@
+name: Update Food Gallery Timeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'food_gallery/image/**'
+
+jobs:
+  update-timeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate timeline data
+        run: node scripts/generate-timeline.js
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code food_gallery/data.json || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add food_gallery/data.json
+          git commit -m "Auto-update food gallery timeline"
+          git push
