@@ -840,6 +840,7 @@ form button[type="submit"]:active {
     background: var(--inner-bg);
     padding: 60px 5%;
     min-height: auto;
+    margin-top: 2rem; /* Reduced from whatever it was before */
 }
 
 .game-wrapper {
@@ -1311,6 +1312,7 @@ form button[type="submit"]:active {
     background-color: var(--inner-bg);
     padding: 80px 5%;
     min-height: 100vh;
+    margin-bottom: 2rem; /* Reduced from whatever it was before */
 }
 
 .about-content {
