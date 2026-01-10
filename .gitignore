@@ -11,3 +11,4 @@ night_stall_food/*.html
 !night_stall_food/night_stall_food.html
 night_stall_food/data.json
 projects/*.html
+!projects/projects.html
