@@ -358,6 +358,32 @@ body.inner-page .page-title {
     padding: 0 20px;
 }
 
+.page-content ol {
+    padding-left: 25px;
+    margin: 20px 0;
+}
+
+.page-content ol li {
+    margin-bottom: 16px;
+    line-height: 1.7;
+    color: var(--inner-text);
+    padding-left: 8px;
+}
+
+.survey-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.survey-results img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .page-content.wide {
     max-width: none;
     width: 100%;
@@ -365,6 +391,27 @@ body.inner-page .page-title {
 
 .page-content p {
     color: var(--inner-text);
+    text-indent: 2em;
+    margin-bottom: 1em;
+}
+
+/* Section boxes for project pages */
+.page-content section {
+    background-color: rgba(255, 255, 245, 0.8);
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 245, 200, 0.5);
+}
+
+:root.dark-mode .page-content section {
+    background-color: rgba(40, 40, 40, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-content section h1 {
+    margin-top: 0;
 }
 
 /* Form styling for contact page - ENHANCED */
@@ -833,6 +880,12 @@ form button[type="submit"]:active {
 .lightbox-close:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.1);
+}
+
+/* --- Background Spacer between sections --- */
+.background-spacer {
+    height: 120px;
+    background: transparent;
 }
 
 /* --- Food Sorting Game Section --- */
@@ -1310,9 +1363,8 @@ form button[type="submit"]:active {
 /* --- About Section on Homepage --- */
 .about-section {
     background-color: var(--inner-bg);
-    padding: 80px 5%;
-    min-height: 100vh;
-    margin-bottom: 2rem; /* Reduced from whatever it was before */
+    padding: 40px 5% 30px 5%;
+    min-height: auto;
 }
 
 .about-content {
@@ -1321,14 +1373,14 @@ form button[type="submit"]:active {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 60px;
+    gap: 40px;
 }
 
 .about-text {
     flex: 1;
-    max-width: 600px;
+    max-width: 550px;
 }
 
 .about-image {
@@ -1358,10 +1410,11 @@ form button[type="submit"]:active {
 }
 
 .about-image img {
-    max-width: 450px;
+    max-width: 600px;
     width: 100%;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-top: 40px;
 }
 
 /* Dark mode for about section */
