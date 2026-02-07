@@ -2,6 +2,7 @@
 title: Steamed Xiaolongbao
 subtitle: 小笼包 - Shanghai Soup Dumplings
 emoji: 🥟
+image: ../images/food/xiaolongbao.jpg
 cardDescription: Soup dumplings
 searchTerms: xiaolongbao soup dumplings pork
 ---
