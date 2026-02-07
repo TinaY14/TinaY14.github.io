@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
+    <!-- Prefetch homepage background so it's cached when navigating back -->
+    <link rel="prefetch" href="images/site/background.jpg" as="image">
+
     <link rel="stylesheet" href="styles.css">
     <script src="darkmode.js"></script>
 
@@ -51,7 +54,13 @@
         <div class="page-content">
             <h2 class="page-title">Projects</h2>
             <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years.</p>
-            
+
+            <div class="content-entry">
+                <img src="projects/image/wofliedine.jpg" alt="Wolfie Dine" class="intro-thumb">
+                <h3><a href="projects/wolfie-dine.html">Wolfie Dine: SBU Dining Hall Menu Aggregator</a></h3>
+                <p>A student-run menu aggregator website for Stony Brook University dining halls that I co-founded with my friend Chenhao Yu. It allows students to view all available meal options from different dining halls in one place, with data sourced from Nutrislice and updated daily. Visit: <a href="https://www.wolfiedine.com" target="_blank">wolfiedine.com</a></p>
+            </div>
+
             <div class="content-entry">
                 <img src="projects/image/Yu_RESEARCH BOARD 2025.png" alt="KAN Research" class="intro-thumb">
                 <h3><a href="projects/kan-research.html">Interpreting Cis-regulatory Mechanisms from Genomic Deep Learning with Kolmogorov-Arnold Networks</a></h3>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodmon App - Tina's Projects</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Foodmon App</h2>
+
+            <section>
+                <h1>🍕 What is Foodmon?</h1>
+                <p>Foodmon is a gamified food collection web application built with React, where users can browse food cards, mark foods as eaten, save favorites, and track their culinary progress - just like collecting Pokemon!</p>
+                <p><strong>Status:</strong> Currently in progress - actively building the app.</p>
+            </section>
+
+            <section>
+                <h1>✨ Features</h1>
+                <ul>
+                    <li><strong>Browse Foods:</strong> Explore a diverse collection of foods from various cuisines worldwide</li>
+                    <li><strong>Food Cards:</strong> Beautiful cards displaying food images, names, nutrition info, and rarity levels</li>
+                    <li><strong>Google Authentication:</strong> Secure login with Google OAuth via Firebase</li>
+                    <li><strong>Mark as Eaten:</strong> Track which foods you've tried to build your collection</li>
+                    <li><strong>Favorites:</strong> Save your favorite dishes for quick access</li>
+                    <li><strong>Food Details:</strong> Detailed pages for each food with comprehensive nutrition information</li>
+                    <li><strong>Progress Tracking:</strong> Visualize your collection progress with statistics and completion percentages</li>
+                    <li><strong>Mobile-Friendly:</strong> Fully responsive design that works on all devices</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>🎮 Gamification System</h1>
+                <ul>
+                    <li>Rarity levels (Common, Uncommon, Rare, Legendary)</li>
+                    <li>Points system for discovering foods</li>
+                    <li>Achievement badges for milestones</li>
+                    <li>Collection completion tracking</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>🔧 Tech Stack</h1>
+                <ul>
+                    <li>React with Vite</li>
+                    <li>Firebase (Google OAuth)</li>
+                    <li>CSS for styling</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+</body>
+</html>
