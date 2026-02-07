@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolfie Dine - Tina's Projects</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Wolfie Dine</h2>
+
+            <section>
+                <h1>🍽️ What is Wolfie Dine?</h1>
+                <p>Wolfie Dine is a student-run menu aggregator website for Stony Brook University dining halls, founded on January 22, 2025. It allows students to view all available meal options from different dining halls in one place and easily see dining hall hours. The data is sourced from Nutrislice, updated daily, and clearly references Nutrislice for detailed nutrition information and service alerts.</p>
+                <p>As of February 7 at 10:00 AM, Wolfie Dine has reached over 2,000 unique visitors with a pull of 28.84. We've earned a lot of cheers and thanks from the Stony Brook community!</p>
+                <div class="survey-results">
+                    <img src="image/w1.png" alt="Wolfie Dine visitor data from January 22 to February 7">
+                </div>
+                <p>Visit the website: <a href="https://www.wolfiedine.com" target="_blank">wolfiedine.com</a></p>
+            </section>
+
+            <section>
+                <h1>💡 Why We Built It</h1>
+                <p>Last semester, I noticed that many students frequently asked in group chats what each dining hall was serving or when it was open. While Nutrislice is helpful, it can sometimes be difficult to quickly compare menus across dining halls and decide where to eat.</p>
+                <p>Over winter break, my friend Chenhao Yu (a Stony Brook sophomore) and I decided to build a solution. We wanted to create a simple, centralized place where students could see everything at a glance without having to check multiple sources.</p>
+            </section>
+
+            <section>
+                <h1>🔧 How It Works</h1>
+                <ul>
+                    <li>Aggregates menus from all Stony Brook University dining halls into one page</li>
+                    <li>Displays dining hall hours so students can plan their meals</li>
+                    <li>Data is sourced from Nutrislice and updated daily</li>
+                    <li>References Nutrislice for detailed nutrition information and service alerts</li>
+                    <li>Built and maintained by students for students</li>
+                </ul>
+            </section>
+
+            <section>
+                <h1>👥 The Team</h1>
+                <p>Wolfie Dine was co-founded by me and my friend Chenhao Yu, a Stony Brook sophomore. We built the site over winter break and continue to maintain it. As a student-run project, we're committed to keeping it useful and up-to-date for the Stony Brook community.</p>
+            </section>
+
+        </div>
+    </main>
+</body>
+</html>
