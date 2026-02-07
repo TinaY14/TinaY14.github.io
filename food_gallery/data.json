@@ -1,5 +1,7 @@
 [
   {
+    "dateLabel": "Jan 20-23, 2026",
+    "location": "@Columbia Dining",
     "photos": [
       {
         "image": "image/012326.jpg",
@@ -20,11 +22,7 @@
       {
         "image": "image/012326(5).jpg",
         "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
+      },
       {
         "image": "image/012226.jpg",
         "caption": ""
@@ -40,11 +38,7 @@
       {
         "image": "image/012226(4).jpg",
         "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
+      },
       {
         "image": "image/012126.jpg",
         "caption": ""
@@ -64,11 +58,7 @@
       {
         "image": "image/012126(4).jpg",
         "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
+      },
       {
         "image": "image/012026.jpg",
         "caption": ""
@@ -276,6 +266,7 @@
     ]
   },
   {
+    "location": "@Stony Brook Dining",
     "photos": [
       {
         "image": "image/082823.jpg",
