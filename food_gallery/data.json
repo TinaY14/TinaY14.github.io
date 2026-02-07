@@ -1,34 +1,334 @@
 [
-  { "dateLabel": "Jan 20-23, 2026", "location": "@Columbia Dining", "photos": [
-    { "image": "image/012026.jpg" }, { "image": "image/012026(1).jpg" }, { "image": "image/012026(2).jpg" }, { "image": "image/012026(3).jpg" },
-    { "image": "image/012126.jpg" }, { "image": "image/012126(1).jpg" }, { "image": "image/012126(2).jpg" }, { "image": "image/012126(3).jpg" }, { "image": "image/012126(4).jpg" },
-    { "image": "image/012226.jpg" }, { "image": "image/012226(1).jpg" }, { "image": "image/012226(2).jpg" }, { "image": "image/012226(4).jpg" },
-    { "image": "image/012326.jpg" }, { "image": "image/012326(1).jpg" }, { "image": "image/012326(3).jpg" }, { "image": "image/012326(4).jpg" }, { "image": "image/012326(5).jpg" }
-  ]},
-  { "photos": [{ "image": "image/011926.jpg" }] },
-  { "photos": [{ "image": "image/010326.jpg" }, { "image": "image/010326(1).jpg" }] },
-  { "photos": [{ "image": "image/112725.jpg" }, { "image": "image/112725(1).jpg" }] },
-  { "photos": [{ "image": "image/072425.jpg" }, { "image": "image/072425(1).jpg" }, { "image": "image/072425(2).jpg" }] },
-  { "photos": [{ "image": "image/070725.jpg" }, { "image": "image/070725(1).jpg" }] },
-  { "photos": [{ "image": "image/070325.jpg" }, { "image": "image/070325(1).jpg" }, { "image": "image/070325(2).jpg" }] },
-  { "photos": [{ "image": "image/070225.jpg" }] },
-  { "photos": [{ "image": "image/070125.jpg" }] },
-  { "photos": [{ "image": "image/112124.jpg" }] },
-  { "photos": [{ "image": "image/110724.jpg" }] },
-  { "photos": [{ "image": "image/101624.jpg" }] },
-  { "photos": [{ "image": "image/100524.jpg" }] },
-  { "photos": [{ "image": "image/092124.jpg" }] },
-  { "photos": [{ "image": "image/090324.jpg" }] },
-  { "photos": [{ "image": "image/063024.jpg" }] },
-  { "photos": [{ "image": "image/050424.jpg" }] },
-  { "photos": [{ "image": "image/020924.jpg" }] },
-  { "photos": [{ "image": "image/111823.jpg" }] },
-  { "photos": [{ "image": "image/102823.jpg" }] },
-  { "photos": [{ "image": "image/092323.jpg" }] },
-  { "photos": [{ "image": "image/082823.jpg" }, { "image": "image/082823(1).jpg" }, { "image": "image/082823(2).jpg" }], "location": "@Stony Brook Dining" },
-  { "photos": [{ "image": "image/070323(1).jpg" }] },
-  { "photos": [{ "image": "image/062523.jpg" }] },
-  { "photos": [{ "image": "image/062023.jpg" }] },
-  { "photos": [{ "image": "image/061023.jpg" }] },
-  { "photos": [{ "image": "image/081422.jpg" }] }
+  {
+    "photos": [
+      {
+        "image": "image/012326.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012326(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012326(3).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012326(4).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012326(5).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/012226.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(4).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/012126.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(3).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(4).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/012026.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012026(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012026(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012026(3).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/011926.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/010326.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/010326(1).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/112725.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/112725(1).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/072425.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/072425(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/072425(2).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/070725.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/070725(1).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/070325.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/070325(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/070325(2).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/070225.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/070125.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/112124.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/110724.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/101624.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/100524.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/092124.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/090324.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/063024.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/050424.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/020924.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/111823.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/102823.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/092323.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/082823.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/082823(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/082823(2).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/070323(1).jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/062523.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/062023.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/061023.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "photos": [
+      {
+        "image": "image/081422.jpg",
+        "caption": ""
+      }
+    ]
+  }
 ]
