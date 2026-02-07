@@ -2,7 +2,7 @@
   {
     "href": "banana-cake.html",
     "title": "Banana Cake",
-    "image": null,
+    "image": "../images/food/bananacake.jpg",
     "emoji": "🍌",
     "description": "Moist homemade cake",
     "searchTerms": "banana cake dessert sweet"
@@ -10,7 +10,7 @@
   {
     "href": "chicken-winter-melon.html",
     "title": "Chicken Winter Melon Soup",
-    "image": null,
+    "image": "../images/food/chickenwintermelon.jpg",
     "emoji": "🍗",
     "description": "Colorful stir-fry",
     "searchTerms": "chicken winter melon stir fry peppers"
@@ -18,7 +18,7 @@
   {
     "href": "chocolate-ice-cream-cake.html",
     "title": "Chocolate Ice Cream Cake",
-    "image": null,
+    "image": "../images/food/chocolateicecream.jpg",
     "emoji": "🍫",
     "description": "Three-layer frozen dessert",
     "searchTerms": "chocolate ice cream cake dessert frozen"
@@ -58,7 +58,7 @@
   {
     "href": "mapo-tofu.html",
     "title": "Homemade Mapo Tofu",
-    "image": null,
+    "image": "../images/food/mapotofu.jpg",
     "emoji": "🌶️",
     "description": "Spicy Sichuan classic",
     "searchTerms": "mapo tofu spicy sichuan pork"
@@ -106,7 +106,7 @@
   {
     "href": "xiaolongbao.html",
     "title": "Steamed Xiaolongbao",
-    "image": null,
+    "image": "../images/food/xiaolongbao.jpg",
     "emoji": "🥟",
     "description": "Soup dumplings",
     "searchTerms": "xiaolongbao soup dumplings pork"
