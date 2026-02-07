@@ -2,6 +2,7 @@
 title: Scallion Pancake
 subtitle: 葱油饼 - Crispy Chinese Street Food
 emoji: 🥞
+image: ../images/food/ScallionPancake.jpg
 cardDescription: Crispy street snack
 searchTerms: scallion pancake crispy street snack
 ---
