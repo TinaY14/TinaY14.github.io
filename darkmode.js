@@ -148,10 +148,16 @@
     function initialize() {
         console.log('Initializing dark mode system...');
         initDarkMode();
-        
+
         // Setup button after a short delay to ensure DOM is ready
         setTimeout(setupToggleButton, 100);
         setTimeout(setupScrollToTop, 100);
+
+        // Enable body transitions only after page loads to prevent
+        // background image from flashing/fading in on initial visit
+        window.addEventListener('load', function() {
+            document.body.classList.add('transitions-ready');
+        });
     }
     
     // Run when DOM is ready
