@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Xitian (Tina) Yu</title>
-    
+    <title>Energy Drinks Fluorescence - Tina's Projects</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        .page-content section {
+            background-color: rgba(220, 235, 250, 0.8) !important;
+            border: 1px solid rgba(200, 220, 245, 0.5) !important;
+        }
+        :root.dark-mode .page-content section {
+            background-color: rgba(30, 40, 55, 0.7) !important;
+            border: 1px solid rgba(100, 130, 170, 0.3) !important;
+        }
+        .page-title {
+            font-size: 1.8em !important;
+        }
+    </style>
     <script src="../darkmode.js"></script>
 
     <!-- Prevent dark mode icon flash -->
@@ -24,7 +37,6 @@
     </script>
 </head>
 <body class="inner-page">
-
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
@@ -46,39 +58,21 @@
             </script>
         </nav>
     </header>
-
     <main class="hero inner-page">
         <div class="page-content">
-            <h2 class="page-title">Projects</h2>
-            <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years.</p>
-            
-            <div class="content-entry">
-                <img src="image/mooncake.jpg" alt="Mooncake Survey" class="intro-thumb">
-                <h3><a href="mooncake-survey.html">Mooncake Survey: Changing Traditions</a></h3>
-                <p>A survey exploring how mooncake traditions are evolving across generations, examining cultural preferences and modern adaptations of this Mid-Autumn Festival delicacy.</p>
-            </div>
+            <h2 class="page-title">The Effect of Fluorescence in Energy Drinks</h2>
 
-            <div class="content-entry">
-                <img src="image/Yu_RESEARCH BOARD 2025.png" alt="KAN Research" class="intro-thumb">
-                <h3><a href="kan-research.html">Interpreting Cis-regulatory Mechanisms from Genomic Deep Learning with Kolmogorov-Arnold Networks</a></h3>
-                <p>Research exploring the use of Kolmogorov-Arnold Networks (KANs) for interpreting cis-regulatory mechanisms in genomic deep learning.</p>
-            </div>
+<section>
+<h1>Introduction</h1>
+<p>This experiment investigates what causes energy drinks to emit luminescence. Using a spectrophotometer to record the maximum absorbance and corresponding wavelength of different energy drink samples, this research provides insights about vitamin B2 and fluorescent properties in beverages.</p>
+</section>
 
+<section>
+<h1>Download Paper</h1>
+<p><a href="image/energydrinkspaper.pdf" download class="resume-btn"><i class="fas fa-download"></i> Download Paper (PDF)</a></p>
+</section>
 
-
-            <div class="content-entry">
-                <img src="image/rice-wine.jpg" alt="Homemade Rice Wine" class="intro-thumb">
-                <h3><a href="rice-wine.html">Homemade Rice Wine Project</a></h3>
-                <p>Traditional Chinese fermentation project aiming to explore the biochemical processes behind rice wine making, trying to combine the culinary chemistry with cultural heritage.</p>
-            </div>
-
-            <div class="content-entry">
-                <img src="image/energy_drinks.png" alt="Energy Drinks Fluorescence" class="intro-thumb">
-                <h3><a href="energy-drinks-fluorescence.html">The Effect of Fluorescence in Energy Drinks</a></h3>
-                <p>An experiment investigating what causes energy drinks to emit luminescence, using spectrophotometry to analyze vitamin B2 content and fluorescent properties.</p>
-            </div>
         </div>
     </main>
-
 </body>
 </html>

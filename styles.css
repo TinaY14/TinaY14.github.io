@@ -26,6 +26,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: #1a3a2e; /* Fallback color while image loads */
     background-image: url('images/site/background.jpg');
     background-size: cover;
     background-position: center;
@@ -715,6 +716,17 @@ form button[type="submit"]:active {
 
 :root.dark-mode .timeline-date {
     color: #e0e0e0;
+}
+
+.timeline-location {
+    font-size: 0.85em;
+    font-weight: 400;
+    color: #666;
+    margin-top: 2px;
+}
+
+:root.dark-mode .timeline-location {
+    color: #aaa;
 }
 
 .timeline-content {

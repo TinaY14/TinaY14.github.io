@@ -68,6 +68,15 @@
             line-height: 1.3 !important;
             white-space: nowrap !important;
         }
+        .timeline-location {
+            font-size: 0.85em !important;
+            font-weight: 400 !important;
+            color: #666 !important;
+            margin-top: 2px !important;
+        }
+        :root.dark-mode .timeline-location {
+            color: #aaa !important;
+        }
         .timeline-content {
             margin-top: 8px;
             margin-left: 15px !important;
@@ -234,25 +243,45 @@
 
         // Process data: extract dates from filenames and group by date
         function processData(data) {
-            const photosByDate = new Map();
+            const result = [];
 
-            // Flatten all photos and extract dates from filenames
             data.forEach(entry => {
-                entry.photos.forEach(photo => {
-                    const dateObj = parseDateFromFilename(photo.image);
-                    if (dateObj) {
-                        const key = dateObj.sortKey;
-                        if (!photosByDate.has(key)) {
-                            photosByDate.set(key, { dateObj, photos: [] });
+                // If entry has explicit dateLabel, use it directly (for date ranges)
+                if (entry.dateLabel) {
+                    // Get sortKey from first photo for ordering
+                    const firstPhotoDate = parseDateFromFilename(entry.photos[0].image);
+                    result.push({
+                        dateLabel: entry.dateLabel,
+                        location: entry.location || null,
+                        sortKey: firstPhotoDate ? firstPhotoDate.sortKey : '9999-99-99',
+                        photos: entry.photos
+                    });
+                } else {
+                    // Group photos by date from filenames
+                    const photosByDate = new Map();
+                    entry.photos.forEach(photo => {
+                        const dateObj = parseDateFromFilename(photo.image);
+                        if (dateObj) {
+                            const key = dateObj.sortKey;
+                            if (!photosByDate.has(key)) {
+                                photosByDate.set(key, { dateObj, photos: [], location: entry.location || null });
+                            }
+                            photosByDate.get(key).photos.push(photo);
                         }
-                        photosByDate.get(key).photos.push(photo);
-                    }
-                });
+                    });
+                    photosByDate.forEach(value => {
+                        result.push({
+                            dateLabel: formatDate(value.dateObj),
+                            location: value.location,
+                            sortKey: value.dateObj.sortKey,
+                            photos: value.photos
+                        });
+                    });
+                }
             });
 
-            // Convert to array and sort by date (most recent first)
-            return Array.from(photosByDate.values())
-                .sort((a, b) => b.dateObj.sortKey.localeCompare(a.dateObj.sortKey));
+            // Sort by date (most recent first)
+            return result.sort((a, b) => b.sortKey.localeCompare(a.sortKey));
         }
 
         // Render timeline entries
@@ -270,9 +299,11 @@
                     </div>
                 `).join('');
 
+                const locationHtml = entry.location ? `<div class="timeline-location">${entry.location}</div>` : '';
+
                 timelineEntry.innerHTML = `
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">${formatDate(entry.dateObj)}</div>
+                    <div class="timeline-date">${entry.dateLabel}${locationHtml}</div>
                     <div class="timeline-content">
                         <div class="timeline-photos">
                             ${photosHtml}
