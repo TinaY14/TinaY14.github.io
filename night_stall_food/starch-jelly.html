@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starch Jelly 凉粉 - Tina's Night Stall Food</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects.html">Projects</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content">
+            <h2 class="page-title">Starch Jelly 凉粉</h2>
+
+            <h1 id="🍜-about-this-dish">🍜 About This Dish</h3>
+<p>Starch Jelly (凉粉) is a special snack from Northern and Northwestern China. It is usually served cold and known for being smooth and tender. It can be spicy and people love to eat it with peppers during summer to make the body feel cool. You can add balsamic vinegar, chili pepper, and sesame sauce if you want.</p>
+<h1 id="🥘-ingredients">🥘 Ingredients</h3>
+<ul>
+<li>Agar powder</li>
+<li>Starch</li>
+<li>Sweet potatoes</li>
+<li>Beans</li>
+<li>Peas</li>
+<li>Green/Red pepper (optional)</li>
+<li>Carrot</li>
+<li>Garlic</li>
+<li>Oil</li>
+<li>Dark soy sauce</li>
+<li>Light soy sauce</li>
+<li>Water</li>
+</ul>
+<h1 id="💡-tips">💡 Tips</h3>
+<ul>
+<li><strong>Origin:</strong> Starch Jelly is a traditional snack from Northern and Northwestern China, enjoyed especially in summer</li>
+<li><strong>Texture:</strong> The jelly should be smooth and tender — avoid overcooking the starch mixture</li>
+<li><strong>Serving:</strong> Best served cold for a refreshing summer treat</li>
+<li><strong>Spice it up:</strong> Add balsamic vinegar, chili pepper, and sesame sauce for extra flavor</li>
+<li><strong>Peppers:</strong> Many people love eating it with peppers during summer — the spiciness helps the body feel cool</li>
+</ul>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>
