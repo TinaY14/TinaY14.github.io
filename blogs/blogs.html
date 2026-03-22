@@ -14,27 +14,12 @@
     <script src="../darkmode.js"></script>
 
     <style>
-        .blog-intro {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .blog-intro p {
-            color: #666;
-            font-size: 1.1em;
-        }
-
-        :root.dark-mode .blog-intro p {
-            color: #aaa;
-        }
-
-        /* Blog Path Container - full width with much more scroll space */
+        /* Blog Path Container - full width with scroll space */
         .blog-path-container {
             position: relative;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 120px 20px 450px;
+            padding: 20px 20px 450px;
         }
 
         /* Full-width curved path SVG */
@@ -91,7 +76,7 @@
         .blog-entry {
             position: relative;
             display: flex;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
@@ -397,15 +382,13 @@
             50% { transform: rotate(-15deg); }
         }
 
-        /* Pig Home - at the START (top, aligned with path start at 78%) */
+        /* Pig Home - positioned dynamically next to road start */
         .pig-home {
             position: absolute;
-            left: 78%;
-            transform: translateX(-50%);
-            top: 10px;
             width: 120px;
             height: 95px;
             z-index: 10;
+            transform: translateX(-50%) translateY(-100%);
         }
 
         .pig-home .house-body {
@@ -818,9 +801,6 @@
     <main class="hero inner-page">
         <div class="page-content wide">
             <h2 class="page-title">Blogs</h2>
-            <div class="blog-intro">
-                <p>Thoughts, stories, and insights from my journey in nutrition and healthy living.</p>
-            </div>
 
             <!-- Blog Path Container -->
             <div class="blog-path-container" id="blog-path-container">
@@ -913,45 +893,64 @@
         let blogPositions = [];
         let blogsData = [];
 
-        // Seasonal decorations based on current month
-        function getSeason() {
-            const month = new Date().getMonth();
-            if (month >= 2 && month <= 4) return 'spring';
-            if (month >= 5 && month <= 7) return 'summer';
-            if (month >= 8 && month <= 10) return 'autumn';
-            return 'winter';
-        }
-
-        function getSeasonalDecorations() {
-            const season = getSeason();
-            switch(season) {
-                case 'spring':
-                    return ['🌸', '🌷', '🌼', '🐣', '🦋', '🌱', '🐝', '🌈'];
-                case 'summer':
-                    return ['🌻', '🌺', '☀️', '🦋', '🐝', '🌴', '🍃', '🌿'];
-                case 'autumn':
-                    return ['🍂', '🍁', '🎃', '🌰', '🍄', '🦔', '🌾', '🍎'];
-                case 'winter':
-                    return ['❄️', '⛄', '🎄', '✨', '🌟', '🎁', '❄️', '🦌'];
-                default:
-                    return ['🌸', '🌷', '🌼', '🌺', '🌻'];
+        // Parse markdown file with YAML frontmatter
+        function parseMarkdownPosts(markdown) {
+            const posts = [];
+            // Split by frontmatter delimiter (--- at start of new post)
+            const sections = markdown.split(/\n---\n(?=title:)/);
+            
+            for (const section of sections) {
+                const trimmed = section.trim();
+                if (!trimmed || !trimmed.includes('title:')) continue;
+                
+                // Find where frontmatter ends (next --- or first blank line after metadata)
+                const lines = trimmed.split('\n');
+                let frontmatterEnd = 0;
+                let inFrontmatter = true;
+                const frontmatter = {};
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    // Check if this line is a frontmatter field
+                    const match = line.match(/^(\w+):\s*(.+)$/);
+                    if (match && inFrontmatter) {
+                        frontmatter[match[1]] = match[2];
+                        frontmatterEnd = i;
+                    } else if (line === '---') {
+                        frontmatterEnd = i;
+                        break;
+                    } else if (line === '' && Object.keys(frontmatter).length > 0) {
+                        // Empty line after frontmatter fields means content starts
+                        frontmatterEnd = i - 1;
+                        inFrontmatter = false;
+                        break;
+                    }
+                }
+                
+                // Get content (everything after frontmatter)
+                const contentLines = lines.slice(frontmatterEnd + 1);
+                const content = contentLines.join('\n').trim();
+                
+                // Convert markdown content to HTML paragraphs
+                const htmlContent = content
+                    .split(/\n\n+/)
+                    .filter(p => p.trim())
+                    .map(p => `<p>${p.trim()}</p>`)
+                    .join('');
+                
+                if (frontmatter.title) {
+                    posts.push({
+                        title: frontmatter.title,
+                        date: frontmatter.date,
+                        image: frontmatter.image,
+                        excerpt: frontmatter.excerpt,
+                        content: htmlContent
+                    });
+                }
             }
-        }
-
-        function getSeasonalSnacks() {
-            const season = getSeason();
-            switch(season) {
-                case 'spring':
-                    return ['🥕', '🍓', '🌰'];
-                case 'summer':
-                    return ['🍎', '🍇', '🌰'];
-                case 'autumn':
-                    return ['🌰', '🍎', '🥜'];
-                case 'winter':
-                    return ['🌰', '🥜', '🍪'];
-                default:
-                    return ['🌰', '🍎', '🥕'];
-            }
+            
+            return posts;
         }
 
         const pigReactions = [
@@ -1094,22 +1093,16 @@
             pathSvg.style.height = containerHeight + 'px';
 
             if (blogPositions.length === 0) {
-                const pathD = `M ${containerWidth * 0.78},100 
+                const pathD = `M ${containerWidth * 0.78},50 
                               L ${containerWidth * 0.5},${containerHeight - 180}`;
                 gardenPath.setAttribute('d', pathD);
                 gardenPathBorder.setAttribute('d', pathD);
                 return;
             }
 
-            // Build path with sharp left/right curves
-            const startX = containerWidth * 0.78; // Start from right (first sign is left, road goes right)
-            const startY = 100;
-            
-            let pathD = `M ${startX},${startY}`;
-            
-            // Sharp curve to first blog position
+            // Path starts directly at first blog position (no vertical line from home)
             const firstPos = blogPositions[0];
-            pathD += ` L ${containerWidth * firstPos.x},${firstPos.y}`;
+            let pathD = `M ${containerWidth * firstPos.x},${firstPos.y}`;
 
             // Sharp zigzag between blog positions
             for (let i = 1; i < blogPositions.length; i++) {
@@ -1126,7 +1119,22 @@
             gardenPath.setAttribute('d', pathD);
             gardenPathBorder.setAttribute('d', pathD);
 
+            // Position pig home right next to road start
+            positionPigHome(containerWidth, firstPos);
+
             addFlowers(containerWidth, containerHeight);
+        }
+
+        function positionPigHome(containerWidth, firstPos) {
+            const pigHomeEl = document.getElementById('pig-home');
+            if (!pigHomeEl || !firstPos) return;
+            
+            // Position home right next to where road starts (same side as road, offset slightly)
+            const homeX = containerWidth * firstPos.x + (firstPos.isLeft ? 60 : -60);
+            const homeY = firstPos.y;
+            
+            pigHomeEl.style.left = homeX + 'px';
+            pigHomeEl.style.top = homeY + 'px';
         }
 
         function addFlowers(containerWidth, containerHeight) {
@@ -1226,9 +1234,11 @@
             const containerTop = containerRect.top + scrollY;
             const containerHeight = pathContainer.offsetHeight;
             
-            // Calculate scroll progress - adjusted for more scroll range
-            const scrollStart = containerTop - windowHeight * 0.6;
-            const scrollEnd = containerTop + containerHeight - windowHeight * 0.3;
+            // Calculate scroll progress
+            // Pig starts moving when container comes into view
+            // Pig should reach 100% when user has scrolled to see the destination
+            const scrollStart = containerTop - windowHeight * 0.5;
+            const scrollEnd = containerTop + containerHeight - windowHeight * 0.5;
             const scrollRange = scrollEnd - scrollStart;
             const progress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange));
             currentPigProgress = progress;
@@ -1313,11 +1323,12 @@
             lastScrollY = scrollY;
         }
 
-        // Load blog data
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                renderBlogs(data);
+        // Load blog data from markdown file
+        fetch('posts.md')
+            .then(response => response.text())
+            .then(markdown => {
+                const blogs = parseMarkdownPosts(markdown);
+                renderBlogs(blogs);
             })
             .catch(error => {
                 console.error('Error loading blog data:', error);
