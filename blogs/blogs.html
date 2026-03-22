@@ -1290,12 +1290,14 @@
             pig.style.transform = 'translate(-50%, -50%)';
             
             // Show/hide pig based on progress
+            // Pig comes out earlier - visible as soon as page loads with any scroll
             if (progress <= 0) {
-                // Pig hidden in house
-                pig.style.opacity = '0';
+                // Pig visible at house, door closed initially
+                pig.style.opacity = '1';
                 if (pigDoor) pigDoor.classList.remove('open');
-            } else if (progress < 0.05) {
-                // Pig coming out of house
+                if (pigHome) pigHome.classList.remove('pig-near');
+            } else if (progress < 0.08) {
+                // Pig coming out of house - door opens
                 pig.style.opacity = '1';
                 if (pigDoor) pigDoor.classList.add('open');
                 if (pigHome) pigHome.classList.add('pig-near');
