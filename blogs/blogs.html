@@ -8,18 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Prefetch homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
-    <!-- Blog Timeline Styles -->
     <style>
         .blog-intro {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 60px;
+            margin: 0 auto 40px;
         }
 
         .blog-intro p {
@@ -31,36 +29,72 @@
             color: #aaa;
         }
 
-        /* Alternating Timeline */
-        .blog-timeline {
+        /* Blog Path Container - full width with much more scroll space */
+        .blog-path-container {
             position: relative;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 120px 20px 450px;
         }
 
-        /* Center line */
-        .blog-timeline::before {
-            content: '';
+        /* Full-width curved path SVG */
+        .blog-path-svg {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
             top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #93c5fd, #60a5fa, #3b82f6);
-            border-radius: 2px;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Path colors - soft blue tones matching site theme */
+        .garden-path {
+            fill: none;
+            stroke: #e3f2fd;
+            stroke-width: 70;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .garden-path-border {
+            fill: none;
+            stroke: #bbdefb;
+            stroke-width: 85;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        :root.dark-mode .garden-path {
+            stroke: #1e3a5f;
+        }
+
+        :root.dark-mode .garden-path-border {
+            stroke: #152a45;
+        }
+
+        /* Flowers along path - bigger */
+        .path-flower {
+            position: absolute;
+            font-size: 32px;
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.2));
+        }
+
+        /* Blog entries */
+        .blog-entries {
+            position: relative;
+            z-index: 5;
         }
 
         .blog-entry {
             position: relative;
-            width: calc(50% - 50px);
-            padding: 20px;
-            box-sizing: border-box;
+            display: flex;
+            margin-bottom: 40px;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
-            margin-bottom: 40px;
         }
 
         .blog-entry.visible {
@@ -68,167 +102,509 @@
             transform: translateY(0);
         }
 
-        /* Left side entries */
+        /* Left side entries - far left edge */
         .blog-entry.left {
-            margin-left: 0;
-            margin-right: auto;
-            text-align: right;
+            justify-content: flex-start;
+            padding-left: 0;
+            padding-right: 65%;
         }
 
-        /* Right side entries */
+        /* Right side entries - far right edge */
         .blog-entry.right {
-            margin-left: auto;
-            margin-right: 0;
-            text-align: left;
+            justify-content: flex-end;
+            padding-right: 0;
+            padding-left: 65%;
         }
 
-        /* Timeline dot - positioned at exact center */
-        .blog-entry::before {
-            content: '';
-            position: absolute;
-            top: 0px;
-            width: 16px;
-            height: 16px;
-            background: #3b82f6;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px #93c5fd;
-            z-index: 2;
-            transform: scale(0);
-            transition: transform 0.4s ease 0.3s;
-        }
-
-        .blog-entry.visible::before {
-            transform: scale(1);
-        }
-
-        :root.dark-mode .blog-entry::before {
-            border-color: #1a1a1a;
-        }
-
-        /* Dot is 16px + 6px border = 22px total, half = 11px */
-        /* Entry is 50% - 50px wide, so gap to center is 50px */
-        /* Position dot so its center aligns with timeline center */
-        .blog-entry.left::before {
-            right: -61px;
-            transform: scale(0);
-        }
-        
-        .blog-entry.left.visible::before {
-            transform: scale(1);
-        }
-
-        .blog-entry.right::before {
-            left: -61px;
-            transform: scale(0);
-        }
-        
-        .blog-entry.right.visible::before {
-            transform: scale(1);
-        }
-
-        /* Connector line from dot to card */
-        .blog-entry::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            height: 3px;
-            background: #93c5fd;
-            width: 50px;
-        }
-
-        .blog-entry.left::after {
-            right: -50px;
-        }
-
-        .blog-entry.right::after {
-            left: -50px;
-        }
-
-        /* Blog card */
-        .blog-card {
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        /* Standing Billboard Sign - longer width, shorter height */
+        .blog-signpost-card {
+            position: relative;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        :root.dark-mode .blog-card {
-            background: #1e1e1e;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        :root.dark-mode .blog-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .blog-card-image {
+            max-width: 480px;
             width: 100%;
-            height: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-signpost-card:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Billboard frame - soft blue/white tones matching site theme */
+        .billboard-frame {
+            background: linear-gradient(145deg, 
+                #ffffff 0%,
+                #f5faff 25%,
+                #ffffff 50%,
+                #e8f4fc 75%,
+                #f8fbff 100%
+            );
+            border: 3px solid #4fc3f7;
+            border-radius: 10px;
+            box-shadow: 
+                0 6px 20px rgba(79, 195, 247, 0.15),
+                0 2px 6px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle texture overlay */
+        .billboard-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(79, 195, 247, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(79, 195, 247, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        :root.dark-mode .billboard-frame {
+            background: linear-gradient(145deg, 
+                #1e3a5f 0%,
+                #152a45 25%,
+                #1a3352 50%,
+                #122540 75%,
+                #1e3a5f 100%
+            );
+            border-color: #64b5f6;
+            box-shadow: 
+                0 6px 20px rgba(100, 181, 246, 0.2),
+                0 2px 6px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        /* Blog image on the billboard - shorter height */
+        .billboard-image {
+            width: 100%;
+            height: 100px;
             object-fit: cover;
+            border-bottom: 2px solid #4fc3f7;
         }
 
-        .blog-card-content {
-            padding: 20px;
+        :root.dark-mode .billboard-image {
+            border-bottom-color: #64b5f6;
         }
 
-        .blog-card-date {
-            font-size: 0.85em;
-            color: #3b82f6;
+        /* Content area - compact for shorter sign */
+        .billboard-content {
+            padding: 10px 14px 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .billboard-date {
+            font-size: 0.75em;
+            color: #4fc3f7;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
-        .blog-card-title {
-            font-size: 1.3em;
+        :root.dark-mode .billboard-date {
+            color: #64b5f6;
+        }
+
+        .billboard-title {
+            font-size: 1em;
             font-weight: 700;
-            color: #1a1a1a;
-            margin: 0 0 12px 0;
+            color: #2c3e50;
+            margin: 0 0 6px 0;
             line-height: 1.3;
         }
 
-        :root.dark-mode .blog-card-title {
-            color: #fff;
+        :root.dark-mode .billboard-title {
+            color: #e8f4fc;
         }
 
-        .blog-card-excerpt {
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.6;
-            margin: 0 0 15px 0;
+        .billboard-excerpt {
+            font-size: 0.82em;
+            color: #5a6c7d;
+            line-height: 1.5;
+            margin: 0 0 8px 0;
         }
 
-        :root.dark-mode .blog-card-excerpt {
-            color: #aaa;
+        :root.dark-mode .billboard-excerpt {
+            color: #a8c5d8;
         }
 
-        .blog-card-readmore {
+        .billboard-readmore {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #3b82f6;
+            gap: 4px;
+            color: #4fc3f7;
             font-weight: 600;
-            font-size: 0.9em;
+            font-size: 0.8em;
             text-decoration: none;
         }
 
-        .blog-card-readmore:hover {
-            color: #2563eb;
+        :root.dark-mode .billboard-readmore {
+            color: #64b5f6;
         }
 
-        .blog-card-readmore i {
+        .billboard-readmore i {
             transition: transform 0.2s ease;
+            font-size: 0.9em;
         }
 
-        .blog-card-readmore:hover i {
+        .blog-signpost-card:hover .billboard-readmore i {
             transform: translateX(4px);
+        }
+
+        /* Standing pole under the billboard - blue tinted */
+        .billboard-pole {
+            width: 10px;
+            height: 30px;
+            background: linear-gradient(90deg, #78909c, #90a4ae, #78909c);
+            margin: 0 auto;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .billboard-pole::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 6px;
+            background: linear-gradient(180deg, #607d8b, #546e7a);
+            border-radius: 2px;
+        }
+
+        :root.dark-mode .billboard-pole {
+            background: linear-gradient(90deg, #37474f, #455a64, #37474f);
+        }
+
+        :root.dark-mode .billboard-pole::before {
+            background: linear-gradient(180deg, #263238, #1c2529);
+        }
+
+        /* Pig looking at signs */
+        .pig-companion.looking .pig {
+            animation: none;
+        }
+
+        .pig-companion.looking-left .pig {
+            transform: scaleX(-1);
+        }
+
+        .pig-companion.looking-right .pig {
+            transform: scaleX(1);
+        }
+
+        /* Thought bubble when pig looks at sign */
+        .pig-thought {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e3f2fd;
+            border: 2px solid #4fc3f7;
+            border-radius: 12px;
+            padding: 4px 10px;
+            font-size: 13px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(79, 195, 247, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 100000;
+            color: #2c3e50;
+        }
+
+        .pig-thought::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #e3f2fd;
+        }
+
+        .pig-companion.looking .pig-thought {
+            opacity: 1;
+        }
+
+        :root.dark-mode .pig-thought {
+            background: #1e3a5f;
+            border-color: #64b5f6;
+            color: #e3f2fd;
+        }
+
+        :root.dark-mode .pig-thought::after {
+            border-top-color: #1e3a5f;
+        }
+
+        /* Pig Companion */
+        .pig-companion {
+            position: fixed;
+            z-index: 99999;
+            pointer-events: none;
+            transition: left 0.08s linear, top 0.08s linear, opacity 0.3s ease;
+        }
+
+        .pig-companion .pig {
+            transition: transform 0.1s ease;
+        }
+
+        .pig-companion.walking .pig {
+            animation: pigBounce 0.18s ease-in-out infinite;
+        }
+
+        .pig-companion.walking .pig-leg-left {
+            animation: legWalk1 0.18s ease-in-out infinite;
+        }
+
+        .pig-companion.walking .pig-leg-right {
+            animation: legWalk2 0.18s ease-in-out infinite;
+        }
+
+        .pig-companion.facing-left .pig {
+            transform: scaleX(-1);
+        }
+
+        /* Celebrating animation when pig reaches healthy destination */
+        .pig-companion.celebrating .pig {
+            animation: pigCelebrate 0.5s ease-in-out infinite;
+        }
+
+        @keyframes pigCelebrate {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            25% { transform: translateY(-8px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(-5deg); }
+            75% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        @keyframes pigBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes legWalk1 {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        @keyframes legWalk2 {
+            0%, 100% { transform: rotate(15deg); }
+            50% { transform: rotate(-15deg); }
+        }
+
+        /* Pig Home - at the START (top, aligned with path start at 78%) */
+        .pig-home {
+            position: absolute;
+            left: 78%;
+            transform: translateX(-50%);
+            top: 10px;
+            width: 120px;
+            height: 95px;
+            z-index: 10;
+        }
+
+        .pig-home .house-body {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 90px;
+            height: 55px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 6px;
+            border: 3px solid #4fc3f7;
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
+        }
+
+        .pig-home .roof {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 40px solid #4fc3f7;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+        }
+
+        .pig-home .door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 38px;
+            background: linear-gradient(135deg, #5d4037, #6d4c41);
+            border-radius: 5px 5px 0 0;
+            transform-origin: left center;
+            transition: transform 0.4s ease;
+            box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
+        }
+
+        .pig-home .door.open {
+            transform: translateX(-50%) perspective(100px) rotateY(-80deg);
+        }
+
+        .pig-home .door-knob {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #daa520);
+            border-radius: 50%;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .pig-home .window {
+            position: absolute;
+            top: 10px;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+            border: 2px solid #4fc3f7;
+            border-radius: 3px;
+            box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
+        }
+
+        .pig-home .window-left {
+            left: 10px;
+        }
+
+        .pig-home .window-right {
+            right: 10px;
+        }
+
+        .pig-home .chimney {
+            position: absolute;
+            top: -5px;
+            right: 25px;
+            width: 16px;
+            height: 25px;
+            background: linear-gradient(90deg, #64b5f6, #4fc3f7, #64b5f6);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .pig-home .heart {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .pig-home.pig-near .heart {
+            opacity: 1;
+            animation: heartBeat 0.6s ease-in-out infinite;
+        }
+
+        :root.dark-mode .pig-home .house-body {
+            background: linear-gradient(135deg, #1e3a5f, #152a45);
+            border-color: #64b5f6;
+        }
+
+        :root.dark-mode .pig-home .roof {
+            border-bottom-color: #64b5f6;
+        }
+
+        :root.dark-mode .pig-home .window {
+            background: linear-gradient(135deg, #1565c0, #1976d2);
+            border-color: #64b5f6;
+        }
+
+        :root.dark-mode .pig-home .chimney {
+            background: linear-gradient(90deg, #1565c0, #1976d2, #1565c0);
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.25); }
+        }
+
+        /* Healthy Pig Destination - at the END (bottom) of the road */
+        .healthy-pig-destination {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 40px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .healthy-pig-area {
+            position: relative;
+            width: 200px;
+            height: 120px;
+        }
+
+        .healthy-pig-platform {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 25px;
+            background: linear-gradient(180deg, #81c784, #66bb6a);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(102, 187, 106, 0.3);
+        }
+
+        .healthy-pig-sparkles {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .healthy-pig-destination.pig-arrived .healthy-pig-sparkles {
+            opacity: 1;
+            animation: sparkleFloat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .healthy-pig-message {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+        }
+
+        .healthy-pig-destination.pig-arrived .healthy-pig-message {
+            opacity: 1;
+        }
+
+        :root.dark-mode .healthy-pig-message {
+            background: linear-gradient(135deg, #1565c0, #1976d2);
+            color: #e3f2fd;
+        }
+
+        :root.dark-mode .healthy-pig-platform {
+            background: linear-gradient(180deg, #4caf50, #388e3c);
         }
 
         /* Blog Detail Modal */
@@ -239,8 +615,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 99999;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999999;
             overflow-y: auto;
             padding: 40px 20px;
         }
@@ -278,22 +654,23 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
 
         .blog-modal-close:hover {
             background: #fff;
+            transform: scale(1.1);
         }
 
         .blog-modal-image {
@@ -340,42 +717,57 @@
         }
 
         /* Responsive */
-        @media (max-width: 900px) {
-            .blog-timeline::before {
-                left: 20px;
-                transform: none;
+        @media (max-width: 1000px) {
+            .blog-path-svg {
+                display: none;
+            }
+
+            .billboard-pole {
+                display: none;
             }
 
             .blog-entry {
-                width: calc(100% - 50px);
-                margin-left: 50px !important;
-                margin-right: 0 !important;
-                text-align: left !important;
+                padding: 0 20px !important;
+                justify-content: center !important;
+                margin-bottom: 50px;
             }
 
-            .blog-entry.left::before,
-            .blog-entry.right::before {
-                left: -39px !important;
-                right: auto !important;
-                transform: scale(0) translateX(-50%) !important;
-            }
-            
-            .blog-entry.left.visible::before,
-            .blog-entry.right.visible::before {
-                transform: scale(1) translateX(-50%) !important;
+            .blog-signpost-card {
+                max-width: 100%;
             }
 
-            .blog-entry.left::after,
-            .blog-entry.right::after {
-                left: -30px !important;
-                right: auto !important;
-                width: 30px;
+            .billboard-frame {
+                border-radius: 12px;
+            }
+
+            .pig-companion {
+                display: none;
+            }
+
+            .pig-home {
+                display: none;
+            }
+
+            .healthy-pig-destination {
+                display: none;
+            }
+
+            .path-flower {
+                display: none;
             }
         }
 
         @media (max-width: 600px) {
-            .blog-card-image {
-                height: 160px;
+            .billboard-image {
+                height: 130px;
+            }
+
+            .billboard-content {
+                padding: 14px 16px 18px;
+            }
+
+            .billboard-title {
+                font-size: 1em;
             }
 
             .blog-modal-image {
@@ -392,7 +784,6 @@
         }
     </style>
 
-    <!-- Prevent dark mode icon flash -->
     <script>
         (function() {
             const savedMode = localStorage.getItem('darkMode');
@@ -413,7 +804,6 @@
             <a href="../projects/projects.html">Projects &amp; Experiences</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
-                // Set initial button state immediately to prevent flash
                 (function() {
                     const btn = document.getElementById('dark-mode-toggle');
                     const isDark = document.documentElement.classList.contains('dark-mode');
@@ -432,12 +822,68 @@
                 <p>Thoughts, stories, and insights from my journey in nutrition and healthy living.</p>
             </div>
 
-            <!-- Blog Timeline -->
-            <div class="blog-timeline" id="blog-timeline">
-                <!-- Blog entries will be loaded dynamically -->
+            <!-- Blog Path Container -->
+            <div class="blog-path-container" id="blog-path-container">
+                <!-- Full-width curved path SVG -->
+                <svg class="blog-path-svg" id="blog-path-svg" preserveAspectRatio="none">
+                    <path id="garden-path-border" class="garden-path-border"/>
+                    <path id="garden-path" class="garden-path"/>
+                </svg>
+
+                <!-- Blog entries container -->
+                <div class="blog-entries" id="blog-entries">
+                    <!-- Blog entries will be loaded dynamically -->
+                </div>
+
+                <!-- Pig's Home at the START (top) -->
+                <div class="pig-home" id="pig-home">
+                    <div class="heart">❤️</div>
+                    <div class="chimney"></div>
+                    <div class="roof"></div>
+                    <div class="house-body">
+                        <div class="window window-left"></div>
+                        <div class="window window-right"></div>
+                        <div class="door" id="pig-door">
+                            <div class="door-knob"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Healthy Pig Destination at the END (bottom) -->
+                <div class="healthy-pig-destination" id="healthy-pig-destination">
+                    <div class="healthy-pig-area">
+                        <div class="healthy-pig-sparkles">✨🌟✨</div>
+                        <div class="healthy-pig-platform"></div>
+                    </div>
+                    <div class="healthy-pig-message">Healthy & Happy! 🎉</div>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- The Pig Companion -->
+    <div class="pig-companion" id="pig-companion">
+        <div class="pig-thought" id="pig-thought">Interesting!</div>
+        <div class="pig" style="position: relative; width: 60px; height: 75px;">
+            <div style="position: absolute; width: 14px; height: 14px; background: #ffb6c1; border-radius: 50%; top: 0px; left: 10px; transform: rotate(-20deg);"></div>
+            <div style="position: absolute; width: 14px; height: 14px; background: #ffb6c1; border-radius: 50%; top: 0px; right: 10px; transform: rotate(20deg);"></div>
+            <div style="position: absolute; width: 50px; height: 42px; background: #ffb6c1; border-radius: 50%; top: 8px; left: 50%; transform: translateX(-50%);">
+                <div style="position: absolute; width: 6px; height: 8px; background: #333; border-radius: 50%; top: 12px; left: 11px;"></div>
+                <div style="position: absolute; width: 6px; height: 8px; background: #333; border-radius: 50%; top: 12px; right: 11px;"></div>
+                <div style="position: absolute; width: 8px; height: 5px; background: rgba(255,150,150,0.6); border-radius: 50%; top: 22px; left: 5px;"></div>
+                <div style="position: absolute; width: 8px; height: 5px; background: rgba(255,150,150,0.6); border-radius: 50%; top: 22px; right: 5px;"></div>
+                <div style="position: absolute; width: 22px; height: 16px; background: #ff9aa2; border-radius: 50%; bottom: 4px; left: 50%; transform: translateX(-50%);">
+                    <div style="position: absolute; width: 5px; height: 5px; background: #d47c84; border-radius: 50%; top: 5px; left: 4px;"></div>
+                    <div style="position: absolute; width: 5px; height: 5px; background: #d47c84; border-radius: 50%; top: 5px; right: 4px;"></div>
+                </div>
+            </div>
+            <div style="position: absolute; width: 38px; height: 28px; background: #ffb6c1; border-radius: 50%; top: 42px; left: 50%; transform: translateX(-50%);">
+                <div style="position: absolute; width: 10px; height: 10px; border: 3px solid #ffb6c1; border-radius: 50%; border-left-color: transparent; border-bottom-color: transparent; right: -8px; top: 8px; transform: rotate(45deg);"></div>
+            </div>
+            <div class="pig-leg-left" style="position: absolute; width: 10px; height: 14px; background: #ffb6c1; border-radius: 5px; bottom: 0; left: 14px; transform-origin: top center;"></div>
+            <div class="pig-leg-right" style="position: absolute; width: 10px; height: 14px; background: #ffb6c1; border-radius: 5px; bottom: 0; right: 14px; transform-origin: top center;"></div>
+        </div>
+    </div>
 
     <!-- Blog Detail Modal -->
     <div id="blog-modal" class="blog-modal">
@@ -453,25 +899,81 @@
     </div>
 
     <script>
-        const blogTimeline = document.getElementById('blog-timeline');
+        // Blog data and rendering
+        const blogEntries = document.getElementById('blog-entries');
         const blogModal = document.getElementById('blog-modal');
         const modalImage = blogModal.querySelector('.blog-modal-image');
         const modalDate = blogModal.querySelector('.blog-modal-date');
         const modalTitle = blogModal.querySelector('.blog-modal-title');
         const modalText = blogModal.querySelector('.blog-modal-text');
         const modalClose = blogModal.querySelector('.blog-modal-close');
+        const pigThought = document.getElementById('pig-thought');
 
-        // Format date string
+        // Store blog positions for path generation
+        let blogPositions = [];
+        let blogsData = [];
+
+        // Seasonal decorations based on current month
+        function getSeason() {
+            const month = new Date().getMonth();
+            if (month >= 2 && month <= 4) return 'spring';
+            if (month >= 5 && month <= 7) return 'summer';
+            if (month >= 8 && month <= 10) return 'autumn';
+            return 'winter';
+        }
+
+        function getSeasonalDecorations() {
+            const season = getSeason();
+            switch(season) {
+                case 'spring':
+                    return ['🌸', '🌷', '🌼', '🐣', '🦋', '🌱', '🐝', '🌈'];
+                case 'summer':
+                    return ['🌻', '🌺', '☀️', '🦋', '🐝', '🌴', '🍃', '🌿'];
+                case 'autumn':
+                    return ['🍂', '🍁', '🎃', '🌰', '🍄', '🦔', '🌾', '🍎'];
+                case 'winter':
+                    return ['❄️', '⛄', '🎄', '✨', '🌟', '🎁', '❄️', '🦌'];
+                default:
+                    return ['🌸', '🌷', '🌼', '🌺', '🌻'];
+            }
+        }
+
+        function getSeasonalSnacks() {
+            const season = getSeason();
+            switch(season) {
+                case 'spring':
+                    return ['🥕', '🍓', '🌰'];
+                case 'summer':
+                    return ['🍎', '🍇', '🌰'];
+                case 'autumn':
+                    return ['🌰', '🍎', '🥜'];
+                case 'winter':
+                    return ['🌰', '🥜', '🍪'];
+                default:
+                    return ['🌰', '🍎', '🥕'];
+            }
+        }
+
+        const pigReactions = [
+            'Interesting!',
+            'Ooh! 📖',
+            'Yummy read!',
+            'Love it! 💕',
+            'So cool!',
+            'Hmm... 🤔',
+            'Nice! ✨',
+            'Wow! 😮'
+        ];
+
         function formatDate(dateStr) {
             const date = new Date(dateStr);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
         }
 
-        // Render blog entries
         function renderBlogs(blogs) {
-            // Sort by date (most recent first)
             blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+            blogsData = blogs;
 
             blogs.forEach((blog, index) => {
                 const isLeft = index % 2 === 0;
@@ -479,30 +981,60 @@
                 entry.className = `blog-entry ${isLeft ? 'left' : 'right'}`;
 
                 entry.innerHTML = `
-                    <div class="blog-card" data-index="${index}">
-                        <img class="blog-card-image" src="${blog.image}" alt="${blog.title}">
-                        <div class="blog-card-content">
-                            <div class="blog-card-date">${formatDate(blog.date)}</div>
-                            <h3 class="blog-card-title">${blog.title}</h3>
-                            <p class="blog-card-excerpt">${blog.excerpt}</p>
-                            <span class="blog-card-readmore">Read more <i class="fas fa-arrow-right"></i></span>
+                    <div class="blog-signpost-card" data-index="${index}">
+                        <div class="billboard-frame">
+                            <img class="billboard-image" src="${blog.image}" alt="${blog.title}">
+                            <div class="billboard-content">
+                                <div class="billboard-date">${formatDate(blog.date)}</div>
+                                <h3 class="billboard-title">${blog.title}</h3>
+                                <p class="billboard-excerpt">${blog.excerpt}</p>
+                                <span class="billboard-readmore">Read more <i class="fas fa-arrow-right"></i></span>
+                            </div>
                         </div>
+                        <div class="billboard-pole"></div>
                     </div>
                 `;
 
-                // Click to open modal
-                entry.querySelector('.blog-card').addEventListener('click', () => {
+                entry.querySelector('.blog-signpost-card').addEventListener('click', () => {
                     openModal(blog);
                 });
 
-                blogTimeline.appendChild(entry);
+                blogEntries.appendChild(entry);
             });
 
-            // Scroll reveal animation
-            observeEntries();
+            // Wait for DOM to settle then generate path and flowers only
+            setTimeout(() => {
+                calculateBlogPositions();
+                generatePath();
+                observeEntries();
+                updatePig();
+            }, 100);
         }
 
-        // Open modal with blog content
+        function calculateBlogPositions() {
+            blogPositions = [];
+            const entries = document.querySelectorAll('.blog-entry');
+            const containerRect = pathContainer.getBoundingClientRect();
+            
+            entries.forEach((entry, index) => {
+                const rect = entry.getBoundingClientRect();
+                const isLeft = entry.classList.contains('left');
+                
+                // Center Y of the blog entry relative to container
+                const centerY = rect.top - containerRect.top + rect.height / 2;
+                
+                // Road goes OPPOSITE direction of sign - sharper curves
+                // If sign is on left, road curves to right (0.75), and vice versa (0.25)
+                const curveX = isLeft ? 0.78 : 0.22;
+                
+                blogPositions.push({
+                    y: centerY,
+                    x: curveX,
+                    isLeft: isLeft
+                });
+            });
+        }
+
         function openModal(blog) {
             modalImage.src = blog.image;
             modalImage.alt = blog.title;
@@ -513,7 +1045,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Close modal
         function closeModal() {
             blogModal.classList.remove('active');
             document.body.style.overflow = '';
@@ -527,7 +1058,6 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        // Intersection Observer for scroll animation
         function observeEntries() {
             const entries = document.querySelectorAll('.blog-entry');
 
@@ -549,15 +1079,258 @@
             }
         }
 
-        // Load blog data from JSON
+        // Path generation
+        const pathContainer = document.getElementById('blog-path-container');
+        const pathSvg = document.getElementById('blog-path-svg');
+        const gardenPath = document.getElementById('garden-path');
+        const gardenPathBorder = document.getElementById('garden-path-border');
+
+        function generatePath() {
+            const containerWidth = pathContainer.offsetWidth;
+            const containerHeight = pathContainer.offsetHeight;
+
+            pathSvg.setAttribute('viewBox', `0 0 ${containerWidth} ${containerHeight}`);
+            pathSvg.style.width = containerWidth + 'px';
+            pathSvg.style.height = containerHeight + 'px';
+
+            if (blogPositions.length === 0) {
+                const pathD = `M ${containerWidth * 0.78},100 
+                              L ${containerWidth * 0.5},${containerHeight - 180}`;
+                gardenPath.setAttribute('d', pathD);
+                gardenPathBorder.setAttribute('d', pathD);
+                return;
+            }
+
+            // Build path with sharp left/right curves
+            const startX = containerWidth * 0.78; // Start from right (first sign is left, road goes right)
+            const startY = 100;
+            
+            let pathD = `M ${startX},${startY}`;
+            
+            // Sharp curve to first blog position
+            const firstPos = blogPositions[0];
+            pathD += ` L ${containerWidth * firstPos.x},${firstPos.y}`;
+
+            // Sharp zigzag between blog positions
+            for (let i = 1; i < blogPositions.length; i++) {
+                const curr = blogPositions[i];
+                pathD += ` L ${containerWidth * curr.x},${curr.y}`;
+            }
+
+            // Final stretch to destination
+            const endX = containerWidth * 0.5;
+            const endY = containerHeight - 180;
+            
+            pathD += ` L ${endX},${endY}`;
+
+            gardenPath.setAttribute('d', pathD);
+            gardenPathBorder.setAttribute('d', pathD);
+
+            addFlowers(containerWidth, containerHeight);
+        }
+
+        function addFlowers(containerWidth, containerHeight) {
+            const flowers = ['🌸', '🌷', '🌼', '🌺', '🌻'];
+            const existingFlowers = pathContainer.querySelectorAll('.path-flower');
+            existingFlowers.forEach(f => f.remove());
+
+            // Add flowers along the sides of the path
+            for (let i = 0; i < blogPositions.length; i++) {
+                const curr = blogPositions[i];
+                
+                // 2 flowers per blog - on opposite side of sign
+                for (let j = 0; j < 2; j++) {
+                    const flower = document.createElement('span');
+                    flower.className = 'path-flower';
+                    flower.textContent = flowers[(i * 2 + j) % flowers.length];
+                    
+                    // Spread out vertically
+                    const offsetY = (j === 0 ? -40 : 40) + (Math.random() - 0.5) * 30;
+                    // On the same side as the road (opposite of sign)
+                    const offsetX = (curr.isLeft ? 1 : -1) * (50 + Math.random() * 40);
+                    
+                    flower.style.top = (curr.y + offsetY) + 'px';
+                    flower.style.left = (containerWidth * curr.x + offsetX) + 'px';
+                    flower.style.transform = `rotate(${Math.random() * 15 - 7}deg)`;
+                    flower.style.opacity = (0.7 + Math.random() * 0.3).toString();
+                    pathContainer.appendChild(flower);
+                }
+            }
+        }
+
+        // Pig movement - follows the actual SVG path
+        const pig = document.getElementById('pig-companion');
+        const pigHome = document.getElementById('pig-home');
+        const pigDoor = document.getElementById('pig-door');
+        const healthyDestination = document.getElementById('healthy-pig-destination');
+
+        let lastScrollY = window.scrollY;
+        let isWalking = false;
+        let walkingTimeout;
+        let lastPigX = 0;
+        let currentPigProgress = 0;
+        let lookingTimeout;
+
+        function checkBlogProximity(progress) {
+            if (blogPositions.length === 0) return;
+            
+            const pathElement = gardenPath;
+            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
+            if (pathLength === 0) return;
+            
+            const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
+            const pigY = pointOnPath.y;
+            
+            // Check if pig is near a blog
+            for (let i = 0; i < blogPositions.length; i++) {
+                const blog = blogPositions[i];
+                const distance = Math.abs(pigY - blog.y);
+                
+                if (distance < 30) {
+                    // Pig is near a blog - show looking animation
+                    clearTimeout(lookingTimeout);
+                    
+                    pig.classList.add('looking');
+                    
+                    // Face the blog
+                    if (blog.isLeft) {
+                        pig.classList.add('looking-left');
+                        pig.classList.remove('looking-right');
+                    } else {
+                        pig.classList.remove('looking-left');
+                        pig.classList.add('looking-right');
+                    }
+                    
+                    // Show thought bubble with random reaction
+                    if (pigThought) {
+                        pigThought.textContent = pigReactions[i % pigReactions.length];
+                    }
+                    
+                    lookingTimeout = setTimeout(() => {
+                        pig.classList.remove('looking', 'looking-left', 'looking-right');
+                    }, 800);
+                    
+                    return;
+                }
+            }
+        }
+
+        function updatePig() {
+            if (!pig || !pathContainer || !gardenPath) return;
+
+            const scrollY = window.scrollY;
+            const scrollDelta = scrollY - lastScrollY;
+            const windowHeight = window.innerHeight;
+            
+            const containerRect = pathContainer.getBoundingClientRect();
+            const containerTop = containerRect.top + scrollY;
+            const containerHeight = pathContainer.offsetHeight;
+            
+            // Calculate scroll progress - adjusted for more scroll range
+            const scrollStart = containerTop - windowHeight * 0.6;
+            const scrollEnd = containerTop + containerHeight - windowHeight * 0.3;
+            const scrollRange = scrollEnd - scrollStart;
+            const progress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange));
+            currentPigProgress = progress;
+
+            // Get position along the actual SVG path - pig stays exactly on road
+            const pathElement = gardenPath;
+            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
+            
+            let pigX, pigY;
+            
+            if (pathLength > 0) {
+                const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
+                pigX = containerRect.left + pointOnPath.x;
+                pigY = containerRect.top + pointOnPath.y;
+                
+                // Face direction of movement
+                if (Math.abs(pointOnPath.x - lastPigX) > 2) {
+                    if (pointOnPath.x < lastPigX) {
+                        pig.classList.add('facing-left');
+                    } else {
+                        pig.classList.remove('facing-left');
+                    }
+                }
+                lastPigX = pointOnPath.x;
+            } else {
+                pigX = containerRect.left + containerRect.width / 2;
+                pigY = containerRect.top + progress * (containerHeight - 200);
+            }
+
+            pig.style.top = pigY + 'px';
+            pig.style.left = pigX + 'px';
+            pig.style.transform = 'translate(-50%, -50%)';
+
+            // Check if pig is leaving home (at START - top)
+            const leaveHomeThreshold = 0.05;
+            
+            if (pigHome && pigDoor) {
+                if (progress < leaveHomeThreshold) {
+                    pigDoor.classList.add('open');
+                    pigHome.classList.add('pig-near');
+                } else {
+                    pigDoor.classList.remove('open');
+                    pigHome.classList.remove('pig-near');
+                }
+            }
+
+            // Check if pig reaches healthy destination (at END - bottom)
+            const arriveThreshold = 0.90;
+            
+            if (healthyDestination) {
+                if (progress > arriveThreshold) {
+                    healthyDestination.classList.add('pig-arrived');
+                    
+                    if (progress > 0.95) {
+                        pig.classList.add('celebrating');
+                    }
+                } else {
+                    healthyDestination.classList.remove('pig-arrived');
+                    pig.classList.remove('celebrating');
+                }
+            }
+
+            // Walking animation
+            if (Math.abs(scrollDelta) > 1) {
+                if (!isWalking) {
+                    pig.classList.add('walking');
+                    pig.classList.remove('looking');
+                    isWalking = true;
+                }
+
+                clearTimeout(walkingTimeout);
+
+                walkingTimeout = setTimeout(() => {
+                    pig.classList.remove('walking');
+                    isWalking = false;
+                    
+                    // Check for interactions when stopped
+                    checkBlogProximity(progress);
+                }, 150);
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        // Load blog data
         fetch('data.json')
             .then(response => response.json())
-            .then(data => renderBlogs(data))
+            .then(data => {
+                renderBlogs(data);
+            })
             .catch(error => {
                 console.error('Error loading blog data:', error);
-                // Show placeholder message if no data
-                blogTimeline.innerHTML = '<p style="text-align: center; color: #666;">Blog posts coming soon!</p>';
+                blogEntries.innerHTML = '<p style="text-align: center; color: #666;">Blog posts coming soon!</p>';
+                generatePath();
             });
+
+        window.addEventListener('scroll', updatePig, { passive: true });
+        window.addEventListener('resize', () => {
+            calculateBlogPositions();
+            generatePath();
+            updatePig();
+        });
     </script>
 </body>
 </html>
