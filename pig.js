@@ -127,6 +127,7 @@
 
         // Check if pig is near home (open/close door)
         const homeThreshold = 0.85; // When pig is 85% of the way down
+        const hideThreshold = 0.95; // When pig enters the house
         if (pigHome && pigDoor) {
             if (scrollProgress > homeThreshold) {
                 pigDoor.classList.add('open');
@@ -134,6 +135,18 @@
             } else {
                 pigDoor.classList.remove('open');
                 pigHome.classList.remove('pig-near');
+            }
+            
+            // Hide pig when it enters the house
+            if (scrollProgress > hideThreshold) {
+                pig.style.opacity = '0';
+                pig.style.transition = 'opacity 0.3s ease';
+                // Close door after pig enters
+                setTimeout(() => {
+                    pigDoor.classList.remove('open');
+                }, 300);
+            } else {
+                pig.style.opacity = '1';
             }
         }
 
