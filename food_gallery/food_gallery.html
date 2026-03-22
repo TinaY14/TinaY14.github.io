@@ -16,9 +16,14 @@
 
     <!-- Timeline styles (embedded for consistency) -->
     <style>
+        /* Remove right padding so photos reach the window edge */
+        .page-content.wide {
+            padding-right: 0 !important;
+        }
         .timeline {
             position: relative !important;
             margin-top: 40px !important;
+            margin-left: 70px !important;
             padding-left: 210px !important;
         }
         .timeline::before {
@@ -44,7 +49,7 @@
         }
         .timeline-dot {
             position: absolute !important;
-            left: -26px !important;
+            left: -25px !important;
             top: 3px !important;
             width: 16px !important;
             height: 16px !important;
@@ -66,7 +71,7 @@
             width: 140px !important;
             font-size: 1.1em !important;
             font-weight: 700 !important;
-            color: #fff !important;
+            color: #000 !important;
             text-align: right !important;
             line-height: 1.3 !important;
             white-space: nowrap !important;
@@ -90,8 +95,7 @@
         .timeline-photos {
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
-            gap: 15px !important;
-            max-width: 1100px !important;
+            gap: 12px !important;
         }
         .timeline-photo {
             text-align: center;
@@ -160,11 +164,44 @@
         .lightbox-close:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+        .timeline-summary {
+            position: absolute !important;
+            left: -193px !important;
+            width: 170px !important;
+            box-sizing: border-box !important;
+            padding: 10px 12px !important;
+            background: #e0f2fe !important;
+            border: 1.5px dashed #38bdf8 !important;
+            border-radius: 10px !important;
+            font-size: 0.8em !important;
+            color: #0c4a6e !important;
+            line-height: 1.6 !important;
+            text-align: left !important;
+            white-space: normal !important;
+        }
+        .timeline-summary-label {
+            display: block !important;
+            font-weight: 700 !important;
+            font-size: 0.7em !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.06em !important;
+            color: #0284c7 !important;
+            margin-bottom: 4px !important;
+        }
+        :root.dark-mode .timeline-summary {
+            background: #0c1e2e !important;
+            border-color: #1d6a9b !important;
+            color: #7dd3fc !important;
+        }
+        :root.dark-mode .timeline-summary-label {
+            color: #38bdf8 !important;
+        }
         @media (max-width: 768px) {
-            .timeline { padding-left: 145px !important; }
+            .timeline { padding-left: 145px !important; margin-left: 0 !important; }
             .timeline::before { left: 128px !important; width: 8px !important; }
             .timeline-dot { left: -22px !important; width: 12px !important; height: 12px !important; }
             .timeline-date { left: -125px !important; width: 90px !important; font-size: 0.8em !important; }
+            .timeline-summary { left: -128px !important; width: 96px !important; }
             .timeline-photos { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
         }
     </style>
@@ -184,9 +221,10 @@
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
+            <a href="../blogs/blogs.html">Blogs</a>
             <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
             <a href="food_gallery.html">Food Gallery</a>
-            <a href="../projects/projects.html">Projects</a>
+            <a href="../projects/projects.html">Projects &amp; Experiences</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
                 // Set initial button state immediately to prevent flash
@@ -259,6 +297,7 @@
                     result.push({
                         dateLabel: entry.dateLabel,
                         location: entry.location || null,
+                        summary: entry.summary || null,
                         sortKey: firstPhotoDate ? firstPhotoDate.sortKey : '9999-99-99',
                         photos: entry.photos
                     });
@@ -279,6 +318,7 @@
                         result.push({
                             dateLabel: formatDate(value.dateObj),
                             location: value.location,
+                            summary: entry.summary || null,
                             sortKey: value.dateObj.sortKey,
                             photos: value.photos
                         });
@@ -306,10 +346,16 @@
                 `).join('');
 
                 const locationHtml = entry.location ? `<div class="timeline-location">${entry.location}</div>` : '';
+                const summaryHtml = entry.summary ? `
+                    <div class="timeline-summary">
+                        <div class="timeline-summary-label">✍️ My take</div>
+                        ${entry.summary}
+                    </div>` : '';
 
                 timelineEntry.innerHTML = `
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">${entry.dateLabel}${locationHtml}</div>
+                    ${summaryHtml}
                     <div class="timeline-content">
                         <div class="timeline-photos">
                             ${photosHtml}
@@ -317,6 +363,13 @@
                     </div>
                 `;
                 timeline.appendChild(timelineEntry);
+
+                // Position summary directly below the date label
+                const dateEl = timelineEntry.querySelector('.timeline-date');
+                const summaryEl = timelineEntry.querySelector('.timeline-summary');
+                if (dateEl && summaryEl) {
+                    summaryEl.style.top = (dateEl.offsetHeight + 10) + 'px';
+                }
             });
 
             // Scroll reveal animation with Intersection Observer

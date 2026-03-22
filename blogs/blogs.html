@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Tina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Prefetch homepage background so it's cached when navigating back -->
+    <link rel="prefetch" href="../images/site/background.jpg" as="image">
+
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../darkmode.js"></script>
+
+    <!-- Blog Timeline Styles -->
+    <style>
+        .blog-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .blog-intro p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        :root.dark-mode .blog-intro p {
+            color: #aaa;
+        }
+
+        /* Alternating Timeline */
+        .blog-timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Center line */
+        .blog-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #93c5fd, #60a5fa, #3b82f6);
+            border-radius: 2px;
+        }
+
+        .blog-entry {
+            position: relative;
+            width: calc(50% - 50px);
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            margin-bottom: 40px;
+        }
+
+        .blog-entry.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Left side entries */
+        .blog-entry.left {
+            margin-left: 0;
+            margin-right: auto;
+            text-align: right;
+        }
+
+        /* Right side entries */
+        .blog-entry.right {
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        /* Timeline dot - positioned at exact center */
+        .blog-entry::before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #93c5fd;
+            z-index: 2;
+            transform: scale(0);
+            transition: transform 0.4s ease 0.3s;
+        }
+
+        .blog-entry.visible::before {
+            transform: scale(1);
+        }
+
+        :root.dark-mode .blog-entry::before {
+            border-color: #1a1a1a;
+        }
+
+        /* Dot is 16px + 6px border = 22px total, half = 11px */
+        /* Entry is 50% - 50px wide, so gap to center is 50px */
+        /* Position dot so its center aligns with timeline center */
+        .blog-entry.left::before {
+            right: -61px;
+            transform: scale(0);
+        }
+        
+        .blog-entry.left.visible::before {
+            transform: scale(1);
+        }
+
+        .blog-entry.right::before {
+            left: -61px;
+            transform: scale(0);
+        }
+        
+        .blog-entry.right.visible::before {
+            transform: scale(1);
+        }
+
+        /* Connector line from dot to card */
+        .blog-entry::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            height: 3px;
+            background: #93c5fd;
+            width: 50px;
+        }
+
+        .blog-entry.left::after {
+            right: -50px;
+        }
+
+        .blog-entry.right::after {
+            left: -50px;
+        }
+
+        /* Blog card */
+        .blog-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        :root.dark-mode .blog-card {
+            background: #1e1e1e;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        :root.dark-mode .blog-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 20px;
+        }
+
+        .blog-card-date {
+            font-size: 0.85em;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .blog-card-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+        }
+
+        :root.dark-mode .blog-card-title {
+            color: #fff;
+        }
+
+        .blog-card-excerpt {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+        }
+
+        :root.dark-mode .blog-card-excerpt {
+            color: #aaa;
+        }
+
+        .blog-card-readmore {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-decoration: none;
+        }
+
+        .blog-card-readmore:hover {
+            color: #2563eb;
+        }
+
+        .blog-card-readmore i {
+            transition: transform 0.2s ease;
+        }
+
+        .blog-card-readmore:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Blog Detail Modal */
+        .blog-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .blog-modal.active {
+            display: block;
+        }
+
+        .blog-modal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        :root.dark-mode .blog-modal-content {
+            background: #1e1e1e;
+        }
+
+        .blog-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.2s ease;
+        }
+
+        .blog-modal-close:hover {
+            background: #fff;
+        }
+
+        .blog-modal-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .blog-modal-body {
+            padding: 40px;
+        }
+
+        .blog-modal-date {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .blog-modal-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+        }
+
+        :root.dark-mode .blog-modal-title {
+            color: #fff;
+        }
+
+        .blog-modal-text {
+            font-size: 1.05em;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        :root.dark-mode .blog-modal-text {
+            color: #ccc;
+        }
+
+        .blog-modal-text p {
+            margin-bottom: 1.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .blog-timeline::before {
+                left: 20px;
+                transform: none;
+            }
+
+            .blog-entry {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+                margin-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .blog-entry.left::before,
+            .blog-entry.right::before {
+                left: -39px !important;
+                right: auto !important;
+                transform: scale(0) translateX(-50%) !important;
+            }
+            
+            .blog-entry.left.visible::before,
+            .blog-entry.right.visible::before {
+                transform: scale(1) translateX(-50%) !important;
+            }
+
+            .blog-entry.left::after,
+            .blog-entry.right::after {
+                left: -30px !important;
+                right: auto !important;
+                width: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blog-card-image {
+                height: 160px;
+            }
+
+            .blog-modal-image {
+                height: 220px;
+            }
+
+            .blog-modal-body {
+                padding: 25px;
+            }
+
+            .blog-modal-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+
+    <!-- Prevent dark mode icon flash -->
+    <script>
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="inner-page">
+    <header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="../projects/projects.html">Projects &amp; Experiences</a>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <script>
+                // Set initial button state immediately to prevent flash
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const isDark = document.documentElement.classList.contains('dark-mode');
+                    if (btn) {
+                        btn.textContent = isDark ? '☀️' : '🌙';
+                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                })();
+            </script>
+        </nav>
+    </header>
+    <main class="hero inner-page">
+        <div class="page-content wide">
+            <h2 class="page-title">Blogs</h2>
+            <div class="blog-intro">
+                <p>Thoughts, stories, and insights from my journey in nutrition and healthy living.</p>
+            </div>
+
+            <!-- Blog Timeline -->
+            <div class="blog-timeline" id="blog-timeline">
+                <!-- Blog entries will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Blog Detail Modal -->
+    <div id="blog-modal" class="blog-modal">
+        <div class="blog-modal-content">
+            <button class="blog-modal-close" aria-label="Close">&times;</button>
+            <img class="blog-modal-image" src="" alt="">
+            <div class="blog-modal-body">
+                <div class="blog-modal-date"></div>
+                <h2 class="blog-modal-title"></h2>
+                <div class="blog-modal-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const blogTimeline = document.getElementById('blog-timeline');
+        const blogModal = document.getElementById('blog-modal');
+        const modalImage = blogModal.querySelector('.blog-modal-image');
+        const modalDate = blogModal.querySelector('.blog-modal-date');
+        const modalTitle = blogModal.querySelector('.blog-modal-title');
+        const modalText = blogModal.querySelector('.blog-modal-text');
+        const modalClose = blogModal.querySelector('.blog-modal-close');
+
+        // Format date string
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Render blog entries
+        function renderBlogs(blogs) {
+            // Sort by date (most recent first)
+            blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            blogs.forEach((blog, index) => {
+                const isLeft = index % 2 === 0;
+                const entry = document.createElement('div');
+                entry.className = `blog-entry ${isLeft ? 'left' : 'right'}`;
+
+                entry.innerHTML = `
+                    <div class="blog-card" data-index="${index}">
+                        <img class="blog-card-image" src="${blog.image}" alt="${blog.title}">
+                        <div class="blog-card-content">
+                            <div class="blog-card-date">${formatDate(blog.date)}</div>
+                            <h3 class="blog-card-title">${blog.title}</h3>
+                            <p class="blog-card-excerpt">${blog.excerpt}</p>
+                            <span class="blog-card-readmore">Read more <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                `;
+
+                // Click to open modal
+                entry.querySelector('.blog-card').addEventListener('click', () => {
+                    openModal(blog);
+                });
+
+                blogTimeline.appendChild(entry);
+            });
+
+            // Scroll reveal animation
+            observeEntries();
+        }
+
+        // Open modal with blog content
+        function openModal(blog) {
+            modalImage.src = blog.image;
+            modalImage.alt = blog.title;
+            modalDate.textContent = formatDate(blog.date);
+            modalTitle.textContent = blog.title;
+            modalText.innerHTML = blog.content;
+            blogModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            blogModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        blogModal.addEventListener('click', (e) => {
+            if (e.target === blogModal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Intersection Observer for scroll animation
+        function observeEntries() {
+            const entries = document.querySelectorAll('.blog-entry');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((observerEntries) => {
+                    observerEntries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                entries.forEach(entry => observer.observe(entry));
+            } else {
+                entries.forEach(entry => entry.classList.add('visible'));
+            }
+        }
+
+        // Load blog data from JSON
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => renderBlogs(data))
+            .catch(error => {
+                console.error('Error loading blog data:', error);
+                // Show placeholder message if no data
+                blogTimeline.innerHTML = '<p style="text-align: center; color: #666;">Blog posts coming soon!</p>';
+            });
+    </script>
+</body>
+</html>

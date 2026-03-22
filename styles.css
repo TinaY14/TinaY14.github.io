@@ -207,7 +207,7 @@ h2.tagline {
     font-size: 1em;
     line-height: 1.6;
     max-width: 500px;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     color: var(--home-text-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
@@ -270,6 +270,7 @@ body.inner-page .page-title {
     margin-bottom: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
 }
 
 /* Dark mode content entries */
@@ -900,7 +901,7 @@ form button[type="submit"]:active {
 
 /* --- Background Spacer between sections --- */
 .background-spacer {
-    height: 120px;
+    height: 40px;
     background: transparent;
 }
 
@@ -1400,7 +1401,10 @@ form button[type="submit"]:active {
 }
 
 .about-image {
-    flex-shrink: 0;
+    flex-shrink: 1;
+    flex: 1;
+    max-width: 400px;
+    min-width: 200px;
 }
 
 .about-section .intro-text {
@@ -1419,6 +1423,8 @@ form button[type="submit"]:active {
 .about-section .description {
     color: var(--inner-text);
     text-shadow: none;
+    margin: 0 0 3px 0;
+    padding: 0;
 }
 
 .about-section .social-links a {
@@ -1638,4 +1644,204 @@ form button[type="submit"]:active {
     .about-section .actions {
         justify-content: center;
     }
+}
+
+/* --- Cute Pig Companion --- */
+.pig-companion {
+    pointer-events: none;
+}
+
+.pig-companion.facing-up .pig {
+    transform: rotate(-90deg);
+}
+
+.pig-companion.facing-down .pig {
+    transform: rotate(90deg);
+}
+
+.pig {
+    position: relative;
+    width: 60px;
+    height: 50px;
+    transition: transform 0.2s ease;
+}
+
+/* Pig ears */
+.pig-ear {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ffb6c1;
+    border-radius: 50% 50% 50% 50%;
+    top: -5px;
+}
+
+.pig-ear-left {
+    left: 8px;
+    transform: rotate(-20deg);
+}
+
+.pig-ear-right {
+    right: 8px;
+    transform: rotate(20deg);
+}
+
+/* Pig face */
+.pig-face {
+    position: absolute;
+    width: 45px;
+    height: 40px;
+    background: #ffb6c1;
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Pig eyes */
+.pig-eye {
+    position: absolute;
+    width: 6px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    top: 12px;
+}
+
+.pig-eye-left {
+    left: 10px;
+}
+
+.pig-eye-right {
+    right: 10px;
+}
+
+/* Pig snout */
+.pig-snout {
+    position: absolute;
+    width: 22px;
+    height: 16px;
+    background: #ff9aa2;
+    border-radius: 50%;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pig-nostril {
+    position: absolute;
+    width: 4px;
+    height: 5px;
+    background: #d47c84;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pig-nostril-left {
+    left: 4px;
+}
+
+.pig-nostril-right {
+    right: 4px;
+}
+
+/* Pig cheeks */
+.pig-cheek {
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    background: rgba(255, 150, 150, 0.5);
+    border-radius: 50%;
+    top: 22px;
+}
+
+.pig-cheek-left {
+    left: 3px;
+}
+
+.pig-cheek-right {
+    right: 3px;
+}
+
+/* Pig body */
+.pig-body {
+    position: absolute;
+    width: 35px;
+    height: 25px;
+    background: #ffb6c1;
+    border-radius: 50%;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Pig legs */
+.pig-leg {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: #ffb6c1;
+    border-radius: 4px;
+    bottom: -10px;
+}
+
+.pig-leg-front-left {
+    left: 4px;
+}
+
+.pig-leg-front-right {
+    left: 12px;
+}
+
+.pig-leg-back-left {
+    right: 12px;
+}
+
+.pig-leg-back-right {
+    right: 4px;
+}
+
+/* Pig tail */
+.pig-tail {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #ffb6c1;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* Walking animation */
+.pig-companion.walking .pig-leg-front-left,
+.pig-companion.walking .pig-leg-back-right {
+    animation: legWalk1 0.2s ease-in-out infinite;
+}
+
+.pig-companion.walking .pig-leg-front-right,
+.pig-companion.walking .pig-leg-back-left {
+    animation: legWalk2 0.2s ease-in-out infinite;
+}
+
+.pig-companion.walking .pig {
+    animation: pigBounce 0.2s ease-in-out infinite;
+}
+
+@keyframes legWalk1 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes legWalk2 {
+    0%, 100% { transform: translateY(-4px); }
+    50% { transform: translateY(0); }
+}
+
+@keyframes pigBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
 }
