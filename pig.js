@@ -49,7 +49,7 @@
         
         // Position the pig home at the end of the path
         if (pigHome) {
-            pigHome.style.bottom = '20px';
+            pigHome.style.bottom = '150px';
         }
         
         // Add flowers along the path
