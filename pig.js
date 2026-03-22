@@ -5,6 +5,8 @@
     const pathSvg = document.getElementById('pig-path-svg');
     const gardenPath = document.getElementById('garden-path');
     const gardenPathBorder = document.getElementById('garden-path-border');
+    const pigHome = document.getElementById('pig-home');
+    const pigDoor = document.getElementById('pig-door');
     
     if (!pig || !pathContainer || !pathSvg || !gardenPath) return;
 
@@ -26,14 +28,15 @@
         pathSvg.setAttribute('viewBox', `0 0 ${pathWidth} ${pageHeight}`);
         pathSvg.style.height = pageHeight + 'px';
         
-        // Generate a wavy path
-        const numCurves = Math.ceil((pageHeight - PATH_START_Y) / CURVE_LENGTH);
+        // Generate a wavy path (end a bit before the house)
+        const pathEndY = pageHeight - 100;
+        const numCurves = Math.ceil((pathEndY - PATH_START_Y) / CURVE_LENGTH);
         let pathD = `M 40,${PATH_START_Y}`;
         
         for (let i = 0; i < numCurves; i++) {
             const curveStartY = PATH_START_Y + i * CURVE_LENGTH;
             const midY = curveStartY + CURVE_LENGTH / 2;
-            const endY = curveStartY + CURVE_LENGTH;
+            const endY = Math.min(curveStartY + CURVE_LENGTH, pathEndY);
             
             // Alternate curve direction
             const curveX = i % 2 === 0 ? 40 + CURVE_AMPLITUDE : 40 - CURVE_AMPLITUDE;
@@ -43,6 +46,11 @@
         
         gardenPath.setAttribute('d', pathD);
         gardenPathBorder.setAttribute('d', pathD);
+        
+        // Position the pig home at the end of the path
+        if (pigHome) {
+            pigHome.style.bottom = '20px';
+        }
         
         // Add flowers along the path
         addFlowers(pageHeight);
@@ -54,7 +62,7 @@
         const existingFlowers = pathContainer.querySelectorAll('.flower');
         existingFlowers.forEach(f => f.remove());
         
-        const numFlowers = Math.ceil((pageHeight - PATH_START_Y) / 120);
+        const numFlowers = Math.ceil((pageHeight - PATH_START_Y - 150) / 120);
         
         for (let i = 0; i < numFlowers; i++) {
             const flower = document.createElement('span');
@@ -97,7 +105,7 @@
         
         // Pig's Y position on the page (not viewport)
         const pageHeight = document.documentElement.scrollHeight;
-        const pigPageY = PATH_START_Y + scrollProgress * (pageHeight - PATH_START_Y - 100);
+        const pigPageY = PATH_START_Y + scrollProgress * (pageHeight - PATH_START_Y - 150);
         
         // Get X position from curved path
         const pathX = getPathXForY(pigPageY);
@@ -116,6 +124,18 @@
         const pathContainerRight = 20;
         const pigRight = pathContainerRight + (80 - pathX) - pigWidth/2;
         pig.style.right = pigRight + 'px';
+
+        // Check if pig is near home (open/close door)
+        const homeThreshold = 0.85; // When pig is 85% of the way down
+        if (pigHome && pigDoor) {
+            if (scrollProgress > homeThreshold) {
+                pigDoor.classList.add('open');
+                pigHome.classList.add('pig-near');
+            } else {
+                pigDoor.classList.remove('open');
+                pigHome.classList.remove('pig-near');
+            }
+        }
 
         // Start walking animation when scrolling
         if (Math.abs(scrollDelta) > 0) {
