@@ -19,7 +19,7 @@
             position: relative;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 20px 450px;
+            padding: 100px 20px 200px;
         }
 
         /* Full-width curved path SVG */
@@ -76,7 +76,7 @@
         .blog-entry {
             position: relative;
             display: flex;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
@@ -382,13 +382,13 @@
             50% { transform: rotate(-15deg); }
         }
 
-        /* Pig Home - positioned dynamically next to road start */
+        /* Pig Home - positioned at top center, above the road */
         .pig-home {
             position: absolute;
             width: 120px;
             height: 95px;
             z-index: 10;
-            transform: translateX(-50%) translateY(-100%);
+            transform: translateX(-50%);
         }
 
         .pig-home .house-body {
@@ -975,7 +975,9 @@
             blogsData = blogs;
 
             blogs.forEach((blog, index) => {
+                // Strictly alternate left/right - no randomness
                 const isLeft = index % 2 === 0;
+                
                 const entry = document.createElement('div');
                 entry.className = `blog-entry ${isLeft ? 'left' : 'right'}`;
 
@@ -1022,9 +1024,8 @@
                 // Center Y of the blog entry relative to container
                 const centerY = rect.top - containerRect.top + rect.height / 2;
                 
-                // Road goes OPPOSITE direction of sign - sharper curves
-                // If sign is on left, road curves to right (0.75), and vice versa (0.25)
-                const curveX = isLeft ? 0.78 : 0.22;
+                // Road stays more centered, further from signs
+                const curveX = isLeft ? 0.45 : 0.55;
                 
                 blogPositions.push({
                     y: centerY,
@@ -1092,49 +1093,80 @@
             pathSvg.style.width = containerWidth + 'px';
             pathSvg.style.height = containerHeight + 'px';
 
+            // End point - grass destination (center)
+            const endX = containerWidth * 0.5;
+            const endY = containerHeight - 80;
+
             if (blogPositions.length === 0) {
-                const pathD = `M ${containerWidth * 0.78},50 
-                              L ${containerWidth * 0.5},${containerHeight - 180}`;
+                const pathD = `M ${containerWidth * 0.5},50 L ${endX},${endY}`;
                 gardenPath.setAttribute('d', pathD);
                 gardenPathBorder.setAttribute('d', pathD);
                 return;
             }
 
-            // Path starts directly at first blog position (no vertical line from home)
             const firstPos = blogPositions[0];
-            let pathD = `M ${containerWidth * firstPos.x},${firstPos.y}`;
+            
+            // Start point - pig home at top center
+            const startX = containerWidth * 0.5;
+            const startY = 60;
 
-            // Sharp zigzag between blog positions
-            for (let i = 1; i < blogPositions.length; i++) {
+            // Build path with smooth curves using cubic bezier
+            let pathD = `M ${startX},${startY}`;
+            
+            // Curve to each blog position
+            for (let i = 0; i < blogPositions.length; i++) {
                 const curr = blogPositions[i];
-                pathD += ` L ${containerWidth * curr.x},${curr.y}`;
+                const currX = containerWidth * curr.x;
+                
+                if (i === 0) {
+                    // First segment: from home to first blog - same smooth curve style as others
+                    const cy1 = startY + (curr.y - startY) * 0.3;
+                    const cy2 = startY + (curr.y - startY) * 0.7;
+                    pathD += ` C ${startX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
+                } else {
+                    const prev = blogPositions[i - 1];
+                    const prevX = containerWidth * prev.x;
+                    // Smooth S-curve between blogs
+                    const cy1 = prev.y + (curr.y - prev.y) * 0.3;
+                    const cy2 = prev.y + (curr.y - prev.y) * 0.7;
+                    pathD += ` C ${prevX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
+                }
             }
 
-            // Final stretch to destination
-            const endX = containerWidth * 0.5;
-            const endY = containerHeight - 180;
-            
-            pathD += ` L ${endX},${endY}`;
+            // Final curve to grass destination
+            const lastPos = blogPositions[blogPositions.length - 1];
+            const lastX = containerWidth * lastPos.x;
+            const cy1 = lastPos.y + (endY - lastPos.y) * 0.3;
+            const cy2 = lastPos.y + (endY - lastPos.y) * 0.7;
+            pathD += ` C ${lastX},${cy1} ${endX},${cy2} ${endX},${endY}`;
 
             gardenPath.setAttribute('d', pathD);
             gardenPathBorder.setAttribute('d', pathD);
 
-            // Position pig home right next to road start
-            positionPigHome(containerWidth, firstPos);
+            // Position pig home at path start
+            positionPigHome(startX, startY);
+            
+            // Position grass at path end
+            positionGrass(endX, endY);
 
             addFlowers(containerWidth, containerHeight);
         }
 
-        function positionPigHome(containerWidth, firstPos) {
+        function positionPigHome(x, y) {
             const pigHomeEl = document.getElementById('pig-home');
-            if (!pigHomeEl || !firstPos) return;
+            if (!pigHomeEl) return;
             
-            // Position home right next to where road starts (same side as road, offset slightly)
-            const homeX = containerWidth * firstPos.x + (firstPos.isLeft ? 60 : -60);
-            const homeY = firstPos.y;
+            pigHomeEl.style.left = x + 'px';
+            pigHomeEl.style.top = (y - 70) + 'px';
+        }
+        
+        function positionGrass(x, y) {
+            const grassEl = document.getElementById('healthy-pig-destination');
+            if (!grassEl) return;
             
-            pigHomeEl.style.left = homeX + 'px';
-            pigHomeEl.style.top = homeY + 'px';
+            grassEl.style.left = x + 'px';
+            grassEl.style.bottom = 'auto';
+            grassEl.style.top = (y - 20) + 'px';
         }
 
         function addFlowers(containerWidth, containerHeight) {
@@ -1142,27 +1174,27 @@
             const existingFlowers = pathContainer.querySelectorAll('.path-flower');
             existingFlowers.forEach(f => f.remove());
 
-            // Add flowers along the sides of the path
-            for (let i = 0; i < blogPositions.length; i++) {
-                const curr = blogPositions[i];
+            const centerX = containerWidth * 0.5;
+            const startY = 80;
+            const endY = containerHeight - 100;
+            const pathHeight = endY - startY;
+            
+            // Add flowers along both sides of the center path
+            const flowerCount = 12;
+            for (let i = 0; i < flowerCount; i++) {
+                const flower = document.createElement('span');
+                flower.className = 'path-flower';
+                flower.textContent = flowers[i % flowers.length];
                 
-                // 2 flowers per blog - on opposite side of sign
-                for (let j = 0; j < 2; j++) {
-                    const flower = document.createElement('span');
-                    flower.className = 'path-flower';
-                    flower.textContent = flowers[(i * 2 + j) % flowers.length];
-                    
-                    // Spread out vertically
-                    const offsetY = (j === 0 ? -40 : 40) + (Math.random() - 0.5) * 30;
-                    // On the same side as the road (opposite of sign)
-                    const offsetX = (curr.isLeft ? 1 : -1) * (50 + Math.random() * 40);
-                    
-                    flower.style.top = (curr.y + offsetY) + 'px';
-                    flower.style.left = (containerWidth * curr.x + offsetX) + 'px';
-                    flower.style.transform = `rotate(${Math.random() * 15 - 7}deg)`;
-                    flower.style.opacity = (0.7 + Math.random() * 0.3).toString();
-                    pathContainer.appendChild(flower);
-                }
+                const y = startY + (pathHeight / flowerCount) * i + Math.random() * 30;
+                const side = (i % 2 === 0) ? -1 : 1;
+                const x = centerX + side * (50 + Math.random() * 40);
+                
+                flower.style.top = y + 'px';
+                flower.style.left = x + 'px';
+                flower.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+                flower.style.opacity = (0.7 + Math.random() * 0.3).toString();
+                pathContainer.appendChild(flower);
             }
         }
 
@@ -1234,71 +1266,63 @@
             const containerTop = containerRect.top + scrollY;
             const containerHeight = pathContainer.offsetHeight;
             
-            // Calculate scroll progress
-            // Pig starts moving when container comes into view
-            // Pig should reach 100% when user has scrolled to see the destination
-            const scrollStart = containerTop - windowHeight * 0.5;
-            const scrollEnd = containerTop + containerHeight - windowHeight * 0.5;
-            const scrollRange = scrollEnd - scrollStart;
+            // Get path info
+            const pathElement = gardenPath;
+            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
+            if (pathLength === 0) return;
+            
+            // Simple scroll progress:
+            // 0% = when container top reaches viewport top
+            // 100% = when container bottom is at viewport bottom
+            const scrollStart = containerTop;
+            const scrollEnd = containerTop + containerHeight - windowHeight;
+            const scrollRange = Math.max(scrollEnd - scrollStart, 1);
             const progress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange));
             currentPigProgress = progress;
 
-            // Get position along the actual SVG path - pig stays exactly on road
-            const pathElement = gardenPath;
-            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
-            
-            let pigX, pigY;
-            
-            if (pathLength > 0) {
-                const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
-                pigX = containerRect.left + pointOnPath.x;
-                pigY = containerRect.top + pointOnPath.y;
-                
-                // Face direction of movement
-                if (Math.abs(pointOnPath.x - lastPigX) > 2) {
-                    if (pointOnPath.x < lastPigX) {
-                        pig.classList.add('facing-left');
-                    } else {
-                        pig.classList.remove('facing-left');
-                    }
-                }
-                lastPigX = pointOnPath.x;
-            } else {
-                pigX = containerRect.left + containerRect.width / 2;
-                pigY = containerRect.top + progress * (containerHeight - 200);
-            }
+            // Get position along the SVG path
+            const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
+            const pigX = containerRect.left + pointOnPath.x;
+            const pigY = containerRect.top + pointOnPath.y;
 
-            pig.style.top = pigY + 'px';
             pig.style.left = pigX + 'px';
+            pig.style.top = pigY + 'px';
             pig.style.transform = 'translate(-50%, -50%)';
-
-            // Check if pig is leaving home (at START - top)
-            const leaveHomeThreshold = 0.05;
             
-            if (pigHome && pigDoor) {
-                if (progress < leaveHomeThreshold) {
-                    pigDoor.classList.add('open');
-                    pigHome.classList.add('pig-near');
-                } else {
-                    pigDoor.classList.remove('open');
-                    pigHome.classList.remove('pig-near');
-                }
+            // Show/hide pig based on progress
+            if (progress <= 0) {
+                // Pig hidden in house
+                pig.style.opacity = '0';
+                if (pigDoor) pigDoor.classList.remove('open');
+            } else if (progress < 0.05) {
+                // Pig coming out of house
+                pig.style.opacity = '1';
+                if (pigDoor) pigDoor.classList.add('open');
+                if (pigHome) pigHome.classList.add('pig-near');
+            } else {
+                // Pig on the road
+                pig.style.opacity = '1';
+                if (pigDoor) pigDoor.classList.remove('open');
+                if (pigHome) pigHome.classList.remove('pig-near');
             }
 
-            // Check if pig reaches healthy destination (at END - bottom)
-            const arriveThreshold = 0.90;
-            
-            if (healthyDestination) {
-                if (progress > arriveThreshold) {
-                    healthyDestination.classList.add('pig-arrived');
-                    
-                    if (progress > 0.95) {
-                        pig.classList.add('celebrating');
-                    }
+            // Face direction of movement
+            if (Math.abs(pointOnPath.x - lastPigX) > 2) {
+                if (pointOnPath.x < lastPigX) {
+                    pig.classList.add('facing-left');
                 } else {
-                    healthyDestination.classList.remove('pig-arrived');
-                    pig.classList.remove('celebrating');
+                    pig.classList.remove('facing-left');
                 }
+            }
+            lastPigX = pointOnPath.x;
+
+            // Check if pig reaches grass at end
+            if (progress > 0.95) {
+                if (healthyDestination) healthyDestination.classList.add('pig-arrived');
+                pig.classList.add('celebrating');
+            } else {
+                if (healthyDestination) healthyDestination.classList.remove('pig-arrived');
+                pig.classList.remove('celebrating');
             }
 
             // Walking animation
