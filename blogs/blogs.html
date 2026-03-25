@@ -634,14 +634,19 @@
             transform: scale(1.1);
         }
 
-        /* ---- Image Carousel ---- */
+        /* ---- Image Carousel (inside modal body, below text) ---- */
         .modal-carousel {
             position: relative;
             width: 100%;
             overflow: hidden;
-            background: #000;
-            /* height is set dynamically by JS, default fallback: */
+            background: #f0f4f8;
+            border-radius: 12px;
+            margin-top: 28px;
             height: 380px;
+        }
+
+        :root.dark-mode .modal-carousel {
+            background: #111;
         }
 
         .carousel-track {
@@ -819,7 +824,7 @@
             .billboard-content { padding: 14px 16px 18px; }
             .billboard-title { font-size: 1em; }
 
-            .modal-carousel { height: 240px !important; }
+            .modal-carousel { height: 220px !important; margin-top: 20px; }
             .carousel-arrow { width: 36px; height: 36px; font-size: 14px; }
             .carousel-arrow.prev { left: 8px; }
             .carousel-arrow.next { right: 8px; }
@@ -929,30 +934,30 @@
         <div class="blog-modal-content">
             <button class="blog-modal-close" aria-label="Close">&times;</button>
 
-            <!-- Image Carousel -->
-            <div class="modal-carousel" id="modal-carousel">
-                <!-- Slides injected by JS -->
-                <div class="carousel-track" id="carousel-track"></div>
-
-                <!-- Prev / Next arrows -->
-                <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-arrow next" id="carousel-next" aria-label="Next image">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-
-                <!-- Dot indicators -->
-                <div class="carousel-dots" id="carousel-dots"></div>
-
-                <!-- Counter badge -->
-                <div class="carousel-counter" id="carousel-counter">1 / 1</div>
-            </div>
-
             <div class="blog-modal-body">
                 <div class="blog-modal-date"></div>
                 <h2 class="blog-modal-title"></h2>
                 <div class="blog-modal-text"></div>
+
+                <!-- Image Carousel at the bottom -->
+                <div class="modal-carousel" id="modal-carousel">
+                    <!-- Slides injected by JS -->
+                    <div class="carousel-track" id="carousel-track"></div>
+
+                    <!-- Prev / Next arrows -->
+                    <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-arrow next" id="carousel-next" aria-label="Next image">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Dot indicators -->
+                    <div class="carousel-dots" id="carousel-dots"></div>
+
+                    <!-- Counter badge -->
+                    <div class="carousel-counter" id="carousel-counter">1 / 1</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1125,13 +1130,15 @@
                     .join('');
 
                 if (frontmatter.title) {
-                    // Resolve image list
-                    // Priority: `images` field (comma-separated) → fallback to single `image`
+                    // Resolve image list.
+                    // Supports both:
+                    //   image: a.jpg, b.jpg, c.jpg   (comma-separated in single field)
+                    //   images: a.jpg, b.jpg, c.jpg  (plural alias)
+                    // Also works with a single path in either field.
                     let images = [];
-                    if (frontmatter.images) {
-                        images = frontmatter.images.split(',').map(s => s.trim()).filter(Boolean);
-                    } else if (frontmatter.image) {
-                        images = [frontmatter.image.trim()];
+                    const rawImages = frontmatter.images || frontmatter.image || '';
+                    if (rawImages) {
+                        images = rawImages.split(',').map(s => s.trim()).filter(Boolean);
                     }
 
                     posts.push({

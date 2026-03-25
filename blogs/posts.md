@@ -112,6 +112,7 @@ title: No-Cook Guacamole from the Teaching Kitchen
 date: 2025-09-17
 image: images/091725/g.jpg,images/091725/g1.jpg,images/091725/g2.jpg,images/091725/g3.jpg
 excerpt: Volunteering in the Teaching Kitchen, we made fresh guacamole!!
+
 ---
 
 I love eating chips with Guacamole! 
