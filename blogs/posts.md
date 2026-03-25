@@ -6,7 +6,7 @@ excerpt: How I discovered my passion for nutrition and healthy living, and why i
 ---
 title: Volunteering in the Teaching Kitchen: We Tried Fried Bananas! 
 date: 2026-03-04
-image: images/placeholder1.jpg
+image: images/030426/b1.jpg
 excerpt: Frying bananas was a very fun kitchen experiment, but I actually ended up falling in love with the fresh pineapple and bean side dish instead lol
 
 This week in the kitchen, we made fried bananas, which was a totally new experience for me. I usually just eat bananas raw for my daily fruit intake, or maybe mash them up into pancake batter, but I had never actually tried frying them before. We paired them with a really unique, fresh mix of beans, pineapple, red onion, and cucumbers.
