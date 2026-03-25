@@ -6,7 +6,7 @@ excerpt: How I discovered my passion for nutrition and healthy living, and why i
 ---
 title: Volunteering in the Teaching Kitchen: We Tried Fried Bananas! 
 date: 2026-03-04
-image: images/030426/b1.jpg
+image: images/030426/b4.jpg
 excerpt: Frying bananas was a very fun kitchen experiment, but I actually ended up falling in love with the fresh pineapple and bean side dish instead lol
 
 This week in the kitchen, we made fried bananas, which was a totally new experience for me. I usually just eat bananas raw for my daily fruit intake, or maybe mash them up into pancake batter, but I had never actually tried frying them before. We paired them with a really unique, fresh mix of beans, pineapple, red onion, and cucumbers.
@@ -14,7 +14,7 @@ Honestly, the dish wasn't bad, but it’s probably just a one-time thing for me.
 ---
 title: Golden, Crispy, and Safe: Lessons from the Potato Pancake Kitchen
 date: 2026-02-18
-image: blogs/images/potatopancakes/p1.jpg
+image: images/021826/p3.jpg
 excerpt: Stepping into the teaching kitchen this week, where we made potato pancakes!
 ---
 
@@ -110,7 +110,7 @@ Focus on the serving size first, as all the numbers are based on it. Pay attenti
 ---
 title: No-Cook Guacamole from the Teaching Kitchen
 date: 2025-09-17
-image: blogs/images/gucamole/g1.jpg
+image: images/091725/g1.jpg
 excerpt: Volunteering in the Teaching Kitchen, we made fresh guacamole!!
 ---
 
@@ -130,7 +130,7 @@ What a perfect full-circle moment!
 ---
 title: Pedaling for Smoothies: My Food Harvest Volunteer Experience
 date: 2025-11-12
-image: blogs/images/111225/s1.jpg
+image: images/111225/s1.jpg
 excerpt: Making 200+ pedal-powered smoothies at the Food Harvest event was a busy but unforgettable volunteer experience!
 
 When I got to the volunteer stand for the Food Harvest event, it started with a quick supply run. Kelsey took me over to the school kitchen, and we used a truck to haul out boxes of frozen pumpkin chunks, frozen bananas, and oat milk that had been prepped the night before. The smoothie bike was already set up with clean blenders waiting for us. Kelsey showed me the ropes, and the whole process was actually super simple. All I had to do was add a scoop of the frozen pumpkin and banana, pour in the oat milk, pop the blender back onto the bike, and secure it with an elastic band. Then, people could just hop on and pedal. It blended up really fast, taking under five minutes to get a perfect smoothie.
