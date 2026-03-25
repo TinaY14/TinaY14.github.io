@@ -110,7 +110,7 @@ Focus on the serving size first, as all the numbers are based on it. Pay attenti
 ---
 title: No-Cook Guacamole from the Teaching Kitchen
 date: 2025-09-17
-image: images/091725/g1.jpg
+image: images/091725/g.jpg,images/091725/g1.jpg,images/091725/g2.jpg,images/091725/g3.jpg
 excerpt: Volunteering in the Teaching Kitchen, we made fresh guacamole!!
 ---
 

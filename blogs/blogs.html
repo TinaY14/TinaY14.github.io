@@ -116,7 +116,7 @@
 
         /* Billboard frame - soft blue/white tones matching site theme */
         .billboard-frame {
-            background: linear-gradient(145deg, 
+            background: linear-gradient(145deg,
                 #ffffff 0%,
                 #f5faff 25%,
                 #ffffff 50%,
@@ -125,7 +125,7 @@
             );
             border: 3px solid #4fc3f7;
             border-radius: 10px;
-            box-shadow: 
+            box-shadow:
                 0 6px 20px rgba(79, 195, 247, 0.15),
                 0 2px 6px rgba(0, 0, 0, 0.08),
                 inset 0 1px 0 rgba(255,255,255,0.9);
@@ -133,7 +133,6 @@
             position: relative;
         }
 
-        /* Subtle texture overlay */
         .billboard-frame::before {
             content: '';
             position: absolute;
@@ -141,7 +140,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 80%, rgba(79, 195, 247, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(79, 195, 247, 0.03) 0%, transparent 50%);
             pointer-events: none;
@@ -149,7 +148,7 @@
         }
 
         :root.dark-mode .billboard-frame {
-            background: linear-gradient(145deg, 
+            background: linear-gradient(145deg,
                 #1e3a5f 0%,
                 #152a45 25%,
                 #1a3352 50%,
@@ -157,13 +156,12 @@
                 #1e3a5f 100%
             );
             border-color: #64b5f6;
-            box-shadow: 
+            box-shadow:
                 0 6px 20px rgba(100, 181, 246, 0.2),
                 0 2px 6px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        /* Blog image on the billboard - shorter height */
         .billboard-image {
             width: 100%;
             height: 100px;
@@ -175,7 +173,6 @@
             border-bottom-color: #64b5f6;
         }
 
-        /* Content area - compact for shorter sign */
         .billboard-content {
             padding: 10px 14px 12px;
             position: relative;
@@ -239,7 +236,6 @@
             transform: translateX(4px);
         }
 
-        /* Standing pole under the billboard - blue tinted */
         .billboard-pole {
             width: 10px;
             height: 30px;
@@ -283,7 +279,6 @@
             transform: scaleX(1);
         }
 
-        /* Thought bubble when pig looks at sign */
         .pig-thought {
             position: absolute;
             top: -35px;
@@ -355,7 +350,6 @@
             transform: scaleX(-1);
         }
 
-        /* Celebrating animation when pig reaches healthy destination */
         .pig-companion.celebrating .pig {
             animation: pigCelebrate 0.5s ease-in-out infinite;
         }
@@ -382,7 +376,7 @@
             50% { transform: rotate(-15deg); }
         }
 
-        /* Pig Home - positioned at top center, above the road */
+        /* Pig Home */
         .pig-home {
             position: absolute;
             width: 120px;
@@ -455,13 +449,8 @@
             box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
         }
 
-        .pig-home .window-left {
-            left: 10px;
-        }
-
-        .pig-home .window-right {
-            right: 10px;
-        }
+        .pig-home .window-left { left: 10px; }
+        .pig-home .window-right { right: 10px; }
 
         .pig-home .chimney {
             position: absolute;
@@ -493,16 +482,11 @@
             background: linear-gradient(135deg, #1e3a5f, #152a45);
             border-color: #64b5f6;
         }
-
-        :root.dark-mode .pig-home .roof {
-            border-bottom-color: #64b5f6;
-        }
-
+        :root.dark-mode .pig-home .roof { border-bottom-color: #64b5f6; }
         :root.dark-mode .pig-home .window {
             background: linear-gradient(135deg, #1565c0, #1976d2);
             border-color: #64b5f6;
         }
-
         :root.dark-mode .pig-home .chimney {
             background: linear-gradient(90deg, #1565c0, #1976d2, #1565c0);
         }
@@ -512,7 +496,7 @@
             50% { transform: translateX(-50%) scale(1.25); }
         }
 
-        /* Healthy Pig Destination - at the END (bottom) of the road */
+        /* Healthy Pig Destination */
         .healthy-pig-destination {
             position: absolute;
             left: 50%;
@@ -577,20 +561,19 @@
             box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
         }
 
-        .healthy-pig-destination.pig-arrived .healthy-pig-message {
-            opacity: 1;
-        }
+        .healthy-pig-destination.pig-arrived .healthy-pig-message { opacity: 1; }
 
         :root.dark-mode .healthy-pig-message {
             background: linear-gradient(135deg, #1565c0, #1976d2);
             color: #e3f2fd;
         }
-
         :root.dark-mode .healthy-pig-platform {
             background: linear-gradient(180deg, #4caf50, #388e3c);
         }
 
-        /* Blog Detail Modal */
+        /* ================================================
+           BLOG DETAIL MODAL
+        ================================================ */
         .blog-modal {
             display: none;
             position: fixed;
@@ -619,14 +602,8 @@
         }
 
         @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         :root.dark-mode .blog-modal-content {
@@ -635,8 +612,8 @@
 
         .blog-modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -647,8 +624,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 20;
             transition: background 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
         .blog-modal-close:hover {
@@ -656,14 +634,138 @@
             transform: scale(1.1);
         }
 
-        .blog-modal-image {
+        /* ---- Image Carousel ---- */
+        .modal-carousel {
+            position: relative;
             width: 100%;
-            height: 350px;
-            object-fit: cover;
+            overflow: hidden;
+            background: #000;
+            /* height is set dynamically by JS, default fallback: */
+            height: 380px;
         }
 
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Arrow buttons */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            font-size: 18px;
+            color: #2c3e50;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+            transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.9;
+        }
+
+        .carousel-arrow:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+        }
+
+        .carousel-arrow:active {
+            transform: translateY(-50%) scale(0.96);
+        }
+
+        .carousel-arrow.prev { left: 14px; }
+        .carousel-arrow.next { right: 14px; }
+
+        /* Hide arrows when only one image */
+        .modal-carousel.single-image .carousel-arrow {
+            display: none;
+        }
+
+        /* Dot indicators */
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.55);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .carousel-dot.active {
+            background: #fff;
+            transform: scale(1.35);
+        }
+
+        /* Hide dots when only one image */
+        .modal-carousel.single-image .carousel-dots {
+            display: none;
+        }
+
+        /* Image counter badge (e.g. "2 / 5") */
+        .carousel-counter {
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+            font-size: 0.8em;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            z-index: 10;
+            letter-spacing: 0.03em;
+            pointer-events: none;
+        }
+
+        .modal-carousel.single-image .carousel-counter {
+            display: none;
+        }
+
+        /* Touch / swipe support - visual hint */
+        .carousel-slide img {
+            touch-action: pan-y;
+        }
+
+        /* ---- Modal body ---- */
         .blog-modal-body {
-            padding: 40px;
+            padding: 36px 40px 42px;
         }
 
         .blog-modal-date {
@@ -681,9 +783,7 @@
             line-height: 1.3;
         }
 
-        :root.dark-mode .blog-modal-title {
-            color: #fff;
-        }
+        :root.dark-mode .blog-modal-title { color: #fff; }
 
         .blog-modal-text {
             font-size: 1.05em;
@@ -691,23 +791,14 @@
             line-height: 1.8;
         }
 
-        :root.dark-mode .blog-modal-text {
-            color: #ccc;
-        }
+        :root.dark-mode .blog-modal-text { color: #ccc; }
 
-        .blog-modal-text p {
-            margin-bottom: 1.2em;
-        }
+        .blog-modal-text p { margin-bottom: 1.2em; }
 
         /* Responsive */
         @media (max-width: 1000px) {
-            .blog-path-svg {
-                display: none;
-            }
-
-            .billboard-pole {
-                display: none;
-            }
+            .blog-path-svg { display: none; }
+            .billboard-pole { display: none; }
 
             .blog-entry {
                 padding: 0 20px !important;
@@ -715,55 +806,26 @@
                 margin-bottom: 50px;
             }
 
-            .blog-signpost-card {
-                max-width: 100%;
-            }
-
-            .billboard-frame {
-                border-radius: 12px;
-            }
-
-            .pig-companion {
-                display: none;
-            }
-
-            .pig-home {
-                display: none;
-            }
-
-            .healthy-pig-destination {
-                display: none;
-            }
-
-            .path-flower {
-                display: none;
-            }
+            .blog-signpost-card { max-width: 100%; }
+            .billboard-frame { border-radius: 12px; }
+            .pig-companion { display: none; }
+            .pig-home { display: none; }
+            .healthy-pig-destination { display: none; }
+            .path-flower { display: none; }
         }
 
         @media (max-width: 600px) {
-            .billboard-image {
-                height: 130px;
-            }
+            .billboard-image { height: 130px; }
+            .billboard-content { padding: 14px 16px 18px; }
+            .billboard-title { font-size: 1em; }
 
-            .billboard-content {
-                padding: 14px 16px 18px;
-            }
+            .modal-carousel { height: 240px !important; }
+            .carousel-arrow { width: 36px; height: 36px; font-size: 14px; }
+            .carousel-arrow.prev { left: 8px; }
+            .carousel-arrow.next { right: 8px; }
 
-            .billboard-title {
-                font-size: 1em;
-            }
-
-            .blog-modal-image {
-                height: 220px;
-            }
-
-            .blog-modal-body {
-                padding: 25px;
-            }
-
-            .blog-modal-title {
-                font-size: 1.5em;
-            }
+            .blog-modal-body { padding: 22px 20px 28px; }
+            .blog-modal-title { font-size: 1.5em; }
         }
     </style>
 
@@ -798,22 +860,19 @@
             </script>
         </nav>
     </header>
+
     <main class="hero inner-page">
         <div class="page-content wide">
             <h2 class="page-title">Blogs</h2>
 
             <!-- Blog Path Container -->
             <div class="blog-path-container" id="blog-path-container">
-                <!-- Full-width curved path SVG -->
                 <svg class="blog-path-svg" id="blog-path-svg" preserveAspectRatio="none">
                     <path id="garden-path-border" class="garden-path-border"/>
                     <path id="garden-path" class="garden-path"/>
                 </svg>
 
-                <!-- Blog entries container -->
-                <div class="blog-entries" id="blog-entries">
-                    <!-- Blog entries will be loaded dynamically -->
-                </div>
+                <div class="blog-entries" id="blog-entries"></div>
 
                 <!-- Pig's Home at the START (top) -->
                 <div class="pig-home" id="pig-home">
@@ -835,7 +894,7 @@
                         <div class="healthy-pig-sparkles">✨🌟✨</div>
                         <div class="healthy-pig-platform"></div>
                     </div>
-                    <div class="healthy-pig-message">Healthy & Happy! 🎉</div>
+                    <div class="healthy-pig-message">Healthy &amp; Happy! 🎉</div>
                 </div>
             </div>
         </div>
@@ -869,7 +928,27 @@
     <div id="blog-modal" class="blog-modal">
         <div class="blog-modal-content">
             <button class="blog-modal-close" aria-label="Close">&times;</button>
-            <img class="blog-modal-image" src="" alt="">
+
+            <!-- Image Carousel -->
+            <div class="modal-carousel" id="modal-carousel">
+                <!-- Slides injected by JS -->
+                <div class="carousel-track" id="carousel-track"></div>
+
+                <!-- Prev / Next arrows -->
+                <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-arrow next" id="carousel-next" aria-label="Next image">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Dot indicators -->
+                <div class="carousel-dots" id="carousel-dots"></div>
+
+                <!-- Counter badge -->
+                <div class="carousel-counter" id="carousel-counter">1 / 1</div>
+            </div>
+
             <div class="blog-modal-body">
                 <div class="blog-modal-date"></div>
                 <h2 class="blog-modal-title"></h2>
@@ -879,41 +958,151 @@
     </div>
 
     <script>
-        // Blog data and rendering
+        // =============================================
+        // Carousel state
+        // =============================================
+        const carousel        = document.getElementById('modal-carousel');
+        const carouselTrack   = document.getElementById('carousel-track');
+        const carouselDots    = document.getElementById('carousel-dots');
+        const carouselCounter = document.getElementById('carousel-counter');
+        const carouselPrev    = document.getElementById('carousel-prev');
+        const carouselNext    = document.getElementById('carousel-next');
+
+        let currentSlide = 0;
+        let totalSlides  = 0;
+
+        function buildCarousel(images) {
+            // Clear old content
+            carouselTrack.innerHTML = '';
+            carouselDots.innerHTML  = '';
+            currentSlide = 0;
+            totalSlides  = images.length;
+
+            // Build slides
+            images.forEach((src, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const img = document.createElement('img');
+                img.src = src.trim();
+                img.alt = `Photo ${i + 1}`;
+                img.loading = i === 0 ? 'eager' : 'lazy';
+                slide.appendChild(img);
+                carouselTrack.appendChild(slide);
+            });
+
+            // Build dots
+            images.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                carouselDots.appendChild(dot);
+            });
+
+            // Toggle single-image class
+            if (totalSlides <= 1) {
+                carousel.classList.add('single-image');
+            } else {
+                carousel.classList.remove('single-image');
+            }
+
+            updateCarouselUI();
+        }
+
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+            updateCarouselUI();
+        }
+
+        function updateCarouselUI() {
+            // Slide the track
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update dots
+            const dots = carouselDots.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+
+            // Update counter
+            carouselCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            // Disable prev/next at edges
+            carouselPrev.style.opacity = currentSlide === 0              ? '0.35' : '';
+            carouselNext.style.opacity = currentSlide === totalSlides - 1 ? '0.35' : '';
+        }
+
+        carouselPrev.addEventListener('click', () => goToSlide(currentSlide - 1));
+        carouselNext.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        // Touch / swipe support
+        let touchStartX = 0;
+        let touchStartY = 0;
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        carousel.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+                dx < 0 ? goToSlide(currentSlide + 1) : goToSlide(currentSlide - 1);
+            }
+        }, { passive: true });
+
+        // =============================================
+        // Blog data & rendering
+        // =============================================
         const blogEntries = document.getElementById('blog-entries');
-        const blogModal = document.getElementById('blog-modal');
-        const modalImage = blogModal.querySelector('.blog-modal-image');
-        const modalDate = blogModal.querySelector('.blog-modal-date');
-        const modalTitle = blogModal.querySelector('.blog-modal-title');
-        const modalText = blogModal.querySelector('.blog-modal-text');
-        const modalClose = blogModal.querySelector('.blog-modal-close');
-        const pigThought = document.getElementById('pig-thought');
+        const blogModal   = document.getElementById('blog-modal');
+        const modalDate   = blogModal.querySelector('.blog-modal-date');
+        const modalTitle  = blogModal.querySelector('.blog-modal-title');
+        const modalText   = blogModal.querySelector('.blog-modal-text');
+        const modalClose  = blogModal.querySelector('.blog-modal-close');
+        const pigThought  = document.getElementById('pig-thought');
 
-        // Store blog positions for path generation
         let blogPositions = [];
-        let blogsData = [];
+        let blogsData     = [];
 
-        // Parse markdown file with YAML frontmatter
+        /**
+         * Parse markdown file with YAML-like frontmatter.
+         *
+         * Supported frontmatter fields:
+         *   title:   Blog title
+         *   date:    ISO date string
+         *   image:   Single cover image path  (used as carousel[0] if no `images` field)
+         *   images:  Comma-separated list of image paths  ← NEW for multi-photo carousel
+         *   excerpt: Short description shown on the card
+         *
+         * Example (single image):
+         *   title: My Trip
+         *   date: 2024-06-01
+         *   image: ../images/blog/trip.jpg
+         *   excerpt: A wonderful journey...
+         *
+         * Example (multiple images):
+         *   title: My Trip
+         *   date: 2024-06-01
+         *   images: ../images/blog/trip1.jpg, ../images/blog/trip2.jpg, ../images/blog/trip3.jpg
+         *   excerpt: A wonderful journey...
+         */
         function parseMarkdownPosts(markdown) {
             const posts = [];
-            // Split by frontmatter delimiter (--- at start of new post)
             const sections = markdown.split(/\n---\n(?=title:)/);
-            
+
             for (const section of sections) {
                 const trimmed = section.trim();
                 if (!trimmed || !trimmed.includes('title:')) continue;
-                
-                // Find where frontmatter ends (next --- or first blank line after metadata)
+
                 const lines = trimmed.split('\n');
                 let frontmatterEnd = 0;
-                let inFrontmatter = true;
-                const frontmatter = {};
-                
+                let inFrontmatter  = true;
+                const frontmatter  = {};
+
                 for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    
-                    // Check if this line is a frontmatter field
+                    const line  = lines[i].trim();
                     const match = line.match(/^(\w+):\s*(.+)$/);
+
                     if (match && inFrontmatter) {
                         frontmatter[match[1]] = match[2];
                         frontmatterEnd = i;
@@ -921,51 +1110,52 @@
                         frontmatterEnd = i;
                         break;
                     } else if (line === '' && Object.keys(frontmatter).length > 0) {
-                        // Empty line after frontmatter fields means content starts
                         frontmatterEnd = i - 1;
-                        inFrontmatter = false;
+                        inFrontmatter  = false;
                         break;
                     }
                 }
-                
-                // Get content (everything after frontmatter)
+
                 const contentLines = lines.slice(frontmatterEnd + 1);
-                const content = contentLines.join('\n').trim();
-                
-                // Convert markdown content to HTML paragraphs
-                const htmlContent = content
+                const content      = contentLines.join('\n').trim();
+                const htmlContent  = content
                     .split(/\n\n+/)
                     .filter(p => p.trim())
                     .map(p => `<p>${p.trim()}</p>`)
                     .join('');
-                
+
                 if (frontmatter.title) {
+                    // Resolve image list
+                    // Priority: `images` field (comma-separated) → fallback to single `image`
+                    let images = [];
+                    if (frontmatter.images) {
+                        images = frontmatter.images.split(',').map(s => s.trim()).filter(Boolean);
+                    } else if (frontmatter.image) {
+                        images = [frontmatter.image.trim()];
+                    }
+
                     posts.push({
-                        title: frontmatter.title,
-                        date: frontmatter.date,
-                        image: frontmatter.image,
-                        excerpt: frontmatter.excerpt,
+                        title:   frontmatter.title,
+                        date:    frontmatter.date,
+                        // Keep `image` for backward compat (card thumbnail = first image)
+                        image:   images[0] || '',
+                        images:  images,
+                        excerpt: frontmatter.excerpt || '',
                         content: htmlContent
                     });
                 }
             }
-            
+
             return posts;
         }
 
         const pigReactions = [
-            'Interesting!',
-            'Ooh! 📖',
-            'Yummy read!',
-            'Love it! 💕',
-            'So cool!',
-            'Hmm... 🤔',
-            'Nice! ✨',
-            'Wow! 😮'
+            'Interesting!', 'Ooh! 📖', 'Yummy read!', 'Love it! 💕',
+            'So cool!', 'Hmm... 🤔', 'Nice! ✨', 'Wow! 😮'
         ];
 
         function formatDate(dateStr) {
-            const date = new Date(dateStr);
+            const date    = new Date(dateStr);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
         }
@@ -975,10 +1165,8 @@
             blogsData = blogs;
 
             blogs.forEach((blog, index) => {
-                // Strictly alternate left/right - no randomness
                 const isLeft = index % 2 === 0;
-                
-                const entry = document.createElement('div');
+                const entry  = document.createElement('div');
                 entry.className = `blog-entry ${isLeft ? 'left' : 'right'}`;
 
                 entry.innerHTML = `
@@ -996,14 +1184,10 @@
                     </div>
                 `;
 
-                entry.querySelector('.blog-signpost-card').addEventListener('click', () => {
-                    openModal(blog);
-                });
-
+                entry.querySelector('.blog-signpost-card').addEventListener('click', () => openModal(blog));
                 blogEntries.appendChild(entry);
             });
 
-            // Wait for DOM to settle then generate path and flowers only
             setTimeout(() => {
                 calculateBlogPositions();
                 generatePath();
@@ -1014,33 +1198,30 @@
 
         function calculateBlogPositions() {
             blogPositions = [];
-            const entries = document.querySelectorAll('.blog-entry');
+            const entries       = document.querySelectorAll('.blog-entry');
             const containerRect = pathContainer.getBoundingClientRect();
-            
-            entries.forEach((entry, index) => {
-                const rect = entry.getBoundingClientRect();
-                const isLeft = entry.classList.contains('left');
-                
-                // Center Y of the blog entry relative to container
+
+            entries.forEach((entry) => {
+                const rect    = entry.getBoundingClientRect();
+                const isLeft  = entry.classList.contains('left');
                 const centerY = rect.top - containerRect.top + rect.height / 2;
-                
-                // Road stays more centered, further from signs
-                const curveX = isLeft ? 0.45 : 0.55;
-                
-                blogPositions.push({
-                    y: centerY,
-                    x: curveX,
-                    isLeft: isLeft
-                });
+                const curveX  = isLeft ? 0.45 : 0.55;
+                blogPositions.push({ y: centerY, x: curveX, isLeft });
             });
         }
 
+        // ---- Open / Close Modal ----
         function openModal(blog) {
-            modalImage.src = blog.image;
-            modalImage.alt = blog.title;
-            modalDate.textContent = formatDate(blog.date);
+            // Populate text fields
+            modalDate.textContent  = formatDate(blog.date);
             modalTitle.textContent = blog.title;
-            modalText.innerHTML = blog.content;
+            modalText.innerHTML    = blog.content;
+
+            // Build carousel
+            const images = (blog.images && blog.images.length > 0) ? blog.images : [blog.image];
+            buildCarousel(images);
+
+            // Show modal
             blogModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1051,49 +1232,43 @@
         }
 
         modalClose.addEventListener('click', closeModal);
-        blogModal.addEventListener('click', (e) => {
-            if (e.target === blogModal) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+        blogModal.addEventListener('click', e => { if (e.target === blogModal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (!blogModal.classList.contains('active')) return;
+            if (e.key === 'Escape')      closeModal();
+            if (e.key === 'ArrowLeft')   goToSlide(currentSlide - 1);
+            if (e.key === 'ArrowRight')  goToSlide(currentSlide + 1);
         });
 
+        // ---- Intersection Observer ----
         function observeEntries() {
             const entries = document.querySelectorAll('.blog-entry');
-
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((observerEntries) => {
-                    observerEntries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, {
-                    threshold: 0.15,
-                    rootMargin: '0px 0px -50px 0px'
-                });
-
+                const observer = new IntersectionObserver(obs => {
+                    obs.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+                }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
                 entries.forEach(entry => observer.observe(entry));
             } else {
                 entries.forEach(entry => entry.classList.add('visible'));
             }
         }
 
+        // =============================================
         // Path generation
-        const pathContainer = document.getElementById('blog-path-container');
-        const pathSvg = document.getElementById('blog-path-svg');
-        const gardenPath = document.getElementById('garden-path');
+        // =============================================
+        const pathContainer    = document.getElementById('blog-path-container');
+        const pathSvg          = document.getElementById('blog-path-svg');
+        const gardenPath       = document.getElementById('garden-path');
         const gardenPathBorder = document.getElementById('garden-path-border');
 
         function generatePath() {
-            const containerWidth = pathContainer.offsetWidth;
+            const containerWidth  = pathContainer.offsetWidth;
             const containerHeight = pathContainer.offsetHeight;
 
             pathSvg.setAttribute('viewBox', `0 0 ${containerWidth} ${containerHeight}`);
-            pathSvg.style.width = containerWidth + 'px';
+            pathSvg.style.width  = containerWidth  + 'px';
             pathSvg.style.height = containerHeight + 'px';
 
-            // End point - grass destination (center)
             const endX = containerWidth * 0.5;
             const endY = containerHeight - 80;
 
@@ -1104,152 +1279,111 @@
                 return;
             }
 
-            const firstPos = blogPositions[0];
-            
-            // Start point - pig home at top center
             const startX = containerWidth * 0.5;
             const startY = 60;
+            let pathD    = `M ${startX},${startY}`;
 
-            // Build path with smooth curves using cubic bezier
-            let pathD = `M ${startX},${startY}`;
-            
-            // Curve to each blog position
             for (let i = 0; i < blogPositions.length; i++) {
-                const curr = blogPositions[i];
+                const curr  = blogPositions[i];
                 const currX = containerWidth * curr.x;
-                
                 if (i === 0) {
-                    // First segment: from home to first blog - same smooth curve style as others
                     const cy1 = startY + (curr.y - startY) * 0.3;
                     const cy2 = startY + (curr.y - startY) * 0.7;
                     pathD += ` C ${startX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
                 } else {
-                    const prev = blogPositions[i - 1];
+                    const prev  = blogPositions[i - 1];
                     const prevX = containerWidth * prev.x;
-                    // Smooth S-curve between blogs
-                    const cy1 = prev.y + (curr.y - prev.y) * 0.3;
-                    const cy2 = prev.y + (curr.y - prev.y) * 0.7;
+                    const cy1   = prev.y + (curr.y - prev.y) * 0.3;
+                    const cy2   = prev.y + (curr.y - prev.y) * 0.7;
                     pathD += ` C ${prevX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
                 }
             }
 
-            // Final curve to grass destination
             const lastPos = blogPositions[blogPositions.length - 1];
-            const lastX = containerWidth * lastPos.x;
-            const cy1 = lastPos.y + (endY - lastPos.y) * 0.3;
-            const cy2 = lastPos.y + (endY - lastPos.y) * 0.7;
-            pathD += ` C ${lastX},${cy1} ${endX},${cy2} ${endX},${endY}`;
+            const lastX   = containerWidth * lastPos.x;
+            const cy1f    = lastPos.y + (endY - lastPos.y) * 0.3;
+            const cy2f    = lastPos.y + (endY - lastPos.y) * 0.7;
+            pathD += ` C ${lastX},${cy1f} ${endX},${cy2f} ${endX},${endY}`;
 
             gardenPath.setAttribute('d', pathD);
             gardenPathBorder.setAttribute('d', pathD);
 
-            // Position pig home at path start
             positionPigHome(startX, startY);
-            
-            // Position grass at path end
             positionGrass(endX, endY);
-
             addFlowers(containerWidth, containerHeight);
         }
 
         function positionPigHome(x, y) {
-            const pigHomeEl = document.getElementById('pig-home');
-            if (!pigHomeEl) return;
-            
-            pigHomeEl.style.left = x + 'px';
-            pigHomeEl.style.top = (y - 70) + 'px';
+            const el = document.getElementById('pig-home');
+            if (!el) return;
+            el.style.left = x + 'px';
+            el.style.top  = (y - 70) + 'px';
         }
-        
+
         function positionGrass(x, y) {
-            const grassEl = document.getElementById('healthy-pig-destination');
-            if (!grassEl) return;
-            
-            grassEl.style.left = x + 'px';
-            grassEl.style.bottom = 'auto';
-            grassEl.style.top = (y - 20) + 'px';
+            const el = document.getElementById('healthy-pig-destination');
+            if (!el) return;
+            el.style.left   = x + 'px';
+            el.style.bottom = 'auto';
+            el.style.top    = (y - 20) + 'px';
         }
 
         function addFlowers(containerWidth, containerHeight) {
             const flowers = ['🌸', '🌷', '🌼', '🌺', '🌻'];
-            const existingFlowers = pathContainer.querySelectorAll('.path-flower');
-            existingFlowers.forEach(f => f.remove());
+            pathContainer.querySelectorAll('.path-flower').forEach(f => f.remove());
 
-            const centerX = containerWidth * 0.5;
-            const startY = 80;
-            const endY = containerHeight - 100;
+            const centerX    = containerWidth * 0.5;
+            const startY     = 80;
+            const endY       = containerHeight - 100;
             const pathHeight = endY - startY;
-            
-            // Add flowers along both sides of the center path
-            const flowerCount = 12;
-            for (let i = 0; i < flowerCount; i++) {
-                const flower = document.createElement('span');
+            const count      = 12;
+
+            for (let i = 0; i < count; i++) {
+                const flower    = document.createElement('span');
                 flower.className = 'path-flower';
                 flower.textContent = flowers[i % flowers.length];
-                
-                const y = startY + (pathHeight / flowerCount) * i + Math.random() * 30;
+                const y    = startY + (pathHeight / count) * i + Math.random() * 30;
                 const side = (i % 2 === 0) ? -1 : 1;
-                const x = centerX + side * (50 + Math.random() * 40);
-                
-                flower.style.top = y + 'px';
-                flower.style.left = x + 'px';
+                const x    = centerX + side * (50 + Math.random() * 40);
+                flower.style.top       = y + 'px';
+                flower.style.left      = x + 'px';
                 flower.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
-                flower.style.opacity = (0.7 + Math.random() * 0.3).toString();
+                flower.style.opacity   = (0.7 + Math.random() * 0.3).toString();
                 pathContainer.appendChild(flower);
             }
         }
 
-        // Pig movement - follows the actual SVG path
-        const pig = document.getElementById('pig-companion');
-        const pigHome = document.getElementById('pig-home');
-        const pigDoor = document.getElementById('pig-door');
-        const healthyDestination = document.getElementById('healthy-pig-destination');
+        // =============================================
+        // Pig movement
+        // =============================================
+        const pig              = document.getElementById('pig-companion');
+        const pigHome          = document.getElementById('pig-home');
+        const pigDoor          = document.getElementById('pig-door');
+        const healthyDest      = document.getElementById('healthy-pig-destination');
 
-        let lastScrollY = window.scrollY;
-        let isWalking = false;
+        let lastScrollY        = window.scrollY;
+        let isWalking          = false;
         let walkingTimeout;
-        let lastPigX = 0;
+        let lastPigX           = 0;
         let currentPigProgress = 0;
         let lookingTimeout;
 
         function checkBlogProximity(progress) {
-            if (blogPositions.length === 0) return;
-            
-            const pathElement = gardenPath;
-            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
-            if (pathLength === 0) return;
-            
-            const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
-            const pigY = pointOnPath.y;
-            
-            // Check if pig is near a blog
+            if (!blogPositions.length) return;
+            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
+            if (!pathLength) return;
+
+            const pt = gardenPath.getPointAtLength(progress * pathLength);
+
             for (let i = 0; i < blogPositions.length; i++) {
-                const blog = blogPositions[i];
-                const distance = Math.abs(pigY - blog.y);
-                
-                if (distance < 30) {
-                    // Pig is near a blog - show looking animation
+                if (Math.abs(pt.y - blogPositions[i].y) < 30) {
                     clearTimeout(lookingTimeout);
-                    
                     pig.classList.add('looking');
-                    
-                    // Face the blog
-                    if (blog.isLeft) {
-                        pig.classList.add('looking-left');
-                        pig.classList.remove('looking-right');
-                    } else {
-                        pig.classList.remove('looking-left');
-                        pig.classList.add('looking-right');
-                    }
-                    
-                    // Show thought bubble with random reaction
-                    if (pigThought) {
-                        pigThought.textContent = pigReactions[i % pigReactions.length];
-                    }
-                    
-                    lookingTimeout = setTimeout(() => {
-                        pig.classList.remove('looking', 'looking-left', 'looking-right');
-                    }, 800);
-                    
+                    blogPositions[i].isLeft
+                        ? (pig.classList.add('looking-left'),  pig.classList.remove('looking-right'))
+                        : (pig.classList.remove('looking-left'), pig.classList.add('looking-right'));
+                    if (pigThought) pigThought.textContent = pigReactions[i % pigReactions.length];
+                    lookingTimeout = setTimeout(() => pig.classList.remove('looking', 'looking-left', 'looking-right'), 800);
                     return;
                 }
             }
@@ -1257,91 +1391,56 @@
 
         function updatePig() {
             if (!pig || !pathContainer || !gardenPath) return;
-
-            const scrollY = window.scrollY;
-            const scrollDelta = scrollY - lastScrollY;
+            const scrollY      = window.scrollY;
+            const scrollDelta  = scrollY - lastScrollY;
             const windowHeight = window.innerHeight;
-            
+
             const containerRect = pathContainer.getBoundingClientRect();
-            const containerTop = containerRect.top + scrollY;
-            const containerHeight = pathContainer.offsetHeight;
-            
-            // Get path info
-            const pathElement = gardenPath;
-            const pathLength = pathElement.getTotalLength ? pathElement.getTotalLength() : 0;
-            if (pathLength === 0) return;
-            
-            // Simple scroll progress:
-            // 0% = when container top reaches viewport top
-            // 100% = when container bottom is at viewport bottom
-            const scrollStart = containerTop;
-            const scrollEnd = containerTop + containerHeight - windowHeight;
-            const scrollRange = Math.max(scrollEnd - scrollStart, 1);
-            const progress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange));
-            currentPigProgress = progress;
+            const containerTop  = containerRect.top + scrollY;
+            const scrollEnd     = containerTop + pathContainer.offsetHeight - windowHeight;
+            const scrollRange   = Math.max(scrollEnd - containerTop, 1);
+            const progress      = Math.max(0, Math.min(1, (scrollY - containerTop) / scrollRange));
+            currentPigProgress  = progress;
 
-            // Get position along the SVG path
-            const pointOnPath = pathElement.getPointAtLength(progress * pathLength);
-            const pigX = containerRect.left + pointOnPath.x;
-            const pigY = containerRect.top + pointOnPath.y;
+            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
+            if (!pathLength) return;
 
-            pig.style.left = pigX + 'px';
-            pig.style.top = pigY + 'px';
+            const pt   = gardenPath.getPointAtLength(progress * pathLength);
+            pig.style.left      = (containerRect.left + pt.x) + 'px';
+            pig.style.top       = (containerRect.top  + pt.y) + 'px';
             pig.style.transform = 'translate(-50%, -50%)';
-            
-            // Show/hide pig based on progress
-            // Pig comes out earlier - visible as soon as page loads with any scroll
+            pig.style.opacity   = '1';
+
             if (progress <= 0) {
-                // Pig visible at house, door closed initially
-                pig.style.opacity = '1';
                 if (pigDoor) pigDoor.classList.remove('open');
                 if (pigHome) pigHome.classList.remove('pig-near');
             } else if (progress < 0.08) {
-                // Pig coming out of house - door opens
-                pig.style.opacity = '1';
                 if (pigDoor) pigDoor.classList.add('open');
                 if (pigHome) pigHome.classList.add('pig-near');
             } else {
-                // Pig on the road
-                pig.style.opacity = '1';
                 if (pigDoor) pigDoor.classList.remove('open');
                 if (pigHome) pigHome.classList.remove('pig-near');
             }
 
-            // Face direction of movement
-            if (Math.abs(pointOnPath.x - lastPigX) > 2) {
-                if (pointOnPath.x < lastPigX) {
-                    pig.classList.add('facing-left');
-                } else {
-                    pig.classList.remove('facing-left');
-                }
+            if (Math.abs(pt.x - lastPigX) > 2) {
+                pt.x < lastPigX ? pig.classList.add('facing-left') : pig.classList.remove('facing-left');
             }
-            lastPigX = pointOnPath.x;
+            lastPigX = pt.x;
 
-            // Check if pig reaches grass at end
             if (progress > 0.95) {
-                if (healthyDestination) healthyDestination.classList.add('pig-arrived');
+                healthyDest && healthyDest.classList.add('pig-arrived');
                 pig.classList.add('celebrating');
             } else {
-                if (healthyDestination) healthyDestination.classList.remove('pig-arrived');
+                healthyDest && healthyDest.classList.remove('pig-arrived');
                 pig.classList.remove('celebrating');
             }
 
-            // Walking animation
             if (Math.abs(scrollDelta) > 1) {
-                if (!isWalking) {
-                    pig.classList.add('walking');
-                    pig.classList.remove('looking');
-                    isWalking = true;
-                }
-
+                if (!isWalking) { pig.classList.add('walking'); pig.classList.remove('looking'); isWalking = true; }
                 clearTimeout(walkingTimeout);
-
                 walkingTimeout = setTimeout(() => {
                     pig.classList.remove('walking');
                     isWalking = false;
-                    
-                    // Check for interactions when stopped
                     checkBlogProximity(progress);
                 }, 150);
             }
@@ -1349,16 +1448,18 @@
             lastScrollY = scrollY;
         }
 
-        // Load blog data from markdown file
+        // =============================================
+        // Load posts
+        // =============================================
         fetch('posts.md')
-            .then(response => response.text())
+            .then(r => r.text())
             .then(markdown => {
                 const blogs = parseMarkdownPosts(markdown);
                 renderBlogs(blogs);
             })
-            .catch(error => {
-                console.error('Error loading blog data:', error);
-                blogEntries.innerHTML = '<p style="text-align: center; color: #666;">Blog posts coming soon!</p>';
+            .catch(err => {
+                console.error('Error loading blog data:', err);
+                blogEntries.innerHTML = '<p style="text-align:center;color:#666;">Blog posts coming soon!</p>';
                 generatePath();
             });
 
