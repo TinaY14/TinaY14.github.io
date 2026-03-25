@@ -634,15 +634,12 @@
             transform: scale(1.1);
         }
 
-        /* ---- Image Carousel (inside modal body, below text) ---- */
+        /* ---- Image Carousel (top of modal, natural image height) ---- */
         .modal-carousel {
             position: relative;
             width: 100%;
             overflow: hidden;
             background: #f0f4f8;
-            border-radius: 12px;
-            margin-top: 28px;
-            height: 380px;
         }
 
         :root.dark-mode .modal-carousel {
@@ -651,7 +648,6 @@
 
         .carousel-track {
             display: flex;
-            height: 100%;
             transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
         }
@@ -659,13 +655,11 @@
         .carousel-slide {
             flex: 0 0 100%;
             width: 100%;
-            height: 100%;
         }
 
         .carousel-slide img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
             user-select: none;
             -webkit-user-drag: none;
@@ -824,7 +818,7 @@
             .billboard-content { padding: 14px 16px 18px; }
             .billboard-title { font-size: 1em; }
 
-            .modal-carousel { height: 220px !important; margin-top: 20px; }
+            /* carousel grows naturally on mobile too */
             .carousel-arrow { width: 36px; height: 36px; font-size: 14px; }
             .carousel-arrow.prev { left: 8px; }
             .carousel-arrow.next { right: 8px; }
@@ -934,30 +928,23 @@
         <div class="blog-modal-content">
             <button class="blog-modal-close" aria-label="Close">&times;</button>
 
+            <!-- Image Carousel at the top -->
+            <div class="modal-carousel" id="modal-carousel">
+                <div class="carousel-track" id="carousel-track"></div>
+                <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-arrow next" id="carousel-next" aria-label="Next image">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="carousel-dots" id="carousel-dots"></div>
+                <div class="carousel-counter" id="carousel-counter">1 / 1</div>
+            </div>
+
             <div class="blog-modal-body">
                 <div class="blog-modal-date"></div>
                 <h2 class="blog-modal-title"></h2>
                 <div class="blog-modal-text"></div>
-
-                <!-- Image Carousel at the bottom -->
-                <div class="modal-carousel" id="modal-carousel">
-                    <!-- Slides injected by JS -->
-                    <div class="carousel-track" id="carousel-track"></div>
-
-                    <!-- Prev / Next arrows -->
-                    <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="carousel-arrow next" id="carousel-next" aria-label="Next image">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-
-                    <!-- Dot indicators -->
-                    <div class="carousel-dots" id="carousel-dots"></div>
-
-                    <!-- Counter badge -->
-                    <div class="carousel-counter" id="carousel-counter">1 / 1</div>
-                </div>
             </div>
         </div>
     </div>
