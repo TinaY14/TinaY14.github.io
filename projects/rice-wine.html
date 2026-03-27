@@ -37,7 +37,8 @@
             overflow: hidden;
             cursor: pointer;
             background: #e3f2fd;
-            aspect-ratio: 4 / 3;
+            height: 200px;          /* explicit height - always works */
+            aspect-ratio: 4 / 3;   /* overrides height in modern browsers */
             box-shadow: 0 3px 10px rgba(0,0,0,0.10);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
@@ -348,32 +349,32 @@
             <div class="rw-gallery" id="rw-gallery">
 
                 <div class="rw-gallery-item" data-index="0">
-                    <img src="image/rw1.jpg" alt="Rice mixed with rice wine starter" loading="lazy">
+                    <img src="image/rw1.jpg" alt="Rice mixed with rice wine starter">
                     <div class="rw-gallery-caption">Rice mixed with crushed rice wine starter (酒曲)</div>
                 </div>
 
                 <div class="rw-gallery-item" data-index="1">
-                    <img src="image/rw2.jpg" alt="Center well formed in rice mixture" loading="lazy">
+                    <img src="image/rw2.jpg" alt="Center well formed in rice mixture">
                     <div class="rw-gallery-caption">Well in the centre for liquid to collect</div>
                 </div>
 
                 <div class="rw-gallery-item" data-index="2">
-                    <img src="image/rw3.jpg" alt="Fermentation setup covered with wrap" loading="lazy">
+                    <img src="image/rw3.jpg" alt="Fermentation setup covered with wrap">
                     <div class="rw-gallery-caption">Fermentation setup covered to maintain warmth</div>
                 </div>
 
                 <div class="rw-gallery-item" data-index="3">
-                    <img src="image/rw4.jpg" alt="Rice wine liquid beginning to collect" loading="lazy">
+                    <img src="image/rw4.jpg" alt="Rice wine liquid beginning to collect">
                     <div class="rw-gallery-caption">Rice wine liquid beginning to collect after day 2</div>
                 </div>
 
                 <div class="rw-gallery-item" data-index="4">
-                    <img src="image/rw5.jpg" alt="Microscope sample of fermentation culture" loading="lazy">
+                    <img src="image/rw5.jpg" alt="Microscope sample of fermentation culture">
                     <div class="rw-gallery-caption">Microscope sample of fermentation culture</div>
                 </div>
 
                 <div class="rw-gallery-item" data-index="5">
-                    <img src="image/rw6.jpg" alt="Finished rice wine ready to strain" loading="lazy">
+                    <img src="image/rw6.jpg" alt="Finished rice wine ready to strain">
                     <div class="rw-gallery-caption">Finished rice wine ready to strain and bottle</div>
                 </div>
 
