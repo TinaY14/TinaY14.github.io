@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homemade Rice Wine Experiment - Tina's Projects &amp; Experiences</title>
+    <title>Homemade Rice Wine Project - Tina's Projects</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
+    <!-- Prevent dark mode icon flash -->
     <script>
         (function() {
             const savedMode = localStorage.getItem('darkMode');
@@ -21,226 +22,18 @@
             }
         })();
     </script>
-
-    <style>
-        /* ── Photo Gallery Grid ── */
-        .rw-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 24px 0 36px;
-        }
-
-        .rw-gallery-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            background: #e3f2fd;
-            height: 200px;          /* explicit height - always works */
-            aspect-ratio: 4 / 3;   /* overrides height in modern browsers */
-            box-shadow: 0 3px 10px rgba(0,0,0,0.10);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .rw-gallery-item:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 22px rgba(79, 195, 247, 0.30);
-        }
-
-        .rw-gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: filter 0.25s ease;
-        }
-
-        .rw-gallery-item:hover img {
-            filter: brightness(0.88);
-        }
-
-        /* Zoom icon overlay on hover */
-        .rw-gallery-item::after {
-            content: '\f00e'; /* fa-search-plus */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: rgba(255,255,255,0.0);
-            transition: color 0.25s ease;
-        }
-
-        .rw-gallery-item:hover::after {
-            color: rgba(255,255,255,0.85);
-        }
-
-        /* Caption strip at bottom */
-        .rw-gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.55));
-            color: #fff;
-            font-size: 0.72em;
-            padding: 18px 8px 7px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(4px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            pointer-events: none;
-        }
-
-        .rw-gallery-item:hover .rw-gallery-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── Lightbox ── */
-        .rw-lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.88);
-            z-index: 999999;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rw-lightbox.open {
-            display: flex;
-        }
-
-        .rw-lightbox-inner {
-            position: relative;
-            max-width: min(860px, 94vw);
-            width: 100%;
-            text-align: center;
-            animation: lbFadeIn 0.28s ease;
-        }
-
-        @keyframes lbFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to   { opacity: 1; transform: scale(1); }
-        }
-
-        .rw-lightbox img {
-            width: 100%;
-            max-height: 78vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-            display: block;
-        }
-
-        .rw-lightbox-caption {
-            color: rgba(255,255,255,0.80);
-            font-size: 0.88em;
-            margin-top: 12px;
-            padding: 0 16px;
-        }
-
-        /* Close button */
-        .rw-lb-close {
-            position: fixed;
-            top: 18px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid rgba(255,255,255,0.4);
-            color: #fff;
-            font-size: 22px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            z-index: 10;
-        }
-
-        .rw-lb-close:hover { background: rgba(255,255,255,0.28); }
-
-        /* Prev / Next arrows */
-        .rw-lb-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid rgba(255,255,255,0.35);
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            z-index: 10;
-        }
-
-        .rw-lb-arrow:hover { background: rgba(255,255,255,0.28); }
-        .rw-lb-arrow.prev { left: 16px; }
-        .rw-lb-arrow.next { right: 16px; }
-
-        /* Dot indicators */
-        .rw-lb-dots {
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-            margin-top: 14px;
-        }
-
-        .rw-lb-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .rw-lb-dot.active {
-            background: #fff;
-            transform: scale(1.35);
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .rw-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .rw-lb-arrow { display: none; }
-        }
-
-        @media (max-width: 380px) {
-            .rw-gallery { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
 </head>
 <body class="inner-page">
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../blogs/blogs.html">Blogs</a>
             <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects.html">Projects &amp; Experiences</a>
+            <a href="../projects.html">Projects</a>
             <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
             <script>
+                // Set initial button state immediately to prevent flash
                 (function() {
                     const btn = document.getElementById('dark-mode-toggle');
                     const isDark = document.documentElement.classList.contains('dark-mode');
@@ -252,232 +45,99 @@
             </script>
         </nav>
     </header>
-
     <main class="hero inner-page">
         <div class="page-content">
-            <h2 class="page-title">Homemade Rice Wine Experiment</h2>
+            <h2 class="page-title">Homemade Rice Wine Project</h2>
 
-            <h3>What's rice wine?</h3>
-            <p>Rice wine (米酒) is a traditional Chinese fermented drink. In this project, I fermented rice wine over two weeks under warm conditions and collected samples to observe under a microscope borrowed from my high school research room. The project explores how Chinese rice wine is made using traditional methods, while also examining the science behind fermentation and gaining practical experience and advice for making homemade rice wine.</p>
-
-            <h1 id="project-overview">🔬 Project Overview</h1>
-            <p><strong>Learning Objectives:</strong></p>
-            <ul>
-                <li>Understand fermentation process</li>
-                <li>Learn traditional Chinese brewing techniques</li>
-                <li>Explore microbiology of koji mold and yeast</li>
-                <li>Experience hands-on traditional fermentation rice-wine</li>
-            </ul>
-            <p><strong>Results &amp; Insights:</strong></p>
-            <p>After 2 weeks, I produced traditional rice wine successfully, it has a sweet flavor with mild alcohol content. The process required patience and careful attention to temperature control and cleanliness of the environment. Through this project, I also developed a better understanding of fermentation biology and practical techniques for successful rice wine production.</p>
-
-            <h1 id="ingredients-materials">🌾 Ingredients &amp; Materials</h1>
-            <p><strong>Main Ingredients:</strong></p>
-            <ul>
-                <li>Glutinous rice (sticky rice) - 2 cups</li>
-                <li>Chinese rice wine starter (酒药/酒曲) - 1 ball</li>
-                <li>Filtered water</li>
-                <li>Clean, sterilized jar</li>
-            </ul>
-            <p><strong>Equipment:</strong></p>
-            <ul>
-                <li>Large glass jar with lid</li>
-                <li>Steamer or rice cooker</li>
-                <li>Clean cloth</li>
-                <li>Thermometer</li>
-            </ul>
-
-            <h1 id="fermentation-process">🔬 Fermentation Process</h1>
-            <p><strong>Step 1: Prepare the Rice</strong></p>
-            <ol>
-                <li>Wash glutinous rice thoroughly</li>
-                <li>Soak overnight in cold water</li>
-                <li>Steam until fully cooked but not mushy</li>
-                <li>Cool to lukewarm (30–35°C)</li>
-            </ol>
-            <p><strong>Step 2: Add Starter Culture</strong></p>
-            <ol>
-                <li>Crush rice wine starter ball into powder</li>
-                <li>Mix thoroughly with cooled rice</li>
-                <li>Transfer to sterilized jar</li>
-                <li>Make a small well in center for liquid to collect</li>
-            </ol>
-            <p><strong>Step 3: Fermentation</strong></p>
-            <ol>
-                <li>Cover jar with clean cloth</li>
-                <li>Keep at warm temperature (25–30°C)</li>
-                <li>Ferment for 2–3 days</li>
-                <li>Liquid (rice wine) will collect in well</li>
-            </ol>
-            <p><strong>Step 4: Secondary Fermentation (Optional)</strong></p>
-            <ol>
-                <li>Add filtered water to jar</li>
-                <li>Seal and ferment additional 1–2 weeks</li>
-                <li>Strain and bottle</li>
-            </ol>
-
-            <h1 id="science">📊 What's the science behind it</h1>
-
-            <h3 id="fermentation-science">🧫 Fermentation Science</h3>
-            <ul>
-                <li>Koji mold (<em>Aspergillus oryzae</em>) acts like a tiny chemical factory. It releases enzymes that break the rice's starch into simple sugars so other microbes can use them.</li>
-                <li>Yeast then eats those sugars and produces alcohol and carbon dioxide (CO₂).</li>
-                <li>Temperature matters a lot because the microbes are very sensitive. If the temperature is too hot, it can kill them or cause spoilage; if it's too cold, it could slow fermentation and affect the flavor of the rice wine. So it would be fine just to keep the temperature at about 25 to 30 degrees Celsius.</li>
-                <li>When the acids are produced during fermentation, the pH changes. A lower pH often signals that fermentation is progressing and helps prevent harmful bacteria.</li>
-            </ul>
-
-            <h3 id="nutritional-content">🥗 Nutritional Content (what ends up in the drink)</h3>
-            <ul>
-                <li><strong>Alcohol:</strong> usually around 2–8%, depending on how long and how strongly it ferments.</li>
-                <li><strong>B vitamins:</strong> produced by microbes during fermentation.</li>
-                <li><strong>Beneficial microbes:</strong> some batches contain lactic acid bacteria that may support gut health.</li>
-                <li><strong>Enzymes &amp; amino acids:</strong> formed that may help with digestion and nutrient breakdown.</li>
-            </ul>
-
-            <h3 id="health">🍶 Is homemade rice wine good for you?</h3>
-            <p>It benefits when consumed in moderation, like small amounts of probiotics, antioxidants, and nutrients created during fermentation. Homemade fermentation also has safety risks if cleanliness and temperature aren't controlled.</p>
-            <ul>
-                <li>Contamination can introduce harmful microbes.</li>
-                <li>Alcohol still has downsides if overconsumed.</li>
-                <li>It's potentially beneficial in small amounts when made safely, but not automatically "healthy," and safety during brewing is very important.</li>
-            </ul>
-
-            <h1 id="gallery">📸 Project Gallery</h1>
-            <p>Click any photo to view it full-size.</p>
-
-            <!-- ── 6-photo gallery grid ── -->
-            <div class="rw-gallery" id="rw-gallery">
-
-                <div class="rw-gallery-item" data-index="0">
-                    <img src="image/rw/rw1.jpg" alt="Rice mixed with rice wine starter">
-                    <div class="rw-gallery-caption">Rice mixed with crushed rice wine starter (酒曲)</div>
-                </div>
-
-                <div class="rw-gallery-item" data-index="1">
-                    <img src="image/rw/rw2.jpg" alt="Center well formed in rice mixture">
-                    <div class="rw-gallery-caption">Well in the centre for liquid to collect</div>
-                </div>
-
-                <div class="rw-gallery-item" data-index="2">
-                    <img src="image/rw/rw.jpg" alt="Fermentation setup covered with wrap">
-                    <div class="rw-gallery-caption">Fermentation setup covered to maintain warmth</div>
-                </div>
-
-                <div class="rw-gallery-item" data-index="3">
-                    <img src="image/rw4.jpg" alt="Rice wine liquid beginning to collect">
-                    <div class="rw-gallery-caption">Rice wine liquid beginning to collect after day 2</div>
-                </div>
-
-                <div class="rw-gallery-item" data-index="4">
-                    <img src="image/rw5.jpg" alt="Microscope sample of fermentation culture">
-                    <div class="rw-gallery-caption">Microscope sample of fermentation culture</div>
-                </div>
-
-                <div class="rw-gallery-item" data-index="5">
-                    <img src="image/rw6.jpg" alt="Finished rice wine ready to strain">
-                    <div class="rw-gallery-caption">Finished rice wine ready to strain and bottle</div>
-                </div>
+            <h1 id="🏛️-cultural-connection">🏛️ Cultural Connection</h3>
+<p>Rice wine (米酒) holds deep cultural significance in Chinese cuisine and tradition. This fermentation project explores the traditional methods of making Chinese rice wine while understanding the science and cultural importance behind this ancient beverage.</p>
+<h1 id="🔬-project-overview">🔬 Project Overview</h3>
+<p><strong>Learning Objectives:</strong></p>
+<ul>
+<li>Understand fermentation process</li>
+<li>Learn traditional Chinese brewing techniques</li>
+<li>Explore microbiology of koji mold and yeast</li>
+<li>Experience hands-on traditional food preparation</li>
+</ul>
+<p><strong>Results &amp; Insights:</strong>
+Successfully produced traditional rice wine with characteristic sweet, mildly alcoholic flavor. The process required patience, precise temperature control, and understanding of fermentation biology.</p>
+<h1 id="🌾-ingredients--materials">🌾 Ingredients &amp; Materials</h3>
+<p><strong>Main Ingredients:</strong></p>
+<ul>
+<li>Glutinous rice (sticky rice) - 2 cups</li>
+<li>Chinese rice wine starter (酒药/酒曲) - 1 ball</li>
+<li>Filtered water</li>
+<li>Clean, sterilized jar</li>
+</ul>
+<p><strong>Equipment:</strong></p>
+<ul>
+<li>Large glass jar with lid</li>
+<li>Steamer or rice cooker</li>
+<li>Clean cloth</li>
+<li>Thermometer</li>
+</ul>
+<h1 id="🔬-fermentation-process">🔬 Fermentation Process</h3>
+<p><strong>Step 1: Prepare the Rice</strong></p>
+<ol>
+<li>Wash glutinous rice thoroughly</li>
+<li>Soak overnight in cold water</li>
+<li>Steam until fully cooked but not mushy</li>
+<li>Cool to lukewarm (30-35°C)</li>
+</ol>
+<p><strong>Step 2: Add Starter Culture</strong></p>
+<ol>
+<li>Crush rice wine starter ball into powder</li>
+<li>Mix thoroughly with cooled rice</li>
+<li>Transfer to sterilized jar</li>
+<li>Make a small well in center for liquid to collect</li>
+</ol>
+<p><strong>Step 3: Fermentation</strong></p>
+<ol>
+<li>Cover jar with clean cloth</li>
+<li>Keep at warm temperature (25-30°C)</li>
+<li>Ferment for 2-3 days</li>
+<li>Liquid (rice wine) will collect in well</li>
+</ol>
+<p><strong>Step 4: Secondary Fermentation (Optional)</strong></p>
+<ol>
+<li>Add filtered water to jar</li>
+<li>Seal and ferment additional 1-2 weeks</li>
+<li>Strain and bottle</li>
+</ol>
+<h1 id="📊-scientific-analysis">📊 Scientific Analysis</h3>
+<p><strong>Fermentation Science:</strong></p>
+<ul>
+<li>Koji mold (Aspergillus oryzae) breaks down rice starches into sugars</li>
+<li>Yeast converts sugars into alcohol and CO2</li>
+<li>Temperature critical for proper fermentation</li>
+<li>pH changes indicate fermentation progress</li>
+</ul>
+<p><strong>Nutritional Content:</strong></p>
+<ul>
+<li>Alcohol content: 2-8% depending on fermentation time</li>
+<li>Contains B vitamins from fermentation</li>
+<li>Probiotics beneficial for digestion</li>
+<li>Natural enzymes aid nutrient absorption</li>
+</ul>
+<h1 id="📸-project-gallery">📸 Project Gallery</h3>
+<p>Documentation includes:</p>
+<ul>
+<li>Rice preparation stages</li>
+<li>Fermentation progress photos</li>
+<li>Temperature and pH measurements</li>
+<li>Final product tasting notes</li>
+</ul>
+<h1 id="💡-key-learnings">💡 Key Learnings</h3>
+<ul>
+<li>Importance of temperature control in fermentation</li>
+<li>Role of traditional knowledge in food preservation</li>
+<li>Connection between food, culture, and science</li>
+<li>Patience and precision required for traditional crafts</li>
+<li>Understanding how our ancestors preserved and created foods</li>
+</ul>
 
             </div>
-            <!-- ── end gallery ── -->
-
-            <h1 id="key-learnings">💡 Key Learnings</h1>
-            <ul>
-                <li>Importance of temperature control in fermentation</li>
-                <li>Be patient and precise, and maintain cleanliness required for traditional crafts</li>
-                <li>Understanding how our ancestors preserved and made rice wine</li>
-                <li>Learned the fermentation process, how it works, read multiple rice wine papers to understand how jiuqu/yeast works in it, and found more papers discussing future research ideas in jiuqu/yeast</li>
-            </ul>
-
-            <h3>References</h3>
-            <ul>
-                <li><a href="https://www.yetraditions.com/blogs/learn/rice-wine-health-benefits-what-science-says" target="_blank">Rice Wine Health Benefits: What Science Says</a></li>
-                <li><a href="https://www.yetraditions.com/blogs/learn/why-fermented-foods-are-good-for-you" target="_blank">Why Fermented Foods Are Good for You</a></li>
-            </ul>
-
         </div>
     </main>
-
-    <!-- ── Lightbox ── -->
-    <div class="rw-lightbox" id="rw-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-        <button class="rw-lb-close" id="rw-lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
-        <button class="rw-lb-arrow prev" id="rw-lb-prev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
-        <button class="rw-lb-arrow next" id="rw-lb-next" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
-
-        <div class="rw-lightbox-inner">
-            <img id="rw-lb-img" src="" alt="">
-            <p class="rw-lightbox-caption" id="rw-lb-cap"></p>
-            <div class="rw-lb-dots" id="rw-lb-dots"></div>
-        </div>
-    </div>
-
-    <script>
-        // ── Collect gallery items ──
-        const items = Array.from(document.querySelectorAll('.rw-gallery-item'));
-        const photos = items.map(el => ({
-            src:     el.querySelector('img').src,
-            alt:     el.querySelector('img').alt,
-            caption: el.querySelector('.rw-gallery-caption').textContent.trim()
-        }));
-
-        // ── Lightbox elements ──
-        const lightbox = document.getElementById('rw-lightbox');
-        const lbImg    = document.getElementById('rw-lb-img');
-        const lbCap    = document.getElementById('rw-lb-cap');
-        const lbDots   = document.getElementById('rw-lb-dots');
-        const lbClose  = document.getElementById('rw-lb-close');
-        const lbPrev   = document.getElementById('rw-lb-prev');
-        const lbNext   = document.getElementById('rw-lb-next');
-
-        let current = 0;
-
-        // Build dots
-        photos.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.className = 'rw-lb-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Photo ${i + 1}`);
-            dot.addEventListener('click', () => openAt(i));
-            lbDots.appendChild(dot);
-        });
-
-        function openAt(index) {
-            current = (index + photos.length) % photos.length;
-            lbImg.src = photos[current].src;
-            lbImg.alt = photos[current].alt;
-            lbCap.textContent = photos[current].caption;
-            lbDots.querySelectorAll('.rw-lb-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            lightbox.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        // Attach click to gallery items
-        items.forEach((el, i) => el.addEventListener('click', () => openAt(i)));
-
-        lbClose.addEventListener('click', closeLightbox);
-        lbPrev.addEventListener('click',  () => openAt(current - 1));
-        lbNext.addEventListener('click',  () => openAt(current + 1));
-        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-        // Keyboard nav
-        document.addEventListener('keydown', e => {
-            if (!lightbox.classList.contains('open')) return;
-            if (e.key === 'Escape')      closeLightbox();
-            if (e.key === 'ArrowLeft')   openAt(current - 1);
-            if (e.key === 'ArrowRight')  openAt(current + 1);
-        });
-
-        // Touch / swipe in lightbox
-        let txStart = 0;
-        lightbox.addEventListener('touchstart', e => { txStart = e.touches[0].clientX; }, { passive: true });
-        lightbox.addEventListener('touchend',   e => {
-            const dx = e.changedTouches[0].clientX - txStart;
-            if (Math.abs(dx) > 40) dx < 0 ? openAt(current + 1) : openAt(current - 1);
-        }, { passive: true });
-    </script>
 </body>
 </html>

@@ -1,0 +1,122 @@
+[
+  {
+    "href": "banana-cake.html",
+    "title": "Banana Cake",
+    "image": "../images/food/bananacake.jpg",
+    "emoji": "🍌",
+    "description": "Moist homemade cake",
+    "searchTerms": "banana cake dessert sweet"
+  },
+  {
+    "href": "chicken-winter-melon.html",
+    "title": "Chicken Winter Melon Soup",
+    "image": "../images/food/chickenwintermelon.jpg",
+    "emoji": "🍗",
+    "description": "Colorful stir-fry",
+    "searchTerms": "chicken winter melon stir fry peppers"
+  },
+  {
+    "href": "chocolate-ice-cream-cake.html",
+    "title": "Chocolate Ice Cream Cake",
+    "image": "../images/food/chocolateicecream.jpg",
+    "emoji": "🍫",
+    "description": "Three-layer frozen dessert",
+    "searchTerms": "chocolate ice cream cake dessert frozen"
+  },
+  {
+    "href": "chuanr.html",
+    "title": "Chuanr 烤串",
+    "image": "../images/food/chuanr.jpg",
+    "emoji": "🍜",
+    "description": "Grilled skewers with cumin spice",
+    "searchTerms": "chuanr bbq skewers grilled meat lamb beef"
+  },
+  {
+    "href": "douhua.html",
+    "title": "Douhua 豆花",
+    "image": "../images/food/douhua.jpg",
+    "emoji": "🍜",
+    "description": "Silky tofu pudding dessert",
+    "searchTerms": "douhua tofu pudding sweet dessert soy"
+  },
+  {
+    "href": "egg-waffles.html",
+    "title": "Egg Waffles 鸡蛋仔",
+    "image": "../images/food/egg-waffle.jpg",
+    "emoji": "🍜",
+    "description": "Crispy Hong Kong bubble waffles",
+    "searchTerms": "egg waffles hong kong bubble crispy snack"
+  },
+  {
+    "href": "jianbing.html",
+    "title": "Jianbing 煎饼",
+    "image": "../images/food/jianbing.jpg",
+    "emoji": "🍜",
+    "description": "Crispy Chinese breakfast crepe",
+    "searchTerms": "jianbing crepe breakfast egg crispy"
+  },
+  {
+    "href": "mapo-tofu.html",
+    "title": "Homemade Mapo Tofu",
+    "image": "../images/food/mapotofu.jpg",
+    "emoji": "🌶️",
+    "description": "Spicy Sichuan classic",
+    "searchTerms": "mapo tofu spicy sichuan pork"
+  },
+  {
+    "href": "roujiamo.html",
+    "title": "Roujiamo 肉夹馍",
+    "image": "../images/food/roujiamo.jpg",
+    "emoji": "🍜",
+    "description": "Chinese-style meat sandwich",
+    "searchTerms": "roujiamo chinese hamburger meat sandwich flatbread"
+  },
+  {
+    "href": "scallion-pancake.html",
+    "title": "Scallion Pancake",
+    "image": "../images/food/ScallionPancake.jpg",
+    "emoji": "🥞",
+    "description": "Crispy street snack",
+    "searchTerms": "scallion pancake crispy street snack"
+  },
+  {
+    "href": "shengjianbao.html",
+    "title": "Shengjianbao 生煎包",
+    "image": "../images/food/xiaolongbao.jpg",
+    "emoji": "🍜",
+    "description": "Pan-fried soup dumplings",
+    "searchTerms": "shengjianbao pan fried buns pork shanghai"
+  },
+  {
+    "href": "starch-jelly.html",
+    "title": "Starch Jelly 凉粉",
+    "image": "../images/food/starchjelly.jpg",
+    "emoji": "🍜",
+    "description": "Smooth and tender cold snack",
+    "searchTerms": "starch jelly liangfen cold summer snack spicy"
+  },
+  {
+    "href": "stinky-tofu.html",
+    "title": "Stinky Tofu 臭豆腐",
+    "image": "../images/food/stinky-tofu.jpg",
+    "emoji": "🍜",
+    "description": "Fermented tofu with crispy exterior",
+    "searchTerms": "stinky tofu fermented crispy taiwanese street food"
+  },
+  {
+    "href": "takoyaki.html",
+    "title": "Takoyaki 章鱼小丸子",
+    "image": "../images/food/takoyaki.jpg",
+    "emoji": "🍜",
+    "description": "Japanese octopus balls",
+    "searchTerms": "takoyaki octopus balls japanese snack"
+  },
+  {
+    "href": "xiaolongbao.html",
+    "title": "Steamed Xiaolongbao",
+    "image": "../images/food/xiaolongbao.jpg",
+    "emoji": "🥟",
+    "description": "Soup dumplings",
+    "searchTerms": "xiaolongbao soup dumplings pork"
+  }
+]
