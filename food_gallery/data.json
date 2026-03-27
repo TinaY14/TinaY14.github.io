@@ -144,8 +144,6 @@
     ]
   },
   {
-<<<<<<< HEAD
-    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072325.jpg",
@@ -158,7 +156,6 @@
     ]
   },
   {
-    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072225.jpg",
@@ -175,7 +172,6 @@
     ]
   },
   {
-    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072125.jpg",
@@ -188,7 +184,6 @@
     ]
   },
   {
-    "summary":"Yum!",
     "photos": [
       {
         "image": "image/071625.jpg",
@@ -205,9 +200,6 @@
     ]
   },
   {
-    "summary":"Second try! Flat noodles is the best!",
-=======
->>>>>>> 4df1be21ef747456ac39f0640eeba7df989e85ef
     "photos": [
       {
         "image": "image/070725.jpg",
