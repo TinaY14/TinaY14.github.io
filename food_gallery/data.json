@@ -1,14 +1,61 @@
 [
   {
+    "dateLabel": "Jan 20-23, 2026",
+    "location": "@Columbia Dining",
+    "summary": "It was an amazing trip! The food in NYC had so much variety compared to what I'm used to. I was especially amazed by the number of cakes Columbia had in their dining hall. They looked beautiful, but I couldn't help feeling they might be a bit too sweet. I was definitely worrying about the sugar content—it looked like a massive amount of calories waiting to happen!",
     "photos": [
       {
-        "image": "image/032626.jpg",
+        "image": "image/012026.jpg",
+        "caption": "love it!"
+      },
+      {
+        "image": "image/012026(1).jpg",
         "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
+      },
+      {
+        "image": "image/012026(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012026(3).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(3).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012126(4).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226.jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(1).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(2).jpg",
+        "caption": ""
+      },
+      {
+        "image": "image/012226(4).jpg",
+        "caption": ""
+      },
       {
         "image": "image/012326.jpg",
         "caption": ""
@@ -32,70 +79,7 @@
     ]
   },
   {
-    "photos": [
-      {
-        "image": "image/012226.jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012226(1).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012226(2).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012226(4).jpg",
-        "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
-      {
-        "image": "image/012126.jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012126(1).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012126(2).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012126(3).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012126(4).jpg",
-        "caption": ""
-      }
-    ]
-  },
-  {
-    "photos": [
-      {
-        "image": "image/012026.jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012026(1).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012026(2).jpg",
-        "caption": ""
-      },
-      {
-        "image": "image/012026(3).jpg",
-        "caption": ""
-      }
-    ]
-  },
-  {
+    "summary":"Chipotle, too much for me lol",
     "photos": [
       {
         "image": "image/011926.jpg",
@@ -104,6 +88,7 @@
     ]
   },
   {
+    "summary":"Homemade eggtarts! Delicious!",
     "photos": [
       {
         "image": "image/010326.jpg",
@@ -116,6 +101,7 @@
     ]
   },
   {
+    "summary":"I love sushi!!It took a long time to make, but it was so satisfying to eat.",
     "photos": [
       {
         "image": "image/112725.jpg",
@@ -128,6 +114,7 @@
     ]
   },
   {
+    "summary":"Homemade noodles, how does it look?:)",
     "photos": [
       {
         "image": "image/072425.jpg",
@@ -144,6 +131,7 @@
     ]
   },
   {
+    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072325.jpg",
@@ -156,6 +144,7 @@
     ]
   },
   {
+    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072225.jpg",
@@ -172,6 +161,7 @@
     ]
   },
   {
+    "summary":"Love it!",
     "photos": [
       {
         "image": "image/072125.jpg",
@@ -184,6 +174,7 @@
     ]
   },
   {
+    "summary":"Yum!",
     "photos": [
       {
         "image": "image/071625.jpg",
@@ -200,6 +191,7 @@
     ]
   },
   {
+    "summary":"Second try! Flat noodles is the best!",
     "photos": [
       {
         "image": "image/070725.jpg",
@@ -212,6 +204,7 @@
     ]
   },
   {
+    "summary":"Homemade flat noodles, how does it look?:)",
     "photos": [
       {
         "image": "image/070325.jpg",
@@ -228,6 +221,7 @@
     ]
   },
   {
+    "summary":"First try over this summer, yum~",
     "photos": [
       {
         "image": "image/070225.jpg",
@@ -252,6 +246,7 @@
     ]
   },
   {
+    "summary":"Dumplings！Guess what kind of filling it has? ",
     "photos": [
       {
         "image": "image/110724.jpg",
@@ -276,6 +271,8 @@
     ]
   },
   {
+    
+    "summary":"Salmon!! ",
     "photos": [
       {
         "image": "image/092124.jpg",
@@ -308,6 +305,7 @@
     ]
   },
   {
+    "summary":"Hotpot!:)))",
     "photos": [
       {
         "image": "image/020924.jpg",
@@ -340,6 +338,7 @@
     ]
   },
   {
+    "location": "@Stony Brook Dining",
     "photos": [
       {
         "image": "image/082823.jpg",
@@ -364,6 +363,7 @@
     ]
   },
   {
+    "summary":"Pork ribs tasted so good! Love it! A great accomplishment!",
     "photos": [
       {
         "image": "image/062523.jpg",
@@ -388,6 +388,7 @@
     ]
   },
   {
+    "summary":"Delicious! ",
     "photos": [
       {
         "image": "image/081422.jpg",
