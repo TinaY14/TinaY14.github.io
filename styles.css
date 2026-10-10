@@ -1984,12 +1984,6 @@ form button[type="submit"]:active {
 :root[data-theme] .start-content p,
 :root[data-theme] .win-content-box h3,
 :root[data-theme] .win-content-box p { color: var(--inner-text); }
-/* Keep the homepage introduction neutral in every color theme. */
-:root[data-theme] .about-section .name,
-:root[data-theme] .about-section .tagline,
-:root[data-theme] .about-section .description,
-:root[data-theme] .about-section .game-invite p,
-:root[data-theme] .about-section .game-invite a { color: #000000; }
 :root[data-theme] .game-score-inline,
 :root[data-theme] .baskets-container { background: var(--panel-bg); border-color: var(--theme-border); }
 :root[data-theme] .game-basket { background: var(--inner-bg); border-color: var(--theme-border); }
@@ -2046,4 +2040,24 @@ form button[type="submit"]:active {
 .theme-announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
     body.transitions-ready, #dark-mode-toggle { transition: none; }
+}
+
+/* Typed colors also interpolate inside gradients, borders, and text. */
+@property --inner-bg { syntax: '<color>'; inherits: true; initial-value: #edf5ee; }
+@property --panel-bg { syntax: '<color>'; inherits: true; initial-value: #f6faf5; }
+@property --inner-text { syntax: '<color>'; inherits: true; initial-value: #344b3d; }
+@property --inner-heading { syntax: '<color>'; inherits: true; initial-value: #2d4937; }
+@property --primary-blue { syntax: '<color>'; inherits: true; initial-value: #52785d; }
+@property --theme-border { syntax: '<color>'; inherits: true; initial-value: #afc8b4; }
+@property --theme-soft { syntax: '<color>'; inherits: true; initial-value: #dceadd; }
+@property --theme-shadow { syntax: '<color>'; inherits: true; initial-value: rgba(54, 83, 61, .08); }
+:root[data-theme] {
+    transition: --inner-bg 1.2s ease-in-out, --panel-bg 1.2s ease-in-out,
+        --inner-text 1.2s ease-in-out, --inner-heading 1.2s ease-in-out,
+        --primary-blue 1.2s ease-in-out, --theme-border 1.2s ease-in-out,
+        --theme-soft 1.2s ease-in-out, --theme-shadow 1.2s ease-in-out;
+}
+:root[data-theme] body.transitions-ready { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+    :root[data-theme] { transition: none; }
 }
