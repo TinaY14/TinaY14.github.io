@@ -10,12 +10,22 @@
     ];
     let saved;
     try { saved = localStorage.getItem('tinaTheme'); } catch (_) {}
-    let themeIndex = Math.max(0, themes.findIndex(theme => theme.id === saved));
+    const path = location.pathname.toLowerCase();
+    const pageTheme = /(?:^|\/)blogs(?:\/|$)/.test(path) ? 'cream'
+        : /(?:^|\/)night_stall_food(?:\/|$)/.test(path) ? 'peach'
+        : /(?:^|\/)food_gallery(?:\/|$)/.test(path) ? 'sky'
+        : /(?:^|\/)projects(?:\/|\.html|$)/.test(path) ? 'lavender'
+        : 'mint';
+    let themeIndex = themes.findIndex(theme => theme.id === pageTheme);
+    const previousTheme = themes.some(theme => theme.id === saved) ? saved : 'mint';
+    // Paint the previous page's palette first, then ease into this page's palette.
+    document.documentElement.classList.remove('dark-mode');
+    document.documentElement.dataset.theme = previousTheme;
     function applyTheme() {
         document.documentElement.classList.remove('dark-mode');
         document.documentElement.dataset.theme = themes[themeIndex].id;
+        try { localStorage.setItem('tinaTheme', themes[themeIndex].id); } catch (_) {}
     }
-    applyTheme();
     function initialize() {
         const filename = location.pathname.split('/').pop();
         if (filename && filename !== 'index.html') document.body.classList.add('inner-page');
@@ -29,6 +39,31 @@
             button.title = `Theme: ${current.name} · Click for ${next.name}`;
         }
         updateButton();
+        let firstFrame = 0, secondFrame = 0;
+        function cancelPageTransition() {
+            cancelAnimationFrame(firstFrame);
+            cancelAnimationFrame(secondFrame);
+        }
+        function transitionToPageTheme() {
+            cancelPageTransition();
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                applyTheme();
+            } else {
+                firstFrame = requestAnimationFrame(() => {
+                    secondFrame = requestAnimationFrame(applyTheme);
+                });
+            }
+        }
+        transitionToPageTheme();
+        window.addEventListener('pageshow', event => {
+            if (!event.persisted) return;
+            let previous;
+            try { previous = localStorage.getItem('tinaTheme'); } catch (_) {}
+            if (themes.some(theme => theme.id === previous)) document.documentElement.dataset.theme = previous;
+            themeIndex = themes.findIndex(theme => theme.id === pageTheme);
+            updateButton();
+            transitionToPageTheme();
+        });
         if (button) {
             announcement = document.createElement('span');
             announcement.className = 'theme-announcement';
@@ -36,9 +71,9 @@
             announcement.setAttribute('aria-live', 'polite');
             document.body.appendChild(announcement);
             button.addEventListener('click', () => {
+                cancelPageTransition();
                 themeIndex = (themeIndex + 1) % themes.length;
                 applyTheme();
-                try { localStorage.setItem('tinaTheme', themes[themeIndex].id); } catch (_) {}
                 updateButton();
                 announcement.textContent = `${themes[themeIndex].name} theme selected`;
             });
