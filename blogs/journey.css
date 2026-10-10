@@ -1,0 +1,147 @@
+.hero.inner-page > .page-content.wide { box-sizing: border-box; min-width: 0; }
+.blog-path-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 150px 20px 360px;
+}
+.journey-intro { position: absolute; top: 0; left: 0; right: 0; text-align: center; }
+.journey-intro > span, .home-caption > span {
+    font-size: 10px; font-weight: 600; letter-spacing: .2em; color: var(--inner-heading);
+}
+.journey-intro p { font-size: 13px; color: var(--inner-text); margin: 8px 0; opacity: .8; text-indent: 0; }
+.blog-entry { margin-bottom: 95px; }
+.blog-entry:last-child { margin-bottom: 0; }
+.blog-entry.left { padding-right: 65%; }
+.blog-entry.right { padding-left: 65%; }
+.billboard-pole { background: linear-gradient(90deg, #b99d82, #d8c0a4, #b99d82); box-shadow: none; width: 7px; }
+.billboard-pole::before { background: #b99d82; border-radius: 50%; height: 4px; width: 22px; }
+.blog-path-svg {
+    display: block; position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 1; pointer-events: none; overflow: visible;
+}
+.blog-path-svg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.garden-path-border { stroke: #cdc7b0; stroke-width: 77; }
+.garden-path { stroke: #f0e6d5; stroke-width: 69; }
+.garden-path-light { stroke: #fbf3e5; stroke-width: 56; opacity: .7; }
+.garden-path-pebbles { stroke: #c6b8a0; stroke-width: 3; stroke-dasharray: 1 23; opacity: .65; }
+.path-flower { position: absolute; width: 46px; height: 62px; z-index: 2; pointer-events: none; }
+.path-flower svg { width: 100%; height: 100%; overflow: visible; }
+.journey-stops { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.snack-stop {
+    position: absolute; width: 51px; height: 51px; transform: translate(-50%, -50%);
+    display: grid; place-items: center; background: #fcf7ec; border: 1px solid #d7c6ac;
+    border-radius: 50%; box-shadow: 0 4px 10px #93795118, inset 0 0 0 4px #fffaf1;
+    transition: background .4s, border-color .4s;
+}
+.snack-stop > svg { width: 36px; height: 36px; transition: opacity .25s, transform .35s; }
+.snack-stop::after {
+    content: ''; width: 9px; height: 5px; border: solid #7f9675; border-width: 0 0 2px 2px;
+    position: absolute; transform: rotate(-45deg) scale(0); transition: transform .3s;
+}
+.snack-stop.collected { background: #e8eddd; border-color: #b5c2a7; box-shadow: none; }
+.snack-stop.collected > svg { opacity: 0; transform: translateY(-15px) scale(.5); }
+.snack-stop.collected::after { transform: rotate(-45deg) scale(1); }
+.snack-stop-label {
+    position: absolute; top: 57px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: .1em; color: #8c7b62; white-space: nowrap;
+}
+.pig-companion {
+    display: block; position: absolute; z-index: 12; width: 66px; height: 78px;
+    pointer-events: none; opacity: 0; transform: translate(-50%, -50%);
+}
+.pig svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.pig { width: 66px; height: 78px; transform-origin: center bottom; }
+.pig-leg-left, .pig-leg-right { transform-box: fill-box; transform-origin: center top; }
+.pig-companion.walking .pig { animation: journey-bob .38s ease-in-out infinite; }
+.pig-companion.walking .pig-leg-left { animation: journey-step .38s ease-in-out infinite alternate; }
+.pig-companion.walking .pig-leg-right { animation: journey-step .38s ease-in-out infinite alternate-reverse; }
+.pig-happy-eyes { opacity: 0; }
+.pig-companion.eating .pig-eyes, .pig-companion.arrived .pig-eyes { opacity: 0; }
+.pig-companion.eating .pig-happy-eyes, .pig-companion.arrived .pig-happy-eyes { opacity: 1; }
+.pig-companion.eating .pig { animation: happy-munch .65s ease-in-out; }
+.pig-companion.arrived .pig { animation: none; }
+.pig-thought {
+    position: absolute; bottom: 89px; left: 50%; transform: translate(-50%, 5px);
+    padding: 7px 12px; border: 1px solid var(--theme-border); border-radius: 14px 14px 14px 3px;
+    background: var(--panel-bg); color: var(--inner-heading); font-size: 11px; font-weight: 600;
+    white-space: nowrap; box-shadow: 0 4px 12px #75604b10; opacity: 0;
+    transition: opacity .18s, transform .18s;
+}
+.pig-companion.eating .pig-thought, .pig-companion.arrived .pig-thought { opacity: 1; transform: translate(-50%, 0); }
+.pig-treat { position: absolute; width: 30px; height: 30px; top: 41px; left: 18px; opacity: 0; }
+.pig-treat svg { width: 100%; height: 100%; }
+.pig-companion.eating .pig-treat { animation: treat-bite .75s ease-in-out forwards; }
+.snack-crumbs { position: absolute; top: 44px; left: 32px; }
+.snack-crumbs i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #c6a16b; opacity: 0; }
+.snack-crumbs i:nth-child(2) { --crumb-x: -16px; --crumb-y: 9px; animation-delay: .12s !important; }
+.snack-crumbs i:nth-child(3) { --crumb-x: 15px; --crumb-y: 15px; animation-delay: .2s !important; }
+.pig-companion.eating .snack-crumbs i { animation: crumb .5s .2s ease-out; }
+.pig-home {
+    display: block; position: absolute; width: 220px; height: 190px; z-index: 9;
+    transform: translateX(-50%); pointer-events: none;
+}
+.pig-home > svg { width: 100%; height: 100%; overflow: visible; }
+.cottage-window { transition: fill .6s, filter .6s; }
+.pig-home.pig-near .cottage-window { fill: #ffdc93; filter: drop-shadow(0 0 5px #f2bd6d80); }
+.cottage-smoke { opacity: .5; }
+.home-heart {
+    position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    font-size: 28px; color: #b47972; opacity: 0; transition: opacity .5s;
+}
+.pig-home.pig-arrived .home-heart { opacity: 1; }
+.home-caption { position: absolute; top: 206px; left: -35px; width: 290px; text-align: center; }
+.home-caption p { margin: 7px 0 0; font-size: 12px; color: var(--inner-text); opacity: .8; text-indent: 0; }
+.journey-meter {
+    position: fixed; right: 92px; bottom: 25px; z-index: 15;
+    display: flex; gap: 10px; align-items: center; padding: 11px 15px;
+    border-radius: 16px; border: 1px solid var(--theme-border); background: var(--panel-bg);
+    box-shadow: 0 6px 22px #765a4310; color: var(--inner-heading); pointer-events: none;
+}
+.journey-meter[hidden] { display: none; }
+.meter-icon { font-size: 24px; line-height: 1; color: #ad8074; }
+#journey-count { display: block; font-size: 10px; margin-bottom: 6px; min-width: 112px; }
+.meter-track { height: 3px; background: var(--theme-soft); border-radius: 5px; overflow: hidden; }
+#journey-energy { display: block; height: 100%; width: 0; border-radius: 5px; background: #8b9b7e; transition: width .4s; }
+.journey-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@keyframes journey-bob { 50% { transform: translateY(-2px) rotate(2deg); } }
+@keyframes journey-step { from { transform: rotate(-10deg); } to { transform: rotate(10deg); } }
+@keyframes happy-munch { 25%, 65% { transform: translateY(-4px) rotate(-3deg); } 45%, 85% { transform: rotate(3deg); } }
+@keyframes treat-bite { 0% { opacity: 0; transform: translateY(14px) scale(.6); } 25%, 50% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px) scale(.1); } }
+@keyframes crumb { 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--crumb-x, 12px), var(--crumb-y, -10px)); } }
+@media (max-width: 1000px) {
+    .blog-path-container { padding: 140px 8px 350px; }
+    .blog-entry { padding: 0 5px 0 105px !important; margin-bottom: 70px; }
+    .blog-signpost-card { width: 100%; max-width: 100%; }
+    .blog-path-svg, .pig-companion, .pig-home, .path-flower { display: block; }
+    .garden-path-border { stroke-width: 43; }
+    .garden-path { stroke-width: 37; }
+    .garden-path-light { stroke-width: 29; }
+    .garden-path-pebbles { stroke-width: 2; stroke-dasharray: 1 18; }
+    .pig-companion, .pig { width: 46px; height: 54px; }
+    .pig-thought { bottom: 65px; font-size: 10px; padding: 6px 9px; }
+    .pig-thought { left: 0; transform: translateY(5px); }
+    .pig-companion.eating .pig-thought { transform: translateY(0); }
+    .pig-companion.arrived .pig-thought { left: 50%; transform: translateX(-50%); }
+    .pig-treat { width: 23px; height: 23px; top: 27px; left: 11px; }
+    .snack-crumbs { top: 30px; left: 23px; }
+    .snack-stop { width: 36px; height: 36px; }
+    .snack-stop > svg { width: 27px; height: 27px; }
+    .snack-stop-label { display: none; }
+    .path-flower { width: 28px; height: 40px; }
+    .journey-meter { right: 80px; bottom: 20px; padding: 9px 11px; }
+}
+@media (max-width: 600px) {
+    .blog-path-container { margin: 0 -16px; padding-left: 0; padding-right: 0; }
+    .blog-entry { padding-left: 82px !important; padding-right: 6px !important; }
+    .journey-intro p { font-size: 11px; }
+    .billboard-content { padding: 12px; text-align: left; }
+    .billboard-image { height: 115px; }
+    .journey-meter { padding: 8px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pig-companion *, .snack-stop *, .snack-crumbs i { animation: none !important; }
+    .pig-companion.eating .pig-treat { opacity: 1; }
+    .snack-stop, .snack-stop > svg, .snack-stop::after, .pig-thought,
+    .cottage-window, .home-heart, #journey-energy { transition: none; }
+}
