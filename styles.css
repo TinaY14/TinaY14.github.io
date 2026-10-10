@@ -1907,7 +1907,7 @@ form button[type="submit"]:active {
     --inner-bg: #edf5ee;
     --panel-bg: #f6faf5;
     --inner-text: #344b3d;
-    --inner-heading: #2d4937;
+    --inner-heading: #5a7564;
     --primary-blue: #52785d;
     --theme-border: #afc8b4;
     --theme-soft: #dceadd;
@@ -1917,7 +1917,7 @@ form button[type="submit"]:active {
     --inner-bg: #edf3fa;
     --panel-bg: #f5f8fd;
     --inner-text: #384b62;
-    --inner-heading: #304b6b;
+    --inner-heading: #5b728c;
     --primary-blue: #587ca4;
     --theme-border: #b2c8e0;
     --theme-soft: #dde8f6;
@@ -1927,7 +1927,7 @@ form button[type="submit"]:active {
     --inner-bg: #fbf0e8;
     --panel-bg: #fff7f0;
     --inner-text: #63493e;
-    --inner-heading: #6a4535;
+    --inner-heading: #896652;
     --primary-blue: #95634b;
     --theme-border: #dfbcaa;
     --theme-soft: #f4dfd1;
@@ -1937,7 +1937,7 @@ form button[type="submit"]:active {
     --inner-bg: #f2eef8;
     --panel-bg: #f9f6fd;
     --inner-text: #53475f;
-    --inner-heading: #564168;
+    --inner-heading: #7a658b;
     --primary-blue: #806496;
     --theme-border: #c9b9dc;
     --theme-soft: #e8dff2;
@@ -1947,12 +1947,18 @@ form button[type="submit"]:active {
     --inner-bg: #f7f2e8;
     --panel-bg: #fcf8f0;
     --inner-text: #554c3c;
-    --inner-heading: #584a31;
+    --inner-heading: #7f6c4d;
     --primary-blue: #856e43;
     --theme-border: #d4c6a5;
     --theme-soft: #ede4cf;
     --theme-shadow: rgba(96, 79, 43, .08);
 }
+/* Softer headings stay distinct from the body text across all palettes. */
+:root[data-theme] .about-section .name,
+:root[data-theme] .page-content h1,
+:root[data-theme] .page-content h2,
+:root[data-theme] .page-content h3,
+:root[data-theme] .blog-modal-title { color: var(--inner-heading); }
 /* Thin outer outlines, a quiet inner rim, and softer corners. */
 :root[data-theme] .content-entry,
 :root[data-theme] .page-content section,
@@ -2001,7 +2007,6 @@ form button[type="submit"]:active {
 :root[data-theme] .billboard-date,
 :root[data-theme] .billboard-readmore { color: var(--primary-blue); }
 :root[data-theme] .blog-modal-content { background: var(--panel-bg); border: 1px solid var(--theme-border); }
-:root[data-theme] .blog-modal-title,
 :root[data-theme] .blog-modal-text { color: var(--inner-text); }
 :root[data-theme] .blog-modal-date { color: var(--primary-blue); }
 :root[data-theme] .timeline-summary {
@@ -2046,7 +2051,7 @@ form button[type="submit"]:active {
 @property --inner-bg { syntax: '<color>'; inherits: true; initial-value: #edf5ee; }
 @property --panel-bg { syntax: '<color>'; inherits: true; initial-value: #f6faf5; }
 @property --inner-text { syntax: '<color>'; inherits: true; initial-value: #344b3d; }
-@property --inner-heading { syntax: '<color>'; inherits: true; initial-value: #2d4937; }
+@property --inner-heading { syntax: '<color>'; inherits: true; initial-value: #5a7564; }
 @property --primary-blue { syntax: '<color>'; inherits: true; initial-value: #52785d; }
 @property --theme-border { syntax: '<color>'; inherits: true; initial-value: #afc8b4; }
 @property --theme-soft { syntax: '<color>'; inherits: true; initial-value: #dceadd; }

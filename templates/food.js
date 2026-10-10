@@ -23,8 +23,8 @@ module.exports = function(data, content) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="../styles.css?v=page-themes-2">
-    <script src="../darkmode.js?v=page-themes-2"></script>
+    <link rel="stylesheet" href="../styles.css?v=page-themes-3">
+    <script src="../darkmode.js?v=page-themes-3"></script>
 
     <!-- Restore the saved color theme before first paint -->
     <script>
