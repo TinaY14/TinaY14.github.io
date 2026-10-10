@@ -26,6 +26,23 @@
         document.documentElement.dataset.theme = themes[themeIndex].id;
         try { localStorage.setItem('tinaTheme', themes[themeIndex].id); } catch (_) {}
     }
+    let firstFrame = 0, secondFrame = 0;
+    function cancelPageTransition() {
+        cancelAnimationFrame(firstFrame);
+        cancelAnimationFrame(secondFrame);
+    }
+    function transitionToPageTheme() {
+        cancelPageTransition();
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            applyTheme();
+        } else {
+            firstFrame = requestAnimationFrame(() => {
+                secondFrame = requestAnimationFrame(applyTheme);
+            });
+        }
+    }
+    // Start the page palette without waiting for unrelated content to finish loading.
+    transitionToPageTheme();
     function initialize() {
         const filename = location.pathname.split('/').pop();
         if (filename && filename !== 'index.html') document.body.classList.add('inner-page');
@@ -39,22 +56,6 @@
             button.title = `Theme: ${current.name} · Click for ${next.name}`;
         }
         updateButton();
-        let firstFrame = 0, secondFrame = 0;
-        function cancelPageTransition() {
-            cancelAnimationFrame(firstFrame);
-            cancelAnimationFrame(secondFrame);
-        }
-        function transitionToPageTheme() {
-            cancelPageTransition();
-            if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                applyTheme();
-            } else {
-                firstFrame = requestAnimationFrame(() => {
-                    secondFrame = requestAnimationFrame(applyTheme);
-                });
-            }
-        }
-        transitionToPageTheme();
         window.addEventListener('pageshow', event => {
             if (!event.persisted) return;
             let previous;
