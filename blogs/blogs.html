@@ -14,59 +14,6 @@
     <script src="../darkmode.js?v=page-themes-3"></script>
 
     <style>
-        /* Blog Path Container - full width with scroll space */
-        .blog-path-container {
-            position: relative;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 100px 20px 200px;
-        }
-
-        /* Full-width curved path SVG */
-        .blog-path-svg {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Path colors - soft blue tones matching site theme */
-        .garden-path {
-            fill: none;
-            stroke: #e3f2fd;
-            stroke-width: 70;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .garden-path-border {
-            fill: none;
-            stroke: #bbdefb;
-            stroke-width: 85;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        :root.dark-mode .garden-path {
-            stroke: #1e3a5f;
-        }
-
-        :root.dark-mode .garden-path-border {
-            stroke: #152a45;
-        }
-
-        /* Flowers along path - bigger */
-        .path-flower {
-            position: absolute;
-            font-size: 32px;
-            z-index: 2;
-            pointer-events: none;
-            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.2));
-        }
-
         /* Blog entries */
         .blog-entries {
             position: relative;
@@ -264,311 +211,6 @@
 
         :root.dark-mode .billboard-pole::before {
             background: linear-gradient(180deg, #263238, #1c2529);
-        }
-
-        /* Pig looking at signs */
-        .pig-companion.looking .pig {
-            animation: none;
-        }
-
-        .pig-companion.looking-left .pig {
-            transform: scaleX(-1);
-        }
-
-        .pig-companion.looking-right .pig {
-            transform: scaleX(1);
-        }
-
-        .pig-thought {
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e3f2fd;
-            border: 2px solid #4fc3f7;
-            border-radius: 12px;
-            padding: 4px 10px;
-            font-size: 13px;
-            white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(79, 195, 247, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 100000;
-            color: #2c3e50;
-        }
-
-        .pig-thought::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 6px solid #e3f2fd;
-        }
-
-        .pig-companion.looking .pig-thought {
-            opacity: 1;
-        }
-
-        :root.dark-mode .pig-thought {
-            background: #1e3a5f;
-            border-color: #64b5f6;
-            color: #e3f2fd;
-        }
-
-        :root.dark-mode .pig-thought::after {
-            border-top-color: #1e3a5f;
-        }
-
-        /* Pig Companion */
-        .pig-companion {
-            position: fixed;
-            z-index: 99999;
-            pointer-events: none;
-            transition: left 0.08s linear, top 0.08s linear, opacity 0.3s ease;
-        }
-
-        .pig-companion .pig {
-            transition: transform 0.1s ease;
-        }
-
-        .pig-companion.walking .pig {
-            animation: pigBounce 0.18s ease-in-out infinite;
-        }
-
-        .pig-companion.walking .pig-leg-left {
-            animation: legWalk1 0.18s ease-in-out infinite;
-        }
-
-        .pig-companion.walking .pig-leg-right {
-            animation: legWalk2 0.18s ease-in-out infinite;
-        }
-
-        .pig-companion.facing-left .pig {
-            transform: scaleX(-1);
-        }
-
-        .pig-companion.celebrating .pig {
-            animation: pigCelebrate 0.5s ease-in-out infinite;
-        }
-
-        @keyframes pigCelebrate {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            25% { transform: translateY(-8px) rotate(5deg); }
-            50% { transform: translateY(0) rotate(-5deg); }
-            75% { transform: translateY(-8px) rotate(5deg); }
-        }
-
-        @keyframes pigBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        @keyframes legWalk1 {
-            0%, 100% { transform: rotate(-15deg); }
-            50% { transform: rotate(15deg); }
-        }
-
-        @keyframes legWalk2 {
-            0%, 100% { transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); }
-        }
-
-        /* Pig Home */
-        .pig-home {
-            position: absolute;
-            width: 120px;
-            height: 95px;
-            z-index: 10;
-            transform: translateX(-50%);
-        }
-
-        .pig-home .house-body {
-            position: absolute;
-            bottom: 0;
-            left: 15px;
-            width: 90px;
-            height: 55px;
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            border-radius: 6px;
-            border: 3px solid #4fc3f7;
-            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
-        }
-
-        .pig-home .roof {
-            position: absolute;
-            top: 5px;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 40px solid #4fc3f7;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-        }
-
-        .pig-home .door {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px;
-            height: 38px;
-            background: linear-gradient(135deg, #5d4037, #6d4c41);
-            border-radius: 5px 5px 0 0;
-            transform-origin: left center;
-            transition: transform 0.4s ease;
-            box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
-        }
-
-        .pig-home .door.open {
-            transform: translateX(-50%) perspective(100px) rotateY(-80deg);
-        }
-
-        .pig-home .door-knob {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle at 30% 30%, #ffd700, #daa520);
-            border-radius: 50%;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .pig-home .window {
-            position: absolute;
-            top: 10px;
-            width: 18px;
-            height: 18px;
-            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
-            border: 2px solid #4fc3f7;
-            border-radius: 3px;
-            box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
-        }
-
-        .pig-home .window-left { left: 10px; }
-        .pig-home .window-right { right: 10px; }
-
-        .pig-home .chimney {
-            position: absolute;
-            top: -5px;
-            right: 25px;
-            width: 16px;
-            height: 25px;
-            background: linear-gradient(90deg, #64b5f6, #4fc3f7, #64b5f6);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .pig-home .heart {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 22px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-
-        .pig-home.pig-near .heart {
-            opacity: 1;
-            animation: heartBeat 0.6s ease-in-out infinite;
-        }
-
-        :root.dark-mode .pig-home .house-body {
-            background: linear-gradient(135deg, #1e3a5f, #152a45);
-            border-color: #64b5f6;
-        }
-        :root.dark-mode .pig-home .roof { border-bottom-color: #64b5f6; }
-        :root.dark-mode .pig-home .window {
-            background: linear-gradient(135deg, #1565c0, #1976d2);
-            border-color: #64b5f6;
-        }
-        :root.dark-mode .pig-home .chimney {
-            background: linear-gradient(90deg, #1565c0, #1976d2, #1565c0);
-        }
-
-        @keyframes heartBeat {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.25); }
-        }
-
-        /* Healthy Pig Destination */
-        .healthy-pig-destination {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 40px;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .healthy-pig-area {
-            position: relative;
-            width: 200px;
-            height: 120px;
-        }
-
-        .healthy-pig-platform {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 25px;
-            background: linear-gradient(180deg, #81c784, #66bb6a);
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(102, 187, 106, 0.3);
-        }
-
-        .healthy-pig-sparkles {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 28px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .healthy-pig-destination.pig-arrived .healthy-pig-sparkles {
-            opacity: 1;
-            animation: sparkleFloat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes sparkleFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        .healthy-pig-message {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
-        }
-
-        .healthy-pig-destination.pig-arrived .healthy-pig-message { opacity: 1; }
-
-        :root.dark-mode .healthy-pig-message {
-            background: linear-gradient(135deg, #1565c0, #1976d2);
-            color: #e3f2fd;
-        }
-        :root.dark-mode .healthy-pig-platform {
-            background: linear-gradient(180deg, #4caf50, #388e3c);
         }
 
         /* ================================================
@@ -800,7 +442,6 @@
 
         /* Responsive */
         @media (max-width: 1000px) {
-            .blog-path-svg { display: none; }
             .billboard-pole { display: none; }
 
             .blog-entry {
@@ -811,10 +452,6 @@
 
             .blog-signpost-card { max-width: 100%; }
             .billboard-frame { border-radius: 12px; }
-            .pig-companion { display: none; }
-            .pig-home { display: none; }
-            .healthy-pig-destination { display: none; }
-            .path-flower { display: none; }
         }
 
         @media (max-width: 600px) {
@@ -831,6 +468,7 @@
             .blog-modal-title { font-size: 1.5em; }
         }
     </style>
+    <link rel="stylesheet" href="journey.css?v=home-journey-1">
 
     <script>
         (function() {
@@ -866,64 +504,77 @@
         <div class="page-content wide">
             <h2 class="page-title">Blogs</h2>
 
-            <!-- Blog Path Container -->
             <div class="blog-path-container" id="blog-path-container">
-                <svg class="blog-path-svg" id="blog-path-svg" preserveAspectRatio="none">
+                <div class="journey-intro"><span>A LITTLE WAY HOME</span><p>Good reads. Little treats. A happy way home.</p></div>
+                <svg class="blog-path-svg" id="blog-path-svg" aria-hidden="true">
                     <path id="garden-path-border" class="garden-path-border"/>
                     <path id="garden-path" class="garden-path"/>
+                    <path id="garden-path-light" class="garden-path-light"/>
+                    <path id="garden-path-pebbles" class="garden-path-pebbles"/>
                 </svg>
-
                 <div class="blog-entries" id="blog-entries"></div>
-
-                <!-- Pig's Home at the START (top) -->
-                <div class="pig-home" id="pig-home">
-                    <div class="heart">❤️</div>
-                    <div class="chimney"></div>
-                    <div class="roof"></div>
-                    <div class="house-body">
-                        <div class="window window-left"></div>
-                        <div class="window window-right"></div>
-                        <div class="door" id="pig-door">
-                            <div class="door-knob"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Healthy Pig Destination at the END (bottom) -->
-                <div class="healthy-pig-destination" id="healthy-pig-destination">
-                    <div class="healthy-pig-area">
-                        <div class="healthy-pig-sparkles">✨🌟✨</div>
-                        <div class="healthy-pig-platform"></div>
-                    </div>
-                    <div class="healthy-pig-message">Healthy &amp; Happy! 🎉</div>
+                <div class="journey-stops" id="journey-stops" aria-hidden="true"></div>
+                <div class="pig-home" id="pig-home" aria-label="Pig's cozy home">
+                    <svg viewBox="0 0 220 190" aria-hidden="true">
+                        <ellipse cx="110" cy="170" rx="99" ry="15" fill="#d9dfc7"/>
+                        <path d="M27 164Q34 131 49 151Q45 113 63 140M159 147Q174 121 174 151Q194 134 192 166" fill="#91a58a"/>
+                        <path d="M156 58V24H177V76" fill="#bc8974" stroke="#946f5e" stroke-width="2"/>
+                        <path d="M163 14Q151 6 162-5M175 10Q165 0 176-9" fill="none" stroke="#c8b4a0" stroke-width="3" stroke-linecap="round" class="cottage-smoke"/>
+                        <path d="M51 81L110 40L171 81V165H51Z" fill="#f8ecd5" stroke="#c7ae8b" stroke-width="2"/>
+                        <path d="M36 87L110 29L185 87L176 97L110 47L45 97Z" fill="#bd7e69" stroke="#a56858" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M48 86L110 40L173 86" fill="none" stroke="#dca58c" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M54 157H166V166H54Z" fill="#e5d4b7"/>
+                        <rect x="64" y="99" width="29" height="31" rx="10" class="cottage-window" fill="#edc98b" stroke="#aa9173" stroke-width="3"/>
+                        <path d="M78.5 100V130M64 114H93" stroke="#aa9173" stroke-width="2"/>
+                        <rect x="128" y="99" width="29" height="31" rx="10" class="cottage-window" fill="#edc98b" stroke="#aa9173" stroke-width="3"/>
+                        <path d="M142.5 100V130M128 114H157" stroke="#aa9173" stroke-width="2"/>
+                        <path d="M95 165V133Q110 110 125 133V165" fill="#8b9b7e" stroke="#728465" stroke-width="2"/>
+                        <path d="M101 155V136Q110 120 119 136V155" fill="#9dac8f"/>
+                        <circle cx="119" cy="146" r="2.5" fill="#f6de9f"/>
+                        <path d="M62 139H95M126 139H159" stroke="#ac8068" stroke-width="5" stroke-linecap="round"/>
+                        <g fill="#8da080"><ellipse cx="72" cy="135" rx="5" ry="9"/><ellipse cx="88" cy="134" rx="5" ry="8"/><ellipse cx="137" cy="134" rx="5" ry="8"/><ellipse cx="151" cy="135" rx="5" ry="9"/></g>
+                        <g fill="#d99b96"><circle cx="78" cy="131" r="5"/><circle cx="143" cy="130" r="5"/></g>
+                        <path d="M42 160Q37 146 31 156Q24 148 22 160M174 165Q182 150 188 163" fill="none" stroke="#7f9875" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="home-heart" aria-hidden="true">♡</span>
+                    <div class="home-caption"><span>HOME, SWEET HOME</span><p id="home-message">A warm welcome is waiting.</p></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- The Pig Companion -->
-    <div class="pig-companion" id="pig-companion">
-        <div class="pig-thought" id="pig-thought">Interesting!</div>
-        <div class="pig" style="position: relative; width: 60px; height: 75px;">
-            <div style="position: absolute; width: 14px; height: 14px; background: #ffb6c1; border-radius: 50%; top: 0px; left: 10px; transform: rotate(-20deg);"></div>
-            <div style="position: absolute; width: 14px; height: 14px; background: #ffb6c1; border-radius: 50%; top: 0px; right: 10px; transform: rotate(20deg);"></div>
-            <div style="position: absolute; width: 50px; height: 42px; background: #ffb6c1; border-radius: 50%; top: 8px; left: 50%; transform: translateX(-50%);">
-                <div style="position: absolute; width: 6px; height: 8px; background: #333; border-radius: 50%; top: 12px; left: 11px;"></div>
-                <div style="position: absolute; width: 6px; height: 8px; background: #333; border-radius: 50%; top: 12px; right: 11px;"></div>
-                <div style="position: absolute; width: 8px; height: 5px; background: rgba(255,150,150,0.6); border-radius: 50%; top: 22px; left: 5px;"></div>
-                <div style="position: absolute; width: 8px; height: 5px; background: rgba(255,150,150,0.6); border-radius: 50%; top: 22px; right: 5px;"></div>
-                <div style="position: absolute; width: 22px; height: 16px; background: #ff9aa2; border-radius: 50%; bottom: 4px; left: 50%; transform: translateX(-50%);">
-                    <div style="position: absolute; width: 5px; height: 5px; background: #d47c84; border-radius: 50%; top: 5px; left: 4px;"></div>
-                    <div style="position: absolute; width: 5px; height: 5px; background: #d47c84; border-radius: 50%; top: 5px; right: 4px;"></div>
-                </div>
-            </div>
-            <div style="position: absolute; width: 38px; height: 28px; background: #ffb6c1; border-radius: 50%; top: 42px; left: 50%; transform: translateX(-50%);">
-                <div style="position: absolute; width: 10px; height: 10px; border: 3px solid #ffb6c1; border-radius: 50%; border-left-color: transparent; border-bottom-color: transparent; right: -8px; top: 8px; transform: rotate(45deg);"></div>
-            </div>
-            <div class="pig-leg-left" style="position: absolute; width: 10px; height: 14px; background: #ffb6c1; border-radius: 5px; bottom: 0; left: 14px; transform-origin: top center;"></div>
-            <div class="pig-leg-right" style="position: absolute; width: 10px; height: 14px; background: #ffb6c1; border-radius: 5px; bottom: 0; right: 14px; transform-origin: top center;"></div>
+    <div class="pig-companion" id="pig-companion" aria-hidden="true">
+        <div class="pig-thought" id="pig-thought"></div>
+        <div class="pig">
+            <svg viewBox="0 0 80 94">
+                <ellipse cx="40" cy="87" rx="24" ry="5" fill="#b89b85" opacity=".2"/>
+                <path d="M62 65Q79 53 75 67Q70 74 68 67" fill="none" stroke="#d99199" stroke-width="4" stroke-linecap="round"/>
+                <g class="pig-leg-left"><rect x="24" y="73" width="12" height="14" rx="6" fill="#e4a1a8"/><path d="M27 85H33" stroke="#ba7c86" stroke-width="3" stroke-linecap="round"/></g>
+                <g class="pig-leg-right"><rect x="44" y="73" width="12" height="14" rx="6" fill="#e4a1a8"/><path d="M47 85H53" stroke="#ba7c86" stroke-width="3" stroke-linecap="round"/></g>
+                <ellipse cx="40" cy="62" rx="24" ry="23" fill="#edb4ba"/>
+                <path d="M19 26Q11 3 25 9L35 23M45 23L55 9Q69 3 61 26" fill="#edb4ba" stroke="#d997a0" stroke-width="1.5"/>
+                <path d="M21 22L20 13L29 23M51 23L60 13L59 22" fill="#d9959f"/>
+                <ellipse cx="40" cy="36" rx="29" ry="26" fill="#f4c5c8" stroke="#dca1a8" stroke-width="1.5"/>
+                <path class="pig-eyes" d="M27 31V34M53 31V34" stroke="#62504c" stroke-width="4" stroke-linecap="round"/>
+                <path class="pig-happy-eyes" d="M23 34Q27 28 31 34M49 34Q53 28 57 34" fill="none" stroke="#62504c" stroke-width="2.5" stroke-linecap="round"/>
+                <g fill="#e6a1a9" opacity=".7"><ellipse cx="20" cy="42" rx="6" ry="3"/><ellipse cx="60" cy="42" rx="6" ry="3"/></g>
+                <ellipse cx="40" cy="44" rx="13" ry="9" fill="#e9a6ae"/>
+                <g fill="#b97d89"><ellipse cx="35" cy="44" rx="2" ry="3"/><ellipse cx="45" cy="44" rx="2" ry="3"/></g>
+                <path d="M35 56Q40 60 45 56" fill="none" stroke="#b97d89" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M21 66Q29 58 32 69M48 69Q51 58 59 66" fill="none" stroke="#d997a0" stroke-width="5" stroke-linecap="round"/>
+                <path d="M20 59Q40 68 60 59" fill="none" stroke="#8b9b7e" stroke-width="5" stroke-linecap="round"/>
+                <path d="M52 62L58 73L48 68Z" fill="#8b9b7e"/>
+            </svg>
         </div>
+        <div class="pig-treat" id="pig-treat"></div>
+        <div class="snack-crumbs"><i></i><i></i><i></i></div>
     </div>
+    <div class="journey-meter" id="journey-meter" aria-label="Pig's snack energy" hidden>
+        <span class="meter-icon" aria-hidden="true">♡</span>
+        <div><span id="journey-count">Little treats along the way</span><div class="meter-track"><span id="journey-energy"></span></div></div>
+    </div>
+    <span class="journey-status" id="journey-status" role="status" aria-live="polite"></span>
+    <script src="journey.js?v=home-journey-1"></script>
 
     <!-- Blog Detail Modal -->
     <div id="blog-modal" class="blog-modal">
@@ -1053,9 +704,7 @@
         const modalTitle  = blogModal.querySelector('.blog-modal-title');
         const modalText   = blogModal.querySelector('.blog-modal-text');
         const modalClose  = blogModal.querySelector('.blog-modal-close');
-        const pigThought  = document.getElementById('pig-thought');
 
-        let blogPositions = [];
         let blogsData     = [];
 
         /**
@@ -1145,11 +794,6 @@
             return posts;
         }
 
-        const pigReactions = [
-            'Interesting!', 'Ooh! 📖', 'Yummy read!', 'Love it! 💕',
-            'So cool!', 'Hmm... 🤔', 'Nice! ✨', 'Wow! 😮'
-        ];
-
         function formatDate(dateStr) {
             const date    = new Date(dateStr);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -1185,25 +829,9 @@
             });
 
             setTimeout(() => {
-                calculateBlogPositions();
-                generatePath();
                 observeEntries();
-                updatePig();
+                window.dispatchEvent(new Event('blogs-rendered'));
             }, 100);
-        }
-
-        function calculateBlogPositions() {
-            blogPositions = [];
-            const entries       = document.querySelectorAll('.blog-entry');
-            const containerRect = pathContainer.getBoundingClientRect();
-
-            entries.forEach((entry) => {
-                const rect    = entry.getBoundingClientRect();
-                const isLeft  = entry.classList.contains('left');
-                const centerY = rect.top - containerRect.top + rect.height / 2;
-                const curveX  = isLeft ? 0.45 : 0.55;
-                blogPositions.push({ y: centerY, x: curveX, isLeft });
-            });
         }
 
         // ---- Open / Close Modal ----
@@ -1250,201 +878,6 @@
         }
 
         // =============================================
-        // Path generation
-        // =============================================
-        const pathContainer    = document.getElementById('blog-path-container');
-        const pathSvg          = document.getElementById('blog-path-svg');
-        const gardenPath       = document.getElementById('garden-path');
-        const gardenPathBorder = document.getElementById('garden-path-border');
-
-        function generatePath() {
-            const containerWidth  = pathContainer.offsetWidth;
-            const containerHeight = pathContainer.offsetHeight;
-
-            pathSvg.setAttribute('viewBox', `0 0 ${containerWidth} ${containerHeight}`);
-            pathSvg.style.width  = containerWidth  + 'px';
-            pathSvg.style.height = containerHeight + 'px';
-
-            const endX = containerWidth * 0.5;
-            const endY = containerHeight - 80;
-
-            if (blogPositions.length === 0) {
-                const pathD = `M ${containerWidth * 0.5},50 L ${endX},${endY}`;
-                gardenPath.setAttribute('d', pathD);
-                gardenPathBorder.setAttribute('d', pathD);
-                return;
-            }
-
-            const startX = containerWidth * 0.5;
-            const startY = 60;
-            let pathD    = `M ${startX},${startY}`;
-
-            for (let i = 0; i < blogPositions.length; i++) {
-                const curr  = blogPositions[i];
-                const currX = containerWidth * curr.x;
-                if (i === 0) {
-                    const cy1 = startY + (curr.y - startY) * 0.3;
-                    const cy2 = startY + (curr.y - startY) * 0.7;
-                    pathD += ` C ${startX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
-                } else {
-                    const prev  = blogPositions[i - 1];
-                    const prevX = containerWidth * prev.x;
-                    const cy1   = prev.y + (curr.y - prev.y) * 0.3;
-                    const cy2   = prev.y + (curr.y - prev.y) * 0.7;
-                    pathD += ` C ${prevX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
-                }
-            }
-
-            const lastPos = blogPositions[blogPositions.length - 1];
-            const lastX   = containerWidth * lastPos.x;
-            const cy1f    = lastPos.y + (endY - lastPos.y) * 0.3;
-            const cy2f    = lastPos.y + (endY - lastPos.y) * 0.7;
-            pathD += ` C ${lastX},${cy1f} ${endX},${cy2f} ${endX},${endY}`;
-
-            gardenPath.setAttribute('d', pathD);
-            gardenPathBorder.setAttribute('d', pathD);
-
-            positionPigHome(startX, startY);
-            positionGrass(endX, endY);
-            addFlowers(containerWidth, containerHeight);
-        }
-
-        function positionPigHome(x, y) {
-            const el = document.getElementById('pig-home');
-            if (!el) return;
-            el.style.left = x + 'px';
-            el.style.top  = (y - 70) + 'px';
-        }
-
-        function positionGrass(x, y) {
-            const el = document.getElementById('healthy-pig-destination');
-            if (!el) return;
-            el.style.left   = x + 'px';
-            el.style.bottom = 'auto';
-            el.style.top    = (y - 20) + 'px';
-        }
-
-        function addFlowers(containerWidth, containerHeight) {
-            const flowers = ['🌸', '🌷', '🌼', '🌺', '🌻'];
-            pathContainer.querySelectorAll('.path-flower').forEach(f => f.remove());
-
-            const centerX    = containerWidth * 0.5;
-            const startY     = 80;
-            const endY       = containerHeight - 100;
-            const pathHeight = endY - startY;
-            const count      = 12;
-
-            for (let i = 0; i < count; i++) {
-                const flower    = document.createElement('span');
-                flower.className = 'path-flower';
-                flower.textContent = flowers[i % flowers.length];
-                const y    = startY + (pathHeight / count) * i + Math.random() * 30;
-                const side = (i % 2 === 0) ? -1 : 1;
-                const x    = centerX + side * (50 + Math.random() * 40);
-                flower.style.top       = y + 'px';
-                flower.style.left      = x + 'px';
-                flower.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
-                flower.style.opacity   = (0.7 + Math.random() * 0.3).toString();
-                pathContainer.appendChild(flower);
-            }
-        }
-
-        // =============================================
-        // Pig movement
-        // =============================================
-        const pig              = document.getElementById('pig-companion');
-        const pigHome          = document.getElementById('pig-home');
-        const pigDoor          = document.getElementById('pig-door');
-        const healthyDest      = document.getElementById('healthy-pig-destination');
-
-        let lastScrollY        = window.scrollY;
-        let isWalking          = false;
-        let walkingTimeout;
-        let lastPigX           = 0;
-        let currentPigProgress = 0;
-        let lookingTimeout;
-
-        function checkBlogProximity(progress) {
-            if (!blogPositions.length) return;
-            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
-            if (!pathLength) return;
-
-            const pt = gardenPath.getPointAtLength(progress * pathLength);
-
-            for (let i = 0; i < blogPositions.length; i++) {
-                if (Math.abs(pt.y - blogPositions[i].y) < 30) {
-                    clearTimeout(lookingTimeout);
-                    pig.classList.add('looking');
-                    blogPositions[i].isLeft
-                        ? (pig.classList.add('looking-left'),  pig.classList.remove('looking-right'))
-                        : (pig.classList.remove('looking-left'), pig.classList.add('looking-right'));
-                    if (pigThought) pigThought.textContent = pigReactions[i % pigReactions.length];
-                    lookingTimeout = setTimeout(() => pig.classList.remove('looking', 'looking-left', 'looking-right'), 800);
-                    return;
-                }
-            }
-        }
-
-        function updatePig() {
-            if (!pig || !pathContainer || !gardenPath) return;
-            const scrollY      = window.scrollY;
-            const scrollDelta  = scrollY - lastScrollY;
-            const windowHeight = window.innerHeight;
-
-            const containerRect = pathContainer.getBoundingClientRect();
-            const containerTop  = containerRect.top + scrollY;
-            const scrollEnd     = containerTop + pathContainer.offsetHeight - windowHeight;
-            const scrollRange   = Math.max(scrollEnd - containerTop, 1);
-            const progress      = Math.max(0, Math.min(1, (scrollY - containerTop) / scrollRange));
-            currentPigProgress  = progress;
-
-            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
-            if (!pathLength) return;
-
-            const pt   = gardenPath.getPointAtLength(progress * pathLength);
-            pig.style.left      = (containerRect.left + pt.x) + 'px';
-            pig.style.top       = (containerRect.top  + pt.y) + 'px';
-            pig.style.transform = 'translate(-50%, -50%)';
-            pig.style.opacity   = '1';
-
-            if (progress <= 0) {
-                if (pigDoor) pigDoor.classList.remove('open');
-                if (pigHome) pigHome.classList.remove('pig-near');
-            } else if (progress < 0.08) {
-                if (pigDoor) pigDoor.classList.add('open');
-                if (pigHome) pigHome.classList.add('pig-near');
-            } else {
-                if (pigDoor) pigDoor.classList.remove('open');
-                if (pigHome) pigHome.classList.remove('pig-near');
-            }
-
-            if (Math.abs(pt.x - lastPigX) > 2) {
-                pt.x < lastPigX ? pig.classList.add('facing-left') : pig.classList.remove('facing-left');
-            }
-            lastPigX = pt.x;
-
-            if (progress > 0.95) {
-                healthyDest && healthyDest.classList.add('pig-arrived');
-                pig.classList.add('celebrating');
-            } else {
-                healthyDest && healthyDest.classList.remove('pig-arrived');
-                pig.classList.remove('celebrating');
-            }
-
-            if (Math.abs(scrollDelta) > 1) {
-                if (!isWalking) { pig.classList.add('walking'); pig.classList.remove('looking'); isWalking = true; }
-                clearTimeout(walkingTimeout);
-                walkingTimeout = setTimeout(() => {
-                    pig.classList.remove('walking');
-                    isWalking = false;
-                    checkBlogProximity(progress);
-                }, 150);
-            }
-
-            lastScrollY = scrollY;
-        }
-
-        // =============================================
         // Load posts
         // =============================================
         fetch('posts.md')
@@ -1456,15 +889,9 @@
             .catch(err => {
                 console.error('Error loading blog data:', err);
                 blogEntries.innerHTML = '<p style="text-align:center;color:#666;">Blog posts coming soon!</p>';
-                generatePath();
+                window.dispatchEvent(new Event('blogs-rendered'));
             });
 
-        window.addEventListener('scroll', updatePig, { passive: true });
-        window.addEventListener('resize', () => {
-            calculateBlogPositions();
-            generatePath();
-            updatePig();
-        });
     </script>
 </body>
 </html>
