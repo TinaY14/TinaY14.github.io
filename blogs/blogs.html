@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogs - Tina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
@@ -831,15 +834,14 @@
 
     <script>
         (function() {
-            const savedMode = localStorage.getItem('darkMode');
-            if (savedMode === 'true') {
-                document.documentElement.classList.add('dark-mode');
-            }
+            let theme = 'mint';
+            try { theme = localStorage.getItem('tinaTheme') || theme; } catch (_) {}
+            if (!['mint', 'sky', 'peach', 'lavender', 'cream'].includes(theme)) theme = 'mint';
+            document.documentElement.dataset.theme = theme;
         })();
     </script>
-<link rel="stylesheet" href="../world.css">
 </head>
-<body class="inner-page journal-page">
+<body class="inner-page">
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
@@ -847,16 +849,14 @@
             <a href="blogs.html">Blogs</a>
             <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects.html">Projects &amp; Experiences</a>
-            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <a href="../projects/projects.html">Projects &amp; Experiences</a>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
             <script>
                 (function() {
                     const btn = document.getElementById('dark-mode-toggle');
-                    const isDark = document.documentElement.classList.contains('dark-mode');
-                    if (btn) {
-                        btn.textContent = isDark ? '☀️' : '🌙';
-                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                    }
+                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
+                    const theme = document.documentElement.dataset.theme || 'mint';
+                    if (btn) btn.textContent = labels[theme];
                 })();
             </script>
         </nav>
@@ -864,7 +864,7 @@
 
     <main class="hero inner-page">
         <div class="page-content wide">
-            <p class="eyebrow page-kicker">01 / THE JOURNAL</p><h1 class="page-title">The scenic route.</h1><p class="room-intro">A collection of travels, everyday discoveries, and moments worth keeping.</p><div class="trail-note"><span aria-hidden="true">🐷</span><div><strong>A little companion for your reading journey.</strong><br>Scroll to wander. Open a story along the way. Help our little pig find home.<span class="trail-progress" id="trail-progress" aria-live="polite">The journey begins here.</span></div></div>
+            <h2 class="page-title">Blogs</h2>
 
             <!-- Blog Path Container -->
             <div class="blog-path-container" id="blog-path-container">
@@ -875,7 +875,7 @@
 
                 <div class="blog-entries" id="blog-entries"></div>
 
-                <!-- Home at the end of the journal trail -->
+                <!-- Pig's Home at the START (top) -->
                 <div class="pig-home" id="pig-home">
                     <div class="heart">❤️</div>
                     <div class="chimney"></div>
@@ -889,13 +889,13 @@
                     </div>
                 </div>
 
-                <!-- A little garden at the beginning -->
+                <!-- Healthy Pig Destination at the END (bottom) -->
                 <div class="healthy-pig-destination" id="healthy-pig-destination">
                     <div class="healthy-pig-area">
                         <div class="healthy-pig-sparkles">✨🌟✨</div>
                         <div class="healthy-pig-platform"></div>
                     </div>
-                    <div class="healthy-pig-message">A little adventure begins 🌱</div>
+                    <div class="healthy-pig-message">Healthy &amp; Happy! 🎉</div>
                 </div>
             </div>
         </div>
@@ -926,7 +926,7 @@
     </div>
 
     <!-- Blog Detail Modal -->
-    <div id="blog-modal" class="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-dialog-title" tabindex="-1">
+    <div id="blog-modal" class="blog-modal">
         <div class="blog-modal-content">
             <button class="blog-modal-close" aria-label="Close">&times;</button>
 
@@ -945,7 +945,7 @@
 
             <div class="blog-modal-body">
                 <div class="blog-modal-date"></div>
-                <h2 class="blog-modal-title" id="blog-dialog-title"></h2>
+                <h2 class="blog-modal-title"></h2>
                 <div class="blog-modal-text"></div>
             </div>
         </div>
@@ -1053,7 +1053,9 @@
         const modalTitle  = blogModal.querySelector('.blog-modal-title');
         const modalText   = blogModal.querySelector('.blog-modal-text');
         const modalClose  = blogModal.querySelector('.blog-modal-close');
+        const pigThought  = document.getElementById('pig-thought');
 
+        let blogPositions = [];
         let blogsData     = [];
 
         /**
@@ -1143,6 +1145,11 @@
             return posts;
         }
 
+        const pigReactions = [
+            'Interesting!', 'Ooh! 📖', 'Yummy read!', 'Love it! 💕',
+            'So cool!', 'Hmm... 🤔', 'Nice! ✨', 'Wow! 😮'
+        ];
+
         function formatDate(dateStr) {
             const date    = new Date(dateStr);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -1159,7 +1166,7 @@
                 entry.className = `blog-entry ${isLeft ? 'left' : 'right'}`;
 
                 entry.innerHTML = `
-                    <div class="blog-signpost-card" data-index="${index}" role="button" tabindex="0" aria-label="Read ${blog.title.replace(/"/g, '&quot;')}">
+                    <div class="blog-signpost-card" data-index="${index}">
                         <div class="billboard-frame">
                             <img class="billboard-image" src="${blog.image}" alt="${blog.title}">
                             <div class="billboard-content">
@@ -1174,32 +1181,33 @@
                 `;
 
                 entry.querySelector('.blog-signpost-card').addEventListener('click', () => openModal(blog));
-                entry.querySelector('.blog-signpost-card').addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(blog); }
-                });
                 blogEntries.appendChild(entry);
             });
 
             setTimeout(() => {
+                calculateBlogPositions();
+                generatePath();
                 observeEntries();
-                window.dispatchEvent(new Event('journal-rendered'));
-                const story = new URLSearchParams(location.search).get('story');
-                if (story === 'jiangnan' || story === 'ganoderma') {
-                    const index = blogs.findIndex(blog => blog.title.toLowerCase().includes(story));
-                    if (index >= 0) {
-                        const card = blogEntries.querySelector(`[data-index="${index}"]`);
-                        card.scrollIntoView({block: 'center', behavior: 'instant'});
-                        card.focus({preventScroll: true});
-                        openModal(blogs[index]);
-                    }
-                }
+                updatePig();
             }, 100);
         }
 
+        function calculateBlogPositions() {
+            blogPositions = [];
+            const entries       = document.querySelectorAll('.blog-entry');
+            const containerRect = pathContainer.getBoundingClientRect();
+
+            entries.forEach((entry) => {
+                const rect    = entry.getBoundingClientRect();
+                const isLeft  = entry.classList.contains('left');
+                const centerY = rect.top - containerRect.top + rect.height / 2;
+                const curveX  = isLeft ? 0.45 : 0.55;
+                blogPositions.push({ y: centerY, x: curveX, isLeft });
+            });
+        }
+
         // ---- Open / Close Modal ----
-        let returnFocus;
         function openModal(blog) {
-            returnFocus = document.activeElement;
             // Populate text fields
             modalDate.textContent  = formatDate(blog.date);
             modalTitle.textContent = blog.title;
@@ -1212,25 +1220,17 @@
             // Show modal
             blogModal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            modalClose.focus();
         }
 
         function closeModal() {
             blogModal.classList.remove('active');
             document.body.style.overflow = '';
-            returnFocus?.focus();
         }
 
         modalClose.addEventListener('click', closeModal);
         blogModal.addEventListener('click', e => { if (e.target === blogModal) closeModal(); });
         document.addEventListener('keydown', e => {
             if (!blogModal.classList.contains('active')) return;
-            if (e.key === 'Tab') {
-                const focusable = [...blogModal.querySelectorAll('button, [tabindex="0"]')].filter(el => el.getClientRects().length);
-                const first = focusable[0], last = focusable[focusable.length - 1];
-                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-                if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-            }
             if (e.key === 'Escape')      closeModal();
             if (e.key === 'ArrowLeft')   goToSlide(currentSlide - 1);
             if (e.key === 'ArrowRight')  goToSlide(currentSlide + 1);
@@ -1250,21 +1250,221 @@
         }
 
         // =============================================
+        // Path generation
+        // =============================================
+        const pathContainer    = document.getElementById('blog-path-container');
+        const pathSvg          = document.getElementById('blog-path-svg');
+        const gardenPath       = document.getElementById('garden-path');
+        const gardenPathBorder = document.getElementById('garden-path-border');
+
+        function generatePath() {
+            const containerWidth  = pathContainer.offsetWidth;
+            const containerHeight = pathContainer.offsetHeight;
+
+            pathSvg.setAttribute('viewBox', `0 0 ${containerWidth} ${containerHeight}`);
+            pathSvg.style.width  = containerWidth  + 'px';
+            pathSvg.style.height = containerHeight + 'px';
+
+            const endX = containerWidth * 0.5;
+            const endY = containerHeight - 80;
+
+            if (blogPositions.length === 0) {
+                const pathD = `M ${containerWidth * 0.5},50 L ${endX},${endY}`;
+                gardenPath.setAttribute('d', pathD);
+                gardenPathBorder.setAttribute('d', pathD);
+                return;
+            }
+
+            const startX = containerWidth * 0.5;
+            const startY = 60;
+            let pathD    = `M ${startX},${startY}`;
+
+            for (let i = 0; i < blogPositions.length; i++) {
+                const curr  = blogPositions[i];
+                const currX = containerWidth * curr.x;
+                if (i === 0) {
+                    const cy1 = startY + (curr.y - startY) * 0.3;
+                    const cy2 = startY + (curr.y - startY) * 0.7;
+                    pathD += ` C ${startX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
+                } else {
+                    const prev  = blogPositions[i - 1];
+                    const prevX = containerWidth * prev.x;
+                    const cy1   = prev.y + (curr.y - prev.y) * 0.3;
+                    const cy2   = prev.y + (curr.y - prev.y) * 0.7;
+                    pathD += ` C ${prevX},${cy1} ${currX},${cy2} ${currX},${curr.y}`;
+                }
+            }
+
+            const lastPos = blogPositions[blogPositions.length - 1];
+            const lastX   = containerWidth * lastPos.x;
+            const cy1f    = lastPos.y + (endY - lastPos.y) * 0.3;
+            const cy2f    = lastPos.y + (endY - lastPos.y) * 0.7;
+            pathD += ` C ${lastX},${cy1f} ${endX},${cy2f} ${endX},${endY}`;
+
+            gardenPath.setAttribute('d', pathD);
+            gardenPathBorder.setAttribute('d', pathD);
+
+            positionPigHome(startX, startY);
+            positionGrass(endX, endY);
+            addFlowers(containerWidth, containerHeight);
+        }
+
+        function positionPigHome(x, y) {
+            const el = document.getElementById('pig-home');
+            if (!el) return;
+            el.style.left = x + 'px';
+            el.style.top  = (y - 70) + 'px';
+        }
+
+        function positionGrass(x, y) {
+            const el = document.getElementById('healthy-pig-destination');
+            if (!el) return;
+            el.style.left   = x + 'px';
+            el.style.bottom = 'auto';
+            el.style.top    = (y - 20) + 'px';
+        }
+
+        function addFlowers(containerWidth, containerHeight) {
+            const flowers = ['🌸', '🌷', '🌼', '🌺', '🌻'];
+            pathContainer.querySelectorAll('.path-flower').forEach(f => f.remove());
+
+            const centerX    = containerWidth * 0.5;
+            const startY     = 80;
+            const endY       = containerHeight - 100;
+            const pathHeight = endY - startY;
+            const count      = 12;
+
+            for (let i = 0; i < count; i++) {
+                const flower    = document.createElement('span');
+                flower.className = 'path-flower';
+                flower.textContent = flowers[i % flowers.length];
+                const y    = startY + (pathHeight / count) * i + Math.random() * 30;
+                const side = (i % 2 === 0) ? -1 : 1;
+                const x    = centerX + side * (50 + Math.random() * 40);
+                flower.style.top       = y + 'px';
+                flower.style.left      = x + 'px';
+                flower.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+                flower.style.opacity   = (0.7 + Math.random() * 0.3).toString();
+                pathContainer.appendChild(flower);
+            }
+        }
+
+        // =============================================
+        // Pig movement
+        // =============================================
+        const pig              = document.getElementById('pig-companion');
+        const pigHome          = document.getElementById('pig-home');
+        const pigDoor          = document.getElementById('pig-door');
+        const healthyDest      = document.getElementById('healthy-pig-destination');
+
+        let lastScrollY        = window.scrollY;
+        let isWalking          = false;
+        let walkingTimeout;
+        let lastPigX           = 0;
+        let currentPigProgress = 0;
+        let lookingTimeout;
+
+        function checkBlogProximity(progress) {
+            if (!blogPositions.length) return;
+            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
+            if (!pathLength) return;
+
+            const pt = gardenPath.getPointAtLength(progress * pathLength);
+
+            for (let i = 0; i < blogPositions.length; i++) {
+                if (Math.abs(pt.y - blogPositions[i].y) < 30) {
+                    clearTimeout(lookingTimeout);
+                    pig.classList.add('looking');
+                    blogPositions[i].isLeft
+                        ? (pig.classList.add('looking-left'),  pig.classList.remove('looking-right'))
+                        : (pig.classList.remove('looking-left'), pig.classList.add('looking-right'));
+                    if (pigThought) pigThought.textContent = pigReactions[i % pigReactions.length];
+                    lookingTimeout = setTimeout(() => pig.classList.remove('looking', 'looking-left', 'looking-right'), 800);
+                    return;
+                }
+            }
+        }
+
+        function updatePig() {
+            if (!pig || !pathContainer || !gardenPath) return;
+            const scrollY      = window.scrollY;
+            const scrollDelta  = scrollY - lastScrollY;
+            const windowHeight = window.innerHeight;
+
+            const containerRect = pathContainer.getBoundingClientRect();
+            const containerTop  = containerRect.top + scrollY;
+            const scrollEnd     = containerTop + pathContainer.offsetHeight - windowHeight;
+            const scrollRange   = Math.max(scrollEnd - containerTop, 1);
+            const progress      = Math.max(0, Math.min(1, (scrollY - containerTop) / scrollRange));
+            currentPigProgress  = progress;
+
+            const pathLength = gardenPath.getTotalLength ? gardenPath.getTotalLength() : 0;
+            if (!pathLength) return;
+
+            const pt   = gardenPath.getPointAtLength(progress * pathLength);
+            pig.style.left      = (containerRect.left + pt.x) + 'px';
+            pig.style.top       = (containerRect.top  + pt.y) + 'px';
+            pig.style.transform = 'translate(-50%, -50%)';
+            pig.style.opacity   = '1';
+
+            if (progress <= 0) {
+                if (pigDoor) pigDoor.classList.remove('open');
+                if (pigHome) pigHome.classList.remove('pig-near');
+            } else if (progress < 0.08) {
+                if (pigDoor) pigDoor.classList.add('open');
+                if (pigHome) pigHome.classList.add('pig-near');
+            } else {
+                if (pigDoor) pigDoor.classList.remove('open');
+                if (pigHome) pigHome.classList.remove('pig-near');
+            }
+
+            if (Math.abs(pt.x - lastPigX) > 2) {
+                pt.x < lastPigX ? pig.classList.add('facing-left') : pig.classList.remove('facing-left');
+            }
+            lastPigX = pt.x;
+
+            if (progress > 0.95) {
+                healthyDest && healthyDest.classList.add('pig-arrived');
+                pig.classList.add('celebrating');
+            } else {
+                healthyDest && healthyDest.classList.remove('pig-arrived');
+                pig.classList.remove('celebrating');
+            }
+
+            if (Math.abs(scrollDelta) > 1) {
+                if (!isWalking) { pig.classList.add('walking'); pig.classList.remove('looking'); isWalking = true; }
+                clearTimeout(walkingTimeout);
+                walkingTimeout = setTimeout(() => {
+                    pig.classList.remove('walking');
+                    isWalking = false;
+                    checkBlogProximity(progress);
+                }, 150);
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        // =============================================
         // Load posts
         // =============================================
         fetch('posts.md')
-            .then(r => { if (!r.ok) throw new Error('Could not load journal'); return r.text(); })
+            .then(r => r.text())
             .then(markdown => {
                 const blogs = parseMarkdownPosts(markdown);
                 renderBlogs(blogs);
             })
             .catch(err => {
                 console.error('Error loading blog data:', err);
-                blogEntries.innerHTML = '<p style="text-align:center;color:#666;">The journal could not load. Please refresh to try again.</p>';
-                window.dispatchEvent(new Event('journal-rendered'));
+                blogEntries.innerHTML = '<p style="text-align:center;color:#666;">Blog posts coming soon!</p>';
+                generatePath();
             });
 
+        window.addEventListener('scroll', updatePig, { passive: true });
+        window.addEventListener('resize', () => {
+            calculateBlogPositions();
+            generatePath();
+            updatePig();
+        });
     </script>
-    <script src="../pig.js"></script>
 </body>
 </html>

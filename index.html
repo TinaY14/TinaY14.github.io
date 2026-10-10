@@ -1,59 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Step into Tina’s little world: nutrition, research, food adventures, and stories from everyday life.">
-<meta name="theme-color" content="#f5f2e9">
-<title>Xitian (Tina) Yu — A Little World of Curiosity</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="world.css">
-<script>try { if(localStorage.getItem('darkMode')==='true') document.documentElement.classList.add('dark-mode'); } catch {}</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xitian (Tina) Yu </title>
+    
+    <!-- Preload background image for faster loading -->
+    <link rel="preload" href="images/site/background.jpg" as="image" fetchpriority="high">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Restore the saved color theme before first paint -->
+    <script>
+        (function() {
+            let theme = 'mint';
+            try { theme = localStorage.getItem('tinaTheme') || theme; } catch (_) {}
+            if (!['mint', 'sky', 'peach', 'lavender', 'cream'].includes(theme)) theme = 'mint';
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+
 </head>
-<body class="world-home">
-<a class="skip-link" href="#main">Skip to content</a>
-<header>
-<a href="index.html" class="logo"><span class="brand-symbol" aria-hidden="true">✳</span> Tina’s little world<span class="brand-dot">.</span></a>
-<nav aria-label="Main navigation">
-<a href="index.html">Home</a><a href="blogs/blogs.html">Journal</a><a href="night_stall_food/night_stall_food.html">Night market</a><a href="food_gallery/food_gallery.html">Food diary</a><a href="projects.html">Projects</a>
-<button id="dark-mode-toggle" aria-label="Switch to dark mode">☾</button>
-</nav>
-</header>
-<main id="main">
-<section class="world-hero" aria-labelledby="hero-title">
-<div class="hero-editorial">
-<p class="eyebrow"><span class="live-dot"></span> A PERSONAL FIELD GUIDE TO LIVING WELL</p>
-<h1 id="hero-title">A little<br><em>curiosity.</em><br>A whole world<span class="heading-dot">.</span></h1>
-<p class="hero-note">Nutrition, culture, and the lovely things in between.<br>Come for a story. Stay for a little discovery.</p>
-<a class="pill-button" href="#explore">Step into my world <span aria-hidden="true">↗</span></a>
-<div class="hero-signature"><span class="signature-line"></span><span>Collected with love by Xitian (Tina) Yu</span></div>
-</div>
-<div class="portrait-world">
-<div class="orbit-ring" aria-hidden="true"></div>
-<span class="orbit-star star-one" aria-hidden="true">✧</span><span class="orbit-star star-two" aria-hidden="true">✳</span>
-<figure class="portrait-frame"><img src="images/site/selfie.png" alt="Xitian (Tina) Yu" fetchpriority="high"><figcaption>ME, IN MY ELEMENT / TINA YU</figcaption></figure>
-<div class="floating-note note-top"><span aria-hidden="true">🌱</span> Rooted in nutrition.<br><em>Led by curiosity.</em></div>
-<a href="night_stall_food/night_stall_food.html" class="food-postcard"><img src="food_gallery/image/012326(1).jpg" alt="A moment from my food diary"><span>A taste of everyday life ↗</span></a>
-<div class="round-seal" aria-hidden="true">GOOD FOOD<br>✳<br>GOOD MOOD</div>
-</div>
-</section>
-<div class="world-divider"><span>NUTRITION ENTHUSIAST</span><span aria-hidden="true">✳</span><span>FOOD EXPLORER</span><span aria-hidden="true">✳</span><span>FOREVER CURIOUS</span><a href="#explore">SCROLL TO WANDER ↓</a></div>
-<section class="explore-section" id="explore" aria-labelledby="explore-title">
-<div class="section-heading"><div><p class="eyebrow">01 — 04 / CHOOSE A LITTLE DETOUR</p><h2 id="explore-title">Follow your <em>curiosity.</em></h2></div><p>No right route. Just four corners of my world,<br>and something to discover in each.</p></div>
-<div class="explorer-passport"><span class="passport-icon" aria-hidden="true">⌘</span><div><strong>Your visitor’s passport</strong><span id="passport-status" aria-live="polite">0 of 4 corners explored</span></div><div class="passport-stamps" aria-label="Exploration progress"><span data-stamp="journal">01</span><span data-stamp="market">02</span><span data-stamp="gallery">03</span><span data-stamp="projects">04</span></div><button id="reset-passport" type="button">Start fresh</button></div>
-<div class="explore-grid">
-<a href="blogs/blogs.html" class="world-card journal-card" data-room="journal"><div class="card-topline"><span>01 / THE JOURNAL</span><span class="card-arrow">↗</span></div><div class="journal-illustration" aria-hidden="true"><span class="journal-scribble">little moments,<br>big memories.</span><span class="pressed-flower">✳</span><span class="journal-pig">🐷</span><span class="journal-trail"></span></div><h3>Stories along<br>the garden path.</h3><p>Life, travels, and thoughts. Follow a little pig through the pages of my journal.</p><span class="card-link">Take the scenic route <span>→</span></span></a>
-<a href="night_stall_food/night_stall_food.html" class="world-card market-card" data-room="market"><div class="card-topline"><span>02 / THE NIGHT MARKET</span><span class="card-arrow">↗</span></div><div class="market-illustration" aria-hidden="true"><span class="market-label">夜市</span><span class="market-bowl">🍜</span><span class="market-caption">one more bite?</span></div><h3>A world that’s<br>worth tasting.</h3><p>Street food, familiar flavors, and the stories behind the things we eat.</p><span class="card-link">Find your next craving <span>→</span></span></a>
-<a href="food_gallery/food_gallery.html" class="world-card gallery-card" data-room="gallery"><div class="card-topline"><span>03 / THE FOOD DIARY</span><span class="card-arrow">↗</span></div><div class="gallery-illustration"><img src="food_gallery/image/012126(1).jpg" alt="From my collection of food memories" loading="lazy"><span>delicious little memories</span></div><h3>Life, one<br>plate at a time.</h3><p>A visual diary of food adventures. The everyday, the unexpected, the delicious.</p><span class="card-link">Leaf through the collection <span>→</span></span></a>
-<a href="projects.html" class="world-card research-card" data-room="projects"><div class="card-topline"><span>04 / THE IDEA LAB</span><span class="card-arrow">↗</span></div><div class="research-illustration" aria-hidden="true"><span class="research-orbit orbit-a"></span><span class="research-orbit orbit-b"></span><span class="research-orbit orbit-c"></span><span class="research-core">✦</span><span class="research-label">what if?</span></div><h3>Small questions.<br>New possibilities.</h3><p>Research, experiments, and projects at the intersection of science and everyday life.</p><span class="card-link">See what I’m working on <span>→</span></span></a>
-</div>
-<button class="surprise-link" id="surprise-me" type="button">A little indecisive? <span>Let curiosity choose ↗</span></button>
-</section>
-<section class="about-editorial" aria-labelledby="about-title"><div class="about-margin"><span class="eyebrow">A NOTE FROM ME</span><span class="about-flower" aria-hidden="true">✳</span></div><div><h2 id="about-title">Healthy living.<br><em>A joyful life.</em></h2><p>Hi, I’m Tina — the creator of this space and a lifelong nutrition enthusiast. I’m here to share my personal journey toward healthy living in everyday life.</p><p>I believe that healthy eating should be about joy, not restriction. Take a look around my little world and feel free to connect with me. I can’t wait to hear from you!</p><p class="handwritten">Enjoy the journey! 💚</p><div class="about-actions"><a href="Xitian_Tina__Yu-2.pdf" class="text-link">View my résumé ↗</a><a href="mailto:18175109yyt@gmail.com" class="text-link">Say hello ↗</a></div></div><div class="about-aside"><span class="eyebrow">MY LITTLE PHILOSOPHY</span><p>“Make room<br>for the things<br>that <em>nourish you.</em>”</p><span class="aside-note">Good food. Good questions.<br>A little room to play.</span></div></section>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="blogs/blogs.html">Blogs</a>
+            <a href="night_stall_food/night_stall_food.html">Night Stall Food</a>
+            <a href="food_gallery/food_gallery.html">Food Gallery</a>
+            <a href="projects/projects.html">Projects &amp; Experiences</a>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
+            <script>
+                // Set the initial theme label
+                (function() {
+                    const btn = document.getElementById('dark-mode-toggle');
+                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
+                    const theme = document.documentElement.dataset.theme || 'mint';
+                    if (btn) btn.textContent = labels[theme];
+                })();
+            </script>
+        </nav>
+    </header>
+
+    <div style="height: 40px;"></div>
+
+    <!-- About Me Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h1 class="name">Xitian (Tina) Yu</h1>
+                <h2 class="tagline">Nutrition Enthusiast</h2>
+                <p class="description">
+                    Hi, I'm Tina - the creator of this space and a lifelong nutrition enthusiast. I'm here to share my personal journey toward healthy living in everyday life.
+                </p>
+                <p class="description">
+                    I believe that healthy eating should be about joy, not restriction. Take a look around my little world and feel free to connect with me, I can't wait to hear from you!
+                </p>
+                <p class="description">
+                    Enjoy the journey! 💚
+                </p>
+                <div class="game-invite">
+                    <p>Want to test your nutrition knowledge? <a href="#game-section">Scroll down to play a fun sorting game!</a></p>
+                </div>
+                <div class="actions">
+                    <a href="Xitian_Tina__Yu-2.pdf" class="resume-btn">Resume</a>
+                    <div class="social-links">
+                        <a href="https://github.com/TinaY14" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/TinaY25754" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/xitian-tina-yu-6080a323b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:18175109yyt@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="images/site/selfie.png" alt="Tina Yu Selfie">
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Spacer -->
+    <div class="background-spacer"></div>
+
+    <!-- Food Sorting Game Section -->
     <section class="game-section" id="game-section">
         <div class="game-wrapper">
-            <span class="eyebrow">05 / THE PLAYGROUND</span><h2 class="game-title">A little food for thought.</h2>
-            <p class="game-subtitle">The food group sorting game. A small challenge for your curious side.</p>
+            <h2 class="game-title">Food Group Sorting Game</h2>
+            <p class="game-subtitle">Test your nutrition knowledge!</p>
 
             <div class="game-box" id="game-box">
                 <!-- Start Screen -->
@@ -61,7 +100,7 @@
                     <div class="start-content">
                         <div class="start-icon">🥗</div>
                         <h3>How to Play</h3>
-                        <p>Drag each food to its food group, or select a food and then choose a basket. Keyboard explorers: use Tab and Enter.</p>
+                        <p>Drag each floating food item to the correct food group basket at the bottom.</p>
                         <p class="start-tip">Sort all 15 foods correctly to win!</p>
                         <button class="start-game-btn" id="start-game-btn">Start Game</button>
                     </div>
@@ -91,9 +130,7 @@
         </div>
     </section>
 
-
-</main>
-<footer class="world-footer"><div><a class="logo" href="index.html">Tina’s little world.</a><p>A little curiosity goes a long way.</p></div><div class="footer-socials"><a href="https://github.com/TinaY14" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/TinaY25754" target="_blank" rel="noopener noreferrer">X / Twitter ↗</a><a href="https://www.linkedin.com/in/xitian-tina-yu-6080a323b" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:18175109yyt@gmail.com">Email ↗</a></div><p class="footer-colophon">Made with curiosity &amp; a lot of heart.<br>© <span data-year>2026</span> Xitian (Tina) Yu</p></footer>
-<script src="darkmode.js"></script><script src="veggies.js"></script>
+    <script src="darkmode.js"></script>
+    <script src="veggies.js"></script>
 </body>
 </html>

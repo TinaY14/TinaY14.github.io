@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects &amp; Experiences - Xitian (Tina) Yu</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <!-- Prefetch homepage background so it's cached when navigating back -->
+    <!-- Preload homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
-    <!-- Prevent dark mode icon flash -->
+    <!-- Restore the saved color theme before first paint -->
     <script>
         (function() {
-            const savedMode = localStorage.getItem('darkMode');
-            if (savedMode === 'true') {
-                document.documentElement.classList.add('dark-mode');
-            }
+            let theme = 'mint';
+            try { theme = localStorage.getItem('tinaTheme') || theme; } catch (_) {}
+            if (!['mint', 'sky', 'peach', 'lavender', 'cream'].includes(theme)) theme = 'mint';
+            document.documentElement.dataset.theme = theme;
         })();
     </script>
-<link rel="stylesheet" href="../world.css">
 </head>
-<body class="inner-page project-index">
+<body class="inner-page">
 
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
@@ -34,16 +36,14 @@
             <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects &amp; Experiences</a>
-                        <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
             <script>
-                // Set initial button state immediately to prevent flash
+                // Set the initial theme label
                 (function() {
                     const btn = document.getElementById('dark-mode-toggle');
-                    const isDark = document.documentElement.classList.contains('dark-mode');
-                    if (btn) {
-                        btn.textContent = isDark ? '☀️' : '🌙';
-                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                    }
+                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
+                    const theme = document.documentElement.dataset.theme || 'mint';
+                    if (btn) btn.textContent = labels[theme];
                 })();
             </script>
         </nav>
@@ -51,8 +51,8 @@
 
     <main class="hero inner-page">
         <div class="page-content">
-            <p class="eyebrow page-kicker">04 / THE IDEA LAB</p><h1 class="page-title">A curious mind at work.</h1>
-            <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years.</p>
+            <h2 class="page-title">Projects &amp; Experiences</h2>
+            <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years!</p>
 
             <div class="content-entry">
                 <img src="image/foodmon.jpg" alt="Foodmon App" class="intro-thumb">
@@ -79,21 +79,9 @@
             </div>
 
             <div class="content-entry">
-                <img src="../blogs/images/010325/4.jpg" alt="Jiangnan University fermentation laboratory" class="intro-thumb" loading="lazy">
-                <h3 style="font-size: 1.05em;"><a href="../blogs/blogs.html?story=jiangnan">Research Visit to the Laboratory of Brewing Microbiology and Applied Enzymology, Jiangnan University</a><span class="project-pending">From the journal ↗</span></h3>
-                <p></p>
-            </div>
-
-            <div class="content-entry">
                 <img src="image/rice-wine.jpg" alt="Homemade Rice Wine" class="intro-thumb">
                 <h3><a href="rice-wine.html">Homemade Rice Wine Project</a></h3>
-                <p>Traditional Chinese fermentation project exploring the biochemical processes behind rice wine making, combining culinary chemistry with cultural heritage.</p>
-            </div>
-
-            <div class="content-entry">
-                <img src="../blogs/images/070523/l.jpg" alt="Ganoderma processing plant visit" class="intro-thumb" loading="lazy">
-                <h3 style="font-size: 1.05em;"><a href="../blogs/blogs.html?story=ganoderma">Industrial Visit to Ganoderma lucidum Processing Plant</a><span class="project-pending">From the journal ↗</span></h3>
-                <p></p>
+                <p>Traditional Chinese fermentation project aiming to explore the biochemical processes behind rice wine making, trying to combine the culinary chemistry with cultural heritage.</p>
             </div>
 
             <div class="content-entry">
@@ -101,9 +89,6 @@
                 <h3><a href="energy-drinks-fluorescence.html">The Effect of Fluorescence in Energy Drinks</a></h3>
                 <p>An experiment investigating what causes energy drinks to emit luminescence, using spectrophotometry to analyze vitamin B2 content and fluorescent properties.</p>
             </div>
-            <div class="content-entry"><span class="room-index">Research &amp; experiences</span><h3><a href="nutrition-research.html">Nutrition Research</a></h3><p>Exploring nutrition and its role in health through research.</p></div>
-            <div class="content-entry"><span class="room-index">Research &amp; experiences</span><h3><a href="community-outreach.html">Community Outreach</a></h3><p>Sharing nutrition knowledge and connecting with the community.</p></div>
-            <div class="content-entry"><span class="room-index">Research &amp; experiences</span><h3><a href="engineering-chemistry.html">Engineering Chemistry</a></h3><p>Investigating the chemistry behind everyday questions.</p></div>
         </div>
     </main>
 

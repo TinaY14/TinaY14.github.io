@@ -63,8 +63,6 @@
     let baskets = {};
     let animationId = null;
     let gameRunning = false;
-    let selectedFood = null;
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
     const cheers = ['GREAT!', 'AWESOME!', 'NICE!', 'AMAZING!', 'PERFECT!', 'WOW!', 'SUPERB!', 'EXCELLENT!'];
 
@@ -90,22 +88,6 @@
             const basket = document.createElement('div');
             basket.className = 'game-basket';
             basket.dataset.category = cat.id;
-            basket.tabIndex = 0;
-            basket.setAttribute('role', 'button');
-            basket.setAttribute('aria-label', `Sort selected food into ${cat.name}`);
-            const sortSelected = () => {
-                if (!selectedFood || selectedFood.classList.contains('sorted')) return;
-                const food = selectedFood;
-                selectedFood = null;
-                food.classList.remove('selected');
-                food.setAttribute('aria-pressed', 'false');
-                checkAnswer(food, cat.id);
-                if (!food.classList.contains('sorted')) food.focus();
-            };
-            basket.addEventListener('click', sortSelected);
-            basket.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSelected(); }
-            });
             basket.innerHTML = `
                 <div class="basket-icon">${cat.icon}</div>
                 <div class="basket-label">${cat.name}</div>
@@ -123,25 +105,6 @@
         food.textContent = foodData.emoji;
         food.dataset.category = foodData.category;
         food.dataset.name = foodData.name;
-        food.tabIndex = 0;
-        food.setAttribute('role', 'button');
-        food.setAttribute('aria-label', `Select ${foodData.name}, then choose a food group`);
-        food.setAttribute('aria-pressed', 'false');
-        food.title = foodData.name;
-        const select = () => {
-            if (food.classList.contains('sorted')) return;
-            if (selectedFood) {
-                selectedFood.classList.remove('selected');
-                selectedFood.setAttribute('aria-pressed', 'false');
-            }
-            selectedFood = food;
-            food.classList.add('selected');
-            food.setAttribute('aria-pressed', 'true');
-        };
-        food.addEventListener('click', select);
-        food.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
-        });
 
         // Random position within container
         const maxX = containerRect.width - 50;
@@ -286,10 +249,6 @@
             updateScore();
             showCheer();
 
-            if (selectedFood === food) selectedFood = null;
-            food.classList.remove('selected');
-            food.setAttribute('aria-pressed', 'false');
-            food.tabIndex = -1;
             food.classList.add('sorted', 'correct');
             showFeedback('Correct! +1', 'correct', food);
             baskets[basketCategory].classList.add('correct-drop');
@@ -367,7 +326,6 @@
     function initFoods() {
         foodContainer.innerHTML = '';
         foodElements = [];
-        selectedFood = null;
 
         // Shuffle and pick foods (3 from each category = 15 total)
         const selectedFoods = [];
@@ -399,7 +357,7 @@
         foodElements.forEach(food => {
             if (food.classList.contains('dragging') ||
                 food.classList.contains('sorted') ||
-                food.classList.contains('returning') || food === selectedFood || reducedMotion.matches) return;
+                food.classList.contains('returning')) return;
 
             let x = parseFloat(food.style.left) || 0;
             let y = parseFloat(food.style.top) || 0;
@@ -450,7 +408,7 @@
 
         startScreen.style.display = 'none';
         winScreen.style.display = 'none';
-        gameArea.style.display = 'flex';
+        gameArea.style.display = 'block';
 
         createBaskets();
         initFoods();
