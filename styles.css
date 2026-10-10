@@ -1984,6 +1984,12 @@ form button[type="submit"]:active {
 :root[data-theme] .start-content p,
 :root[data-theme] .win-content-box h3,
 :root[data-theme] .win-content-box p { color: var(--inner-text); }
+/* Keep the homepage introduction neutral in every color theme. */
+:root[data-theme] .about-section .name,
+:root[data-theme] .about-section .tagline,
+:root[data-theme] .about-section .description,
+:root[data-theme] .about-section .game-invite p,
+:root[data-theme] .about-section .game-invite a { color: #000000; }
 :root[data-theme] .game-score-inline,
 :root[data-theme] .baskets-container { background: var(--panel-bg); border-color: var(--theme-border); }
 :root[data-theme] .game-basket { background: var(--inner-bg); border-color: var(--theme-border); }
