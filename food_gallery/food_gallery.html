@@ -25,13 +25,13 @@
         .timeline {
             position: relative !important;
             margin-top: 40px !important;
-            margin-left: 30px !important;
-            padding-left: 300px !important;
+            margin-left: 0 !important;
+            padding-left: 400px !important;
         }
         .timeline::before {
             content: '' !important;
             position: absolute !important;
-            left: 281px !important;
+            left: 381px !important;
             top: 0 !important;
             bottom: 0 !important;
             width: 10px !important;
@@ -68,9 +68,9 @@
         }
         .timeline-date {
             position: absolute !important;
-            left: -290px !important;
+            left: -390px !important;
             top: 0 !important;
-            width: 260px !important;
+            width: 360px !important;
             font-size: 1.1em !important;
             font-weight: 700 !important;
             color: #000 !important;
@@ -168,8 +168,8 @@
         }
         .timeline-summary {
             position: absolute !important;
-            left: -290px !important;
-            width: 260px !important;
+            left: -390px !important;
+            width: 360px !important;
             box-sizing: border-box !important;
             padding: 18px 18px 30px !important;
             background: #e0f2fe !important;
@@ -219,7 +219,12 @@
             font-size: 25px; line-height: 1; color: #b7a4d0; transform: rotate(12deg);
             pointer-events: none;
         }
+        @media (min-width: 901px) and (max-width: 1200px) {
+            .timeline-photos { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+        }
         @media (max-width: 900px) {
+            .page-content.wide { padding-left: 0; }
+
             .timeline { padding-left: 30px !important; margin-left: 0 !important; }
             .timeline::before { left: 6px !important; width: 6px !important; }
             .timeline-dot { left: -30px !important; width: 12px !important; height: 12px !important; }
