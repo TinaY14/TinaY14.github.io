@@ -17,14 +17,14 @@
     container.appendChild(pig);
 
     const foodArt = {
-        banana: '<path d="M11 15Q13 36 34 30Q31 40 19 37Q4 31 7 15Z" fill="#e4be66" stroke="#b99b59" stroke-width="1.5"/><path d="M11 15L10 10M34 30L37 28" stroke="#927451" stroke-width="3" stroke-linecap="round"/><path d="M12 23Q17 34 29 32" fill="none" stroke="#f7db91" stroke-width="2"/>',
-        pancake: '<ellipse cx="22" cy="31" rx="17" ry="5" fill="#ded3bb"/><ellipse cx="22" cy="26" rx="14" ry="5" fill="#bc8b58"/><ellipse cx="22" cy="22" rx="14" ry="5" fill="#d7ac6c"/><ellipse cx="22" cy="18" rx="14" ry="5" fill="#edc68a"/><path d="M12 18Q18 15 25 18L29 22L24 25L21 20Z" fill="#b48758"/><rect x="19" y="14" width="8" height="5" rx="1" fill="#f7dfa1"/>',
-        smoothie: '<path d="M11 14H33L29 37H15Z" fill="#dab7bd" stroke="#b98d98" stroke-width="1.5"/><path d="M13 21H31L29 35H15Z" fill="#cb91a0"/><ellipse cx="22" cy="14" rx="11" ry="3" fill="#f1d4cf"/><path d="M25 25L29 7H35" fill="none" stroke="#8c9e7e" stroke-width="2.5" stroke-linecap="round"/><path d="M18 14Q9 10 13 5Q20 3 23 11" fill="#a0b38d"/>',
-        avocado: '<path d="M22 5Q31 6 36 25Q39 38 22 39Q5 38 8 25Q13 6 22 5Z" fill="#90a27b" stroke="#768867" stroke-width="1.5"/><path d="M22 10Q28 11 32 25Q34 34 22 35Q10 34 12 25Q16 11 22 10Z" fill="#d4d6a2"/><circle cx="22" cy="26" r="7" fill="#b18161"/><circle cx="20" cy="24" r="2" fill="#c79d79"/>',
-        apple: '<path d="M22 13Q8 7 7 23Q8 39 19 37L22 35L25 37Q37 39 37 23Q36 7 22 13Z" fill="#d49a90" stroke="#b77d74" stroke-width="1.5"/><path d="M22 15L23 7" stroke="#907353" stroke-width="2.5" stroke-linecap="round"/><path d="M23 10Q27 1 35 7Q31 14 23 10" fill="#9aab82"/><path d="M12 21Q11 28 15 31" fill="none" stroke="#edbeb0" stroke-width="3" stroke-linecap="round"/>',
-        bread: '<path d="M9 22Q1 10 14 8Q22 3 30 8Q43 11 35 22V35H9Z" fill="#c99764" stroke="#ad7f55" stroke-width="1.5"/><path d="M12 22Q6 13 16 12Q22 8 28 12Q38 14 32 22V32H12Z" fill="#ecd2a5"/><circle cx="17" cy="22" r="1.5" fill="#c6a77c"/><circle cx="26" cy="26" r="1.5" fill="#c6a77c"/>',
-        tea: '<path d="M10 17H31V29Q30 36 21 36Q11 36 10 29Z" fill="#e8decb" stroke="#b2a38b" stroke-width="1.5"/><path d="M31 19Q42 18 37 29Q34 32 31 29" fill="none" stroke="#b2a38b" stroke-width="2.5"/><ellipse cx="20.5" cy="17" rx="10.5" ry="3" fill="#b3bb90"/><path d="M17 11Q12 7 17 3M25 11Q20 7 25 3" fill="none" stroke="#c9bba5" stroke-width="2" stroke-linecap="round"/><ellipse cx="22" cy="38" rx="17" ry="2" fill="#d4c7b0"/>',
-        cookie: '<circle cx="22" cy="23" r="15" fill="#dfbd88" stroke="#ba996b" stroke-width="1.5"/><path d="M11 15L15 12M12 29L16 33" stroke="#f1d6aa" stroke-width="2" stroke-linecap="round"/><g fill="#987252"><circle cx="19" cy="14" r="2.5"/><circle cx="29" cy="19" r="2"/><circle cx="17" cy="24" r="2"/><circle cx="25" cy="30" r="2.5"/><circle cx="11" cy="22" r="1.5"/></g>'
+        banana: '<path d="M11 15Q13 36 34 30Q31 40 19 37Q4 31 7 15Z" fill="#ffcf40" stroke="#e5a61d" stroke-width="1.5"/><path d="M11 15L10 10M34 30L37 28" stroke="#927451" stroke-width="3" stroke-linecap="round"/><path d="M12 23Q17 34 29 32" fill="none" stroke="#ffe88a" stroke-width="2"/>',
+        pancake: '<ellipse cx="22" cy="31" rx="17" ry="5" fill="#ded3bb"/><ellipse cx="22" cy="26" rx="14" ry="5" fill="#d69037"/><ellipse cx="22" cy="22" rx="14" ry="5" fill="#f2b854"/><ellipse cx="22" cy="18" rx="14" ry="5" fill="#ffd379"/><path d="M12 18Q18 15 25 18L29 22L24 25L21 20Z" fill="#e1943b"/><rect x="19" y="14" width="8" height="5" rx="1" fill="#fff09b"/>',
+        smoothie: '<path d="M11 14H33L29 37H15Z" fill="#ffb6de" stroke="#e674b0" stroke-width="1.5"/><path d="M13 21H31L29 35H15Z" fill="#f96db2"/><ellipse cx="22" cy="14" rx="11" ry="3" fill="#ffd7e8"/><path d="M25 25L29 7H35" fill="none" stroke="#35b88d" stroke-width="2.5" stroke-linecap="round"/><path d="M18 14Q9 10 13 5Q20 3 23 11" fill="#7cda8f"/>',
+        avocado: '<path d="M22 5Q31 6 36 25Q39 38 22 39Q5 38 8 25Q13 6 22 5Z" fill="#4dc375" stroke="#239855" stroke-width="1.5"/><path d="M22 10Q28 11 32 25Q34 34 22 35Q10 34 12 25Q16 11 22 10Z" fill="#d3ef79"/><circle cx="22" cy="26" r="7" fill="#ca8548"/><circle cx="20" cy="24" r="2" fill="#edb979"/>',
+        apple: '<path d="M22 13Q8 7 7 23Q8 39 19 37L22 35L25 37Q37 39 37 23Q36 7 22 13Z" fill="#ff737d" stroke="#e34c69" stroke-width="1.5"/><path d="M22 15L23 7" stroke="#907353" stroke-width="2.5" stroke-linecap="round"/><path d="M23 10Q27 1 35 7Q31 14 23 10" fill="#63c65b"/><path d="M12 21Q11 28 15 31" fill="none" stroke="#ffb6a1" stroke-width="3" stroke-linecap="round"/>',
+        bread: '<path d="M9 22Q1 10 14 8Q22 3 30 8Q43 11 35 22V35H9Z" fill="#eda04d" stroke="#cd7d35" stroke-width="1.5"/><path d="M12 22Q6 13 16 12Q22 8 28 12Q38 14 32 22V32H12Z" fill="#ffe2a7"/><circle cx="17" cy="22" r="1.5" fill="#e4b77f"/><circle cx="26" cy="26" r="1.5" fill="#e4b77f"/>',
+        tea: '<path d="M10 17H31V29Q30 36 21 36Q11 36 10 29Z" fill="#fff4ce" stroke="#e4b263" stroke-width="1.5"/><path d="M31 19Q42 18 37 29Q34 32 31 29" fill="none" stroke="#e4b263" stroke-width="2.5"/><ellipse cx="20.5" cy="17" rx="10.5" ry="3" fill="#9adb78"/><path d="M17 11Q12 7 17 3M25 11Q20 7 25 3" fill="none" stroke="#eac995" stroke-width="2" stroke-linecap="round"/><ellipse cx="22" cy="38" rx="17" ry="2" fill="#ffddb0"/>',
+        cookie: '<circle cx="22" cy="23" r="15" fill="#ffcc75" stroke="#e7a449" stroke-width="1.5"/><path d="M11 15L15 12M12 29L16 33" stroke="#ffecb8" stroke-width="2" stroke-linecap="round"/><g fill="#a46835"><circle cx="19" cy="14" r="2.5"/><circle cx="29" cy="19" r="2"/><circle cx="17" cy="24" r="2"/><circle cx="25" cy="30" r="2.5"/><circle cx="11" cy="22" r="1.5"/></g>'
     };
     const foodNames = { banana: 'Banana bite', pancake: 'Pancake bite', smoothie: 'Berry smoothie', avocado: 'Avocado bite', apple: 'Apple slice', bread: 'Little toast', tea: 'Warm tea', cookie: 'Tiny cookie' };
     const foodSvg = id => `<svg viewBox="0 0 44 44" aria-hidden="true">${foodArt[id]}</svg>`;
@@ -41,8 +41,8 @@
     let stops = [];
     const collected = new Set();
     let length = 0;
-    let startY = 95;
-    let endY = 95;
+    let startY = 120;
+    let endY = 120;
     let currentY = null;
     let frame = 0;
     let lastTime = 0;
@@ -51,7 +51,7 @@
     let arrived = false;
 
     function updateEnergy() {
-        count.textContent = arrived ? 'Home, happily fueled' : `${collected.size} / ${stops.length} little treats`;
+        count.textContent = arrived ? 'Journey complete! ★' : `ENERGY ${collected.size} / ${stops.length}`;
         energy.style.width = `${stops.length ? collected.size / stops.length * 100 : 0}%`;
     }
 
@@ -67,11 +67,11 @@
             const dx = after.x - before.x, dy = after.y - before.y;
             const magnitude = Math.hypot(dx, dy) || 1;
             const side = i % 2 ? 1 : -1;
-            const offset = mobile ? 31 : 57;
+            const offset = mobile ? 46 : 80;
             const x = pt.x + side * dy / magnitude * offset;
             const y = pt.y - side * dx / magnitude * offset;
             // Plants stay out of the article cards and the narrow mobile reading column.
-            if (x < 8 || x > width - 30 || (mobile && x > 74)) continue;
+            if (x < 8 || x > width - 30 || (mobile && x > 100)) continue;
             const blocked = [...container.querySelectorAll('.blog-entry')].some(entry => {
                 const card = entry.querySelector('.blog-signpost-card');
                 const left = entry.offsetLeft + card.offsetLeft;
@@ -84,7 +84,7 @@
             plant.setAttribute('aria-hidden', 'true');
             plant.style.left = `${x - (mobile ? 14 : 23)}px`;
             plant.style.top = `${y - (mobile ? 20 : 31)}px`;
-            plant.innerHTML = `<svg viewBox="0 0 46 62"><path d="M23 56Q20 37 24 17M23 43Q7 42 9 30Q20 29 23 43M23 48Q39 45 39 35Q27 33 23 48" fill="#9cac87" stroke="#829672" stroke-width="1.5" stroke-linecap="round"/>${i % 3 === 0 ? '<g fill="#d8a4a0"><ellipse cx="24" cy="14" rx="5" ry="9"/><ellipse cx="24" cy="14" rx="5" ry="9" transform="rotate(60 24 14)"/><ellipse cx="24" cy="14" rx="5" ry="9" transform="rotate(120 24 14)"/></g><circle cx="24" cy="14" r="3.5" fill="#e9cb95"/>' : '<path d="M23 32Q13 21 17 14Q29 18 23 32M23 25Q34 17 33 9Q22 11 23 25" fill="#a9b797"/>'}</svg>`;
+            plant.innerHTML = `<svg viewBox="0 0 46 62"><path d="M23 56Q20 37 24 17M23 43Q7 42 9 30Q20 29 23 43M23 48Q39 45 39 35Q27 33 23 48" fill="#74d294" stroke="#40b784" stroke-width="1.5" stroke-linecap="round"/>${i % 3 === 0 ? '<g fill="#ff8db7"><ellipse cx="24" cy="14" rx="5" ry="9"/><ellipse cx="24" cy="14" rx="5" ry="9" transform="rotate(60 24 14)"/><ellipse cx="24" cy="14" rx="5" ry="9" transform="rotate(120 24 14)"/></g><circle cx="24" cy="14" r="3.5" fill="#ffe16c"/>' : '<path d="M23 32Q13 21 17 14Q29 18 23 32M23 25Q34 17 33 9Q22 11 23 25" fill="#9ee5a2"/>'}</svg>`;
             container.appendChild(plant);
         }
     }
@@ -94,21 +94,22 @@
         const height = container.clientHeight;
         const mobile = matchMedia('(max-width: 1000px)').matches;
         const entries = [...container.querySelectorAll('.blog-entry')];
-        startY = 95;
-        endY = Math.max(startY + 160, height - 150);
-        const points = [{ x: mobile ? 45 : width * .5, y: startY }];
+        startY = 120;
+        endY = Math.max(startY + 160, height - 205);
+        const entryX = mobile ? 58 : width * .5;
+        const points = [{ x: entryX, y: startY }, { x: entryX, y: startY + 65 }];
         stops = entries.map((entry, index) => {
             const stop = {
                 index, y: entry.offsetParent.offsetTop + entry.offsetTop + entry.offsetHeight / 2,
-                x: mobile ? (index % 2 ? 35 : 54) : width * (index % 2 ? .32 : .68),
+                x: mobile ? (index % 2 ? 49 : 65) : width * (index % 2 ? .32 : .68),
                 food: snackFor(entry.querySelector('.billboard-title').textContent, index)
             };
             points.push(stop);
             return stop;
         });
         points.push({ x: width * .5, y: endY });
-        let d = `M ${points[0].x} ${points[0].y}`;
-        for (let i = 1; i < points.length; i++) {
+        let d = `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`;
+        for (let i = 2; i < points.length; i++) {
             const a = points[i - 1], b = points[i];
             const bend = (b.y - a.y) * .5;
             d += ` C ${a.x} ${a.y + bend}, ${b.x} ${b.y - bend}, ${b.x} ${b.y}`;
@@ -117,7 +118,7 @@
         svg.querySelectorAll('path').forEach(el => el.setAttribute('d', d));
         length = path.getTotalLength();
         home.style.left = `${width * .5}px`;
-        home.style.top = `${endY - 155}px`;
+        home.style.top = `${endY - home.offsetHeight * 155 / 190}px`;
         stopsLayer.replaceChildren();
         stops.forEach(stop => {
             const node = document.createElement('div');
@@ -125,7 +126,8 @@
             node.style.left = `${stop.x}px`;
             node.style.top = `${stop.y}px`;
             node.dataset.index = stop.index;
-            node.innerHTML = foodSvg(stop.food) + `<span class="snack-stop-label">LITTLE TREAT ${String(stop.index + 1).padStart(2, '0')}</span>`;
+            node.innerHTML = foodSvg(stop.food);
+            node.style.setProperty('--snack-delay', `${stop.index * -.27}s`);
             stopsLayer.appendChild(node);
             stop.node = node;
         });
@@ -207,7 +209,7 @@
             clearTimeout(eatingTimer);
             pig.classList.remove('eating', 'walking');
             thought.textContent = 'Home ♡';
-            document.getElementById('home-message').textContent = 'Healthy & happy. Thanks for coming along!';
+            document.getElementById('home-message').textContent = 'Healthy, happy, and home! You made it!';
             status.textContent = 'Home, sweet home! The pig has arrived happy and full of energy.';
         } else if (!isHome && arrived) {
             document.getElementById('home-message').textContent = 'A warm welcome is waiting.';
