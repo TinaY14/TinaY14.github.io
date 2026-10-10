@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shengjianbao (生煎包, Pan-Fried Pork Buns) - Tina's Night Stall Food</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="stylesheet" href="../styles.css">
     <script src="../darkmode.js"></script>
 
-    <!-- Prevent dark mode icon flash -->
+    <!-- Restore the saved color theme before first paint -->
     <script>
         (function() {
-            const savedMode = localStorage.getItem('darkMode');
-            if (savedMode === 'true') {
-                document.documentElement.classList.add('dark-mode');
-            }
+            let theme = 'mint';
+            try { theme = localStorage.getItem('tinaTheme') || theme; } catch (_) {}
+            if (!['mint', 'sky', 'peach', 'lavender', 'cream'].includes(theme)) theme = 'mint';
+            document.documentElement.dataset.theme = theme;
         })();
     </script>
-<link rel="stylesheet" href="../world.css">
 </head>
 <body class="inner-page">
     <header>
@@ -29,16 +31,14 @@
             <a href="night_stall_food.html">Night Stall Food</a>
             <a href="../food_gallery/food_gallery.html">Food Gallery</a>
             <a href="../projects.html">Projects</a>
-            <button id="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
             <script>
-                // Set initial button state immediately to prevent flash
+                // Set the initial theme label
                 (function() {
                     const btn = document.getElementById('dark-mode-toggle');
-                    const isDark = document.documentElement.classList.contains('dark-mode');
-                    if (btn) {
-                        btn.textContent = isDark ? '☀️' : '🌙';
-                        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                    }
+                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
+                    const theme = document.documentElement.dataset.theme || 'mint';
+                    if (btn) btn.textContent = labels[theme];
                 })();
             </script>
         </nav>
