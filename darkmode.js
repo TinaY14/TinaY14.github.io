@@ -1,171 +1,88 @@
-// Dark Mode Toggle Script - Simplified and Fixed
-(function() {
-    'use strict';
-    
-    console.log('Dark mode script starting...');
-    
-    // Function to determine if current page is an inner page
-    function isInnerPage() {
-        const path = window.location.pathname;
-        const filename = path.split('/').pop() || 'index.html';
-        
-        // Homepage patterns
-        const isHomepage = filename === 'index.html' || 
-                          filename === '' || 
-                          path === '/' ||
-                          path.endsWith('/') ||
-                          path.endsWith('TinaY14.github.io') ||
-                          path.endsWith('TinaY14.github.io/');
-        
-        console.log('Page check - Path:', path, 'Filename:', filename, 'Is Homepage:', isHomepage);
-        return !isHomepage;
+// Shared theme, navigation, and a small passport for curious visitors.
+(() => {
+  'use strict';
+  const storage = {
+    get(key) { try { return localStorage.getItem(key); } catch { return null; } },
+    set(key, value) { try { localStorage.setItem(key, value); } catch { /* The site also works without storage. */ } }
+  };
+  function init() {
+    const path = location.pathname;
+    const home = path.endsWith('/') || path.endsWith('/index.html');
+    if (!home) document.body.classList.add('inner-page');
+    if (storage.get('darkMode') === 'true') document.documentElement.classList.add('dark-mode');
+    const toggle = document.getElementById('dark-mode-toggle');
+    const updateTheme = () => {
+      if (!toggle) return;
+      const dark = document.documentElement.classList.contains('dark-mode');
+      toggle.textContent = dark ? '☀' : '☾';
+      toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('aria-pressed', String(dark));
+    };
+    updateTheme();
+    toggle?.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark-mode');
+      storage.set('darkMode', String(dark));
+      updateTheme();
+    });
+    const room = path.includes('/blogs/') ? 'journal' : path.includes('/night_stall_food/') ? 'market' : path.includes('/food_gallery/') ? 'gallery' : /\/projects(?:\/|\.html)/.test(path) ? 'projects' : null;
+    const roomNames = { journal: 'Journal', market: 'Night market', gallery: 'Food diary', projects: 'Idea lab' };
+    let visits;
+    try { visits = JSON.parse(storage.get('tina-explorer-passport') || '[]'); } catch { visits = []; }
+    if (!Array.isArray(visits)) visits = [];
+    visits = visits.filter(value => Object.hasOwn(roomNames, value));
+    if (room && !visits.includes(room)) {
+      visits.push(room);
+      storage.set('tina-explorer-passport', JSON.stringify(visits));
+      const toast = document.createElement('div');
+      toast.className = 'visit-toast';
+      toast.setAttribute('role', 'status');
+      toast.textContent = `✳ ${roomNames[room]} stamp collected · ${visits.length} / 4 corners explored`;
+      document.body.append(toast);
+      setTimeout(() => toast.remove(), 4200);
     }
-    
-    // Initialize dark mode state
-    function initDarkMode() {
-        console.log('Initializing dark mode...');
-        
-        // Add inner-page class if needed
-        if (isInnerPage()) {
-            document.body.classList.add('inner-page');
-            console.log('Added inner-page class to body');
-        }
-        
-        // Check saved preference
-        const savedMode = localStorage.getItem('darkMode');
-        console.log('Saved dark mode preference:', savedMode);
-        
-        if (savedMode === 'true') {
-            document.documentElement.classList.add('dark-mode');
-            console.log('Applied dark mode from saved preference');
-        }
+    const showPassport = () => {
+      document.querySelectorAll('[data-stamp]').forEach(stamp => {
+        const collected = visits.includes(stamp.dataset.stamp);
+        stamp.classList.toggle('collected', collected);
+        stamp.setAttribute('aria-label', `${roomNames[stamp.dataset.stamp]}: ${collected ? 'explored' : 'unexplored'}`);
+      });
+      const status = document.getElementById('passport-status');
+      if (status) status.textContent = visits.length === 4 ? 'All four corners explored. Make yourself at home.' : `${visits.length} of 4 corners explored`;
+    };
+    showPassport();
+    document.getElementById('reset-passport')?.addEventListener('click', () => {
+      visits = []; storage.set('tina-explorer-passport', '[]'); showPassport();
+    });
+    document.getElementById('surprise-me')?.addEventListener('click', () => {
+      const links = [...document.querySelectorAll('[data-room]')];
+      const unseen = links.filter(link => !visits.includes(link.dataset.room));
+      const choices = unseen.length ? unseen : links;
+      if (choices.length) location.href = choices[Math.floor(Math.random() * choices.length)].href;
+    });
+    document.querySelector('header nav')?.setAttribute('aria-label', 'Main navigation');
+    document.querySelectorAll('header nav a').forEach(link => {
+      const url = new URL(link.href);
+      const linkRoom = url.pathname.includes('/blogs/') ? 'journal' : url.pathname.includes('/night_stall_food/') ? 'market' : url.pathname.includes('/food_gallery/') ? 'gallery' : /\/projects(?:\/|\.html)/.test(url.pathname) ? 'projects' : null;
+      const names = {journal: 'Journal', market: 'Night market', gallery: 'Food diary', projects: 'Projects'};
+      link.textContent = linkRoom ? names[linkRoom] : 'Home';
+      if ((home && /index\.html$/.test(url.pathname)) || (room && linkRoom === room)) link.setAttribute('aria-current', 'page');
+    });
+    document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+    if (!document.querySelector('.skip-link')) {
+      const main = document.querySelector('main');
+      if (main) {
+        main.id ||= 'main';
+        const skip = document.createElement('a'); skip.className = 'skip-link'; skip.href = `#${main.id}`; skip.textContent = 'Skip to content'; document.body.prepend(skip);
+      }
     }
-    
-    // Update button appearance
-    function updateButton(button) {
-        if (!button) {
-            console.warn('Button not found for update');
-            return;
-        }
-        
-        const isDark = document.documentElement.classList.contains('dark-mode');
-        button.textContent = isDark ? '☀️' : '🌙';
-        button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-        button.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-        console.log('Button updated - Dark mode:', isDark, 'Button text:', button.textContent);
+    let up = document.getElementById('scroll-to-top');
+    if (!up) {
+      up = document.createElement('button'); up.id = 'scroll-to-top'; up.textContent = '↑'; up.setAttribute('aria-label', 'Back to top'); document.body.append(up);
     }
-    
-    // Toggle dark mode
-    function toggleDarkMode() {
-        console.log('Toggle dark mode called');
-        
-        const html = document.documentElement;
-        const isDarkNow = html.classList.toggle('dark-mode');
-        
-        // Save preference
-        localStorage.setItem('darkMode', isDarkNow.toString());
-        
-        // Update button
-        const button = document.getElementById('dark-mode-toggle');
-        updateButton(button);
-        
-        console.log('Dark mode toggled to:', isDarkNow ? 'ON' : 'OFF');
-    }
-    
-    // Setup the toggle button - SIMPLIFIED
-    function setupToggleButton() {
-        console.log('Setting up toggle button...');
-        
-        const button = document.getElementById('dark-mode-toggle');
-        
-        if (button) {
-            console.log('Dark mode button found:', button);
-            
-            // Clear any existing listeners
-            button.onclick = null;
-            
-            // Add simple click listener
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Button clicked!');
-                toggleDarkMode();
-            });
-            
-            // Update initial appearance
-            updateButton(button);
-            
-            console.log('Dark mode toggle setup completed');
-        } else {
-            console.error('Dark mode toggle button (#dark-mode-toggle) not found!');
-        }
-    }
-    
-    // Scroll to Top Button Functionality
-    function setupScrollToTop() {
-        console.log('Setting up scroll to top button...');
-        
-        // Create the button if it doesn't exist
-        let scrollBtn = document.getElementById('scroll-to-top');
-        if (!scrollBtn) {
-            scrollBtn = document.createElement('button');
-            scrollBtn.id = 'scroll-to-top';
-            scrollBtn.innerHTML = '↑';
-            scrollBtn.setAttribute('aria-label', 'Scroll to top');
-            scrollBtn.title = 'Back to top';
-            document.body.appendChild(scrollBtn);
-            console.log('Scroll to top button created');
-        }
-        
-        // Show/hide button based on scroll position
-        function toggleScrollButton() {
-            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollPosition > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-        }
-        
-        // Smooth scroll to top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
-        // Event listeners
-        window.addEventListener('scroll', toggleScrollButton);
-        scrollBtn.addEventListener('click', scrollToTop);
-        
-        // Initial check
-        toggleScrollButton();
-        
-        console.log('Scroll to top button setup completed');
-    }
-    
-    // Initialize everything
-    function initialize() {
-        console.log('Initializing dark mode system...');
-        initDarkMode();
-
-        // Setup button after a short delay to ensure DOM is ready
-        setTimeout(setupToggleButton, 100);
-        setTimeout(setupScrollToTop, 100);
-
-        // Enable body transitions only after page loads to prevent
-        // background image from flashing/fading in on initial visit
-        window.addEventListener('load', function() {
-            document.body.classList.add('transitions-ready');
-        });
-    }
-    
-    // Run when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initialize);
-    } else {
-        initialize();
-    }
-    
-    console.log('Dark mode script loaded');
+    const scrollState = () => up.classList.toggle('visible', scrollY > 350);
+    window.addEventListener('scroll', scrollState, { passive: true }); scrollState();
+    up.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }));
+    document.body.classList.add('transitions-ready');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

@@ -1,183 +1,106 @@
-// Cute Pig Companion - walks along curved path as the user scrolls
-(function() {
-    const pig = document.getElementById('pig-companion');
-    const pathContainer = document.getElementById('pig-path-container');
-    const pathSvg = document.getElementById('pig-path-svg');
-    const gardenPath = document.getElementById('garden-path');
-    const gardenPathBorder = document.getElementById('garden-path-border');
-    const pigHome = document.getElementById('pig-home');
-    const pigDoor = document.getElementById('pig-door');
-    
-    if (!pig || !pathContainer || !pathSvg || !gardenPath) return;
-
-    let lastScrollY = window.scrollY;
-    let isWalking = false;
-    let walkingTimeout;
-    
-    const PATH_START_Y = 150;
-    const CURVE_LENGTH = 300;
-    const CURVE_AMPLITUDE = 30; // How far left/right the curve goes
-
-    // Generate curved path based on page height
-    function generatePath() {
-        const pageHeight = document.documentElement.scrollHeight;
-        const pathWidth = 80;
-        
-        // Set container and SVG height to match page
-        pathContainer.style.height = pageHeight + 'px';
-        pathSvg.setAttribute('viewBox', `0 0 ${pathWidth} ${pageHeight}`);
-        pathSvg.style.height = pageHeight + 'px';
-        
-        // Generate a wavy path (end a bit before the house)
-        const pathEndY = pageHeight - 100;
-        const numCurves = Math.ceil((pathEndY - PATH_START_Y) / CURVE_LENGTH);
-        let pathD = `M 40,${PATH_START_Y}`;
-        
-        for (let i = 0; i < numCurves; i++) {
-            const curveStartY = PATH_START_Y + i * CURVE_LENGTH;
-            const midY = curveStartY + CURVE_LENGTH / 2;
-            const endY = Math.min(curveStartY + CURVE_LENGTH, pathEndY);
-            
-            // Alternate curve direction
-            const curveX = i % 2 === 0 ? 40 + CURVE_AMPLITUDE : 40 - CURVE_AMPLITUDE;
-            
-            pathD += ` Q ${curveX},${midY} 40,${endY}`;
-        }
-        
-        gardenPath.setAttribute('d', pathD);
-        gardenPathBorder.setAttribute('d', pathD);
-        
-        // Position the pig home at the end of the path
-        if (pigHome) {
-            pigHome.style.bottom = '150px';
-        }
-        
-        // Add flowers along the path
-        addFlowers(pageHeight);
+// A scroll-driven companion on the journal's quiet garden trail.
+(() => {
+  const container = document.getElementById('blog-path-container');
+  const svg = document.getElementById('blog-path-svg');
+  const path = document.getElementById('garden-path');
+  const border = document.getElementById('garden-path-border');
+  const pig = document.getElementById('pig-companion');
+  const home = document.getElementById('pig-home');
+  const door = document.getElementById('pig-door');
+  const start = document.getElementById('healthy-pig-destination');
+  const label = document.getElementById('trail-progress');
+  if (!container || !path || !pig) return;
+  container.append(pig);
+  pig.style.position = 'absolute';
+  pig.setAttribute('aria-hidden', 'true');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let length = 0, target = 0, current = 0, frame = 0, lastTime = 0;
+  let startY = 65, endY = 0, lastChapter = -1, ready = false;
+  let samples = [];
+  const clamp = (n, low, high) => Math.max(low, Math.min(high, n));
+  function draw() {
+    if (!length) return;
+    const point = path.getPointAtLength(current);
+    pig.style.transform = `translate3d(${point.x - 30}px, ${point.y - 37.5}px, 0)`;
+    const progress = current / length;
+    const arrived = length - current < 12;
+    const near = length - current < 90;
+    home.classList.toggle('pig-near', near);
+    door.classList.toggle('open', near && !arrived);
+    pig.classList.toggle('celebrating', arrived);
+    pig.style.opacity = arrived ? '0' : '1';
+    const chapter = arrived ? 4 : Math.min(3, Math.floor(progress * 4));
+    if (chapter !== lastChapter) {
+      const messages = ['The journey begins here.', 'A few stories, a little wonder.', 'Halfway home. Keep wandering.', 'Almost home. One more little discovery.', 'Home sweet home. Thanks for wandering with me.'];
+      if (label) label.textContent = messages[chapter];
+      lastChapter = chapter;
     }
-    
-    // Add flowers along the path
-    function addFlowers(pageHeight) {
-        const flowers = ['🌸', '🌷', '🌼', '🌺', '🌻', '🏵️', '💐', '🌹'];
-        const existingFlowers = pathContainer.querySelectorAll('.flower');
-        existingFlowers.forEach(f => f.remove());
-        
-        const numFlowers = Math.ceil((pageHeight - PATH_START_Y - 150) / 120);
-        
-        for (let i = 0; i < numFlowers; i++) {
-            const flower = document.createElement('span');
-            flower.className = 'flower';
-            flower.textContent = flowers[i % flowers.length];
-            flower.style.top = (PATH_START_Y + i * 120 + 30) + 'px';
-            flower.style.left = (i % 2 === 0 ? '-5px' : '65px');
-            pathContainer.appendChild(flower);
-        }
+  }
+  function tick(time) {
+    const dt = lastTime ? Math.min(time - lastTime, 48) : 16;
+    lastTime = time;
+    current += (target - current) * (1 - Math.exp(-dt / 90));
+    const moving = Math.abs(target - current) > .5;
+    pig.classList.toggle('walking', moving && !reduced.matches);
+    draw();
+    if (moving) frame = requestAnimationFrame(tick);
+    else { current = target; draw(); frame = 0; lastTime = 0; pig.classList.remove('walking'); }
+  }
+  function update() {
+    if (!ready) return;
+    const rect = container.getBoundingClientRect();
+    const top = rect.top + scrollY;
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const from = Math.max(0, top + startY - innerHeight * .48);
+    const to = Math.min(maxScroll, top + endY - innerHeight * .48);
+    const progress = clamp((scrollY - from) / Math.max(1, to - from), 0, 1);
+    const y = startY + progress * (endY - startY);
+    // Match vertical position rather than arc length, so bends never change scroll speed.
+    let low = 0, high = samples.length - 1;
+    while (high - low > 1) {
+      const mid = (low + high) >> 1;
+      if (samples[mid].y < y) low = mid; else high = mid;
     }
-    
-    // Get X position on the curved path for a given Y position
-    function getPathXForY(pageY) {
-        // Adjust for path start
-        const adjustedY = pageY - PATH_START_Y;
-        if (adjustedY < 0) return 40; // Before path starts, center position
-        
-        // Which curve segment are we in?
-        const curveIndex = Math.floor(adjustedY / CURVE_LENGTH);
-        // Progress within this curve (0 to 1)
-        const t = (adjustedY % CURVE_LENGTH) / CURVE_LENGTH;
-        
-        // Quadratic bezier: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2
-        // P0 = 40 (start), P1 = curveX (control point), P2 = 40 (end)
-        const curveX = curveIndex % 2 === 0 ? 40 + CURVE_AMPLITUDE : 40 - CURVE_AMPLITUDE;
-        
-        const x = (1-t)*(1-t)*40 + 2*(1-t)*t*curveX + t*t*40;
-        
-        return x;
-    }
-
-    function updatePig() {
-        const scrollY = window.scrollY;
-        const scrollDelta = scrollY - lastScrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight - windowHeight;
-        
-        // Calculate scroll progress (0 to 1)
-        const scrollProgress = documentHeight > 0 ? scrollY / documentHeight : 0;
-        
-        // Pig's Y position on the page (not viewport)
-        const pageHeight = document.documentElement.scrollHeight;
-        const pigPageY = PATH_START_Y + scrollProgress * (pageHeight - PATH_START_Y - 150);
-        
-        // Get X position from curved path
-        const pathX = getPathXForY(pigPageY);
-        
-        // Convert page Y to viewport position for fixed element
-        const pigViewportY = pigPageY - scrollY;
-        
-        // Position the pig
-        pig.style.top = pigViewportY + 'px';
-        pig.style.transform = 'translateY(-50%)';
-        
-        // Position pig on the path (pathX is 0-80, we need to convert to right position)
-        // Path container is 80px wide, positioned at right: 20px
-        // So pig's right = 20 + (80 - pathX) - pigWidth/2
-        const pigWidth = 60;
-        const pathContainerRight = 20;
-        const pigRight = pathContainerRight + (80 - pathX) - pigWidth/2;
-        pig.style.right = pigRight + 'px';
-
-        // Check if pig is near home (open/close door)
-        const homeThreshold = 0.85; // When pig is 85% of the way down
-        const hideThreshold = 0.95; // When pig enters the house
-        if (pigHome && pigDoor) {
-            if (scrollProgress > homeThreshold) {
-                pigDoor.classList.add('open');
-                pigHome.classList.add('pig-near');
-            } else {
-                pigDoor.classList.remove('open');
-                pigHome.classList.remove('pig-near');
-            }
-            
-            // Hide pig when it enters the house
-            if (scrollProgress > hideThreshold) {
-                pig.style.opacity = '0';
-                pig.style.transition = 'opacity 0.3s ease';
-                // Close door after pig enters
-                setTimeout(() => {
-                    pigDoor.classList.remove('open');
-                }, 300);
-            } else {
-                pig.style.opacity = '1';
-            }
-        }
-
-        // Start walking animation when scrolling
-        if (Math.abs(scrollDelta) > 0) {
-            if (!isWalking) {
-                pig.classList.add('walking');
-                isWalking = true;
-            }
-            
-            clearTimeout(walkingTimeout);
-            
-            walkingTimeout = setTimeout(() => {
-                pig.classList.remove('walking');
-                isWalking = false;
-            }, 150);
-        }
-
-        lastScrollY = scrollY;
-    }
-
-    // Initialize
-    generatePath();
-    updatePig();
-    
-    // Listen to scroll events
-    window.addEventListener('scroll', updatePig, { passive: true });
-    
-    // Regenerate path on resize
-    window.addEventListener('resize', () => {
-        generatePath();
-        updatePig();
+    const a = samples[low], b = samples[high];
+    target = a.distance + (b.distance - a.distance) * clamp((y - a.y) / Math.max(.001, b.y - a.y), 0, 1);
+    if (reduced.matches) { current = target; draw(); return; }
+    if (!frame) frame = requestAnimationFrame(tick);
+  }
+  function rebuild() {
+    const width = container.clientWidth, height = container.offsetHeight;
+    const mobile = width < 680;
+    const center = mobile ? 31 : width / 2;
+    const amplitude = mobile ? 5 : Math.min(15, width * .018);
+    endY = height - 95;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.style.width = `${width}px`; svg.style.height = `${height}px`;
+    const entriesTop = document.getElementById('blog-entries').offsetTop;
+    const stops = [{x: center, y: startY}];
+    container.querySelectorAll('.blog-entry').forEach((entry, i) => {
+      stops.push({x: center + (i % 2 ? amplitude : -amplitude), y: entriesTop + entry.offsetTop + entry.offsetHeight / 2});
     });
+    stops.push({x: center, y: endY});
+    let d = `M ${center} ${startY}`;
+    for (let i = 1; i < stops.length; i++) {
+      const a = stops[i-1], b = stops[i], mid = (a.y+b.y)/2;
+      d += ` C ${a.x} ${mid} ${b.x} ${mid} ${b.x} ${b.y}`;
+    }
+    path.setAttribute('d', d); border.setAttribute('d', d);
+    length = path.getTotalLength();
+    samples = Array.from({length: 257}, (_, i) => {
+      const distance = length * i / 256;
+      return {distance, y: path.getPointAtLength(distance).y};
+    });
+    home.style.left = `${center}px`; home.style.top = `${endY}px`;
+    start.style.left = `${center}px`; start.style.top = `${startY}px`; start.style.bottom = 'auto';
+    ready = true; update(); current = target; draw();
+  }
+  window.addEventListener('journal-rendered', rebuild);
+  window.addEventListener('scroll', update, {passive: true});
+  let resizeFrame;
+  const observer = new ResizeObserver(() => {
+    cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(rebuild);
+  });
+  observer.observe(container);
+  reduced.addEventListener('change', update);
 })();
