@@ -259,6 +259,12 @@ fetch('../food_gallery/data.json').then(response => {
             date: photo.image.split('/').pop().slice(0, 10),
             location: entry.location || ''
         }))).sort((a, b) => b.date.localeCompare(a.date));
+    if (document.body.dataset.collection === 'kitchen') {
+        for (let index = allPhotos.length - 1; index > 0; index--) {
+            const other = Math.floor(Math.random() * (index + 1));
+            [allPhotos[index], allPhotos[other]] = [allPhotos[other], allPhotos[index]];
+        }
+    }
     if (!allPhotos.length) {
         status.textContent = 'No photos in this collection yet.';
         document.querySelectorAll('.film-controls button, .film-controls input').forEach(control => { control.disabled = true; });

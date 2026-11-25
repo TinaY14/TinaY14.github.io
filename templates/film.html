@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Kitchen - Tina</title>
+<link rel="stylesheet" href="../styles.css?v=notebook-1">
+<link rel="stylesheet" href="../film-gallery.css?v=film-1">
+<script src="../darkmode.js?v=notebook-1"></script>
+</head>
+<body class="inner-page" data-collection="kitchen">
+<header>
+        <a href="../index.html" class="logo">Tina's Little World</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="food_gallery.html" aria-current="page">Food Diary</a>
+            <a href="../night_stall_food/night_stall_food.html">Street Food Notes</a>
+            <a href="../kitchen/index.html">My Kitchen</a>
+            <a href="../blogs/blogs.html">Journal</a>
+            <a href="../projects/projects.html">Projects & Research</a>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
+        </nav>
+    </header>
+<main class="film-page">
+    <div class="film-heading">
+        <h1 class="page-title">My Kitchen</h1>
+        <div class="film-filters"><a class="film-archive-link" href="archive.html">Browse by year</a>
+            <label>Year <select id="film-year" aria-label="Year"><option value="">All years</option></select></label>
+            <label>Month <select id="film-month" aria-label="Month" disabled><option value="">All months</option></select></label>
+        </div>
+    </div>
+    <div class="film-controls">
+        <button id="film-play" type="button" aria-pressed="true">Pause</button>
+        <label class="film-speed">Speed <input id="film-speed" type="range" min="0" max="2" step="0.1" value="1"><output id="film-speed-value" for="film-speed">1.0×</output></label>
+        <div class="film-photo-controls">
+            <button id="film-previous" type="button" aria-label="Previous photo">Previous</button>
+            <button id="film-open" type="button">Open photo & notes</button>
+            <button id="film-next" type="button" aria-label="Next photo">Next</button>
+        </div>
+    </div>
+    <section class="film-space" aria-label="Two scrolling photo films">
+        <div id="film-upper" class="film-strip" role="region" aria-label="Photo film moving left" tabindex="0"></div>
+        <div id="film-lower" class="film-strip" role="region" aria-label="Photo film moving right" tabindex="0"></div>
+        <p id="film-status" role="status">Loading your photos…</p>
+    </section>
+    <p id="film-info" aria-live="polite"></p>
+    <p id="film-hint">Drag the film or scroll over it to move. Select a frame to open its notebook.</p>
+</main>
+<script src="../photo-journal.js?v=film-1" defer></script>
+<script src="../film-gallery.js?v=film-1" type="module"></script>
+</body>
+</html>

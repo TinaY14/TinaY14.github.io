@@ -30,10 +30,12 @@ module.exports = function buildCollections() {
     }
     let index = templates.hub(entries.filter(entry => entry.data.published !== false), collection);
     if (collection.output === 'kitchen') {
-      index = fs.readFileSync('food_gallery/food_gallery.html', 'utf8')
+      index = fs.readFileSync('templates/film.html', 'utf8');
+      const archive = fs.readFileSync('food_gallery/food_gallery.html', 'utf8')
         .replace('data-collection="diary"', 'data-collection="kitchen"')
-        .replace('<title>Food Diary - Tina</title>', '<title>My Kitchen - Tina</title>')
-        .replace('<h1 class="page-title">Food Diary</h1>', '<h1 class="page-title">My Kitchen</h1>');
+        .replace('<title>Food Diary - Tina</title>', '<title>My Kitchen Archive - Tina</title>')
+        .replace('<h2 class="page-title">Food Diary</h2>', '<h2 class="page-title">My Kitchen</h2><a class="collection-back" href="index.html">Film view</a>');
+      fs.writeFileSync(path.join(collection.output, 'archive.html'), archive);
     }
     fs.writeFileSync(path.join(collection.output, collection.hub), index);
     console.log(`Built ${entries.length} ${collection.title} entries and automatic index.`);

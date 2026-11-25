@@ -9,10 +9,11 @@ It adds new photos to `data.json` and preserves existing captions, locations,
 date ranges and reflections. Edit those details in `data.json`.
 The existing GitHub Actions workflow also runs this command when photos change.
 
-The gallery shows two full-width film strips moving in opposite directions.
-Use Year and Month to filter the photos. Each image keeps its original aspect
-ratio and opens a notebook with its existing reflections. Pause, speed, drag,
-and scroll controls are implemented in `film-gallery.js`.
+Food Diary opens with years, then months, then a chronological timeline with
+notes on the left and photos on the right. My Kitchen offers the same archive
+at `kitchen/archive.html`, alongside its shuffled film view. Each photo can
+open a notebook with its existing reflections. The film template is
+`templates/film.html`, and its controls are in `film-gallery.js`.
 
 Each photo in `data.json` has `collection: "diary"` for eating out or
 `collection: "kitchen"` for homemade food. Existing classifications and

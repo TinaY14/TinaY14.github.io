@@ -7,7 +7,7 @@ Preview the repository with `python3 -m http.server 3000`.
 
 - Food Diary uses `food_gallery/data.json` and dated photos under `food_gallery/image/YYYY/MM/`. See `food_gallery/README.md`.
 - Street Food Notes is a topic inside Food Diary. Its Markdown sources live in `content/food/`.
-- My Kitchen displays photos from `food_gallery/data.json` with `collection: kitchen`. Food Diary displays `collection: diary`. Both use two full-width photo film strips, year/month filters, and the photo notebook.
+- My Kitchen displays photos from `food_gallery/data.json` with `collection: kitchen`. Food Diary displays `collection: diary`. Food Diary uses a year/month archive and chronological timeline with notes on the left and photos on the right. My Kitchen has a shuffled film view and a separate chronological archive at `kitchen/archive.html`.
 - Recipe text is retained in `content/kitchen/`. The three earlier recipes have `published: false` and are excluded from the collection list.
 - Journal articles live in `content/journal/`. The older `blogs/posts.md` is retained as an archive and is no longer read by the website.
 - Projects & Research uses `content/projects/` for new project pages and the existing manually authored project pages. Existing project HTML is preserved during builds. Its index is `projects/projects.html`.
@@ -47,4 +47,4 @@ collection pages use `templates/collection.js` and shared palette variables in
 Push to main to run the GitHub Pages workflow. GitHub repository Settings →
 Pages → Build and deployment → Source must be GitHub Actions.
 
-The archive displays two straight film strips moving in opposite directions. Photos retain their original aspect ratio. Pause and speed controls, dragging, and scrolling move the film. Reduced-motion preferences start it paused. Clicking a content photo opens the shared notebook viewer in `photo-journal.js`. Theme choice persists when moving between sections.
+My Kitchen’s film view displays two straight film strips moving in opposite directions. Every page load shuffles the complete photo collection before filtering. The chronological archive keeps date ordering. Photos retain their original aspect ratio. Pause and speed controls, dragging, and scrolling move the film. Reduced-motion preferences start it paused. Clicking a content photo opens the shared notebook viewer in `photo-journal.js`. Theme choice persists when moving between sections.

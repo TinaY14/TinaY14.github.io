@@ -101,3 +101,6 @@
     .film-controls { padding:0; gap:16px; }
     .film-controls button { padding:9px 11px; }
 }
+
+.film-archive-link { align-self:center; padding:8px 14px; border:1px solid var(--theme-border); border-radius:7px; color:var(--inner-text); background:var(--panel-bg); text-decoration:none; font-size:.85rem; white-space:nowrap; }
+@media(max-width:650px) { .film-filters { flex-wrap:wrap; } .film-archive-link { flex-basis:100%; text-align:center; } }
