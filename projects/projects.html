@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects &amp; Experiences - Xitian (Tina) Yu</title>
+    <title>Projects &amp; Research - Xitian (Tina) Yu</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,8 @@
     <!-- Preload homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=page-themes-3">
-    <script src="../darkmode.js?v=page-themes-3"></script>
+    <link rel="stylesheet" href="../styles.css?v=collections-1">
+    <script src="../darkmode.js?v=collections-1"></script>
 
     <!-- Restore the saved color theme before first paint -->
     <script>
@@ -32,27 +32,18 @@
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../blogs/blogs.html">Blogs</a>
-            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
-            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects.html">Projects &amp; Experiences</a>
+            <a href="../food_gallery/food_gallery.html">Food Diary</a>
+            <a href="../kitchen/index.html">My Kitchen</a>
+            <a href="../blogs/blogs.html">Journal</a>
+            <a href="projects.html" aria-current="page">Projects & Research</a>
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
-            <script>
-                // Set the initial theme label
-                (function() {
-                    const btn = document.getElementById('dark-mode-toggle');
-                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
-                    const theme = document.documentElement.dataset.theme || 'mint';
-                    if (btn) btn.textContent = labels[theme];
-                })();
-            </script>
         </nav>
     </header>
 
     <main class="hero inner-page">
         <div class="page-content">
-            <h2 class="page-title">Projects &amp; Experiences</h2>
-            <p>Here are some of my academic and personal projects related to nutrition, and research did in recent years!</p>
+            <h2 class="page-title">Projects &amp; Research</h2>
+            <p>Food science explorations, research, and web projects — from fermentation to things I’ve built.</p>
 
             <div class="content-entry">
                 <img src="image/foodmon.jpg" alt="Foodmon App" class="intro-thumb">
@@ -89,6 +80,9 @@
                 <h3><a href="energy-drinks-fluorescence.html">The Effect of Fluorescence in Energy Drinks</a></h3>
                 <p>An experiment investigating what causes energy drinks to emit luminescence, using spectrophotometry to analyze vitamin B2 content and fluorescent properties.</p>
             </div>
+            <div class="content-entry"><h3><a href="engineering-chemistry.html">Engineering Chemistry Laboratory Work</a></h3></div>
+            <div class="content-entry"><h3><a href="nutrition-research.html">Nutrition Research Project</a></h3></div>
+            <div class="content-entry"><h3><a href="community-outreach.html">Community Nutrition Outreach</a></h3></div>
         </div>
     </main>
 

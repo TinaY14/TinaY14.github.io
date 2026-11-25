@@ -36,13 +36,14 @@ jobs:
 
       - name: Prepare deploy folder
         run: |
-          mkdir -p deploy/night_stall_food deploy/food_gallery deploy/projects deploy/images deploy/blogs
+          mkdir -p deploy/night_stall_food deploy/food_gallery deploy/projects deploy/images deploy/blogs deploy/kitchen
           cp index.html styles.css darkmode.js script.js veggies.js projects.html Xitian_Tina__Yu_resume_sophomore_.pdf deploy/
           cp -r night_stall_food/* deploy/night_stall_food/
           cp -r food_gallery/* deploy/food_gallery/
           cp -r projects/* deploy/projects/
           cp -r images/* deploy/images/
           cp -r blogs/* deploy/blogs/
+          cp -r kitchen/* deploy/kitchen/
           touch deploy/.nojekyll
 
       - name: Configure GitHub Pages

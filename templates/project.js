@@ -1,10 +1,8 @@
 module.exports = function(data, content) {
-  // Process content to wrap H1 sections in content-entry divs
-  // and convert H1 to H3
+  // Keep article headings below the page title.
   const processedContent = content
-    .replace(/<h1>/g, '</div><div class="content-entry"><h3>')
-    .replace(/<\/h1>/g, '</h3>')
-    .replace(/^<\/div>/, ''); // Remove leading closing div from first section
+    .replace(/<h1([^>]*)>/g, '<h3$1>')
+    .replace(/<\/h1>/g, '</h3>');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -36,9 +34,10 @@ module.exports = function(data, content) {
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../night_stall_food/night_stall_food.html">Night Stall Food</a>
-            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects.html">Projects</a>
+            <a href="../food_gallery/food_gallery.html">Food Diary</a>
+            <a href="../kitchen/index.html">My Kitchen</a>
+            <a href="../blogs/blogs.html">Journal</a>
+            <a href="../projects/projects.html">Projects & Research</a>
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
             <script>
                 // Set the initial theme label
@@ -55,8 +54,7 @@ module.exports = function(data, content) {
         <div class="page-content">
             <h2 class="page-title">${data.title}</h2>
 
-            ${processedContent}
-            </div>
+            <article class="collection-article">${processedContent}</article>
         </div>
     </main>
 </body>

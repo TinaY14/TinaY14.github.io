@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="styles.css?v=page-themes-3">
+    <link rel="stylesheet" href="styles.css?v=collections-1">
 
     <!-- Restore the saved color theme before first paint -->
     <script>
@@ -31,21 +31,12 @@
     <header>
         <a href="index.html" class="logo">Tina's Little World</a>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="blogs/blogs.html">Blogs</a>
-            <a href="night_stall_food/night_stall_food.html">Night Stall Food</a>
-            <a href="food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="projects/projects.html">Projects &amp; Experiences</a>
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="food_gallery/food_gallery.html">Food Diary</a>
+            <a href="kitchen/index.html">My Kitchen</a>
+            <a href="blogs/blogs.html">Journal</a>
+            <a href="projects/projects.html">Projects & Research</a>
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
-            <script>
-                // Set the initial theme label
-                (function() {
-                    const btn = document.getElementById('dark-mode-toggle');
-                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
-                    const theme = document.documentElement.dataset.theme || 'mint';
-                    if (btn) btn.textContent = labels[theme];
-                })();
-            </script>
         </nav>
     </header>
 
@@ -57,7 +48,7 @@
             <div class="about-text">
                 <h1 class="name">Xitian (Tina) Yu</h1>
                 <p class="description">
-                    Hi, I'm Tina - the creator of this space and a lifelong nutrition enthusiast. I'm here to share my personal journey toward healthy living in everyday life.
+                    Hi, I'm Tina. I’m exploring food through cooking, science, and everyday curiosity.
                 </p>
                 <p class="description">
                     I believe that healthy eating should be about joy, not restriction. Take a look around my little world and feel free to connect with me, I can't wait to hear from you!
@@ -81,6 +72,15 @@
             <div class="about-image">
                 <img src="images/site/selfie.png" alt="Tina Yu Selfie">
             </div>
+        </div>
+    </section>
+
+    <section class="home-collections" aria-label="Explore my collections">
+        <div class="collection-grid">
+            <a class="collection-card" href="food_gallery/food_gallery.html"><img src="food_gallery/image/2025/07/2025-07-03.jpg" alt="" loading="lazy"><div><h2>Food Diary</h2><p>Everyday meals, places worth remembering, and Street Food Notes.</p><span>Open the diary ↗</span></div></a>
+            <a class="collection-card" href="kitchen/index.html"><img src="images/food/bananacake.jpg" alt="" loading="lazy"><div><h2>My Kitchen</h2><p>Recipes, ingredients, and what I’ll try differently next time.</p><span>Come into the kitchen ↗</span></div></a>
+            <a class="collection-card" href="blogs/blogs.html"><img src="blogs/images/030426/b4.jpg" alt="" loading="lazy"><div><h2>Journal</h2><p>Cooking events, field visits, and thoughts along the way.</p><span>Read the stories ↗</span></div></a>
+            <a class="collection-card" href="projects/projects.html"><img src="projects/image/foodmon.jpg" alt="" loading="lazy"><div><h2>Projects &amp; Research</h2><p>Food science explorations, research, and things I’ve built.</p><span>Explore the projects ↗</span></div></a>
         </div>
     </section>
 
@@ -129,7 +129,7 @@
         </div>
     </section>
 
-    <script src="darkmode.js?v=page-themes-3"></script>
+    <script src="darkmode.js?v=collections-1"></script>
     <script src="veggies.js"></script>
 </body>
 </html>

@@ -1,10 +1,8 @@
 module.exports = function(data, content) {
-  // Process content to wrap H1 sections in content-entry divs
-  // and convert H1 to H3
+  // Keep article headings below the page title.
   const processedContent = content
-    .replace(/<h1>/g, '</div><div class="content-entry"><h3>')
-    .replace(/<\/h1>/g, '</h3>')
-    .replace(/^<\/div>/, ''); // Remove leading closing div from first section
+    .replace(/<h1([^>]*)>/g, '<h3$1>')
+    .replace(/<\/h1>/g, '</h3>');
 
   // Build title with Chinese and English names
   const titleText = data.chineseName
@@ -16,7 +14,7 @@ module.exports = function(data, content) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${titleText} - Tina's Night Stall Food</title>
+    <title>${titleText} - Tina's Street Food Notes</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,9 +39,10 @@ module.exports = function(data, content) {
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="night_stall_food.html">Night Stall Food</a>
-            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects.html">Projects</a>
+            <a href="../food_gallery/food_gallery.html">Food Diary</a>
+            <a href="../kitchen/index.html">My Kitchen</a>
+            <a href="../blogs/blogs.html">Journal</a>
+            <a href="../projects/projects.html">Projects & Research</a>
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
             <script>
                 // Set the initial theme label
@@ -58,10 +57,10 @@ module.exports = function(data, content) {
     </header>
     <main class="hero inner-page">
         <div class="page-content">
+            <a class="collection-back" href="night_stall_food.html">← Street Food Notes</a>
             <h2 class="page-title">${titleText}</h2>
 
-            ${processedContent}
-            </div>
+            <article class="collection-article">${processedContent}</article>
         </div>
     </main>
 </body>

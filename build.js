@@ -15,6 +15,7 @@ const config = {
   },
   projects: {
     contentDir: 'content/projects',
+    preserveExisting: true,
     outputDir: 'projects',
     template: null
   }
@@ -83,6 +84,8 @@ function generateHTML(sectionName, section) {
   }
 
   files.forEach(file => {
+    if (section.preserveExisting && fs.existsSync(path.join(outputDir, file.replace('.md', '.html')))) return;
+
     const filePath = path.join(contentDir, file);
     const fileContent = fs.readFileSync(filePath, 'utf8');
 
@@ -132,5 +135,8 @@ if (config.projects.template) {
 } else {
   console.log('⚠️  Skipping projects - template not found');
 }
+
+require('./scripts/build-collections')();
+require('./scripts/build-navigation')();
 
 console.log('\n✅ Build complete!');

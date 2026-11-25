@@ -3,7 +3,7 @@ title: Chicken Winter Melon Soup
 subtitle: 冬瓜鸡汤 - Nourishing Chinese Soup
 emoji: 🍗
 image: ../images/food/chickenwintermelon.jpg
-cardDescription: Colorful stir-fry
+cardDescription: Nourishing chicken and winter melon soup
 searchTerms: chicken winter melon stir fry peppers
 hasImage: true
 ---

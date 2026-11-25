@@ -2066,3 +2066,39 @@ form button[type="submit"]:active {
 @media (prefers-reduced-motion: reduce) {
     :root[data-theme] { transition: none; }
 }
+
+/* Food collections share the site's selectable palette. */
+.collection-page { max-width: 1200px; margin-inline: auto; }
+.collection-intro { font-size: 1.15rem; margin: 16px 0 32px; }
+.collection-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.collection-card { display: block; background: var(--panel-bg); border: 1px solid var(--theme-border); border-radius: 24px; overflow: hidden; color: var(--inner-text); text-decoration: none; box-shadow: 0 8px 24px var(--theme-shadow); transition: transform .25s; }
+.collection-card:hover { transform: translateY(-5px); }
+.collection-card > img { width: 100%; aspect-ratio: 1.2; object-fit: cover; display: block; }
+.collection-card > div { padding: 24px; }
+.collection-card h2 { font-size: 1.2rem; margin: 12px 0; }
+.collection-card time { font-size: .85rem; }
+.collection-card span { display: block; margin-top: 20px; color: var(--inner-heading); font-weight: 600; }
+.collection-card:focus-visible { outline: 3px solid var(--primary-blue); outline-offset: 4px; }
+.collection-back { display: inline-block; margin-bottom: 24px; color: var(--inner-text); }
+.collection-article { max-width: 800px; margin: 32px auto; line-height: 1.85; overflow-wrap: anywhere; }
+.collection-article img { max-width: 100%; height: auto; border-radius: 16px; }
+.collection-article h2, .collection-article h3 { margin: 32px 0 16px; }
+.collection-article ul, .collection-article ol { padding-left: 28px; }
+.collection-article p { margin-bottom: 20px; }
+.article-photos { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin-top: 24px; }
+.article-photos img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 18px; }
+.diary-topic { display: inline-block; margin: 8px 0 24px; color: var(--inner-text); text-underline-offset: 5px; }
+header nav { flex-wrap: wrap; }
+@media (max-width: 1000px) { .collection-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 600px) { .collection-grid { grid-template-columns: 1fr; } .article-photos { grid-template-columns: repeat(2,minmax(0,1fr)); } header { flex-wrap: wrap; gap: 12px; } header nav { gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { .collection-card { transition: none; } }
+
+header nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+
+.home-collections { max-width:1100px; margin:48px auto; padding:0 24px; }
+.home-collections .collection-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.home-collections .collection-card > img { aspect-ratio:1.8; }
+@media(max-width:600px) { .home-collections .collection-grid { grid-template-columns:1fr; } }
+.collection-page { box-sizing:border-box; width:100%; min-width:0; }
+.collection-card { min-width:0; overflow-wrap:anywhere; }
+.page-content { box-sizing:border-box; min-width:0; }

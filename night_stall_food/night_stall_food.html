@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Night Stall Food - Tina</title>
+    <title>Street Food Notes - Tina</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,8 @@
     <!-- Prefetch homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=page-themes-3">
-    <script src="../darkmode.js?v=page-themes-3"></script>
+    <link rel="stylesheet" href="../styles.css?v=collections-1">
+    <script src="../darkmode.js?v=collections-1"></script>
 
     <!-- Restore the saved color theme before first paint -->
     <script>
@@ -32,27 +32,18 @@
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="../blogs/blogs.html">Blogs</a>
-            <a href="night_stall_food.html">Night Stall Food</a>
-            <a href="../food_gallery/food_gallery.html">Food Gallery</a>
-            <a href="../projects/projects.html">Projects &amp; Experiences</a>
-                        <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
-            <script>
-                // Set the initial theme label
-                (function() {
-                    const btn = document.getElementById('dark-mode-toggle');
-                    const labels = { mint: 'Mint', sky: 'Sky', peach: 'Peach', lavender: 'Lavender', cream: 'Cream' };
-                    const theme = document.documentElement.dataset.theme || 'mint';
-                    if (btn) btn.textContent = labels[theme];
-                })();
-            </script>
+            <a href="../food_gallery/food_gallery.html" aria-current="page">Food Diary</a>
+            <a href="../kitchen/index.html">My Kitchen</a>
+            <a href="../blogs/blogs.html">Journal</a>
+            <a href="../projects/projects.html">Projects & Research</a>
+            <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
         </nav>
     </header>
 
     <main class="hero inner-page">
         <div class="page-content wide">
-            <h2 class="page-title">Night Stall Food</h2>
-            <p>Exploring the vibrant world of street food and night market culture.</p>
+            <h2 class="page-title">Street Food Notes</h2>
+            <p>A collection within my Food Diary — street bites I love and how they’re made.</p><p><a href="../food_gallery/food_gallery.html">← Back to Food Diary</a></p>
 
             <!-- Search Bar -->
             <div class="search-container">

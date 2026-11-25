@@ -11,7 +11,8 @@
     let saved;
     try { saved = localStorage.getItem('tinaTheme'); } catch (_) {}
     const path = location.pathname.toLowerCase();
-    const pageTheme = /(?:^|\/)blogs(?:\/|$)/.test(path) ? 'peach'
+    const pageTheme = /(?:^|\/)kitchen(?:\/|$)/.test(path) ? 'cream'
+        : /(?:^|\/)blogs(?:\/|$)/.test(path) ? 'peach'
         : /(?:^|\/)night_stall_food(?:\/|$)/.test(path) ? 'cream'
         : /(?:^|\/)food_gallery(?:\/|$)/.test(path) ? 'sky'
         : /(?:^|\/)projects(?:\/|\.html|$)/.test(path) ? 'lavender'

@@ -1,110 +1,47 @@
-# Website Build System
+# Updating the site
 
-This website uses a simple build system to generate HTML pages from Markdown content. This makes managing content much easier - you write in Markdown, run the build script, and HTML files are automatically generated.
+Run `npm ci` once, then `npm run build` after changing content.
+Preview the repository with `python3 -m http.server 3000`.
 
-## Quick Start
+## Content collections
 
-### Building the Site
+- Food Diary uses `food_gallery/data.json` and dated photos under `food_gallery/image/YYYY/MM/`. See `food_gallery/README.md`.
+- Street Food Notes is a topic inside Food Diary. Its Markdown sources live in `content/food/`.
+- My Kitchen recipes live in `content/kitchen/`.
+- Journal articles live in `content/journal/`. The older `blogs/posts.md` is retained as an archive and is no longer read by the website.
+- Projects & Research uses `content/projects/` for new project pages and the existing manually authored project pages. Existing project HTML is preserved during builds. Its index is `projects/projects.html`.
 
-```bash
-npm run build
+## Add a Journal article or kitchen recipe
+
+Create a new Markdown file with a unique filename in the appropriate content folder.
+The filename becomes its page URL. Use this frontmatter, then write the article below it.
+
+```markdown
+---
+title: "A day in the teaching kitchen"
+date: "2026-11-25"
+excerpt: "A short introduction for the article card."
+images:
+  - "../blogs/images/my-event/photo.jpg"
+---
+
+## What we made
+
+Write your story here.
 ```
 
-This generates all HTML files from your Markdown content.
+For kitchen recipes use `image: "../images/food/my-dish.jpg"` and `subtitle` or
+`cardDescription` for the card text. Include ingredients, quantities, steps,
+and reflections in the Markdown body.
 
-## Adding New Content
+Run `npm run build`. Journal and My Kitchen indexes and article pages update
+automatically. Adding entries requires no navigation or JavaScript edits.
+Keep original photo and article filenames stable after publication.
 
-### Adding a New Recipe
+The build normalizes navigation across every page. Edit the shared destinations
+in `scripts/build-navigation.js` when changing the main sections. Generated
+collection pages use `templates/collection.js` and shared palette variables in
+`styles.css`.
 
-1. Create a new markdown file in `content/recipes/`:
-   ```
-   content/recipes/your-recipe-name.md
-   ```
-
-2. Add frontmatter and content:
-   ```markdown
-   ---
-   title: Your Recipe Name
-   subtitle: Short description
-   emoji: 🍕
-   hasImage: true
-   ---
-
-   # 📖 About This Recipe
-
-   Description here...
-
-   # 🥄 Ingredients
-
-   - Ingredient 1
-   - Ingredient 2
-
-   # 👩‍🍳 Instructions
-
-   **Step 1: Prepare**
-
-   1. First instruction
-   2. Second instruction
-
-   # 💡 Tips
-
-   - Tip 1
-   - Tip 2
-   ```
-
-3. Run `npm run build`
-
-4. Your HTML file is generated at `food_gallery/your-recipe-name.html`
-
-### Adding Night Stall Food
-
-1. Create markdown file in `content/night-stall/`
-2. Add frontmatter with `title`, `chineseName`, `englishName`
-3. Run `npm run build`
-4. HTML generated in `night_stall_food/`
-
-### Adding a Project
-
-1. Create markdown file in `content/projects/`
-2. Add frontmatter with `title` (quote it if it contains colons!)
-3. Run `npm run build`
-4. HTML generated in `projects/`
-
-## File Structure
-
-```
-├── content/              # Your markdown content (edit these!)
-│   ├── recipes/         # Recipe markdown files
-│   ├── night-stall/     # Night stall food markdown
-│   └── projects/        # Project markdown files
-├── templates/           # HTML templates (rarely need to edit)
-│   ├── recipe.js
-│   ├── night-stall.js
-│   └── project.js
-├── build.js            # Build script
-├── package.json        # Dependencies
-├── food_gallery/       # Generated recipe HTML
-├── night_stall_food/   # Generated night stall HTML
-└── projects/           # Generated project HTML
-```
-
-## Important Notes
-
-1. **Always run `npm run build` after making changes to markdown files**
-2. **Frontmatter titles with colons must be quoted:** `title: "My Title: Subtitle"`
-3. **Generated HTML files should be committed to git** (GitHub Pages needs them)
-4. **Markdown files are your "source of truth"** - they're small and easy to edit
-
-## Benefits
-
-- ✅ **Smaller files** - Markdown is much more compact than HTML
-- ✅ **Easier to edit** - No HTML boilerplate to maintain
-- ✅ **Consistency** - All pages use the same templates
-- ✅ **Quick updates** - Change navigation once in templates, rebuild, done!
-- ✅ **Dark mode preserved** - All generated pages have dark mode support
-
-## Need Help?
-
-- Templates are in `templates/` folder
-- Build script is `build.js`
-- Dependencies: just `marked` (markdown parser) and `gray-matter` (frontmatter parser)
+Push to main to run the GitHub Pages workflow. GitHub repository Settings →
+Pages → Build and deployment → Source must be GitHub Actions.
