@@ -1,77 +1,42 @@
 const fs = require('fs');
 const path = require('path');
 
-const IMAGE_DIR = path.join(__dirname, '..', 'food_gallery', 'image');
-const DATA_FILE = path.join(__dirname, '..', 'food_gallery', 'data.json');
+const imageDir = path.join(__dirname, '..', 'food_gallery', 'image');
+const dataFile = path.join(__dirname, '..', 'food_gallery', 'data.json');
 
-function parseDate(filename) {
-  // Extract date from filename like "112725.jpg" or "112725(1).jpg"
-  // Format is MMDDYY
-  const match = filename.match(/^(\d{6})/);
-  if (!match) return null;
-
-  const dateStr = match[1];
-  const month = parseInt(dateStr.substring(0, 2), 10);
-  const day = parseInt(dateStr.substring(2, 4), 10);
-  const year = parseInt(dateStr.substring(4, 6), 10);
-
-  // Convert 2-digit year to 4-digit (assuming 20xx for years < 50, 19xx otherwise)
-  const fullYear = year < 50 ? 2000 + year : 1900 + year;
-
-  // Validate date
-  if (month < 1 || month > 12 || day < 1 || day > 31) return null;
-
-  return `${fullYear}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+function photoDate(image) {
+  const name = path.basename(image);
+  const iso = name.match(/^(\d{4}-\d{2}-\d{2})/);
+  if (iso) return iso[1];
+  const legacy = name.match(/^(\d{2})(\d{2})(\d{2})/);
+  if (!legacy) throw new Error('Missing photo date: ' + image);
+  return '20' + legacy[3] + '-' + legacy[1] + '-' + legacy[2];
 }
 
-function generateTimeline() {
-  // Read all jpg files from image directory
-  const files = fs.readdirSync(IMAGE_DIR)
-    .filter(f => f.toLowerCase().endsWith('.jpg') || f.toLowerCase().endsWith('.jpeg'));
-
-  // Group photos by date
-  const photosByDate = {};
-
-  for (const file of files) {
-    const date = parseDate(file);
-    if (!date) {
-      console.warn(`Skipping file with unrecognized format: ${file}`);
-      continue;
-    }
-
-    if (!photosByDate[date]) {
-      photosByDate[date] = [];
-    }
-    photosByDate[date].push({
-      image: `image/${file}`,
-      caption: ''
-    });
-  }
-
-  // Sort photos within each date (main photo first, then variants)
-  for (const date of Object.keys(photosByDate)) {
-    photosByDate[date].sort((a, b) => {
-      const aName = path.basename(a.image);
-      const bName = path.basename(b.image);
-      // Files without parentheses come first
-      const aHasVariant = aName.includes('(');
-      const bHasVariant = bName.includes('(');
-      if (aHasVariant !== bHasVariant) return aHasVariant ? 1 : -1;
-      return aName.localeCompare(bName);
-    });
-  }
-
-  // Convert to array (no need to include date - HTML extracts it from filename)
-  const timeline = Object.keys(photosByDate)
-    .sort((a, b) => b.localeCompare(a))
-    .map(date => ({
-      photos: photosByDate[date]
-    }));
-
-  // Write to data.json
-  fs.writeFileSync(DATA_FILE, JSON.stringify(timeline, null, 2) + '\n');
-
-  console.log(`Generated timeline with ${timeline.length} entries and ${files.length} photos`);
+function findPhotos(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return findPhotos(fullPath);
+    return /\.jpe?g$/i.test(entry.name) ? [fullPath] : [];
+  });
 }
 
-generateTimeline();
+// Retain authored date ranges, captions, locations and reflections.
+const timeline = fs.existsSync(dataFile) ? JSON.parse(fs.readFileSync(dataFile, 'utf8')) : [];
+const knownImages = new Set(timeline.flatMap(entry => entry.photos.map(photo => photo.image)));
+const newEntries = new Map();
+for (const file of findPhotos(imageDir).sort()) {
+  const image = 'image/' + path.relative(imageDir, file).split(path.sep).join('/');
+  if (knownImages.has(image)) continue;
+  const date = photoDate(image);
+  let entry = timeline.find(item => !item.dateLabel && item.photos.length && photoDate(item.photos[0].image) === date);
+  if (!entry) {
+    if (!newEntries.has(date)) newEntries.set(date, { photos: [] });
+    entry = newEntries.get(date);
+  }
+  entry.photos.push({ image, caption: '' });
+}
+timeline.push(...newEntries.values());
+timeline.sort((a, b) => photoDate(b.photos[0].image).localeCompare(photoDate(a.photos[0].image)));
+fs.writeFileSync(dataFile, JSON.stringify(timeline, null, 2) + '\n');
+console.log('Updated timeline while preserving existing notes and captions.');

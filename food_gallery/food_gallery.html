@@ -239,6 +239,17 @@
             .timeline-content { margin-left: 0 !important; }
             .timeline-photos { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
         }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; padding-right: 28px; margin: 24px 0; }
+        .archive-card { display: block; overflow: hidden; border-radius: 16px; background: var(--card-bg, #fff); color: inherit; text-decoration: none; border: 1px solid #93c5fd; transition: transform .2s; }
+        .archive-card:hover { transform: translateY(-4px); }
+        .archive-card:focus-visible, .archive-breadcrumb a:focus-visible { outline: 3px solid #60a5fa; outline-offset: 4px; }
+        .archive-card img { width: 100%; height: 170px; object-fit: cover; display: block; }
+        .archive-card strong { display: block; padding: 18px; font-size: 1.3rem; }
+        .archive-breadcrumb { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 24px 0; }
+        .archive-breadcrumb a { color: inherit; text-underline-offset: 4px; }
+        #archive-title { margin-top: 20px; }
+        [hidden] { display: none !important; }
+        body.dark-mode .archive-card { background: #223047; }
     </style>
 
     <!-- Restore the saved color theme before first paint -->
@@ -277,6 +288,10 @@
             <h2 class="page-title">Food Gallery</h2>
             <p>A timeline of my food adventures</p>
 
+            <nav id="archive-breadcrumb" class="archive-breadcrumb" aria-label="Gallery archive"></nav>
+            <h2 id="archive-title" tabindex="-1">Browse by year</h2>
+            <div id="archive-grid" class="archive-grid"></div>
+            <p id="archive-status" role="status">Loading gallery…</p>
             <!-- Timeline Container -->
             <div class="timeline" id="timeline">
                 <!-- Timeline entries will be loaded dynamically -->
@@ -295,9 +310,11 @@
 
         // Extract date from filename (MMDDYY format, e.g., "070325.jpg" -> July 3, 2025)
         function parseDateFromFilename(imagePath) {
-            // Get filename from path (e.g., "image/070325.jpg" -> "070325.jpg")
+            // Get filename from path (e.g., "image/2025/07/2025-07-03.jpg" -> "070325.jpg")
             const filename = imagePath.split('/').pop();
             // Extract the 6-digit date part (handles files like "070325.jpg" or "070325(1).jpg")
+            const iso = filename.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            if (iso) return { year: Number(iso[1]), month: Number(iso[2]), day: Number(iso[3]), sortKey: iso[0] };
             const match = filename.match(/^(\d{6})/);
             if (!match) return null;
 
@@ -364,8 +381,8 @@
         }
 
         // Render timeline entries
-        function renderTimeline(data) {
-            const processedData = processData(data);
+        function renderTimeline(processedData) {
+            timeline.replaceChildren();
 
             processedData.forEach(entry => {
                 const timelineEntry = document.createElement('div');
@@ -444,11 +461,87 @@
         window.addEventListener('resize', alignNotes);
         if (document.fonts) document.fonts.ready.then(alignNotes);
 
-        // Load timeline data from JSON file
+        let galleryEntries = [];
+        const archiveGrid = document.getElementById('archive-grid');
+        const breadcrumb = document.getElementById('archive-breadcrumb');
+        const archiveTitle = document.getElementById('archive-title');
+        const archiveStatus = document.getElementById('archive-status');
+        const monthName = month => new Date(2000, Number(month) - 1, 1)
+            .toLocaleDateString('en-US', { month: 'long' });
+
+        function archiveLink(label, hash, parent) {
+            const link = document.createElement('a');
+            link.textContent = label;
+            link.href = hash;
+            parent.appendChild(link);
+            return link;
+        }
+
+        function showArchive() {
+            const params = new URLSearchParams(location.hash.slice(1));
+            const year = params.get('year');
+            const month = params.get('month');
+            const years = [...new Set(galleryEntries.map(entry => entry.sortKey.slice(0, 4)))];
+            const selectedYear = years.includes(year) ? year : null;
+            const yearEntries = galleryEntries.filter(entry => entry.sortKey.startsWith(selectedYear + '-'));
+            const months = [...new Set(yearEntries.map(entry => entry.sortKey.slice(5, 7)))];
+            const selectedMonth = months.includes(month) ? month : null;
+            breadcrumb.replaceChildren();
+            archiveLink('All years', '#', breadcrumb);
+            if (selectedYear) archiveLink(selectedYear, '#year=' + selectedYear, breadcrumb);
+            if (selectedMonth) {
+                const current = document.createElement('span');
+                current.textContent = monthName(selectedMonth);
+                current.setAttribute('aria-current', 'page');
+                breadcrumb.appendChild(current);
+            }
+            archiveGrid.replaceChildren();
+            timeline.replaceChildren();
+            timeline.hidden = !selectedMonth;
+            archiveGrid.hidden = Boolean(selectedMonth);
+            archiveTitle.textContent = selectedMonth
+                ? monthName(selectedMonth) + ' ' + selectedYear
+                : selectedYear || 'Browse by year';
+            if (selectedMonth) {
+                renderTimeline(yearEntries.filter(entry => entry.sortKey.slice(5, 7) === selectedMonth));
+            } else {
+                const groups = selectedYear ? months : years;
+                groups.forEach(key => {
+                    const entries = selectedYear
+                        ? yearEntries.filter(entry => entry.sortKey.slice(5, 7) === key)
+                        : galleryEntries.filter(entry => entry.sortKey.startsWith(key + '-'));
+                    const hash = selectedYear ? '#year=' + selectedYear + '&month=' + key : '#year=' + key;
+                    const card = archiveLink('', hash, archiveGrid);
+                    card.className = 'archive-card';
+                    const image = document.createElement('img');
+                    image.src = entries[0].photos[0].image;
+                    image.alt = '';
+                    image.loading = 'lazy';
+                    const label = document.createElement('strong');
+                    label.textContent = selectedYear ? monthName(key) : key;
+                    card.append(image, label);
+                });
+            }
+            archiveStatus.textContent = galleryEntries.length ? '' : 'No gallery entries yet.';
+        }
+
+        window.addEventListener('hashchange', () => {
+            showArchive();
+            archiveTitle.focus({ preventScroll: true });
+        });
         fetch('data.json')
-            .then(response => response.json())
-            .then(data => renderTimeline(data))
-            .catch(error => console.error('Error loading timeline data:', error));
+            .then(response => {
+                if (!response.ok) throw new Error('Gallery request failed');
+                return response.json();
+            })
+            .then(data => {
+                galleryEntries = processData(data);
+                showArchive();
+            })
+            .catch(error => {
+                archiveStatus.textContent = 'Could not load the gallery. Please refresh to try again.';
+                console.error('Error loading timeline data:', error);
+            });
 
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
