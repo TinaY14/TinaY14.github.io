@@ -26,35 +26,47 @@
 
     function showPhoto() {
         const photo = photos[position];
-        image.src = photo.currentSrc || photo.src;
-        image.alt = photo.alt;
-        const entry = photo.closest('.timeline-entry');
-        const article = photo.closest('main')?.querySelector('.collection-article');
-        const summary = entry?.querySelector('.timeline-summary');
-        if (summary) {
-            const reflection = summary.cloneNode(true);
-            reflection.querySelector('.timeline-summary-label')?.remove();
-            notes.textContent = reflection.textContent.trim();
-        } else {
-            notes.textContent = article?.textContent.trim() || '';
-        }
-        dialog.querySelector('.notebook-date').textContent = entry?.querySelector('.timeline-date')?.innerText || '';
+        image.src = photo.src;
+        image.alt = photo.alt || '';
+        notes.textContent = photo.notes || '';
+        dialog.querySelector('.notebook-date').textContent = [photo.date, photo.location].filter(Boolean).join('\n');
         dialog.querySelector('figcaption').textContent = photo.alt || '';
         dialog.querySelector('.notebook-position').textContent = (position + 1) + ' / ' + photos.length;
         previous.disabled = position === 0;
         next.disabled = position === photos.length - 1;
     }
 
-    function openNotebook(photo) {
-        photos = [...document.querySelectorAll(selector)].filter(item => item.getClientRects().length);
-        position = photos.indexOf(photo);
-        if (position < 0) return;
-        opener = photo;
+    function openItems(items, index, source) {
+        if (!items.length || index < 0 || index >= items.length) return;
+        photos = items;
+        position = index;
+        opener = source;
         showPhoto();
         previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
-        dialog.showModal();
+        if (!dialog.open) dialog.showModal();
     }
+
+    function openNotebook(photo) {
+        const images = [...document.querySelectorAll(selector)].filter(item => item.getClientRects().length);
+        const items = images.map(item => {
+            const entry = item.closest('.timeline-entry');
+            const article = item.closest('main')?.querySelector('.collection-article');
+            const summary = entry?.querySelector('.timeline-summary')?.cloneNode(true);
+            summary?.querySelector('.timeline-summary-label')?.remove();
+            return {
+                src: item.currentSrc || item.src,
+                alt: item.alt,
+                notes: summary?.textContent.trim() || article?.textContent.trim() || '',
+                date: entry?.querySelector('.timeline-date')?.innerText || ''
+            };
+        });
+        openItems(items, images.indexOf(photo), photo);
+    }
+
+    document.addEventListener('photo-notebook:open', event => {
+        openItems(event.detail.photos, event.detail.index, event.detail.opener);
+    });
 
     document.addEventListener('click', event => {
         if (!event.target.matches(selector)) return;

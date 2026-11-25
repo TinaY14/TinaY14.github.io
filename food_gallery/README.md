@@ -9,8 +9,10 @@ It adds new photos to `data.json` and preserves existing captions, locations,
 date ranges and reflections. Edit those details in `data.json`.
 The existing GitHub Actions workflow also runs this command when photos change.
 
-The gallery opens with years, then months, then the selected month's timeline.
-Entries with a custom date range are filed under the month of their first photo.
+The gallery shows two full-width film strips moving in opposite directions.
+Use Year and Month to filter the photos. Each image keeps its original aspect
+ratio and opens a notebook with its existing reflections. Pause, speed, drag,
+and scroll controls are implemented in `film-gallery.js`.
 
 Each photo in `data.json` has `collection: "diary"` for eating out or
 `collection: "kitchen"` for homemade food. Existing classifications and

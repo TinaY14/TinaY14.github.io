@@ -33,10 +33,7 @@ module.exports = function buildCollections() {
       index = fs.readFileSync('food_gallery/food_gallery.html', 'utf8')
         .replace('data-collection="diary"', 'data-collection="kitchen"')
         .replace('<title>Food Diary - Tina</title>', '<title>My Kitchen - Tina</title>')
-        .replace('<h2 class="page-title">Food Diary</h2>', '<h2 class="page-title">My Kitchen</h2>')
-        .replace('A little hungry, a little curious. What shall we open today?', 'Made by me. A notebook of meals, experiments, and little discoveries.')
-        .replaceAll('href="food_gallery.html" aria-current="page">Food Diary', 'href="../food_gallery/food_gallery.html">Food Diary')
-        .replaceAll('href="../kitchen/index.html">My Kitchen', 'href="../kitchen/index.html" aria-current="page">My Kitchen');
+        .replace('<h1 class="page-title">Food Diary</h1>', '<h1 class="page-title">My Kitchen</h1>');
     }
     fs.writeFileSync(path.join(collection.output, collection.hub), index);
     console.log(`Built ${entries.length} ${collection.title} entries and automatic index.`);
