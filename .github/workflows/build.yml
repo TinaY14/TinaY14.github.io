@@ -67,6 +67,19 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 
+      - name: Verify Pages publishing source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pages_config=$(gh api "repos/$GITHUB_REPOSITORY/pages")
+          pages_mode=$(printf '%s' "$pages_config" | jq -r '.build_type')
+          pages_branch=$(printf '%s' "$pages_config" | jq -r '.source.branch // "none"')
+          echo "::notice title=GitHub Pages source::build_type=$pages_mode source_branch=$pages_branch"
+          if [ "$pages_mode" != "workflow" ]; then
+            echo "::error title=Pages source mismatch::Open repository Settings > Pages and set Build and deployment > Source to GitHub Actions."
+            exit 1
+          fi
+
       - name: Publish GitHub Pages
         id: deployment
         continue-on-error: true
