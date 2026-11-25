@@ -11,7 +11,7 @@
     <!-- Prefetch homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=742560252623">
+    <link rel="stylesheet" href="../styles.css?v=3c07299f6a19">
     <script src="../darkmode.js?v=ca22f2adf14d"></script>
 
     <!-- Timeline styles (embedded for consistency) -->
@@ -264,7 +264,9 @@
         @media(max-width:1100px) { .archive-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
         @media(max-width:540px) { .archive-grid { gap:12px; padding-right:16px; } .archive-card { border-radius:16px; } .archive-card strong { font-size:1.45rem; } .archive-card span { bottom:14px; font-size:.7rem; } }
         @media(prefers-reduced-motion:reduce) { .archive-card,.archive-card img { transition:none; } }
-        body[data-collection="diary"] .archive-grid { grid-template-columns:repeat(auto-fit,minmax(220px,320px)); justify-content:center; max-width:720px; margin:28px auto; padding-right:0; }
+        body[data-collection="diary"] .archive-grid { grid-template-columns:repeat(auto-fit,minmax(220px,320px)); justify-content:center; max-width:1060px; margin:28px auto; padding-right:0; }
+        .archive-collection strong { font-size:clamp(1.5rem,2.7vw,2.4rem); text-align:center; }
+        #archive-status:empty { display:none; }
     </style>
 
     <!-- Restore the saved color theme before first paint -->
@@ -291,10 +293,9 @@
     </header>
     <main class="hero inner-page">
         <div class="page-content wide">
-            <h2 class="page-title">Food Diary</h2>
-            <div class="diary-topics"><a class="diary-topic-link" href="../night_stall_food/night_stall_food.html">Street Food Notes</a></div>
+            <h2 class="page-title" tabindex="-1">Food Diary</h2>
             <nav id="archive-breadcrumb" class="archive-breadcrumb" aria-label="Gallery archive"></nav>
-            <h2 id="archive-title" tabindex="-1">Browse by year</h2>
+            <h2 id="archive-title" tabindex="-1" hidden></h2>
             <p id="archive-status" role="status">Loading gallery…</p>
             <div id="archive-grid" class="archive-grid"></div>
             <!-- Timeline Container -->
@@ -487,6 +488,7 @@
             if (Number(selectedYear) === new Date().getFullYear()) months.reverse();
             const selectedMonth = months.includes(month) ? month : null;
             breadcrumb.replaceChildren();
+            breadcrumb.hidden = !selectedYear;
             if (selectedYear) archiveLink('Year shelf', '#', breadcrumb);
             if (selectedMonth) archiveLink('Months of ' + selectedYear, '#year=' + selectedYear, breadcrumb);
             if (selectedMonth) {
@@ -501,7 +503,8 @@
             archiveGrid.hidden = Boolean(selectedMonth);
             archiveTitle.textContent = selectedMonth
                 ? monthName(selectedMonth) + ' ' + selectedYear
-                : selectedYear || 'Browse by year';
+                : selectedYear || '';
+            archiveTitle.hidden = !selectedYear;
             if (selectedMonth) {
                 renderTimeline(yearEntries.filter(entry => entry.sortKey.slice(5, 7) === selectedMonth));
             } else {
@@ -524,14 +527,28 @@
                     card.append(image, label, detail);
                 });
             }
+            if (!selectedYear && document.body.dataset.collection === 'diary') {
+                const card = archiveLink('', '../night_stall_food/night_stall_food.html', archiveGrid);
+                card.className = 'archive-card archive-collection';
+                const image = document.createElement('img');
+                image.src = '../images/food/jianbing.jpg';
+                image.alt = '';
+                image.loading = 'lazy';
+                const label = document.createElement('strong');
+                label.textContent = 'Street Food Notes';
+                const detail = document.createElement('span');
+                detail.textContent = 'Open collection';
+                card.append(image, label, detail);
+            }
             archiveStatus.textContent = galleryEntries.length ? '' : 'No gallery entries yet.';
         }
 
         const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
         window.addEventListener('hashchange', () => {
             showArchive();
-            archiveTitle.focus({ preventScroll: true });
-            archiveTitle.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+            const heading = archiveTitle.hidden ? document.querySelector('.page-title') : archiveTitle;
+            heading.focus({ preventScroll: true });
+            heading.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
         });
         fetch('../food_gallery/data.json')
             .then(response => {

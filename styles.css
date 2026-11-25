@@ -2127,7 +2127,6 @@ header nav a[aria-current="page"] { text-decoration: underline; text-underline-o
 @media(prefers-reduced-motion:no-preference) { .photo-notebook[open] { animation:open-notebook .3s ease-out; } @keyframes open-notebook { from { opacity:0; transform:translateY(16px) scale(.97); } to { opacity:1; transform:none; } } }
 @media(prefers-reduced-motion:reduce) { .collection-back { transition:none; } }
 
-.diary-topics { margin:16px 0 24px; }
-.diary-topic-link { display:inline-flex; padding:9px 16px; border:1px solid var(--theme-border); border-radius:7px; background:var(--panel-bg); color:var(--inner-text); text-decoration:none; font-size:.9rem; }
 .return-link { display:inline-flex; align-items:center; gap:9px; width:fit-content; padding:8px 12px; border:1px solid var(--theme-border); border-radius:7px; color:var(--inner-text); background:var(--panel-bg); font-size:.85rem; text-decoration:none; }
 .return-link::before { content:""; width:6px; height:6px; border-left:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); }
+header { font-family:Arial, sans-serif; }
