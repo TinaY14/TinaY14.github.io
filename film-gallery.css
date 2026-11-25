@@ -88,8 +88,7 @@
 .film-speed input { width:130px; accent-color:#9b87af; }
 .film-speed output { min-width:3em; font-variant-numeric:tabular-nums; }
 .film-photo-controls { display:flex; gap:8px; }
-#film-info, #film-hint { text-align:center; margin:12px 0; font-size:.85rem; }
-#film-hint { font-size:.75rem; opacity:.7; margin-bottom:24px; }
+#film-hint { text-align:center; margin:20px 12px 28px; font-size:1rem; font-weight:600; color:#24212a; line-height:1.6; }
 .film-page :focus-visible { outline:2px solid #9b87af; outline-offset:-3px; }
 @media(max-width:650px) {
     .film-page { margin-top:18px; }
@@ -104,3 +103,7 @@
 
 .film-archive-link { align-self:center; padding:8px 14px; border:1px solid var(--theme-border); border-radius:7px; color:var(--inner-text); background:var(--panel-bg); text-decoration:none; font-size:.85rem; white-space:nowrap; }
 @media(max-width:650px) { .film-filters { flex-wrap:wrap; } .film-archive-link { flex-basis:100%; text-align:center; } }
+
+.film-archive-link { display:inline-flex; align-items:center; gap:9px; }
+.grid-view-icon { display:grid; grid-template-columns:repeat(2,5px); gap:3px; }
+.grid-view-icon i { width:5px; height:5px; background:currentColor; border-radius:1px; }

@@ -32,6 +32,7 @@ module.exports = function buildCollections() {
     if (collection.output === 'kitchen') {
       index = fs.readFileSync('templates/film.html', 'utf8');
       const archive = fs.readFileSync('food_gallery/food_gallery.html', 'utf8')
+        .replace(/[ \t]*<div class="diary-topics">[\s\S]*?<\/div>\n?/, '')
         .replace('data-collection="diary"', 'data-collection="kitchen"')
         .replace('<title>Food Diary - Tina</title>', '<title>My Kitchen Archive - Tina</title>')
         .replace('<h2 class="page-title">Food Diary</h2>', '<h2 class="page-title">My Kitchen</h2><a class="collection-back" href="index.html">Film view</a>');

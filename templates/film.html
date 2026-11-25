@@ -14,7 +14,6 @@
         <nav>
             <a href="../index.html">Home</a>
             <a href="food_gallery.html" aria-current="page">Food Diary</a>
-            <a href="../night_stall_food/night_stall_food.html">Street Food Notes</a>
             <a href="../kitchen/index.html">My Kitchen</a>
             <a href="../blogs/blogs.html">Journal</a>
             <a href="../projects/projects.html">Projects & Research</a>
@@ -24,7 +23,7 @@
 <main class="film-page">
     <div class="film-heading">
         <h1 class="page-title">My Kitchen</h1>
-        <div class="film-filters"><a class="film-archive-link" href="archive.html">Browse by year</a>
+        <div class="film-filters"><a class="film-archive-link" href="archive.html"><span class="grid-view-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Grid view</a>
             <label>Year <select id="film-year" aria-label="Year"><option value="">All years</option></select></label>
             <label>Month <select id="film-month" aria-label="Month" disabled><option value="">All months</option></select></label>
         </div>
@@ -43,7 +42,6 @@
         <div id="film-lower" class="film-strip" role="region" aria-label="Photo film moving right" tabindex="0"></div>
         <p id="film-status" role="status">Loading your photos…</p>
     </section>
-    <p id="film-info" aria-live="polite"></p>
     <p id="film-hint">Drag the film or scroll over it to move. Select a frame to open its notebook.</p>
 </main>
 <script src="../photo-journal.js?v=film-1" defer></script>

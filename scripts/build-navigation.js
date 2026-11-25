@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = function buildNavigation() {
   const destinations = [
     ['Home', 'index.html'], ['Food Diary', 'food_gallery/food_gallery.html'],
-    ['Street Food Notes', 'night_stall_food/night_stall_food.html'],
     ['My Kitchen', 'kitchen/index.html'], ['Journal', 'blogs/blogs.html'],
     ['Projects & Research', 'projects/projects.html']
   ];

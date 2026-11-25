@@ -264,6 +264,7 @@
         @media(max-width:1100px) { .archive-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
         @media(max-width:540px) { .archive-grid { gap:12px; padding-right:16px; } .archive-card { border-radius:16px; } .archive-card strong { font-size:1.45rem; } .archive-card span { bottom:14px; font-size:.7rem; } }
         @media(prefers-reduced-motion:reduce) { .archive-card,.archive-card img { transition:none; } }
+        body[data-collection="kitchen"] .archive-grid { grid-template-columns:repeat(auto-fit,minmax(220px,320px)); justify-content:center; max-width:720px; margin:28px auto; padding-right:0; }
     </style>
 
     <!-- Restore the saved color theme before first paint -->
@@ -276,13 +277,12 @@
         })();
     </script>
 </head>
-<body class="inner-page" data-collection="kitchen">
+<body class="inner-page" data-collection="diary">
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
             <a href="../index.html">Home</a>
             <a href="../food_gallery/food_gallery.html">Food Diary</a>
-            <a href="../night_stall_food/night_stall_food.html">Street Food Notes</a>
             <a href="index.html" aria-current="page">My Kitchen</a>
             <a href="../blogs/blogs.html">Journal</a>
             <a href="../projects/projects.html">Projects & Research</a>

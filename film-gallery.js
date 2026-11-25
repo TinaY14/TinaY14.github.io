@@ -3,7 +3,6 @@ const yearSelect = document.getElementById('film-year');
 const monthSelect = document.getElementById('film-month');
 const playButton = document.getElementById('film-play');
 const speedInput = document.getElementById('film-speed');
-const info = document.getElementById('film-info');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const rows = ['film-upper', 'film-lower'].map((id, index) => ({
     element: document.getElementById(id),
@@ -28,8 +27,6 @@ function wrap(value, width) {
 function updateSelection(index) {
     if (!photos.length) return;
     selected = (index + photos.length) % photos.length;
-    const photo = photos[selected];
-    info.textContent = photo.date + (photo.alt ? ' · ' + photo.alt : '') + ' · ' + (selected + 1) + ' / ' + photos.length;
 }
 
 function openPhoto(index, opener) {
