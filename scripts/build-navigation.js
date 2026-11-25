@@ -13,6 +13,11 @@ module.exports = function buildNavigation() {
   }
   for (const file of files) {
     let html = fs.readFileSync(file, 'utf8');
+    if (html.includes('http-equiv="refresh"')) {
+      html = html.replace(/<script src="[^"]*photo-journal\.js[^"]*" defer><\/script>\n?/g, '');
+      fs.writeFileSync(file, html);
+      continue;
+    }
     const active = file.startsWith('night_stall_food/') ? 'food_gallery/food_gallery.html'
       : file.startsWith('kitchen/') ? 'kitchen/index.html'
       : file.startsWith('blogs/') ? 'blogs/blogs.html'
