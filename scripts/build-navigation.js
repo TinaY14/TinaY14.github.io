@@ -1,7 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 module.exports = function buildNavigation() {
+  const assets = ['styles.css', 'darkmode.js', 'photo-journal.js', 'film-gallery.js', 'film-gallery.css'];
+  const versions = Object.fromEntries(assets.map(asset => [
+    asset, crypto.createHash('sha256').update(fs.readFileSync(asset)).digest('hex').slice(0, 12)
+  ]));
   const destinations = [
     ['Home', 'index.html'], ['Food Diary', 'food_gallery/food_gallery.html'],
     ['My Kitchen', 'kitchen/index.html'], ['Journal', 'blogs/blogs.html'],
@@ -31,12 +36,14 @@ module.exports = function buildNavigation() {
             ${links}
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
         </nav>`);
-    html = html.replace(/(styles\.css|darkmode\.js)\?v=[^"']+/g, '$1?v=collections-1');
     if (!html.includes('photo-journal.js') && html.includes('</body>')) {
       const scriptPath = path.posix.relative(path.posix.dirname(file), 'photo-journal.js');
       html = html.replace('</body>', `<script src="${scriptPath}?v=notebook-1" defer></script>\n</body>`);
     }
-    html = html.replace(/(styles\.css|darkmode\.js)\?v=[^"']+/g, '$1?v=notebook-1');
+    html = html.replace(
+      /((?:src|href)=["'](?:\.\.\/)*)(styles\.css|darkmode\.js|photo-journal\.js|film-gallery\.(?:js|css))(?:\?[^"']*)?(["'])/g,
+      (_, prefix, asset, quote) => prefix + asset + '?v=' + versions[asset] + quote
+    );
     fs.writeFileSync(file, html);
   }
 };
