@@ -27,6 +27,11 @@ module.exports = function buildNavigation() {
             <button id="dark-mode-toggle" aria-label="Change color theme">Mint</button>
         </nav>`);
     html = html.replace(/(styles\.css|darkmode\.js)\?v=[^"']+/g, '$1?v=collections-1');
+    if (!html.includes('photo-journal.js') && html.includes('</body>')) {
+      const scriptPath = path.posix.relative(path.posix.dirname(file), 'photo-journal.js');
+      html = html.replace('</body>', `<script src="${scriptPath}?v=notebook-1" defer></script>\n</body>`);
+    }
+    html = html.replace(/(styles\.css|darkmode\.js)\?v=[^"']+/g, '$1?v=notebook-1');
     fs.writeFileSync(file, html);
   }
 };

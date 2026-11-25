@@ -11,3 +11,8 @@ The existing GitHub Actions workflow also runs this command when photos change.
 
 The gallery opens with years, then months, then the selected month's timeline.
 Entries with a custom date range are filed under the month of their first photo.
+
+Each photo in `data.json` has `collection: "diary"` for eating out or
+`collection: "kitchen"` for homemade food. Existing classifications and
+reflections are preserved by the generator. New photos default to Kitchen;
+set their collection to Diary when they document eating out.

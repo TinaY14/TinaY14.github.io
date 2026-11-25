@@ -31,7 +31,7 @@ ${links.map(([label, url]) => `<a href="${url}">${label}</a>`).join('\n')}
 function article(data, content, collection) {
   const images = data.images || (data.image ? [data.image] : []);
   return page(data.title, `
-<a class="collection-back" href="${collection.hub}">← Back to ${collection.title}</a>
+<a class="collection-back" href="${collection.hub}">Close this chapter · ${collection.title}</a>
 <h1>${escape(data.title)}</h1>
 ${data.date ? `<p><time datetime="${escape(data.date)}">${escape(data.date)}</time></p>` : ''}
 ${data.subtitle ? `<p>${escape(data.subtitle)}</p>` : ''}
@@ -40,8 +40,16 @@ ${data.subtitle ? `<p>${escape(data.subtitle)}</p>` : ''}
 }
 
 function hub(entries, collection) {
+  const kitchenNavigation = collection.output === 'kitchen' ? `
+<nav class="gallery-tabs" aria-label="Food collections">
+<a href="../food_gallery/food_gallery.html">Food Diary</a><a href="../kitchen/index.html" aria-current="page">My Kitchen</a>
+</nav>
+<div class="collection-shortcuts"><a href="../blogs/blogs.html">Journal <small>Events & reflections</small></a><a href="../night_stall_food/night_stall_food.html">Street Food Notes <small>A Food Diary collection</small></a></div>` : '';
+
   return page(collection.title, `<h1>${collection.title}</h1>
 <p class="collection-intro">${collection.intro}</p>
+${kitchenNavigation}
+${!entries.length ? '<div class="kitchen-empty"><h2>A fresh page in my kitchen notebook</h2><p>Recipes and experiments will be collected here.</p></div>' : ''}
 <div class="collection-grid">
 ${entries.map(entry => `<a class="collection-card" href="${escape(entry.slug)}.html">
 ${entry.data.image || entry.data.images?.[0] ? `<img src="${escape(entry.data.image || entry.data.images[0])}" alt="" loading="lazy">` : ''}

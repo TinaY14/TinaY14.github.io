@@ -11,8 +11,8 @@
     <!-- Prefetch homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=collections-1">
-    <script src="../darkmode.js?v=collections-1"></script>
+    <link rel="stylesheet" href="../styles.css?v=notebook-1">
+    <script src="../darkmode.js?v=notebook-1"></script>
 
     <!-- Timeline styles (embedded for consistency) -->
     <style>
@@ -279,7 +279,7 @@
         })();
     </script>
 </head>
-<body class="inner-page">
+<body class="inner-page" data-collection="diary">
     <header>
         <a href="../index.html" class="logo">Tina's Little World</a>
         <nav>
@@ -295,26 +295,21 @@
         <div class="page-content wide">
             <h2 class="page-title">Food Diary</h2>
             <p class="gallery-intro">A little hungry, a little curious. What shall we open today?</p>
-            <nav class="gallery-tabs" aria-label="Food collections"><a href="food_gallery.html" aria-current="page">Food Diary</a><a href="../kitchen/index.html">My Kitchen ↗</a></nav>
-
-            <p class="diary-topic"><a href="../night_stall_food/night_stall_food.html">Street Food Notes ↗</a> · Favourite street bites and how they’re made</p>
-            <a class="diary-topic" href="../night_stall_food/night_stall_food.html">Street Food Notes · Favourite street bites & how they’re made ↗</a>
+            <nav class="gallery-tabs" aria-label="Food collections"><a href="food_gallery.html" aria-current="page">Food Diary</a><a href="../kitchen/index.html">My Kitchen</a></nav>
+            <div class="collection-shortcuts"><a href="../blogs/blogs.html">Journal <small>Events & reflections</small></a><a href="../night_stall_food/night_stall_food.html">Street Food Notes <small>Favourite street bites & how they’re made</small></a></div>
             <nav id="archive-breadcrumb" class="archive-breadcrumb" aria-label="Gallery archive"></nav>
             <h2 id="archive-title" tabindex="-1">Browse by year</h2>
-            <div id="archive-grid" class="archive-grid"></div>
             <p id="archive-status" role="status">Loading gallery…</p>
+            <div class="tunnel-wrap" id="tunnel-wrap">
+                <nav class="tunnel-index" id="tunnel-index" aria-label="Choose an archive chapter"></nav>
+                <div id="archive-grid" class="archive-grid"></div>
+            </div>
             <!-- Timeline Container -->
             <div class="timeline" id="timeline">
                 <!-- Timeline entries will be loaded dynamically -->
             </div>
         </div>
     </main>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <img class="lightbox-img" src="" alt="">
-    </div>
 
     <script>
         const timeline = document.getElementById('timeline');
@@ -474,6 +469,8 @@
 
         let galleryEntries = [];
         const archiveGrid = document.getElementById('archive-grid');
+        const tunnelIndex = document.getElementById('tunnel-index');
+        const tunnelWrap = document.getElementById('tunnel-wrap');
         const breadcrumb = document.getElementById('archive-breadcrumb');
         const archiveTitle = document.getElementById('archive-title');
         const archiveStatus = document.getElementById('archive-status');
@@ -499,8 +496,8 @@
             if (Number(selectedYear) === new Date().getFullYear()) months.reverse();
             const selectedMonth = months.includes(month) ? month : null;
             breadcrumb.replaceChildren();
-            if (selectedYear) archiveLink('← Choose another year', '#', breadcrumb);
-            if (selectedMonth) archiveLink('← Months in ' + selectedYear, '#year=' + selectedYear, breadcrumb);
+            if (selectedYear) archiveLink('Year shelf', '#', breadcrumb);
+            if (selectedMonth) archiveLink('Months of ' + selectedYear, '#year=' + selectedYear, breadcrumb);
             if (selectedMonth) {
                 const current = document.createElement('span');
                 current.textContent = monthName(selectedMonth);
@@ -508,6 +505,8 @@
                 breadcrumb.appendChild(current);
             }
             archiveGrid.replaceChildren();
+            tunnelIndex.replaceChildren();
+            tunnelWrap.hidden = Boolean(selectedMonth);
             timeline.replaceChildren();
             timeline.hidden = !selectedMonth;
             archiveGrid.hidden = Boolean(selectedMonth);
@@ -525,6 +524,9 @@
                     const hash = selectedYear ? '#year=' + selectedYear + '&month=' + key : '#year=' + key;
                     const card = archiveLink('', hash, archiveGrid);
                     card.className = 'archive-card';
+                    const stop = archiveLink(selectedYear ? monthName(key) : key, hash, tunnelIndex);
+                    stop.className = 'tunnel-stop';
+                    stop.setAttribute('aria-label', 'Open ' + (selectedYear ? monthName(key) + ' ' + selectedYear : key));
                     const image = document.createElement('img');
                     image.src = entries[0].photos[0].image;
                     image.alt = '';
@@ -532,24 +534,61 @@
                     const label = document.createElement('strong');
                     label.textContent = selectedYear ? monthName(key) : key;
                     const detail = document.createElement('span');
-                    detail.textContent = selectedYear ? 'Open this month ↗' : 'Explore the months ↗';
+                    detail.textContent = selectedYear ? 'Open this chapter' : 'Step inside this year';
                     card.append(image, label, detail);
                 });
             }
-            archiveStatus.textContent = galleryEntries.length ? '' : 'No gallery entries yet.';
+            archiveStatus.textContent = galleryEntries.length ? (selectedMonth ? '' : 'Scroll through the chapters, or choose a dot to step inside.') : 'No gallery entries yet.';
+            requestTunnelFrame();
         }
+
+        let tunnelFrame = 0;
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+        function animateTunnel() {
+            tunnelFrame = 0;
+            const cards = [...archiveGrid.children];
+            let closest = 0;
+            let closestDistance = Infinity;
+            cards.forEach((card, index) => {
+                const position = card.getBoundingClientRect();
+                const offset = (position.top + position.height / 2 - innerHeight / 2) / innerHeight;
+                const distance = Math.abs(offset);
+                if (distance < closestDistance) { closestDistance = distance; closest = index; }
+                const turn = reducedMotion.matches ? 0 : Math.max(-42, Math.min(42, offset * (index % 2 ? -42 : 42)));
+                card.style.setProperty('--page-turn', turn + 'deg');
+                card.style.setProperty('--page-depth', (reducedMotion.matches ? 0 : -Math.min(distance, 1.5) * 100) + 'px');
+                card.style.setProperty('--page-opacity', reducedMotion.matches ? 1 : Math.max(.35, 1 - distance * .4));
+            });
+            [...tunnelIndex.children].forEach((stop, index) => {
+                if (index === closest) stop.setAttribute('aria-current', 'step');
+                else stop.removeAttribute('aria-current');
+            });
+        }
+        function requestTunnelFrame() {
+            if (!tunnelFrame) tunnelFrame = requestAnimationFrame(animateTunnel);
+        }
+        window.addEventListener('scroll', requestTunnelFrame, { passive: true });
+        window.addEventListener('resize', requestTunnelFrame);
+        reducedMotion.addEventListener('change', requestTunnelFrame);
 
         window.addEventListener('hashchange', () => {
             showArchive();
             archiveTitle.focus({ preventScroll: true });
+            archiveTitle.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
         });
-        fetch('data.json')
+        fetch('../food_gallery/data.json')
             .then(response => {
                 if (!response.ok) throw new Error('Gallery request failed');
                 return response.json();
             })
             .then(data => {
-                galleryEntries = processData(data);
+                const collection = document.body.dataset.collection;
+                const filtered = data.map(entry => ({
+                    ...entry,
+                    photos: entry.photos.filter(photo => (photo.collection || 'diary') === collection)
+                        .map(photo => ({ ...photo, image: '../food_gallery/' + photo.image }))
+                })).filter(entry => entry.photos.length);
+                galleryEntries = processData(filtered);
                 showArchive();
             })
             .catch(error => {
@@ -557,34 +596,7 @@
                 console.error('Error loading timeline data:', error);
             });
 
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('.lightbox-img');
-        const lightboxClose = lightbox.querySelector('.lightbox-close');
-
-        // Open lightbox when clicking on a photo
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('.timeline-photo img')) {
-                lightboxImg.src = e.target.src;
-                lightboxImg.alt = e.target.alt;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        });
-
-        // Close lightbox
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
     </script>
+<script src="../photo-journal.js?v=notebook-1" defer></script>
 </body>
 </html>

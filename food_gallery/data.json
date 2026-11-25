@@ -6,75 +6,93 @@
     "photos": [
       {
         "image": "image/2026/01/2026-01-20.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-20-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-20-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-20-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-21.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-21-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-21-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-21-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-21-04.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-22.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-22-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-22-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-22-04.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-23.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-23-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-23-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-23-04.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2026/01/2026-01-23-05.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       }
     ]
   },
@@ -83,7 +101,8 @@
     "photos": [
       {
         "image": "image/2026/01/2026-01-19.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       }
     ]
   },
@@ -92,11 +111,13 @@
     "photos": [
       {
         "image": "image/2026/01/2026-01-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2026/01/2026-01-03-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -105,11 +126,13 @@
     "photos": [
       {
         "image": "image/2025/11/2025-11-27.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/11/2025-11-27-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -118,15 +141,18 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-24.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-24-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-24-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -135,11 +161,13 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-23.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-23-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -148,15 +176,18 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-22.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-22-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-22-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -165,11 +196,13 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-21.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-21-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -178,15 +211,18 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-16.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-16-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-16-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -195,11 +231,13 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-07.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-07-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -208,15 +246,18 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-03-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       },
       {
         "image": "image/2025/07/2025-07-03-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -225,7 +266,8 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -233,7 +275,8 @@
     "photos": [
       {
         "image": "image/2025/07/2025-07-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -241,7 +284,8 @@
     "photos": [
       {
         "image": "image/2024/11/2024-11-21.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -250,7 +294,8 @@
     "photos": [
       {
         "image": "image/2024/11/2024-11-07.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -258,7 +303,8 @@
     "photos": [
       {
         "image": "image/2024/10/2024-10-16.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -266,7 +312,8 @@
     "photos": [
       {
         "image": "image/2024/10/2024-10-05.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -275,7 +322,8 @@
     "photos": [
       {
         "image": "image/2024/09/2024-09-21.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -283,7 +331,8 @@
     "photos": [
       {
         "image": "image/2024/09/2024-09-03.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -291,7 +340,8 @@
     "photos": [
       {
         "image": "image/2024/06/2024-06-30.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -299,7 +349,8 @@
     "photos": [
       {
         "image": "image/2024/05/2024-05-04.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -308,7 +359,8 @@
     "photos": [
       {
         "image": "image/2024/02/2024-02-09.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -316,7 +368,8 @@
     "photos": [
       {
         "image": "image/2023/11/2023-11-18.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -324,7 +377,8 @@
     "photos": [
       {
         "image": "image/2023/10/2023-10-28.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -332,7 +386,8 @@
     "photos": [
       {
         "image": "image/2023/09/2023-09-23.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -341,15 +396,18 @@
     "photos": [
       {
         "image": "image/2023/08/2023-08-28.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2023/08/2023-08-28-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       },
       {
         "image": "image/2023/08/2023-08-28-02.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "diary"
       }
     ]
   },
@@ -357,7 +415,8 @@
     "photos": [
       {
         "image": "image/2023/07/2023-07-03-01.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -366,7 +425,8 @@
     "photos": [
       {
         "image": "image/2023/06/2023-06-25.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -374,7 +434,8 @@
     "photos": [
       {
         "image": "image/2023/06/2023-06-20.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -382,7 +443,8 @@
     "photos": [
       {
         "image": "image/2023/06/2023-06-10.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   },
@@ -391,7 +453,8 @@
     "photos": [
       {
         "image": "image/2022/08/2022-08-14.jpg",
-        "caption": ""
+        "caption": "",
+        "collection": "kitchen"
       }
     ]
   }

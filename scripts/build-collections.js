@@ -28,7 +28,17 @@ module.exports = function buildCollections() {
           `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=../kitchen/${entry.slug}.html"><title>${entry.data.title}</title></head><body><a href="../kitchen/${entry.slug}.html">Open recipe</a></body></html>`);
       }
     }
-    fs.writeFileSync(path.join(collection.output, collection.hub), templates.hub(entries, collection));
+    let index = templates.hub(entries.filter(entry => entry.data.published !== false), collection);
+    if (collection.output === 'kitchen') {
+      index = fs.readFileSync('food_gallery/food_gallery.html', 'utf8')
+        .replace('data-collection="diary"', 'data-collection="kitchen"')
+        .replace('<title>Food Diary - Tina</title>', '<title>My Kitchen - Tina</title>')
+        .replace('<h2 class="page-title">Food Diary</h2>', '<h2 class="page-title">My Kitchen</h2>')
+        .replace('A little hungry, a little curious. What shall we open today?', 'Made by me. A notebook of meals, experiments, and little discoveries.')
+        .replaceAll('href="food_gallery.html" aria-current="page">Food Diary', 'href="../food_gallery/food_gallery.html">Food Diary')
+        .replaceAll('href="../kitchen/index.html">My Kitchen', 'href="../kitchen/index.html" aria-current="page">My Kitchen');
+    }
+    fs.writeFileSync(path.join(collection.output, collection.hub), index);
     console.log(`Built ${entries.length} ${collection.title} entries and automatic index.`);
   }
 };

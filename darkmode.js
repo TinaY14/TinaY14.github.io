@@ -10,18 +10,10 @@
     ];
     let saved;
     try { saved = localStorage.getItem('tinaTheme'); } catch (_) {}
-    const path = location.pathname.toLowerCase();
-    const pageTheme = /(?:^|\/)kitchen(?:\/|$)/.test(path) ? 'cream'
-        : /(?:^|\/)blogs(?:\/|$)/.test(path) ? 'peach'
-        : /(?:^|\/)night_stall_food(?:\/|$)/.test(path) ? 'cream'
-        : /(?:^|\/)food_gallery(?:\/|$)/.test(path) ? 'sky'
-        : /(?:^|\/)projects(?:\/|\.html|$)/.test(path) ? 'lavender'
-        : 'mint';
-    let themeIndex = themes.findIndex(theme => theme.id === pageTheme);
-    const previousTheme = themes.some(theme => theme.id === saved) ? saved : 'mint';
-    // Paint the previous page's palette first, then ease into this page's palette.
+    const initialTheme = themes.some(theme => theme.id === saved) ? saved : 'sky';
+    let themeIndex = themes.findIndex(theme => theme.id === initialTheme);
     document.documentElement.classList.remove('dark-mode');
-    document.documentElement.dataset.theme = previousTheme;
+    document.documentElement.dataset.theme = initialTheme;
     function applyTheme() {
         document.documentElement.classList.remove('dark-mode');
         document.documentElement.dataset.theme = themes[themeIndex].id;
@@ -62,7 +54,7 @@
             let previous;
             try { previous = localStorage.getItem('tinaTheme'); } catch (_) {}
             if (themes.some(theme => theme.id === previous)) document.documentElement.dataset.theme = previous;
-            themeIndex = themes.findIndex(theme => theme.id === pageTheme);
+            themeIndex = themes.findIndex(theme => theme.id === (themes.some(item => item.id === previous) ? previous : initialTheme));
             updateButton();
             transitionToPageTheme();
         });
@@ -84,7 +76,7 @@
         if (!scrollButton) {
             scrollButton = document.createElement('button');
             scrollButton.id = 'scroll-to-top';
-            scrollButton.textContent = '↑';
+            scrollButton.textContent = 'Top';
             scrollButton.setAttribute('aria-label', 'Scroll to top');
             document.body.appendChild(scrollButton);
         }

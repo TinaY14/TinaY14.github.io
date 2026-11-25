@@ -34,7 +34,7 @@ for (const file of findPhotos(imageDir).sort()) {
     if (!newEntries.has(date)) newEntries.set(date, { photos: [] });
     entry = newEntries.get(date);
   }
-  entry.photos.push({ image, caption: '' });
+  entry.photos.push({ image, caption: '', collection: 'kitchen' });
 }
 timeline.push(...newEntries.values());
 timeline.sort((a, b) => photoDate(b.photos[0].image).localeCompare(photoDate(a.photos[0].image)));
