@@ -250,6 +250,23 @@
         #archive-title { margin-top: 20px; }
         [hidden] { display: none !important; }
         body.dark-mode .archive-card { background: #223047; }
+
+        .gallery-intro { font-size: 1.15rem; margin-bottom: 24px; }
+        .gallery-tabs { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0 36px; }
+        .gallery-tabs a { padding:12px 24px; border:1px solid currentColor; border-radius:999px; color:inherit; text-decoration:none; font-weight:600; }
+        .gallery-tabs a[aria-current] { background:#365e51; color:#fff; border-color:#365e51; }
+        .archive-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; max-width:1120px; padding-right:28px; }
+        .archive-card { position:relative; aspect-ratio:1; border:0; border-radius:24px; isolation:isolate; color:white; box-shadow:0 12px 28px #243f3020; }
+        .archive-card img { position:absolute; inset:0; width:100%; height:100%; filter:blur(2px) brightness(.65); transform:scale(1.04); transition:transform .5s, filter .5s; z-index:-2; }
+        .archive-card::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,#142b3566,transparent); z-index:-1; }
+        .archive-card strong { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:12px; font-size:clamp(1.6rem,3.1vw,3.4rem); font-weight:700; text-shadow:0 2px 16px #0008; }
+        .archive-card span { position:absolute; bottom:24px; left:0; right:0; text-align:center; font-size:.9rem; }
+        .archive-card:hover img { transform:scale(1.12); filter:blur(0) brightness(.75); }
+        .archive-card:hover { transform:translateY(-5px) rotate(-1deg); }
+        .archive-breadcrumb { justify-content:flex-start; }
+        @media(max-width:1100px) { .archive-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
+        @media(max-width:540px) { .archive-grid { gap:12px; padding-right:16px; } .archive-card { border-radius:16px; } .archive-card strong { font-size:1.45rem; } .archive-card span { bottom:14px; font-size:.7rem; } }
+        @media(prefers-reduced-motion:reduce) { .archive-card,.archive-card img { transition:none; } }
     </style>
 
     <!-- Restore the saved color theme before first paint -->
@@ -286,7 +303,8 @@
     <main class="hero inner-page">
         <div class="page-content wide">
             <h2 class="page-title">Food Gallery</h2>
-            <p>A timeline of my food adventures</p>
+            <p class="gallery-intro">A little hungry, a little curious. What shall we open today?</p>
+            <nav class="gallery-tabs" aria-label="Food collections"><a href="food_gallery.html" aria-current="page">Food Diary</a><a href="my-kitchen.html">My Kitchen ↗</a></nav>
 
             <nav id="archive-breadcrumb" class="archive-breadcrumb" aria-label="Gallery archive"></nav>
             <h2 id="archive-title" tabindex="-1">Browse by year</h2>
@@ -484,11 +502,12 @@
             const years = [...new Set(galleryEntries.map(entry => entry.sortKey.slice(0, 4)))];
             const selectedYear = years.includes(year) ? year : null;
             const yearEntries = galleryEntries.filter(entry => entry.sortKey.startsWith(selectedYear + '-'));
-            const months = [...new Set(yearEntries.map(entry => entry.sortKey.slice(5, 7)))];
+            const months = [...new Set(yearEntries.map(entry => entry.sortKey.slice(5, 7)))].sort();
+            if (Number(selectedYear) === new Date().getFullYear()) months.reverse();
             const selectedMonth = months.includes(month) ? month : null;
             breadcrumb.replaceChildren();
-            archiveLink('All years', '#', breadcrumb);
-            if (selectedYear) archiveLink(selectedYear, '#year=' + selectedYear, breadcrumb);
+            if (selectedYear) archiveLink('← Choose another year', '#', breadcrumb);
+            if (selectedMonth) archiveLink('← Months in ' + selectedYear, '#year=' + selectedYear, breadcrumb);
             if (selectedMonth) {
                 const current = document.createElement('span');
                 current.textContent = monthName(selectedMonth);
@@ -501,7 +520,7 @@
             archiveGrid.hidden = Boolean(selectedMonth);
             archiveTitle.textContent = selectedMonth
                 ? monthName(selectedMonth) + ' ' + selectedYear
-                : selectedYear || 'Browse by year';
+                : selectedYear ? 'A taste of ' + selectedYear : 'Pick a year, open a memory';
             if (selectedMonth) {
                 renderTimeline(yearEntries.filter(entry => entry.sortKey.slice(5, 7) === selectedMonth));
             } else {
@@ -519,7 +538,9 @@
                     image.loading = 'lazy';
                     const label = document.createElement('strong');
                     label.textContent = selectedYear ? monthName(key) : key;
-                    card.append(image, label);
+                    const detail = document.createElement('span');
+                    detail.textContent = selectedYear ? 'Open this month ↗' : 'Explore the months ↗';
+                    card.append(image, label, detail);
                 });
             }
             archiveStatus.textContent = galleryEntries.length ? '' : 'No gallery entries yet.';
