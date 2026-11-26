@@ -389,7 +389,7 @@
                 const summaryHtml = entry.summary ? `
                     <div class="timeline-summary">
                         <div class="timeline-summary-label">✍️ My take</div>
-                        ${entry.summary}
+                        <div style="white-space:pre-line">${entry.summary}</div>
                     </div>` : '';
 
                 timelineEntry.innerHTML = `

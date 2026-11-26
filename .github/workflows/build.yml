@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate timeline data
+        run: node scripts/generate-timeline.js
+
       - name: Build HTML files
         run: npm run build
 
