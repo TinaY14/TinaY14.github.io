@@ -13,18 +13,8 @@
     <!-- Preload homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=3c07299f6a19">
-    <script src="../darkmode.js?v=ca22f2adf14d"></script>
-
-    <!-- Restore the saved color theme before first paint -->
-    <script>
-        (function() {
-            let theme = 'mint';
-            try { theme = localStorage.getItem('tinaTheme') || theme; } catch (_) {}
-            if (!['mint', 'sky', 'peach', 'lavender', 'cream'].includes(theme)) theme = 'mint';
-            document.documentElement.dataset.theme = theme;
-        })();
-    </script>
+    <link rel="stylesheet" href="../styles.css?v=bdd6667eec9c">
+    <script src="../darkmode.js?v=04145d42310c"></script>
 </head>
 <body class="inner-page">
 

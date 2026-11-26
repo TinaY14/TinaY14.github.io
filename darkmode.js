@@ -8,16 +8,23 @@
         { id: 'lavender', name: 'Lavender' },
         { id: 'cream', name: 'Cream' }
     ];
+    const pathname = location.pathname.toLowerCase();
+    const section = /\/kitchen(?:\/|$)/.test(pathname) ? 'kitchen'
+        : /\/blogs(?:\/|$)/.test(pathname) ? 'journal'
+        : /\/(?:food_gallery|night_stall_food)(?:\/|$)/.test(pathname) ? 'diary'
+        : /\/projects(?:\/|\.html|$)/.test(pathname) ? 'projects' : 'home';
+    const defaults = { home: 'mint', diary: 'sky', kitchen: 'cream', journal: 'peach', projects: 'lavender' };
+    const storageKey = 'tinaTheme:' + section;
     let saved;
-    try { saved = localStorage.getItem('tinaTheme'); } catch (_) {}
-    const initialTheme = themes.some(theme => theme.id === saved) ? saved : 'sky';
+    try { saved = localStorage.getItem(storageKey); } catch (_) {}
+    const initialTheme = themes.some(theme => theme.id === saved) ? saved : defaults[section];
     let themeIndex = themes.findIndex(theme => theme.id === initialTheme);
     document.documentElement.classList.remove('dark-mode');
     document.documentElement.dataset.theme = initialTheme;
     function applyTheme() {
         document.documentElement.classList.remove('dark-mode');
         document.documentElement.dataset.theme = themes[themeIndex].id;
-        try { localStorage.setItem('tinaTheme', themes[themeIndex].id); } catch (_) {}
+        try { localStorage.setItem(storageKey, themes[themeIndex].id); } catch (_) {}
     }
     let firstFrame = 0, secondFrame = 0;
     function cancelPageTransition() {
@@ -52,7 +59,7 @@
         window.addEventListener('pageshow', event => {
             if (!event.persisted) return;
             let previous;
-            try { previous = localStorage.getItem('tinaTheme'); } catch (_) {}
+            try { previous = localStorage.getItem(storageKey); } catch (_) {}
             if (themes.some(theme => theme.id === previous)) document.documentElement.dataset.theme = previous;
             themeIndex = themes.findIndex(theme => theme.id === (themes.some(item => item.id === previous) ? previous : initialTheme));
             updateButton();

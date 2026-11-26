@@ -23,6 +23,14 @@ module.exports = function buildNavigation() {
       fs.writeFileSync(file, html);
       continue;
     }
+    html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => {
+      return script.includes("localStorage.getItem('tinaTheme')") && script.includes('document.documentElement.dataset.theme')
+        ? '' : script;
+    });
+    html = html.replace(/<!-- Restore the saved color theme before first paint -->[ \t\r\n]*/g, '');
+    html = html.replace(/<script\b[^>]*src=["'][^"']*darkmode\.js[^"']*["'][^>]*>\s*<\/script>\s*/g, '');
+    const themeScriptPath = path.posix.relative(path.posix.dirname(file), 'darkmode.js');
+    html = html.replace('</head>', `<script src="${themeScriptPath}"></script>\n</head>`);
     const active = file.startsWith('night_stall_food/') ? 'food_gallery/food_gallery.html'
       : file.startsWith('kitchen/') ? 'kitchen/index.html'
       : file.startsWith('blogs/') ? 'blogs/blogs.html'

@@ -2130,3 +2130,13 @@ header nav a[aria-current="page"] { text-decoration: underline; text-underline-o
 .return-link { display:inline-flex; align-items:center; gap:9px; width:fit-content; padding:8px 12px; border:1px solid var(--theme-border); border-radius:7px; color:var(--inner-text); background:var(--panel-bg); font-size:.85rem; text-decoration:none; }
 .return-link::before { content:""; width:6px; height:6px; border-left:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); }
 header { font-family:Arial, sans-serif; }
+
+.section-title-row { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:20px; }
+.section-title-row .page-title { margin:0; min-width:0; }
+.section-title-row .return-link { flex:none; margin:0; padding:7px 0 7px 12px; border:0; background:transparent; font-weight:400; white-space:nowrap; }
+.section-title-row .return-link::before { display:none; }
+@media(max-width:650px) {
+    .section-title-row { gap:12px; align-items:flex-start; }
+    .section-title-row .page-title { font-size:clamp(1.6rem,6vw,2.3rem); text-align:left; }
+    .section-title-row .return-link { font-size:.75rem; padding-top:9px; }
+}
