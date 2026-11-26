@@ -2141,60 +2141,115 @@ header { font-family:Arial, sans-serif; }
     .section-title-row .return-link { font-size:.75rem; padding-top:9px; }
 }
 
-/* Journal prose sits on its own sheet, using the active section palette. */
-.journal-paper {
-    --paper-rule: color-mix(in srgb, var(--theme-border) 28%, transparent);
-    --paper-surface: color-mix(in srgb, var(--panel-bg) 82%, white);
+/* A bound writing journal with a locally hosted handwritten face. */
+@font-face {
+    font-family:'Caveat';
+    src:url('fonts/caveat-variable.ttf') format('truetype');
+    font-style:normal;
+    font-weight:400 700;
+    font-display:swap;
+}
+.journal-notebook {
     position:relative;
     box-sizing:border-box;
-    width:100%;
-    max-width:900px;
-    margin:56px auto 40px;
-    padding:64px 64px 52px 76px;
+    max-width:960px;
+    width:calc(100% - 12px);
+    margin:56px auto 48px;
+    padding:18px 18px 22px 36px;
     border:1px solid var(--theme-border);
-    border-radius:16px 16px 6px 16px;
-    color:var(--inner-text);
+    border-radius:12px 20px 20px 12px;
     background:
-        linear-gradient(to right, transparent 0 42px, var(--paper-rule) 42px 43px, transparent 43px),
-        repeating-linear-gradient(to bottom, transparent 0 31px, var(--paper-rule) 31px 32px),
-        var(--paper-surface);
-    box-shadow:0 14px 36px var(--theme-shadow), 5px 6px 0 var(--panel-bg), 6px 7px 0 var(--theme-border);
-    font-family:Georgia, 'Times New Roman', serif;
-    font-size:1.1rem;
-    line-height:32px;
-    text-align:left;
+        repeating-linear-gradient(100deg,transparent 0 3px,color-mix(in srgb,var(--theme-border) 7%,transparent) 3px 4px),
+        var(--theme-soft);
+    box-shadow:0 18px 42px var(--theme-shadow),0 3px 0 var(--theme-border);
 }
-.journal-paper::before {
+.journal-notebook::before {
     content:"";
     position:absolute;
-    top:14px;
-    left:38px;
-    right:26px;
-    height:12px;
-    background:radial-gradient(circle at 6px 6px, var(--inner-bg) 0 4px, var(--theme-border) 4px 5px, transparent 5.5px) 0 0 / 38px 12px repeat-x;
+    z-index:2;
+    top:0;
+    right:48px;
+    width:24px;
+    height:56px;
+    background:linear-gradient(90deg,var(--theme-border),var(--primary-blue),var(--theme-border));
+    clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);
+}
+.journal-notebook::after {
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px dashed color-mix(in srgb,var(--theme-border) 65%,transparent);
+    border-radius:7px 14px 14px 7px;
+    pointer-events:none;
+}
+.journal-binding {
+    position:absolute;
+    z-index:3;
+    inset:50px auto 50px 17px;
+    width:36px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    pointer-events:none;
+}
+.journal-binding i {
+    display:block;
+    height:10px;
+    border:1px solid var(--theme-border);
+    border-radius:7px;
+    background:linear-gradient(to bottom,#fff9f2,color-mix(in srgb,var(--theme-border) 55%,white) 48%,var(--theme-border) 55%,#fff9f2);
+    box-shadow:0 2px 3px var(--theme-shadow);
+}
+.journal-paper {
+    --paper-rule:color-mix(in srgb,var(--theme-border) 27%,transparent);
+    --paper-surface:color-mix(in srgb,var(--panel-bg) 78%,white);
+    position:relative;
+    box-sizing:border-box;
+    max-width:none;
+    width:100%;
+    margin:0;
+    padding:52px 52px 48px 68px;
+    border:1px solid color-mix(in srgb,var(--theme-border) 55%,white);
+    border-radius:5px 11px 20px 5px;
+    color:var(--inner-text);
+    background:
+        linear-gradient(to right,transparent 0 40px,var(--paper-rule) 40px 41px,transparent 41px),
+        repeating-linear-gradient(to bottom,transparent 0 35px,var(--paper-rule) 35px 36px),
+        var(--paper-surface);
+    background-position:0 0,0 16px,0 0;
+    box-shadow:0 2px 9px var(--theme-shadow),3px 4px 0 var(--panel-bg),4px 5px 0 var(--theme-border);
+    font-family:'Caveat','KaiTi','STKaiti',cursive;
+    font-size:26px;
+    font-weight:500;
+    line-height:36px;
+    text-align:left;
 }
 .journal-paper::after {
     content:"";
     position:absolute;
     right:-1px;
     bottom:-1px;
-    width:26px;
-    height:26px;
-    border-radius:0 0 5px 0;
-    background:linear-gradient(135deg, var(--theme-soft) 0 49%, var(--inner-bg) 51%);
-    box-shadow:-3px -3px 8px var(--theme-shadow);
+    width:34px;
+    height:34px;
+    border-radius:0 0 15px 0;
+    background:linear-gradient(135deg,var(--theme-soft) 0 49%,var(--inner-bg) 51%);
+    box-shadow:-2px -2px 6px var(--theme-shadow);
 }
-.page-content .journal-paper p { text-indent:0; line-height:32px; margin:0 0 32px; }
+.page-content .journal-paper p { text-indent:2em; line-height:36px; margin:0 0 36px; }
 .journal-paper > :last-child { margin-bottom:0; }
 @media(max-width:650px) {
+    .journal-notebook { width:calc(100% - 5px); margin-top:36px; padding:12px 10px 16px 22px; }
+    .journal-notebook::before { right:28px; width:18px; height:42px; }
+    .journal-notebook::after { inset:5px; }
+    .journal-binding { left:9px; width:26px; top:38px; bottom:38px; }
+    .journal-binding i { height:8px; }
     .journal-paper {
-        margin-top:36px;
-        padding:48px 22px 36px 40px;
-        font-size:1rem;
+        padding:40px 16px 36px 32px;
+        font-size:24px;
         background:
-            linear-gradient(to right, transparent 0 24px, var(--paper-rule) 24px 25px, transparent 25px),
-            repeating-linear-gradient(to bottom, transparent 0 31px, var(--paper-rule) 31px 32px),
+            linear-gradient(to right,transparent 0 20px,var(--paper-rule) 20px 21px,transparent 21px),
+            repeating-linear-gradient(to bottom,transparent 0 35px,var(--paper-rule) 35px 36px),
             var(--paper-surface);
+        background-position:0 0,0 4px,0 0;
     }
-    .journal-paper::before { left:24px; right:18px; }
 }

@@ -36,7 +36,9 @@ function article(data, content, collection) {
 ${data.date ? `<p><time datetime="${escape(data.date)}">${escape(data.date)}</time></p>` : ''}
 ${data.subtitle ? `<p>${escape(data.subtitle)}</p>` : ''}
 <div class="article-photos">${images.map(image => `<a href="${escape(image)}" target="_blank" rel="noopener"><img src="${escape(image)}" alt="${escape(data.title)}" loading="lazy"></a>`).join('')}</div>
-<article class="collection-article${collection.output === 'blogs' ? ' journal-paper' : ''}">${content}</article>`);
+${collection.output === 'blogs' ? '<div class="journal-notebook"><div class="journal-binding" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>' : ''}
+<article class="collection-article${collection.output === 'blogs' ? ' journal-paper' : ''}">${content}</article>
+${collection.output === 'blogs' ? '</div>' : ''}`);
 }
 
 function hub(entries, collection) {
