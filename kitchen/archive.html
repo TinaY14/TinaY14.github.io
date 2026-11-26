@@ -11,7 +11,7 @@
     <!-- Prefetch homepage background so it's cached when navigating back -->
     <link rel="prefetch" href="../images/site/background.jpg" as="image">
 
-    <link rel="stylesheet" href="../styles.css?v=76dd20a6875c">
+    <link rel="stylesheet" href="../styles.css?v=437217c1c1d8">
     <!-- Timeline styles (embedded for consistency) -->
     <style>
         /* Remove right padding so photos reach the window edge */
@@ -267,7 +267,7 @@
         #archive-status:empty { display:none; }
     </style>
 
-    <script src="../darkmode.js?v=04145d42310c"></script>
+    <script src="../darkmode.js?v=904db7ba988f"></script>
 </head>
 <body class="inner-page" data-collection="kitchen">
     <header>
@@ -479,8 +479,8 @@
             const selectedMonth = months.includes(month) ? month : null;
             breadcrumb.replaceChildren();
             breadcrumb.hidden = !selectedYear;
-            if (selectedYear) archiveLink('Year shelf', '#', breadcrumb);
-            if (selectedMonth) archiveLink('Months of ' + selectedYear, '#year=' + selectedYear, breadcrumb);
+            if (selectedYear) archiveLink('Years', '#', breadcrumb).className = 'return-link';
+            if (selectedMonth) archiveLink(selectedYear + ' months', '#year=' + selectedYear, breadcrumb).className = 'return-link';
             if (selectedMonth) {
                 const current = document.createElement('span');
                 current.textContent = monthName(selectedMonth);

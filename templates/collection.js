@@ -31,8 +31,7 @@ ${links.map(([label, url]) => `<a href="${url}">${label}</a>`).join('\n')}
 function article(data, content, collection) {
   const images = data.images || (data.image ? [data.image] : []);
   return page(data.title, `
-<a class="collection-back" href="${collection.hub}">Close this chapter · ${collection.title}</a>
-<h1>${escape(data.title)}</h1>
+<div class="article-title-row"><h1>${escape(data.title)}</h1><a class="return-link" href="${collection.hub}" aria-label="Back to ${collection.title}">${collection.title}</a></div>
 ${data.date ? `<p><time datetime="${escape(data.date)}">${escape(data.date)}</time></p>` : ''}
 ${data.subtitle ? `<p>${escape(data.subtitle)}</p>` : ''}
 <div class="article-photos">${images.map(image => `<a href="${escape(image)}" target="_blank" rel="noopener"><img src="${escape(image)}" alt="${escape(data.title)}" loading="lazy"></a>`).join('')}</div>

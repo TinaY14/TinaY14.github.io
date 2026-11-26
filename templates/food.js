@@ -57,7 +57,7 @@ module.exports = function(data, content) {
     </header>
     <main class="hero inner-page">
         <div class="page-content">
-            <a class="collection-back" href="night_stall_food.html">Street Food Notes · All entries</a>
+            <a class="collection-back" href="night_stall_food.html">Back to Street Food Notes</a>
             <h2 class="page-title">${titleText}</h2>
 
             <article class="collection-article">${processedContent}</article>

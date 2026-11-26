@@ -83,16 +83,23 @@
         if (!scrollButton) {
             scrollButton = document.createElement('button');
             scrollButton.id = 'scroll-to-top';
-            scrollButton.textContent = 'Top';
+            scrollButton.type = 'button';
             scrollButton.setAttribute('aria-label', 'Scroll to top');
             document.body.appendChild(scrollButton);
         }
+        scrollButton.innerHTML = '<span class="top-plane" aria-hidden="true"></span><span class="top-trail" aria-hidden="true"></span><span class="top-label">Top</span>';
+        scrollButton.setAttribute('aria-label', 'Back to top');
+        scrollButton.title = 'Back to top';
         const updateScrollButton = () => scrollButton.classList.toggle('visible', window.scrollY > 300);
         window.addEventListener('scroll', updateScrollButton, { passive: true });
-        scrollButton.addEventListener('click', () => window.scrollTo({
-            top: 0,
-            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-        }));
+        scrollButton.addEventListener('click', () => {
+            const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!reducedMotion) {
+                scrollButton.classList.add('launching');
+                setTimeout(() => scrollButton.classList.remove('launching'), 700);
+            }
+            window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+        });
         updateScrollButton();
         const enableTransitions = () => document.body.classList.add('transitions-ready');
         if (document.readyState === 'complete') enableTransitions();

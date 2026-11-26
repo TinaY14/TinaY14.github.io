@@ -100,3 +100,45 @@ jobs:
         uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages
+
+      - name: Verify live Journal layout and font
+        env:
+          PUBLISHED_URL: ${{ steps.deployment.outputs.page_url || steps.retry_deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import time
+          from urllib.parse import urljoin
+          from urllib.request import Request, urlopen
+
+          base = os.environ["PUBLISHED_URL"].rstrip("/") + "/"
+          revision = os.environ["GITHUB_SHA"]
+          article_url = urljoin(base, "blogs/2026-03-04-volunteering-in-the-teaching-kitchen-we-tried-fried-bananas.html")
+
+          def read(url):
+              separator = "&" if "?" in url else "?"
+              request = Request(url + separator + "verify=" + revision, headers={"Cache-Control": "no-cache"})
+              with urlopen(request, timeout=20) as response:
+                  return response.read()
+
+          for attempt in range(12):
+              try:
+                  article = read(article_url).decode()
+                  assert 'class="journal-notebook"' in article, "Notebook markup is missing"
+                  assert 'class="article-title-row"' in article, "Article is still an older release"
+                  stylesheet = re.search(r'href="([^"]*styles\.css[^"]*)"', article)
+                  assert stylesheet, "Stylesheet link is missing"
+                  css = read(urljoin(article_url, stylesheet.group(1))).decode()
+                  assert "font-family:'Caveat'" in css, "Handwritten typography is missing"
+                  assert "text-indent:2em" in css, "Paragraph indentation is missing"
+                  font = read(urljoin(base, "fonts/caveat-variable.ttf"))
+                  assert font[:4] == b"\x00\x01\x00\x00", "The font URL did not return a TrueType font"
+                  print("::notice title=Live Journal verified::Current notebook layout, stylesheet and Caveat font are available on the published website.")
+                  break
+              except Exception as error:
+                  if attempt == 11:
+                      raise
+                  print("Waiting for published files:", str(error), flush=True)
+                  time.sleep(10)
+          PY
